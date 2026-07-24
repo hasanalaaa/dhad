@@ -29,3 +29,6 @@ node_modules
 *.onnx
 
 # Docker build needs only the Python package surface copied explicitly by Dockerfile.
+
+# Generated Tauri frontend staging directory
+web_dist/

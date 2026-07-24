@@ -4,7 +4,19 @@
   "version": "1.0.0",
   "identifier": "com.dhad.desktop",
   "build": {
-    "frontendDist": "../web_demo"
+    "beforeBuildCommand": {
+      "script": "node tools/build_web_dist.mjs",
+      "cwd": ".."
+    },
+    "beforeDevCommand": {
+      "script": "node tools/build_web_dist.mjs",
+      "cwd": "..",
+      "wait": true
+    },
+    "additionalWatchFolders": [
+      "../web_demo"
+    ],
+    "frontendDist": "../web_dist"
   },
   "app": {
     "withGlobalTauri": true,

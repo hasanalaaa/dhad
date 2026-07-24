@@ -63,6 +63,10 @@ def test_tauri_2_11_configuration_is_strict_and_regression_safe():
     bundle_key["bundle"]["windows"]["bundleVCRuntime"] = True
     mutations.append(bundle_key)
 
+    unsafe_frontend = deepcopy(config)
+    unsafe_frontend["build"]["frontendDist"] = "../web_demo"
+    mutations.append(unsafe_frontend)
+
     for invalid in mutations:
         assert validate_tauri_config(invalid), invalid
 
@@ -81,8 +85,31 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         'TAURI_CLI_VERSION: "2.11.4"',
         '@tauri-apps/cli@2.11.4', 'tauriScript: tauri',
         'tauri --version | grep -F "2.11.4"',
+        'node tools/build_web_dist.mjs',
+        'Stage dependency-free Tauri frontend',
     ):
         assert contract in text
+
+
+def test_tauri_frontend_dist_is_isolated_from_node_dependencies():
+    config = json.loads((ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8"))
+    build = config["build"]
+
+    assert build["frontendDist"] == "../web_dist"
+    assert build["beforeBuildCommand"] == {
+        "script": "node tools/build_web_dist.mjs",
+        "cwd": "..",
+    }
+    assert build["beforeDevCommand"] == {
+        "script": "node tools/build_web_dist.mjs",
+        "cwd": "..",
+        "wait": True,
+    }
+    assert build["additionalWatchFolders"] == ["../web_demo"]
+    staging_tool = (ROOT / "tools" / "build_web_dist.mjs").read_text(encoding="utf-8")
+    assert '"node_modules"' in staging_tool
+    assert '".test.mjs"' in staging_tool
+    assert 'models/model_int8.onnx' in staging_tool
 
 
 def test_desktop_build_environment_is_ignored_and_never_packaged():
@@ -91,6 +118,9 @@ def test_desktop_build_environment_is_ignored_and_never_packaged():
     assert ".desktop-build" in EXCLUDED_DIRS
     assert ".desktop-build/" in (ROOT / ".gitignore").read_text(encoding="utf-8")
     assert ".desktop-build/" in (ROOT / ".tauriignore").read_text(encoding="utf-8")
+    assert "web_dist" in EXCLUDED_DIRS
+    assert "web_dist/" in (ROOT / ".gitignore").read_text(encoding="utf-8")
+    assert "web_dist/" in (ROOT / ".tauriignore").read_text(encoding="utf-8")
 
 
 def test_macos_bundle_identity_and_native_launch_contracts_are_pinned():

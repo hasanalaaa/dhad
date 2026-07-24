@@ -6,7 +6,7 @@ or Rust CLI entry points.
 
 ## Architecture
 
-- `tauri.conf.json` serves `../web_demo` directly.
+- `tauri.conf.json` embeds the generated `../web_dist` tree. `tools/build_web_dist.mjs` stages runtime assets from `web_demo` while excluding `node_modules`, tests, and package metadata.
 - `analyze_text_native` executes the shared Rust `RuleSet` and `SyntaxEngine`.
 - `paraphrase_native` performs deterministic, offline Rust rewriting while
   reusing core normalization, tokenization, and sentence segmentation.

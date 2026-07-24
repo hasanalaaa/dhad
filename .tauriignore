@@ -23,3 +23,6 @@ Thumbs.db
 *.log
 *.tmp
 *.temp
+
+# Generated Tauri frontend staging directory
+web_dist/

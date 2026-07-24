@@ -83,6 +83,9 @@ jobs:
       - name: Install web dependencies
         run: npm ci --prefix web_demo --ignore-scripts
 
+      - name: Stage dependency-free Tauri frontend
+        run: node tools/build_web_dist.mjs
+
       - name: Validate Tauri 2.11 configuration
         run: python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
 
@@ -182,6 +185,9 @@ jobs:
           npm run check --prefix web_demo
           npm test --prefix web_demo
           cargo test --workspace
+
+      - name: Stage dependency-free Tauri frontend
+        run: node tools/build_web_dist.mjs
 
       - name: Configure optional Apple signing and notarization
         if: runner.os == 'macOS'

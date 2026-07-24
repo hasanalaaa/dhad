@@ -13,7 +13,7 @@ from pathlib import Path
 
 EXCLUDED_DIRS = {
     ".git", ".desktop-build", ".audit-venv", ".ci-venv", ".pytest_cache", ".ruff_cache",
-    ".mypy_cache", "__pycache__", "node_modules", "target", "venv", ".venv",
+    ".mypy_cache", "__pycache__", "node_modules", "target", "venv", ".venv", "web_dist",
 }
 EXCLUDED_NAMES = {".DS_Store", "Thumbs.db", "Desktop.ini"}
 EXCLUDED_SUFFIXES = {".pyc", ".pyo", ".log", ".tmp", ".temp", ".bak", ".swp"}
@@ -29,6 +29,7 @@ REQUIRED_ARCHIVE_PATHS = {
     "dhad/scripts/build-desktop.bat",
     "dhad/scripts/install-macos-app.sh",
     "dhad/tools/clean_repository.py",
+    "dhad/tools/build_web_dist.mjs",
 }
 
 
@@ -74,7 +75,7 @@ def package(root: Path, output: Path) -> tuple[int, str]:
             raise RuntimeError(f"archive is missing required paths: {missing}")
         if bad:
             raise RuntimeError(f"CRC failure in archive entry: {bad}")
-        excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/.ci-venv/", "/__pycache__/")
+        excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/.ci-venv/", "/web_dist/", "/__pycache__/")
         if any(any(fragment in f"/{name}" for fragment in excluded_archive_fragments) for name in names):
             raise RuntimeError("archive contains excluded build, cache, or VCS directories")
         forbidden_basenames = {".DS_Store", "Thumbs.db", "Desktop.ini"}
@@ -105,6 +106,7 @@ def package(root: Path, output: Path) -> tuple[int, str]:
             "dhad/scripts/install-macos-app.sh",
             "dhad/tools/verify_macos_bundle.py",
             "dhad/tools/clean_repository.py",
+            "dhad/tools/build_web_dist.mjs",
         ):
             mode = archive.getinfo(executable_name).external_attr >> 16
             if not mode & 0o111:

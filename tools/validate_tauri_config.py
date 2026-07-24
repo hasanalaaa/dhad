@@ -10,11 +10,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
-PROFILE = "tauri-cli 2.11.5 / tauri 2.11.5"
+PROFILE = "tauri-cli 2.11.4 / tauri 2.11.5"
 
 ROOT_KEYS = {"$schema", "productName", "version", "identifier", "mainBinaryName", "build", "app", "bundle", "plugins"}
 BUILD_KEYS = {"beforeBuildCommand", "beforeDevCommand", "devUrl", "frontendDist", "additionalWatchFolders", "removeUnusedCommands", "windows"}
 BUILD_WINDOWS_KEYS = {"staticVCRuntime"}
+HOOK_KEYS = {"script", "cwd", "wait"}
 APP_KEYS = {"windows", "security", "trayIcon", "withGlobalTauri", "enableGTKAppId", "macOSPrivateApi"}
 SECURITY_KEYS = {"csp", "devCsp", "freezePrototype", "assetProtocol", "dangerousDisableAssetCspModification", "pattern", "capabilities"}
 WINDOW_KEYS = {
@@ -93,6 +94,28 @@ def validate_tauri_config(config: dict[str, Any]) -> list[str]:
     _unknown(build, BUILD_KEYS, "$.build", errors)
     if "windows" in build:
         _unknown(build["windows"], BUILD_WINDOWS_KEYS, "$.build.windows", errors)
+
+    frontend_dist = build.get("frontendDist")
+    if frontend_dist != "../web_dist":
+        errors.append("$.build.frontendDist must point to ../web_dist, not the dependency-bearing web_demo source tree")
+    if isinstance(frontend_dist, str) and "node_modules" in frontend_dist.replace("\\", "/").split("/"):
+        errors.append("$.build.frontendDist must never include node_modules")
+
+    expected_hook = {"script": "node tools/build_web_dist.mjs", "cwd": ".."}
+    before_build = build.get("beforeBuildCommand")
+    _unknown(before_build, HOOK_KEYS, "$.build.beforeBuildCommand", errors)
+    if isinstance(before_build, dict) and before_build != expected_hook:
+        errors.append("$.build.beforeBuildCommand must deterministically stage web_dist from web_demo")
+
+    before_dev = build.get("beforeDevCommand")
+    _unknown(before_dev, HOOK_KEYS, "$.build.beforeDevCommand", errors)
+    expected_dev_hook = {**expected_hook, "wait": True}
+    if isinstance(before_dev, dict) and before_dev != expected_dev_hook:
+        errors.append("$.build.beforeDevCommand must synchronously stage web_dist for local development")
+
+    watch_folders = build.get("additionalWatchFolders")
+    if watch_folders != ["../web_demo"]:
+        errors.append("$.build.additionalWatchFolders must watch ../web_demo")
 
     app = config.get("app", {})
     _unknown(app, APP_KEYS, "$.app", errors)

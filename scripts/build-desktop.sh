@@ -13,7 +13,7 @@ command -v node >/dev/null 2>&1 || fail "Node.js 22 is required."
 command -v npm >/dev/null 2>&1 || fail "npm is required."
 command -v cargo >/dev/null 2>&1 || fail "Rust/Cargo is required."
 
-TAURI_CLI_VERSION="${DHAD_TAURI_CLI_VERSION:-2.11.5}"
+TAURI_CLI_VERSION="${DHAD_TAURI_CLI_VERSION:-2.11.4}"
 [[ -f ".github/workflows/desktop-release.yml" ]] || fail "Missing .github/workflows/desktop-release.yml. Preserve hidden directories when copying or extracting the release archive."
 [[ -f "src-tauri/tauri.conf.json" ]] || fail "Missing src-tauri/tauri.conf.json."
 python3 tools/validate_tauri_config.py --config src-tauri/tauri.conf.json || fail "Tauri configuration is incompatible with CLI 2.11.x."
@@ -67,17 +67,21 @@ if [[ "${DHAD_SKIP_RUST_TESTS:-0}" != "1" ]]; then
   cargo test --workspace
 fi
 
-INSTALLED_TAURI_VERSION="$(cargo tauri --version 2>/dev/null || true)"
+log "Staging dependency-free Tauri frontend"
+node tools/build_web_dist.mjs
+
+INSTALLED_TAURI_VERSION="$(tauri --version 2>/dev/null || true)"
 if [[ "$INSTALLED_TAURI_VERSION" != *"$TAURI_CLI_VERSION"* ]]; then
   if [[ "${DHAD_SKIP_CLI_INSTALL:-0}" == "1" ]]; then
-    fail "Tauri CLI $TAURI_CLI_VERSION is required. Install it with: cargo install tauri-cli --version =$TAURI_CLI_VERSION --locked --force"
+    fail "Tauri npm CLI $TAURI_CLI_VERSION is required. Install it with: npm install --global @tauri-apps/cli@$TAURI_CLI_VERSION"
   fi
-  log "Installing pinned Tauri CLI $TAURI_CLI_VERSION"
-  cargo install tauri-cli --version "=$TAURI_CLI_VERSION" --locked --force
+  log "Installing pinned Tauri npm CLI $TAURI_CLI_VERSION"
+  npm install --global "@tauri-apps/cli@$TAURI_CLI_VERSION"
 fi
+command -v tauri >/dev/null 2>&1 || fail "Pinned Tauri CLI is not available on PATH after installation."
 
 log "Building native bundle(s): $BUNDLES"
-cargo tauri build --bundles "$BUNDLES" "$@"
+tauri build --bundles "$BUNDLES" "$@"
 
 log "Verifying generated macOS application bundle"
 ./scripts/verify-macos-app.sh

@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **448**
-- Checks passed: **142/142**
+- Files audited: **449**
+- Checks passed: **152/152**
 - Errors: **0**
 - Warnings: **0**
 
@@ -35,6 +35,7 @@
 - PASS — `required:scripts/verify-macos-app.sh`: missing or empty required release file
 - PASS — `required:scripts/install-macos-app.sh`: missing or empty required release file
 - PASS — `required:tools/clean_repository.py`: missing or empty required release file
+- PASS — `required:tools/build_web_dist.mjs`: missing or empty required release file
 - PASS — `required:src-tauri/Info.plist`: missing or empty required release file
 - PASS — `required:src-tauri/Entitlements.plist`: missing or empty required release file
 - PASS — `required:vercel.json`: missing or empty required release file
@@ -42,7 +43,11 @@
 - PASS — `identifier`: com.dhad.desktop
 - PASS — `identifier-no-app-suffix`: com.dhad.desktop
 - PASS — `main-binary-name`: dhad-desktop
-- PASS — `tauri-schema-2.11-compatible`: tauri-cli 2.11.5 / tauri 2.11.5
+- PASS — `frontend-dist-isolated`: ../web_dist
+- PASS — `frontend-dist-build-hook`: {'script': 'node tools/build_web_dist.mjs', 'cwd': '..'}
+- PASS — `frontend-dist-dev-hook`: {'script': 'node tools/build_web_dist.mjs', 'cwd': '..', 'wait': True}
+- PASS — `frontend-source-watch-folder`: ['../web_demo']
+- PASS — `tauri-schema-2.11-compatible`: tauri-cli 2.11.4 / tauri 2.11.5
 - PASS — `tauri-no-security-headers`: app.security.headers is unsupported by the pinned CLI
 - PASS — `tauri-no-no-redirection-bitmap`: unsupported app.windows key
 - PASS — `tauri-no-bundle-vc-runtime`: unsupported bundle.windows key
@@ -87,6 +92,8 @@
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
+- PASS — `workflow-validation:tools/build_web_dist.mjs`: missing workflow contract matching tools/build_web_dist\.mjs
+- PASS — `workflow-validation:Stage dependency-free Tauri frontend`: missing workflow contract matching Stage dependency-free Tauri frontend
 - PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$
 - PASS — `workflow-validation:@tauri-apps/cli@2.11.4`: missing workflow contract matching @tauri-apps/cli@2\.11\.4
 - PASS — `workflow-validation:tauriScript: tauri`: missing workflow contract matching ^\s*tauriScript\s*:\s*tauri\s*$
@@ -115,7 +122,8 @@
 - PASS — `build-sh:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-sh:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-sh:validate_desktop_release.py`: missing build stage
-- PASS — `build-sh:2.11.5`: missing build stage
+- PASS — `build-sh:build_web_dist.mjs`: missing build stage
+- PASS — `build-sh:2.11.4`: missing build stage
 - PASS — `build-sh:cargo clippy`: missing build stage
 - PASS — `build-sh:tauri build`: missing build stage
 - PASS — `build-bat:desktop-release.yml`: missing build stage
@@ -123,7 +131,8 @@
 - PASS — `build-bat:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-bat:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-bat:validate_desktop_release.py`: missing build stage
-- PASS — `build-bat:2.11.5`: missing build stage
+- PASS — `build-bat:build_web_dist.mjs`: missing build stage
+- PASS — `build-bat:2.11.4`: missing build stage
 - PASS — `build-bat:cargo clippy`: missing build stage
 - PASS — `build-bat:tauri build`: missing build stage
 - PASS — `build-sh:macos-bundle-verification`: macOS build must verify and launch-smoke the generated app
@@ -131,6 +140,7 @@
 - PASS — `no-case-insensitive-path-collisions`: []
 - PASS — `no-packaged-node-modules`: excluded by Git, Tauri, and release packaging
 - PASS — `no-packaged-target`: excluded by Git, Tauri, and release packaging
+- PASS — `no-packaged-web-dist`: generated on demand and excluded from source release packaging
 - PASS — `no-packaged-build-venv`: excluded by Git, Tauri, and release packaging
 - PASS — `shell-build-script-executable`
 - PASS — `macos-verifier-script-executable`
@@ -148,4 +158,4 @@
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 448 files
+- PASS — `repository-file-count`: only 449 files

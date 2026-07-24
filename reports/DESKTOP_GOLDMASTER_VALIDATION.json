@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T07:31:26.266104+00:00",
-  "file_count": 448,
-  "total_bytes": 180119836,
-  "checks_total": 142,
-  "checks_passed": 142,
+  "generated_at_utc": "2026-07-24T08:48:05.781524+00:00",
+  "file_count": 449,
+  "total_bytes": 180132410,
+  "checks_total": 152,
+  "checks_passed": 152,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -148,6 +148,11 @@
       "detail": "missing or empty required release file"
     },
     {
+      "name": "required:tools/build_web_dist.mjs",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
       "name": "required:src-tauri/Info.plist",
       "ok": true,
       "detail": "missing or empty required release file"
@@ -183,9 +188,29 @@
       "detail": "dhad-desktop"
     },
     {
+      "name": "frontend-dist-isolated",
+      "ok": true,
+      "detail": "../web_dist"
+    },
+    {
+      "name": "frontend-dist-build-hook",
+      "ok": true,
+      "detail": "{'script': 'node tools/build_web_dist.mjs', 'cwd': '..'}"
+    },
+    {
+      "name": "frontend-dist-dev-hook",
+      "ok": true,
+      "detail": "{'script': 'node tools/build_web_dist.mjs', 'cwd': '..', 'wait': True}"
+    },
+    {
+      "name": "frontend-source-watch-folder",
+      "ok": true,
+      "detail": "['../web_demo']"
+    },
+    {
       "name": "tauri-schema-2.11-compatible",
       "ok": true,
-      "detail": "tauri-cli 2.11.5 / tauri 2.11.5"
+      "detail": "tauri-cli 2.11.4 / tauri 2.11.5"
     },
     {
       "name": "tauri-no-security-headers",
@@ -408,6 +433,16 @@
       "detail": "missing workflow contract matching tools/validate_desktop_release\\.py"
     },
     {
+      "name": "workflow-validation:tools/build_web_dist.mjs",
+      "ok": true,
+      "detail": "missing workflow contract matching tools/build_web_dist\\.mjs"
+    },
+    {
+      "name": "workflow-validation:Stage dependency-free Tauri frontend",
+      "ok": true,
+      "detail": "missing workflow contract matching Stage dependency-free Tauri frontend"
+    },
+    {
       "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.4\"",
       "ok": true,
       "detail": "missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.4[\"\\']?\\s*$"
@@ -548,7 +583,12 @@
       "detail": "missing build stage"
     },
     {
-      "name": "build-sh:2.11.5",
+      "name": "build-sh:build_web_dist.mjs",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:2.11.4",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -588,7 +628,12 @@
       "detail": "missing build stage"
     },
     {
-      "name": "build-bat:2.11.5",
+      "name": "build-bat:build_web_dist.mjs",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:2.11.4",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -626,6 +671,11 @@
       "name": "no-packaged-target",
       "ok": true,
       "detail": "excluded by Git, Tauri, and release packaging"
+    },
+    {
+      "name": "no-packaged-web-dist",
+      "ok": true,
+      "detail": "generated on demand and excluded from source release packaging"
     },
     {
       "name": "no-packaged-build-venv",
@@ -715,11 +765,11 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 448 files"
+      "detail": "only 449 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "b94aef3eb143ff570b81740e38b5aebf6f57a8d7c2bb4cd3890b82b631436df7",
+    "src-tauri/tauri.conf.json": "53e394232ce6c42d81e546934a689789aa0229d2c3354143b0d182a8848e6d9e",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
     "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
@@ -731,22 +781,23 @@
     "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
-    "scripts/build-desktop.sh": "4476f9ac8f59b9f9b5b4bf110e9b07ee8db58da27134dfc57a9c0df9cfe6647c",
-    "scripts/build-desktop.bat": "6abedefca3129adf3aa3ad62477bb8e9e4055c738da0b9c5bed4886048239769",
-    ".github/workflows/desktop-release.yml": "82866c60cf233f7c722c4f25a077269aa6df50db88b9273884c90e9d34a77387",
-    ".github/workflows/ci.yml": "9920b333eaed087cdf253836c200f48b298dc4e05e4e9c4d7c9ca3b9e540ca36",
+    "scripts/build-desktop.sh": "0e36c5e042764ddf91cf73c845c7103a32b345f64e34693d448414f9ffc302c2",
+    "scripts/build-desktop.bat": "b8f96af8d717b86cb4c99662e728412af47347867c4abbecec8f245fcef1f332",
+    ".github/workflows/desktop-release.yml": "cdad9da470ed54bd0322737425a94fadcbd848fead58a2e8aedebbb51344b142",
+    ".github/workflows/ci.yml": "c127ad76fbb0061bf2ed6f7f551cb72b691702671c6fbec1560e4c2d3793fd37",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "5402214f72426db1c609d53673d887072d0c25a36cd361cdc69b7af2230670f0",
-    "tools/validate_tauri_config.py": "75d931198285b1cc2b4c41718ad0c3084cd62a7d9e2d848d64e7be36a9266c51",
-    "tools/package_release.py": "80ee86a41bc8086136b91e719ced1b610b372175589d79d402172301f9502fd4",
+    "tools/validate_desktop_release.py": "69bdfae32913e242f40c4525349c86e533193dd5edf0f88bee352875adac00e3",
+    "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
+    "tools/package_release.py": "0f41067320f6aa4d503c90a4e60040dfdac6711ae70841f1835aed12ac0d7363",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
-    "tools/generate_release_inventory.py": "47908240787c2af386160b4c2b7a6beed37d1aae46c725855f49a48f21a2cce2",
+    "tools/generate_release_inventory.py": "d71294945e76a7c864cd3265673120fdc9da6b7380a7231908fa77f8ea7b497d",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
     "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
-    "tools/clean_repository.py": "f35920c622ebc2d860d18b5172002a15e846fda9aa5b8d0d20e03ee69a79a3ed",
+    "tools/clean_repository.py": "f44148f00a3b25b1c69a1db3e09d5d3f1abaaad578592c80a36b57a76b087ccc",
+    "tools/build_web_dist.mjs": "52cc1875ea5e42b1ba4dbca888816a1e836ccd93b2ea9b20f286c6afc3dcefdd",
     "src-tauri/Info.plist": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
     "src-tauri/Entitlements.plist": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
     "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",

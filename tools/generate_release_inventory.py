@@ -9,7 +9,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-EXCLUDED_PARTS = {'.git', 'node_modules', 'target', '.desktop-build', '__pycache__'}
+EXCLUDED_PARTS = {'.git', 'node_modules', 'target', '.desktop-build', '__pycache__', 'web_dist'}
 GENERATED_OUTPUTS = {
     'reports/DESKTOP_GOLDMASTER_INVENTORY.json',
     'reports/DESKTOP_GOLDMASTER_DIRECTORY_INVENTORY.txt',

@@ -37,6 +37,7 @@ EXCLUDED_DIRS = {
     "__pycache__",
     "node_modules",
     "target",
+    "web_dist",
     "venv",
     ".venv",
 }

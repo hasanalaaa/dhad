@@ -33,6 +33,9 @@ def test_release_pipeline_declares_desktop_build_exclusions() -> None:
     assert '".desktop-build"' in (root / "tools" / "package_release.py").read_text(encoding="utf-8")
     assert ".desktop-build/" in (root / ".gitignore").read_text(encoding="utf-8")
     assert ".desktop-build/" in (root / ".tauriignore").read_text(encoding="utf-8")
+    assert '"web_dist"' in (root / "tools" / "package_release.py").read_text(encoding="utf-8")
+    assert "web_dist/" in (root / ".gitignore").read_text(encoding="utf-8")
+    assert "web_dist/" in (root / ".tauriignore").read_text(encoding="utf-8")
 
 
 def test_workflow_contains_pinned_release_contracts() -> None:
@@ -48,6 +51,8 @@ def test_workflow_contains_pinned_release_contracts() -> None:
         "build-essential",
         "libxdo-dev",
         "libssl-dev",
+        "node tools/build_web_dist.mjs",
+        "Stage dependency-free Tauri frontend",
     ):
         assert token in workflow
 
@@ -89,6 +94,8 @@ def test_desktop_build_environment_pins_yaml_and_runs_full_audit() -> None:
     assert requirements == ["onnx==1.22.0", "PyYAML==6.0.3"]
     assert "tools/clean_repository.py" in build_script
     assert "tools/audit_repository.py" in build_script
+    assert "node tools/build_web_dist.mjs" in build_script
+    assert "@tauri-apps/cli@$TAURI_CLI_VERSION" in build_script
     assert "if args.write_reports or True" not in validator
 
 
@@ -109,6 +116,7 @@ def test_release_packager_preserves_new_release_tools() -> None:
     for path in (
         "dhad/scripts/install-macos-app.sh",
         "dhad/tools/clean_repository.py",
+        "dhad/tools/build_web_dist.mjs",
     ):
         assert path in packager
 
@@ -203,6 +211,9 @@ def test_release_audits_ignore_local_ci_and_compiler_outputs(tmp_path: Path) -> 
     assert "'target' in package_excluded_dirs" in desktop_validator
     assert '"node_modules",' in sovereign_validator
     assert '"target",' in sovereign_validator
+    assert '"web_dist",' in sovereign_validator
+    assert '"web_dist"' in auditor
+    assert '"web_dist"' in packager
 
 
 def test_python_and_rust_ci_lint_regressions_are_fixed() -> None:

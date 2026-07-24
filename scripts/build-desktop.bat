@@ -14,7 +14,7 @@ where node >nul 2>nul || (echo [Dhad Desktop] ERROR: Node.js 22 is required.& ex
 where npm >nul 2>nul || (echo [Dhad Desktop] ERROR: npm is required.& exit /b 1)
 where cargo >nul 2>nul || (echo [Dhad Desktop] ERROR: Rust/Cargo is required.& exit /b 1)
 
-if not defined DHAD_TAURI_CLI_VERSION set "DHAD_TAURI_CLI_VERSION=2.11.5"
+if not defined DHAD_TAURI_CLI_VERSION set "DHAD_TAURI_CLI_VERSION=2.11.4"
 if not exist ".github\workflows\desktop-release.yml" (echo [Dhad Desktop] ERROR: Missing .github\workflows\desktop-release.yml. Preserve hidden directories when extracting the archive.& exit /b 1)
 if not exist "src-tauri\tauri.conf.json" (echo [Dhad Desktop] ERROR: Missing src-tauri\tauri.conf.json.& exit /b 1)
 %PY% tools\validate_tauri_config.py --config src-tauri\tauri.conf.json || exit /b 1
@@ -62,21 +62,27 @@ if not "%DHAD_SKIP_RUST_TESTS%"=="1" (
   cargo test --workspace || exit /b 1
 )
 
-for /f "delims=" %%V in ('cargo tauri --version 2^>nul') do set "INSTALLED_TAURI_VERSION=%%V"
+echo.
+echo [Dhad Desktop] Staging dependency-free Tauri frontend
+node tools\build_web_dist.mjs || exit /b 1
+
+set "INSTALLED_TAURI_VERSION="
+for /f "delims=" %%V in ('tauri --version 2^>nul') do set "INSTALLED_TAURI_VERSION=%%V"
 echo !INSTALLED_TAURI_VERSION! | findstr /c:"%DHAD_TAURI_CLI_VERSION%" >nul
 if errorlevel 1 (
   if "%DHAD_SKIP_CLI_INSTALL%"=="1" (
-    echo [Dhad Desktop] ERROR: Tauri CLI %DHAD_TAURI_CLI_VERSION% is required. Run: cargo install tauri-cli --version "=%DHAD_TAURI_CLI_VERSION%" --locked --force
+    echo [Dhad Desktop] ERROR: Tauri npm CLI %DHAD_TAURI_CLI_VERSION% is required. Run: npm install --global @tauri-apps/cli@%DHAD_TAURI_CLI_VERSION%
     exit /b 1
   )
   echo.
-  echo [Dhad Desktop] Installing pinned Tauri CLI %DHAD_TAURI_CLI_VERSION%
-  cargo install tauri-cli --version "=%DHAD_TAURI_CLI_VERSION%" --locked --force || exit /b 1
+  echo [Dhad Desktop] Installing pinned Tauri npm CLI %DHAD_TAURI_CLI_VERSION%
+  call npm install --global @tauri-apps/cli@%DHAD_TAURI_CLI_VERSION% || exit /b 1
 )
+where tauri >nul 2>nul || (echo [Dhad Desktop] ERROR: Pinned Tauri CLI is not available on PATH after installation.& exit /b 1)
 
 echo.
 echo [Dhad Desktop] Building native bundle(s): %DHAD_BUNDLES%
-cargo tauri build --bundles "%DHAD_BUNDLES%" %* || exit /b 1
+tauri build --bundles "%DHAD_BUNDLES%" %* || exit /b 1
 
 echo.
 echo [Dhad Desktop] Build complete. Bundles are under target\release\bundle.

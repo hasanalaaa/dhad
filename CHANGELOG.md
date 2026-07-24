@@ -1,3 +1,11 @@
+## 1.0.13 — Isolated Tauri frontend distribution
+
+- Replaced `build.frontendDist = "../web_demo"` with a generated `../web_dist` directory so installed npm dependencies can never be embedded or rejected by Tauri.
+- Added `tools/build_web_dist.mjs`, a deterministic cross-platform staging step that copies only runtime HTML, CSS, JavaScript, WASM, ONNX, vocabulary, icons, and ONNX Runtime vendor assets.
+- Added Tauri `beforeBuildCommand` and `beforeDevCommand` hooks plus explicit CI staging on macOS and Windows.
+- Excluded `web_dist` from Git, Tauri source packaging, repository audits, Docker context, and deterministic source ZIP archives while validating required runtime assets before every native build.
+- Updated local macOS and Windows build scripts to use the published npm Tauri CLI `2.11.4` consistently with release CI.
+
 ## 1.0.10 — CI portability and release bootstrap repair
 
 - Installed the complete official Tauri Linux prerequisite set before Rust workspace linting and tests.

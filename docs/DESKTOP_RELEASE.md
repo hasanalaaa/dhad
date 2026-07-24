@@ -8,7 +8,7 @@
 ./scripts/build-desktop.sh
 ```
 
-The script creates an isolated `.desktop-build/venv`, installs the pinned ONNX tooling, validates and safely optimizes model metadata, runs JavaScript, Clippy, Rust formatting, and workspace tests, installs the Tauri 2 CLI when needed, creates a DMG, then verifies the generated `.app` metadata, executable permissions, Mach-O architecture, code signature, dynamic-library linkage, and native launch smoke test.
+The script creates an isolated `.desktop-build/venv`, installs the pinned ONNX tooling, validates and safely optimizes model metadata, runs JavaScript, Clippy, Rust formatting, and workspace tests, stages a dependency-free `web_dist`, installs the pinned npm Tauri CLI when needed, creates a DMG, then verifies the generated `.app` metadata, executable permissions, Mach-O architecture, code signature, dynamic-library linkage, and native launch smoke test.
 
 ### Windows
 
@@ -23,8 +23,9 @@ Environment switches:
 - `DHAD_SKIP_WEB_TESTS=1` skips JavaScript tests.
 - `DHAD_SKIP_RUST_TESTS=1` skips Cargo formatting/tests.
 - `DHAD_SKIP_CLI_INSTALL=1` prevents automatic Tauri CLI installation.
-- Native Cargo release scripts pin `tauri-cli` to `2.11.5`, while GitHub release jobs use the precompiled npm wrapper `@tauri-apps/cli@2.11.4`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before dependency installation or bundling.
+- Local and GitHub release builds use the published npm wrapper `@tauri-apps/cli@2.11.4`, while the Rust application crate remains pinned to `tauri = 2.11.5`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before bundling.
 - Preserve the hidden `.github/` directory when copying or extracting the source archive; the build preflight requires `.github/workflows/desktop-release.yml`.
+- Tauri embeds only the generated `web_dist/` tree. `tools/build_web_dist.mjs` rebuilds it from `web_demo/` while excluding `node_modules`, tests, package metadata, benchmarks, and fixtures.
 - `DHAD_BUNDLES=dmg` or `DHAD_BUNDLES=nsis,msi` overrides bundle targets.
 - `DHAD_SKIP_MACOS_LAUNCH_SMOKE=1` skips only the post-build launch smoke test; structural and signing checks still run.
 - `DHAD_REQUIRE_NOTARIZED=1` additionally requires Gatekeeper assessment and a valid stapled notarization ticket.

@@ -80,7 +80,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -92,6 +92,11 @@ def main() -> int:
     ok('identifier', cfg.get('identifier') == 'com.dhad.desktop', str(cfg.get('identifier')))
     ok('identifier-no-app-suffix', not str(cfg.get('identifier', '')).lower().endswith('.app'), str(cfg.get('identifier')))
     ok('main-binary-name', cfg.get('mainBinaryName') == 'dhad-desktop', str(cfg.get('mainBinaryName')))
+    build = cfg.get('build', {})
+    ok('frontend-dist-isolated', build.get('frontendDist') == '../web_dist', str(build.get('frontendDist')))
+    ok('frontend-dist-build-hook', build.get('beforeBuildCommand') == {'script': 'node tools/build_web_dist.mjs', 'cwd': '..'}, str(build.get('beforeBuildCommand')))
+    ok('frontend-dist-dev-hook', build.get('beforeDevCommand') == {'script': 'node tools/build_web_dist.mjs', 'cwd': '..', 'wait': True}, str(build.get('beforeDevCommand')))
+    ok('frontend-source-watch-folder', build.get('additionalWatchFolders') == ['../web_demo'], str(build.get('additionalWatchFolders')))
     schema_errors = validate_tauri_config(cfg)
     ok('tauri-schema-2.11-compatible', not schema_errors, '; '.join(schema_errors[:10]) or TAURI_SCHEMA_PROFILE)
     security = cfg.get('app', {}).get('security', {})
@@ -147,6 +152,8 @@ def main() -> int:
         ("tools/optimize_onnx_assets.py", r"tools/optimize_onnx_assets\.py"),
         ("tools/validate_tauri_config.py", r"tools/validate_tauri_config\.py"),
         ("tools/validate_desktop_release.py", r"tools/validate_desktop_release\.py"),
+        ("tools/build_web_dist.mjs", r"tools/build_web_dist\.mjs"),
+        ("Stage dependency-free Tauri frontend", r"Stage dependency-free Tauri frontend"),
         (
             'TAURI_CLI_VERSION: "2.11.4"',
             r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$',
@@ -180,10 +187,10 @@ def main() -> int:
     sh = (root / 'scripts/build-desktop.sh').read_text(encoding='utf-8')
     bat = (root / 'scripts/build-desktop.bat').read_text(encoding='utf-8')
     for label, text in [('sh', sh), ('bat', bat)]:
-        for token in ['desktop-release.yml', 'validate_tauri_config.py', 'desktop-build-requirements.txt', 'optimize_onnx_assets.py', 'validate_desktop_release.py', '2.11.5', 'cargo clippy', 'tauri build']:
+        for token in ['desktop-release.yml', 'validate_tauri_config.py', 'desktop-build-requirements.txt', 'optimize_onnx_assets.py', 'validate_desktop_release.py', 'build_web_dist.mjs', '2.11.4', 'cargo clippy', 'tauri build']:
             ok(f'build-{label}:{token}', token in text, 'missing build stage')
     ok('build-sh:macos-bundle-verification', 'verify-macos-app.sh' in sh, 'macOS build must verify and launch-smoke the generated app')
-    excluded_scan_parts = {'.git', 'target', 'node_modules', '.desktop-build', '.audit-venv', '.ci-venv', '.venv', 'venv', '__pycache__', '.pytest_cache', '.ruff_cache', '.mypy_cache'}
+    excluded_scan_parts = {'.git', 'target', 'node_modules', '.desktop-build', '.audit-venv', '.ci-venv', '.venv', 'venv', '__pycache__', '.pytest_cache', '.ruff_cache', '.mypy_cache', 'web_dist'}
     files = [p for p in root.rglob('*') if p.is_file() and (not any((part in excluded_scan_parts for part in p.relative_to(root).parts)))]
     intentional_zero = {'docs/.nojekyll', 'tools/__init__.py', 'src/dhad/py.typed'}
     zero = [p.relative_to(root).as_posix() for p in files if p.stat().st_size == 0 and p.relative_to(root).as_posix() not in intentional_zero]
@@ -213,8 +220,14 @@ def main() -> int:
         '.gitignore': _has_ignore_rule(gitignore, 'target'),
         '.tauriignore': _has_ignore_rule(tauriignore, 'target'),
     }
+    web_dist_contracts = {
+        'package_release.py': 'web_dist' in package_excluded_dirs,
+        '.gitignore': _has_ignore_rule(gitignore, 'web_dist'),
+        '.tauriignore': _has_ignore_rule(tauriignore, 'web_dist'),
+    }
     missing_node_modules_contracts = [name for name, present in node_modules_contracts.items() if not present]
     missing_target_contracts = [name for name, present in target_contracts.items() if not present]
+    missing_web_dist_contracts = [name for name, present in web_dist_contracts.items() if not present]
     ok(
         'no-packaged-node-modules',
         not missing_node_modules_contracts,
@@ -228,6 +241,13 @@ def main() -> int:
         'missing target exclusion in: ' + ', '.join(missing_target_contracts)
         if missing_target_contracts
         else 'excluded by Git, Tauri, and release packaging',
+    )
+    ok(
+        'no-packaged-web-dist',
+        not missing_web_dist_contracts,
+        'missing web_dist exclusion in: ' + ', '.join(missing_web_dist_contracts)
+        if missing_web_dist_contracts
+        else 'generated on demand and excluded from source release packaging',
     )
     build_venv_contracts = {'package_release.py': '.desktop-build' in package_excluded_dirs, '.gitignore': _has_ignore_rule(gitignore, '.desktop-build'), '.tauriignore': _has_ignore_rule(tauriignore, '.desktop-build')}
     missing_build_venv_contracts = [name for name, present in build_venv_contracts.items() if not present]

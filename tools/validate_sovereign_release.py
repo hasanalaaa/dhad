@@ -158,6 +158,7 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
             "venv",
             "node_modules",
             "target",
+            "web_dist",
         }
         forbidden_names = {".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
         forbidden_suffixes = {".log", ".tmp", ".temp", ".bak", ".pyc", ".pyo"}

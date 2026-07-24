@@ -87,3 +87,6 @@ redis-data/
 
 # Local CI parity environment
 .ci-venv/
+
+# Generated Tauri frontend staging directory
+web_dist/
