@@ -15,7 +15,11 @@ import sys
 import tempfile
 import tomllib
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError as exc:  # pragma: no cover - startup guidance
+    raise SystemExit("PyYAML is required. Run this audit with .desktop-build/venv/bin/python or execute scripts/build-desktop.sh.") from exc
+
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -379,6 +383,14 @@ def main() -> int:
             }
         )
     )
+    for finding in report["findings"]:
+        print(
+            f"{finding['severity'].upper()}: {finding['path']} — {finding['message']}",
+            file=sys.stderr,
+        )
+    for name, result in report["checks"].items():
+        if result["status"] == "failed":
+            print(f"CHECK FAILED: {name}: {result['detail']}", file=sys.stderr)
     return 1 if report["status"] == "failed" else 0
 
 

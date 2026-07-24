@@ -34,12 +34,24 @@ fi
 log "Installing pinned desktop build tooling"
 "$PYTHON" -m pip install --disable-pip-version-check --quiet -r tools/desktop-build-requirements.txt
 
+log "Cleaning host-generated repository artifacts"
+"$PYTHON" tools/clean_repository.py --root .
+
 log "Optimizing and validating ONNX release assets"
-"$PYTHON" tools/optimize_onnx_assets.py --root . --write-manifest
+OPTIMIZE_ARGS=(--root .)
+if [[ "${DHAD_WRITE_REPORTS:-0}" == "1" ]]; then OPTIMIZE_ARGS+=(--write-manifest); fi
+"$PYTHON" tools/optimize_onnx_assets.py "${OPTIMIZE_ARGS[@]}"
 
 log "Running desktop release audits"
-"$PYTHON" tools/validate_desktop_release.py --root . --strict
-"$PYTHON" tools/validate_sovereign_release.py --root . --skip-cleanliness --strict --write-report
+DESKTOP_AUDIT_ARGS=(--root . --strict)
+SOVEREIGN_AUDIT_ARGS=(--root . --strict)
+if [[ "${DHAD_WRITE_REPORTS:-0}" == "1" ]]; then
+  DESKTOP_AUDIT_ARGS+=(--write-reports)
+  SOVEREIGN_AUDIT_ARGS+=(--write-report)
+fi
+"$PYTHON" tools/validate_desktop_release.py "${DESKTOP_AUDIT_ARGS[@]}"
+"$PYTHON" tools/validate_sovereign_release.py "${SOVEREIGN_AUDIT_ARGS[@]}"
+"$PYTHON" tools/audit_repository.py
 
 if [[ "${DHAD_SKIP_WEB_TESTS:-0}" != "1" ]]; then
   log "Installing and testing the web/PWA surface"

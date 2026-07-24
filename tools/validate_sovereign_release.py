@@ -47,9 +47,11 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         "src-tauri/src/tray.rs",
         "tools/run_sovereign_validation_matrix.py",
         "tools/validate_tauri_config.py",
+        "tools/clean_repository.py",
         "tools/package_release.py",
         "tools/verify_macos_bundle.py",
         "scripts/verify-macos-app.sh",
+        "scripts/install-macos-app.sh",
         "web_demo/mini-assistant.css",
         "web_demo/mini-assistant.js",
         "web_demo/ui/mini-assistant-runtime.test.mjs",
@@ -147,9 +149,9 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         checks.append(check_contains(f"readme:{marker.lower().replace(' ', '-')}", readme, f"## {marker}"))
 
     if include_cleanliness:
-        ignored_transient_names = {".desktop-build", ".audit-venv", ".venv", "venv"}
-        forbidden_names = {"node_modules", "target", ".pytest_cache", "__pycache__", ".ruff_cache"}
-        forbidden_suffixes = {".log", ".tmp", ".temp", ".bak"}
+        ignored_transient_names = {".git", ".desktop-build", ".audit-venv", ".venv", "venv"}
+        forbidden_names = {"node_modules", "target", ".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
+        forbidden_suffixes = {".log", ".tmp", ".temp", ".bak", ".pyc", ".pyo"}
         violations: list[str] = []
         for path in root.rglob("*"):
             relative = path.relative_to(root)
@@ -158,7 +160,7 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
             if any(part in forbidden_names for part in relative.parts):
                 violations.append(relative.as_posix())
                 continue
-            if path.is_file() and path.suffix.lower() in forbidden_suffixes:
+            if path.is_file() and (path.name in {".DS_Store", "Thumbs.db", "Desktop.ini"} or path.name.startswith("._") or path.suffix.lower() in forbidden_suffixes):
                 violations.append(relative.as_posix())
         checks.append(Check("clean:generated-artifacts", not violations, ", ".join(violations[:10]) or "clean"))
     return checks

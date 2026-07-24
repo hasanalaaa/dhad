@@ -1,15 +1,10 @@
 {
-  "generated_at_utc": "2026-07-24T03:51:35.122704+00:00",
-  "file_count": 443,
-  "total_bytes": 180088250,
+  "generated_at_utc": "2026-07-24T04:07:33.534919+00:00",
+  "file_count": 445,
+  "total_bytes": 180090659,
   "checks_total": 125,
-  "checks_passed": 121,
-  "errors": [
-    "workflow-validation:TAURI_CLI_VERSION: \"2.11.5\": missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.5[\"\\']?\\s*$",
-    "workflow-validation:dtolnay/rust-toolchain@1.97.1: missing workflow contract matching uses\\s*:\\s*dtolnay/rust-toolchain@1\\.97\\.1\\b",
-    "workflow-validation:verify-macos-app.sh: missing workflow contract matching (?:^|[\\s./])verify-macos-app\\.sh\\b",
-    "workflow-validation:APPLE_SIGNING_IDENTITY: missing workflow contract matching \\bAPPLE_SIGNING_IDENTITY\\b"
-  ],
+  "checks_passed": 125,
+  "errors": [],
   "warnings": [],
   "checks": [
     {
@@ -379,12 +374,12 @@
     },
     {
       "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.5\"",
-      "ok": false,
+      "ok": true,
       "detail": "missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.5[\"\\']?\\s*$"
     },
     {
       "name": "workflow-validation:dtolnay/rust-toolchain@1.97.1",
-      "ok": false,
+      "ok": true,
       "detail": "missing workflow contract matching uses\\s*:\\s*dtolnay/rust-toolchain@1\\.97\\.1\\b"
     },
     {
@@ -399,12 +394,12 @@
     },
     {
       "name": "workflow-validation:verify-macos-app.sh",
-      "ok": false,
+      "ok": true,
       "detail": "missing workflow contract matching (?:^|[\\s./])verify-macos-app\\.sh\\b"
     },
     {
       "name": "workflow-validation:APPLE_SIGNING_IDENTITY",
-      "ok": false,
+      "ok": true,
       "detail": "missing workflow contract matching \\bAPPLE_SIGNING_IDENTITY\\b"
     },
     {
@@ -635,7 +630,7 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 443 files"
+      "detail": "only 445 files"
     }
   ],
   "key_assets": {
@@ -653,7 +648,7 @@
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
     "scripts/build-desktop.sh": "b502008761e27d8675858b2a851a91338718c0ab608500ca9b3b222baab8e533",
     "scripts/build-desktop.bat": "25fed88efcdc4bfb15eb3912969313cb1862e289375ad500bdc9cdd3cb0d82a8",
-    ".github/workflows/desktop-release.yml": "f452d4d94336506bfcc611c2af5aae4c47029e2d18bbcdaa860d0688c2a20126",
+    ".github/workflows/desktop-release.yml": "16d8d9b9d94d957351f984499046a883851053bc5baa681e4fa81e466740e437",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
     "tools/validate_desktop_release.py": "2755c9424998b3a7cb55b06d883c5816205676f7021f12a1a9043b9dd773861a",

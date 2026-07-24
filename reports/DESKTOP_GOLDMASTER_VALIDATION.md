@@ -1,8 +1,8 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **443**
-- Checks passed: **121/125**
-- Errors: **4**
+- Files audited: **445**
+- Checks passed: **125/125**
+- Errors: **0**
 - Warnings: **0**
 
 ## Results
@@ -80,12 +80,12 @@
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
-- FAIL — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$
-- FAIL — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
+- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$
+- PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
 - PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
-- FAIL — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
-- FAIL — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
+- PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
+- PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
 - PASS — `landing:data-download`: missing landing-page section
@@ -131,4 +131,4 @@
 - PASS — `onnx-build-tool-pinned`: ['onnx==1.22.0']
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 443 files
+- PASS — `repository-file-count`: only 445 files

@@ -27,6 +27,8 @@ REQUIRED_ARCHIVE_PATHS = {
     "dhad/scripts/build-desktop.sh",
     "dhad/scripts/verify-macos-app.sh",
     "dhad/scripts/build-desktop.bat",
+    "dhad/scripts/install-macos-app.sh",
+    "dhad/tools/clean_repository.py",
 }
 
 
@@ -75,12 +77,24 @@ def package(root: Path, output: Path) -> tuple[int, str]:
         excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/__pycache__/")
         if any(any(fragment in f"/{name}" for fragment in excluded_archive_fragments) for name in names):
             raise RuntimeError("archive contains excluded build, cache, or VCS directories")
+        forbidden_basenames = {".DS_Store", "Thumbs.db", "Desktop.ini"}
+        forbidden_suffixes = {".pyc", ".pyo", ".tmp", ".temp", ".bak", ".swp"}
+        dirty = sorted(
+            name for name in names
+            if Path(name).name in forbidden_basenames
+            or Path(name).name.startswith("._")
+            or Path(name).suffix.lower() in forbidden_suffixes
+        )
+        if dirty:
+            raise RuntimeError(f"archive contains generated host artifacts: {dirty[:10]}")
         nonempty_required = (
             "dhad/.github/workflows/desktop-release.yml",
             "dhad/src-tauri/Info.plist",
             "dhad/src-tauri/Entitlements.plist",
             "dhad/tools/verify_macos_bundle.py",
+            "dhad/tools/clean_repository.py",
             "dhad/scripts/verify-macos-app.sh",
+            "dhad/scripts/install-macos-app.sh",
         )
         for required_name in nonempty_required:
             if archive.getinfo(required_name).file_size == 0 or not archive.read(required_name).strip():
@@ -88,7 +102,9 @@ def package(root: Path, output: Path) -> tuple[int, str]:
         for executable_name in (
             "dhad/scripts/build-desktop.sh",
             "dhad/scripts/verify-macos-app.sh",
+            "dhad/scripts/install-macos-app.sh",
             "dhad/tools/verify_macos_bundle.py",
+            "dhad/tools/clean_repository.py",
         ):
             mode = archive.getinfo(executable_name).external_attr >> 16
             if not mode & 0o111:

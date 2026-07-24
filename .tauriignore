@@ -1,1 +1,24 @@
-.desktop-build
+# Local and temporary build environments
+.desktop-build/
+.audit-venv/
+.venv/
+venv/
+
+# Dependency and compiler outputs
+node_modules/
+target/
+web_demo/node_modules/
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Local operating-system and editor artifacts
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp

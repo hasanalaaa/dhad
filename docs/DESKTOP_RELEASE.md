@@ -66,3 +66,33 @@ Local macOS builds use the configured ad-hoc identity when no Apple identity is 
 3. Verify signatures with `Get-AuthenticodeSignature` before publishing.
 
 Signing credentials are intentionally not stored in the repository. Unsigned artifacts remain suitable for internal validation but public releases should be signed and notarized.
+
+## macOS local build and installation
+
+Use the repository root, not `src-tauri`, because the Cargo workspace writes native artifacts under the root `target` directory.
+
+Run a development build:
+
+```bash
+cd ~/Documents/dhad
+cargo tauri dev
+```
+
+Create and verify the production DMG:
+
+```bash
+cd ~/Documents/dhad
+chmod +x scripts/build-desktop.sh scripts/verify-macos-app.sh scripts/install-macos-app.sh
+./scripts/build-desktop.sh
+```
+
+Install the verified application bundle directly into `/Applications/Dhad.app` and launch it:
+
+```bash
+cd ~/Documents/dhad
+./scripts/install-macos-app.sh
+```
+
+The bundle filename stays ASCII-safe as `Dhad.app`, while `CFBundleDisplayName` presents the Arabic product name «ضاد» in macOS.
+
+The local build environment is isolated under `.desktop-build/venv`. Never install PyYAML or ONNX into Homebrew's managed Python. The build script pins and installs both dependencies automatically.

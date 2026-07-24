@@ -1,3 +1,9 @@
+## v1.0.7 — Repository audit hardening
+
+- Exclude internal `.git` metadata from Sovereign release cleanliness checks.
+- Add regression coverage for Finder-created `.git/.DS_Store` files on macOS.
+- Preserve strict checks for generated artifacts in the actual distributable source tree.
+
 # Changelog
 
 
@@ -240,3 +246,11 @@
 - Added confidence, priority, profiles, tags, references, and safe autofix metadata.
 - Added deterministic overlap resolution and local suppression controls.
 - Added 1,024 Unicode/offset regression cases; full suite now has 1,379 tests.
+
+## v1.0.6 — macOS release hygiene and reproducible local builds
+
+- Automatically removes Finder `.DS_Store`, AppleDouble, Python bytecode, and test caches before release audits.
+- Pins PyYAML inside the isolated desktop build environment so repository auditing never modifies Homebrew Python.
+- Keeps validation read-only by default; report files are updated only when `DHAD_WRITE_REPORTS=1` is explicitly set.
+- Adds a verified macOS installer script that copies the built ASCII-named bundle to `/Applications/Dhad.app` while preserving the Arabic display name «ضاد».
+- Makes repository audit failures print their exact path and reason immediately.

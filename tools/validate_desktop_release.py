@@ -88,7 +88,7 @@ def main() -> int:
       'docs/index.html','tools/optimize_onnx_assets.py','tools/validate_desktop_release.py',
       'tools/validate_tauri_config.py','tools/package_release.py',
       'tools/desktop-build-requirements.txt','tools/generate_release_inventory.py','tools/verify_macos_bundle.py',
-      'scripts/verify-macos-app.sh','src-tauri/Info.plist','src-tauri/Entitlements.plist',
+      'scripts/verify-macos-app.sh','scripts/install-macos-app.sh','tools/clean_repository.py','src-tauri/Info.plist','src-tauri/Entitlements.plist',
       'vercel.json','docs/.nojekyll'
     ]
     for rel in required:
@@ -258,7 +258,7 @@ def main() -> int:
         if not item.get('version') or not item.get('integrity'): missing_integrity.append(name)
     ok('critical-npm-dependencies-pinned', not missing_integrity, str(missing_integrity))
     requirements=(root/'tools/desktop-build-requirements.txt').read_text(encoding='utf-8').splitlines()
-    ok('onnx-build-tool-pinned', requirements==['onnx==1.22.0'], str(requirements))
+    ok('desktop-build-tools-pinned', requirements==['onnx==1.22.0','PyYAML==6.0.3'], str(requirements))
 
     private_markers=[]
     markers=('-----BEGIN ' + 'PRIVATE KEY-----','-----BEGIN RSA ' + 'PRIVATE KEY-----','ghp_','AKIA')
@@ -287,7 +287,7 @@ def main() -> int:
       'key_assets':{rel:sha256(root/rel) for rel in required if (root/rel).is_file()},
     }
     reports=root/'reports'; reports.mkdir(exist_ok=True)
-    if args.write_reports or True:
+    if args.write_reports:
         (reports/'DESKTOP_GOLDMASTER_VALIDATION.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         md=['# Dhad Desktop Gold Master Validation','',f"- Files audited: **{len(files)}**",f"- Checks passed: **{report['checks_passed']}/{report['checks_total']}**",f"- Errors: **{len(errors)}**",f"- Warnings: **{len(warnings)}**",'', '## Results','']
         md += [f"- {'PASS' if c['ok'] else 'FAIL'} — `{c['name']}`{(': '+c['detail']) if c['detail'] else ''}" for c in checks]

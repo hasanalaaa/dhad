@@ -1,37 +1,231 @@
 name: Desktop Release
+
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
-  TAURI_CLI_VERSION: "2.11.4"
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+  TAURI_CLI_VERSION: "2.11.5"
+
 jobs:
+  validate:
+    name: Validate release contracts
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - name: Checkout source and LFS assets
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web_demo/package-lock.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: tools/desktop-build-requirements.txt
+
+      - name: Install Linux desktop prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            libwebkit2gtk-4.1-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            patchelf
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@1.97.1
+        with:
+          components: clippy,rustfmt
+          targets: wasm32-unknown-unknown
+
+      - name: Install pinned Tauri CLI
+        run: cargo install tauri-cli --version "=${TAURI_CLI_VERSION}" --locked --force
+
+      - name: Install desktop build requirements
+        run: python -m pip install --disable-pip-version-check -r tools/desktop-build-requirements.txt
+
+      - name: Install web dependencies
+        run: npm ci --prefix web_demo --ignore-scripts
+
+      - name: Validate Tauri 2.11 configuration
+        run: python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
+
+      - name: Optimize and inventory ONNX assets
+        run: python tools/optimize_onnx_assets.py --root . --write-manifest
+
+      - name: Run release audits
+        run: |
+          python tools/validate_desktop_release.py --root . --strict --write-reports
+          python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict --write-report
+          python tools/audit_repository.py
+
+      - name: Test JavaScript and PWA surface
+        run: |
+          npm run check --prefix web_demo
+          npm test --prefix web_demo
+
+      - name: Test Rust workspace
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --workspace --all-targets -- -D warnings
+          cargo test --workspace
+
   build:
+    name: Build ${{ matrix.label }}
+    needs: validate
     strategy:
+      fail-fast: false
       matrix:
         include:
-          - os: macos-15
+          - label: macOS Apple Silicon DMG
+            platform: macos-15
             target: aarch64-apple-darwin
-          - os: macos-15-intel
+            args: --target aarch64-apple-darwin --bundles dmg
+            verify_arch: aarch64
+          - label: macOS Intel DMG
+            platform: macos-15-intel
             target: x86_64-apple-darwin
-          - os: windows-2025
+            args: --target x86_64-apple-darwin --bundles dmg
+            verify_arch: x86_64
+          - label: Windows x64 NSIS and MSI
+            platform: windows-2025
             target: x86_64-pc-windows-msvc
-            bundle: "nsis,msi"
-    runs-on: ${{ matrix.os }}
+            args: --target x86_64-pc-windows-msvc --bundles nsis,msi
+    runs-on: ${{ matrix.platform }}
+    timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Linux Dependencies
-        if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev
-      - name: Setup Python & Tools
+      - name: Checkout source and LFS assets
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web_demo/package-lock.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: tools/desktop-build-requirements.txt
+
+      - name: Set up Rust target
+        uses: dtolnay/rust-toolchain@1.97.1
+        with:
+          components: clippy,rustfmt
+          targets: ${{ matrix.target }}
+
+      - name: Install pinned Tauri CLI
+        run: cargo install tauri-cli --version "=${TAURI_CLI_VERSION}" --locked --force
+
+      - name: Install desktop build requirements
+        run: python -m pip install --disable-pip-version-check -r tools/desktop-build-requirements.txt
+
+      - name: Install web dependencies
+        run: npm ci --prefix web_demo --ignore-scripts
+
+      - name: Validate and prepare release assets
         run: |
-          pip install -r tools/desktop-build-requirements.txt
-          python tools/optimize_onnx_assets.py
-          python tools/validate_tauri_config.py
-          python tools/validate_desktop_release.py
-      - name: Run Tests
+          python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
+          python tools/optimize_onnx_assets.py --root . --write-manifest
+          python tools/validate_desktop_release.py --root . --strict
+          python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict
+          npm run check --prefix web_demo
+          npm test --prefix web_demo
+          cargo test --workspace
+
+      - name: Configure optional Apple signing and notarization
+        if: runner.os == 'macOS'
+        shell: bash
+        env:
+          DHAD_APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          DHAD_APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          DHAD_APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          DHAD_APPLE_ID: ${{ secrets.APPLE_ID }}
+          DHAD_APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          DHAD_APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
-          cargo test
-          npm test
-      - name: Tauri Build
+          set -euo pipefail
+          write_env() {
+            local name="$1" value="$2" delimiter="DHAD_$(date +%s%N)_$RANDOM"
+            if [[ -n "$value" ]]; then
+              {
+                printf '%s<<%s\n' "$name" "$delimiter"
+                printf '%s\n' "$value"
+                printf '%s\n' "$delimiter"
+              } >> "$GITHUB_ENV"
+            fi
+          }
+
+          if [[ -n "$DHAD_APPLE_CERTIFICATE" || -n "$DHAD_APPLE_CERTIFICATE_PASSWORD" || -n "$DHAD_APPLE_SIGNING_IDENTITY" ]]; then
+            [[ -n "$DHAD_APPLE_CERTIFICATE" && -n "$DHAD_APPLE_CERTIFICATE_PASSWORD" && -n "$DHAD_APPLE_SIGNING_IDENTITY" ]] || {
+              echo "APPLE_CERTIFICATE, APPLE_CERTIFICATE_PASSWORD, and APPLE_SIGNING_IDENTITY must be configured together." >&2
+              exit 1
+            }
+          fi
+          if [[ -n "$DHAD_APPLE_ID" || -n "$DHAD_APPLE_PASSWORD" || -n "$DHAD_APPLE_TEAM_ID" ]]; then
+            [[ -n "$DHAD_APPLE_ID" && -n "$DHAD_APPLE_PASSWORD" && -n "$DHAD_APPLE_TEAM_ID" ]] || {
+              echo "APPLE_ID, APPLE_PASSWORD, and APPLE_TEAM_ID must be configured together." >&2
+              exit 1
+            }
+          fi
+
+          write_env APPLE_CERTIFICATE "$DHAD_APPLE_CERTIFICATE"
+          write_env APPLE_CERTIFICATE_PASSWORD "$DHAD_APPLE_CERTIFICATE_PASSWORD"
+          write_env APPLE_SIGNING_IDENTITY "$DHAD_APPLE_SIGNING_IDENTITY"
+          write_env APPLE_ID "$DHAD_APPLE_ID"
+          write_env APPLE_PASSWORD "$DHAD_APPLE_PASSWORD"
+          write_env APPLE_TEAM_ID "$DHAD_APPLE_TEAM_ID"
+
+      - name: Build and publish Tauri bundles
         uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_CLI_VERSION: "2.11.5"
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "ضاد ${{ github.ref_name }}"
+          releaseBody: |
+            إصدار ضاد المكتبي لنظامي macOS وWindows.
+
+            - macOS: Apple Silicon وIntel بصيغة DMG
+            - Windows: NSIS setup EXE وMSI
+            - المعالجة اللغوية محلية افتراضيًا
+          releaseDraft: false
+          prerelease: false
+          generateReleaseNotes: true
+          args: ${{ matrix.args }}
+      - name: Verify signed macOS app bundle and native launch
+        if: runner.os == 'macOS'
+        env:
+          DHAD_EXPECTED_MACOS_ARCH: ${{ matrix.verify_arch }}
+          DHAD_SKIP_MACOS_LAUNCH_SMOKE: "0"
+        run: ./scripts/verify-macos-app.sh
+

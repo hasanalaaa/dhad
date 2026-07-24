@@ -33,13 +33,18 @@ echo [Dhad Desktop] Installing pinned desktop build tooling
 "%BUILD_PY%" -m pip install --disable-pip-version-check --quiet -r tools\desktop-build-requirements.txt || exit /b 1
 
 echo.
+echo [Dhad Desktop] Cleaning host-generated repository artifacts
+"%BUILD_PY%" tools\clean_repository.py --root . || exit /b 1
+
+echo.
 echo [Dhad Desktop] Optimizing and validating ONNX release assets
-"%BUILD_PY%" tools\optimize_onnx_assets.py --root . --write-manifest || exit /b 1
+"%BUILD_PY%" tools\optimize_onnx_assets.py --root . || exit /b 1
 
 echo.
 echo [Dhad Desktop] Running desktop release audits
 "%BUILD_PY%" tools\validate_desktop_release.py --root . --strict || exit /b 1
-"%BUILD_PY%" tools\validate_sovereign_release.py --root . --skip-cleanliness --strict --write-report || exit /b 1
+"%BUILD_PY%" tools\validate_sovereign_release.py --root . --strict || exit /b 1
+"%BUILD_PY%" tools\audit_repository.py || exit /b 1
 
 if not "%DHAD_SKIP_WEB_TESTS%"=="1" (
   echo.
