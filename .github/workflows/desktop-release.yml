@@ -55,7 +55,7 @@ jobs:
             patchelf
 
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@1.97.1
+        uses: dtolnay/rust-toolchain@1.100.0
         with:
           components: clippy,rustfmt
           targets: wasm32-unknown-unknown
@@ -137,7 +137,7 @@ jobs:
           cache-dependency-path: tools/desktop-build-requirements.txt
 
       - name: Set up Rust target
-        uses: dtolnay/rust-toolchain@1.97.1
+        uses: dtolnay/rust-toolchain@1.100.0
         with:
           components: clippy,rustfmt
           targets: ${{ matrix.target }}
