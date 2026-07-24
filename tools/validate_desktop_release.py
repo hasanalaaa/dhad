@@ -136,7 +136,29 @@ def main() -> int:
     workflow = (root / '.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
     for token in ['macos-15', 'macos-15-intel', 'windows-2025', 'aarch64-apple-darwin', 'x86_64-apple-darwin', 'nsis,msi', 'tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
-    workflow_contracts = [('v*.*.*', '["\\\']v\\*\\.\\*\\.\\*["\\\']'), ('libwebkit2gtk-4.1-dev', '\\blibwebkit2gtk-4\\.1-dev\\b'), ('libayatana-appindicator3-dev', '\\blibayatana-appindicator3-dev\\b'), ('tools/desktop-build-requirements.txt', 'tools/desktop-build-requirements\\.txt'), ('tools/optimize_onnx_assets.py', 'tools/optimize_onnx_assets\\.py'), ('tools/validate_tauri_config.py', 'tools/validate_tauri_config\\.py'), ('tools/validate_desktop_release.py', 'tools/validate_desktop_release\\.py'), ('TAURI_CLI_VERSION: "2.11.5"', '^\\s*TAURI_CLI_VERSION\\s*:\\s*["\\\']?2\\.11\\.5["\\\']?\\s*$'), ('dtolnay/rust-toolchain@1.97.1', 'uses\\s*:\\s*dtolnay/rust-toolchain@1\\.97\\.1\\b'), ('cargo test', '\\bcargo\\s+test\\b'), ('npm test', '\\bnpm\\s+test\\b'), ('verify-macos-app.sh', '(?:^|[\\s./])verify-macos-app\\.sh\\b'), ('APPLE_SIGNING_IDENTITY', '\\bAPPLE_SIGNING_IDENTITY\\b')]
+    workflow_contracts = [
+        ("v*.*.*", r'["\']v\*\.\*\.\*["\']'),
+        ("libwebkit2gtk-4.1-dev", r"\blibwebkit2gtk-4\.1-dev\b"),
+        ("libayatana-appindicator3-dev", r"\blibayatana-appindicator3-dev\b"),
+        ("build-essential", r"\bbuild-essential\b"),
+        ("libxdo-dev", r"\blibxdo-dev\b"),
+        ("libssl-dev", r"\blibssl-dev\b"),
+        ("tools/desktop-build-requirements.txt", r"tools/desktop-build-requirements\.txt"),
+        ("tools/optimize_onnx_assets.py", r"tools/optimize_onnx_assets\.py"),
+        ("tools/validate_tauri_config.py", r"tools/validate_tauri_config\.py"),
+        ("tools/validate_desktop_release.py", r"tools/validate_desktop_release\.py"),
+        (
+            'TAURI_CLI_VERSION: "2.11.5"',
+            r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$',
+        ),
+        ("@tauri-apps/cli@2.11.5", r"@tauri-apps/cli@2\.11\.5"),
+        ("tauriScript: tauri", r"^\s*tauriScript\s*:\s*tauri\s*$"),
+        ("dtolnay/rust-toolchain@1.97.1", r"uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b"),
+        ("cargo test", r"\bcargo\s+test\b"),
+        ("npm test", r"\bnpm\s+test\b"),
+        ("verify-macos-app.sh", r"(?:^|[\s./])verify-macos-app\.sh\b"),
+        ("APPLE_SIGNING_IDENTITY", r"\bAPPLE_SIGNING_IDENTITY\b"),
+    ]
     for label, pattern in workflow_contracts:
         ok(f'workflow-validation:{label}', _workflow_contract(workflow, pattern), f'missing workflow contract matching {pattern}')
     ci_workflow = (root / '.github/workflows/ci.yml').read_text(encoding='utf-8')

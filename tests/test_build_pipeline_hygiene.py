@@ -43,6 +43,11 @@ def test_workflow_contains_pinned_release_contracts() -> None:
         "dtolnay/rust-toolchain@1.97.1",
         "verify-macos-app.sh",
         "APPLE_SIGNING_IDENTITY",
+        "@tauri-apps/cli@2.11.5",
+        "tauriScript: tauri",
+        "build-essential",
+        "libxdo-dev",
+        "libssl-dev",
     ):
         assert token in workflow
 
@@ -212,3 +217,27 @@ def test_python_and_rust_ci_lint_regressions_are_fixed() -> None:
     assert "while let Some(next)" in native
     assert "sort_by_key(|item| std::cmp::Reverse(item.offset))" in native
 
+
+
+def test_ci_installs_cross_runtime_and_linux_system_dependencies() -> None:
+    root = Path(__file__).resolve().parents[1]
+    workflow = (root / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+
+    assert "npm ci --prefix web_demo --ignore-scripts" in workflow
+    assert "libwebkit2gtk-4.1-dev" in workflow
+    assert "build-essential" in workflow
+    assert "libxdo-dev" in workflow
+    assert "libssl-dev" in workflow
+    assert "libayatana-appindicator3-dev" in workflow
+    assert "actions/checkout@v5" in workflow
+    assert "actions/setup-node@v5" in workflow
+    assert "actions/setup-python@v7" in workflow
+
+
+def test_general_ci_does_not_run_again_for_release_tags() -> None:
+    root = Path(__file__).resolve().parents[1]
+    workflow = (root / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+
+    assert "push:\n    branches:\n      - main" in workflow
+    assert "pull_request:\n    branches:\n      - main" in workflow
+    assert "tags:" not in workflow

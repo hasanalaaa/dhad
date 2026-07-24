@@ -1,3 +1,11 @@
+## 1.0.10 — CI portability and release bootstrap repair
+
+- Installed the complete official Tauri Linux prerequisite set before Rust workspace linting and tests.
+- Installed the web runtime in the Python job so Yrs/Yjs compatibility tests resolve `yjs` on clean runners.
+- Replaced source-built `cargo install tauri-cli` in release jobs with the pinned precompiled `@tauri-apps/cli@2.11.5`.
+- Materialized Git LFS assets explicitly before integrity audits and release preparation.
+- Upgraded first-party GitHub setup actions to Node 24 based major versions and limited general CI pushes to `main`, preventing duplicate tag runs.
+
 ## v1.0.7 — Repository audit hardening
 
 ## v1.0.9 — CI parity and transient-output isolation

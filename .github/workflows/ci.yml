@@ -2,7 +2,11 @@ name: ci
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -18,30 +22,56 @@ concurrency:
 jobs:
   python:
     name: Python quality and tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
+          fetch-depth: 0
           lfs: true
-      - uses: actions/setup-python@v5
+      - name: Materialize Git LFS assets
+        run: |
+          git lfs pull
+          git lfs checkout
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: requirements-dev.lock
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web_demo/package-lock.json
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -r requirements-dev.lock
       - run: python -m pip install --no-deps -e .
+      - name: Install Yjs runtime used by Python cross-runtime tests
+        run: npm ci --prefix web_demo --ignore-scripts
       - run: python -m compileall -q src tests tools benchmarks
       - run: ruff check src tests tools benchmarks gunicorn_conf.py
       - run: pytest -q
 
   rust:
     name: Rust formatting, lint, and tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - name: Install Tauri Linux prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            libwebkit2gtk-4.1-dev \
+            build-essential \
+            curl \
+            wget \
+            file \
+            libxdo-dev \
+            libssl-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            patchelf
       - uses: dtolnay/rust-toolchain@1.97.1
         with:
           components: clippy,rustfmt
@@ -56,28 +86,35 @@ jobs:
 
   web:
     name: JavaScript, PWA, and repository contracts
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     defaults:
       run:
         working-directory: web_demo
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
+          fetch-depth: 0
           lfs: true
-      - uses: actions/setup-node@v4
+      - name: Materialize Git LFS assets
+        working-directory: .
+        run: |
+          git lfs pull
+          git lfs checkout
+      - uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: npm
           cache-dependency-path: web_demo/package-lock.json
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm test
-      - name: Audit complete repository and retained assets
+      - name: Audit complete repository
         working-directory: .
-        run: |
-          python tools/audit_repository.py --write-reports
-          python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict
+        run: python tools/audit_repository.py --write-reports
+      - name: Validate retained release assets
+        working-directory: .
+        run: python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict

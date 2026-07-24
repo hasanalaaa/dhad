@@ -26,20 +26,26 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: Checkout source and LFS assets
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           lfs: true
 
+      - name: Materialize Git LFS assets
+        shell: bash
+        run: |
+          git lfs pull
+          git lfs checkout
+
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: npm
           cache-dependency-path: web_demo/package-lock.json
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
           cache: pip
@@ -50,6 +56,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y \
             libwebkit2gtk-4.1-dev \
+            build-essential \
+            curl \
+            wget \
+            file \
+            libxdo-dev \
+            libssl-dev \
             libayatana-appindicator3-dev \
             librsvg2-dev \
             patchelf
@@ -61,7 +73,7 @@ jobs:
           targets: wasm32-unknown-unknown
 
       - name: Install pinned Tauri CLI
-        run: cargo install tauri-cli --version "=${TAURI_CLI_VERSION}" --locked --force
+        run: npm install --global @tauri-apps/cli@2.11.5
 
       - name: Install desktop build requirements
         run: python -m pip install --disable-pip-version-check -r tools/desktop-build-requirements.txt
@@ -117,20 +129,26 @@ jobs:
     timeout-minutes: 90
     steps:
       - name: Checkout source and LFS assets
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           lfs: true
 
+      - name: Materialize Git LFS assets
+        shell: bash
+        run: |
+          git lfs pull
+          git lfs checkout
+
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: npm
           cache-dependency-path: web_demo/package-lock.json
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
           cache: pip
@@ -143,7 +161,7 @@ jobs:
           targets: ${{ matrix.target }}
 
       - name: Install pinned Tauri CLI
-        run: cargo install tauri-cli --version "=${TAURI_CLI_VERSION}" --locked --force
+        run: npm install --global @tauri-apps/cli@2.11.5
 
       - name: Install desktop build requirements
         run: python -m pip install --disable-pip-version-check -r tools/desktop-build-requirements.txt
@@ -210,6 +228,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_CLI_VERSION: "2.11.5"
         with:
+          tauriScript: tauri
+          projectPath: src-tauri
           tagName: ${{ github.ref_name }}
           releaseName: "ضاد ${{ github.ref_name }}"
           releaseBody: |

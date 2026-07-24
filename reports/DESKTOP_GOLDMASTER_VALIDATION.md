@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
 - Files audited: **448**
-- Checks passed: **136/136**
+- Checks passed: **141/141**
 - Errors: **0**
 - Warnings: **0**
 
@@ -80,11 +80,16 @@
 - PASS — `workflow-validation:v*.*.*`: missing workflow contract matching ["\']v\*\.\*\.\*["\']
 - PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing workflow contract matching \blibwebkit2gtk-4\.1-dev\b
 - PASS — `workflow-validation:libayatana-appindicator3-dev`: missing workflow contract matching \blibayatana-appindicator3-dev\b
+- PASS — `workflow-validation:build-essential`: missing workflow contract matching \bbuild-essential\b
+- PASS — `workflow-validation:libxdo-dev`: missing workflow contract matching \blibxdo-dev\b
+- PASS — `workflow-validation:libssl-dev`: missing workflow contract matching \blibssl-dev\b
 - PASS — `workflow-validation:tools/desktop-build-requirements.txt`: missing workflow contract matching tools/desktop-build-requirements\.txt
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
 - PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$
+- PASS — `workflow-validation:@tauri-apps/cli@2.11.5`: missing workflow contract matching @tauri-apps/cli@2\.11\.5
+- PASS — `workflow-validation:tauriScript: tauri`: missing workflow contract matching ^\s*tauriScript\s*:\s*tauri\s*$
 - PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
 - PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
