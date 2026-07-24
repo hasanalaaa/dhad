@@ -1,8 +1,8 @@
 {
   "release": "Dhad v1.0.0 Sovereign Edition",
   "summary": {
-    "passed": 63,
-    "total": 63,
+    "passed": 69,
+    "total": 69,
     "errors": 0
   },
   "checks": [
@@ -23,6 +23,16 @@
     },
     {
       "name": "required:src-tauri/tauri.conf.json",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/Info.plist",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/Entitlements.plist",
       "passed": true,
       "detail": "release file exists"
     },
@@ -63,6 +73,16 @@
     },
     {
       "name": "required:tools/package_release.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:tools/verify_macos_bundle.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:scripts/verify-macos-app.sh",
       "passed": true,
       "detail": "release file exists"
     },
@@ -109,7 +129,7 @@
     {
       "name": "tauri:schema-2.11-compatible",
       "passed": true,
-      "detail": "tauri-cli 2.11.x"
+      "detail": "tauri-cli 2.11.5 / tauri 2.11.5"
     },
     {
       "name": "tauri:no-custom-headers",
@@ -147,14 +167,9 @@
       "detail": "keyboard input"
     },
     {
-      "name": "mini:mica",
+      "name": "mini:no-cross-platform-static-effects",
       "passed": true,
-      "detail": "Windows Mica preference"
-    },
-    {
-      "name": "mini:mac-material",
-      "passed": true,
-      "detail": "macOS HUD material preference"
+      "detail": "platform effects are applied in target-guarded Rust code"
     },
     {
       "name": "mini:zoom-disabled",
@@ -215,6 +230,21 @@
       "name": "files:windows-restore",
       "passed": true,
       "detail": "requires 'fs::rename(backup_path, destination)'"
+    },
+    {
+      "name": "native:mac-hud-material",
+      "passed": true,
+      "detail": "requires 'Effect::HudWindow'"
+    },
+    {
+      "name": "native:windows-mica",
+      "passed": true,
+      "detail": "requires 'Effect::Mica'"
+    },
+    {
+      "name": "native:effects-nonfatal",
+      "passed": true,
+      "detail": "requires 'failed to apply platform window effects'"
     },
     {
       "name": "shortcut:fallback",

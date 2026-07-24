@@ -21,7 +21,11 @@ REQUIRED_ARCHIVE_PATHS = {
     "dhad/.github/workflows/desktop-release.yml",
     "dhad/src-tauri/tauri.conf.json",
     "dhad/tools/validate_tauri_config.py",
+    "dhad/tools/verify_macos_bundle.py",
+    "dhad/src-tauri/Info.plist",
+    "dhad/src-tauri/Entitlements.plist",
     "dhad/scripts/build-desktop.sh",
+    "dhad/scripts/verify-macos-app.sh",
     "dhad/scripts/build-desktop.bat",
 }
 
@@ -55,7 +59,8 @@ def package(root: Path, output: Path) -> tuple[int, str]:
             relative = Path("dhad") / path.relative_to(root)
             info = zipfile.ZipInfo(relative.as_posix(), date_time=(2026, 7, 24, 0, 0, 0))
             mode = path.stat().st_mode
-            info.external_attr = (stat.S_IMODE(mode) & 0xFFFF) << 16
+            info.create_system = 3  # Unix: preserve executable permission bits on macOS/Linux extraction.
+            info.external_attr = (stat.S_IFREG | stat.S_IMODE(mode)) << 16
             info.compress_type = zipfile.ZIP_DEFLATED
             with path.open("rb") as stream:
                 archive.writestr(info, stream.read(), compress_type=zipfile.ZIP_DEFLATED, compresslevel=6)
@@ -70,9 +75,24 @@ def package(root: Path, output: Path) -> tuple[int, str]:
         excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/__pycache__/")
         if any(any(fragment in f"/{name}" for fragment in excluded_archive_fragments) for name in names):
             raise RuntimeError("archive contains excluded build, cache, or VCS directories")
-        workflow_name="dhad/.github/workflows/desktop-release.yml"
-        if archive.getinfo(workflow_name).file_size == 0 or not archive.read(workflow_name).strip():
-            raise RuntimeError("desktop release workflow is empty")
+        nonempty_required = (
+            "dhad/.github/workflows/desktop-release.yml",
+            "dhad/src-tauri/Info.plist",
+            "dhad/src-tauri/Entitlements.plist",
+            "dhad/tools/verify_macos_bundle.py",
+            "dhad/scripts/verify-macos-app.sh",
+        )
+        for required_name in nonempty_required:
+            if archive.getinfo(required_name).file_size == 0 or not archive.read(required_name).strip():
+                raise RuntimeError(f"required release file is empty: {required_name}")
+        for executable_name in (
+            "dhad/scripts/build-desktop.sh",
+            "dhad/scripts/verify-macos-app.sh",
+            "dhad/tools/verify_macos_bundle.py",
+        ):
+            mode = archive.getinfo(executable_name).external_attr >> 16
+            if not mode & 0o111:
+                raise RuntimeError(f"archive lost executable permissions: {executable_name}")
     os.replace(temp, output)
     return len(files), sha256(output)
 

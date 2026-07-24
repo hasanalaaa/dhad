@@ -105,7 +105,7 @@ pub struct NativeParaphraseResponse {
 pub struct SystemInfo {
     app_name: &'static str,
     app_version: &'static str,
-    identifier: &'static str,
+    identifier: String,
     engine_version: &'static str,
     os: &'static str,
     family: &'static str,
@@ -302,7 +302,7 @@ pub async fn paraphrase_native(
 }
 
 #[tauri::command]
-pub fn get_system_info() -> SystemInfo {
+pub fn get_system_info(app: tauri::AppHandle) -> SystemInfo {
     let hostname = std::env::var("COMPUTERNAME")
         .or_else(|_| std::env::var("HOSTNAME"))
         .ok()
@@ -311,7 +311,7 @@ pub fn get_system_info() -> SystemInfo {
     SystemInfo {
         app_name: "ضاد",
         app_version: env!("CARGO_PKG_VERSION"),
-        identifier: "com.dhad.app",
+        identifier: app.config().identifier.clone(),
         engine_version: env!("CARGO_PKG_VERSION"),
         os: std::env::consts::OS,
         family: std::env::consts::FAMILY,

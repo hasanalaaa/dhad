@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import plistlib
+import re
 import struct
 import sys
 import tomllib
@@ -64,7 +66,9 @@ def main() -> int:
       'scripts/build-desktop.sh','scripts/build-desktop.bat','.github/workflows/desktop-release.yml',
       'docs/index.html','tools/optimize_onnx_assets.py','tools/validate_desktop_release.py',
       'tools/validate_tauri_config.py','tools/package_release.py',
-      'tools/desktop-build-requirements.txt','tools/generate_release_inventory.py','vercel.json','docs/.nojekyll'
+      'tools/desktop-build-requirements.txt','tools/generate_release_inventory.py','tools/verify_macos_bundle.py',
+      'scripts/verify-macos-app.sh','src-tauri/Info.plist','src-tauri/Entitlements.plist',
+      'vercel.json','docs/.nojekyll'
     ]
     for rel in required:
         path = root / rel
@@ -74,7 +78,9 @@ def main() -> int:
         print('\n'.join(errors), file=sys.stderr); return 1
 
     cfg=json.loads((root/'src-tauri/tauri.conf.json').read_text(encoding='utf-8'))
-    ok('identifier', cfg.get('identifier')=='com.dhad.app', str(cfg.get('identifier')))
+    ok('identifier', cfg.get('identifier')=='com.dhad.desktop', str(cfg.get('identifier')))
+    ok('identifier-no-app-suffix', not str(cfg.get('identifier','')).lower().endswith('.app'), str(cfg.get('identifier')))
+    ok('main-binary-name', cfg.get('mainBinaryName')=='dhad-desktop', str(cfg.get('mainBinaryName')))
     schema_errors=validate_tauri_config(cfg)
     ok('tauri-schema-2.11-compatible', not schema_errors, '; '.join(schema_errors[:10]) or TAURI_SCHEMA_PROFILE)
     security=cfg.get('app',{}).get('security',{})
@@ -84,6 +90,10 @@ def main() -> int:
     ok('tauri-no-bundle-vc-runtime', 'bundleVCRuntime' not in cfg.get('bundle',{}).get('windows',{}), 'unsupported bundle.windows key')
     bundle=cfg.get('bundle',{}); mac=bundle.get('macOS',{}); windows=bundle.get('windows',{})
     dmg=mac.get('dmg',{}); nsis=windows.get('nsis',{}); wix=windows.get('wix',{})
+    ok('macos-bundle-name-ascii-safe', mac.get('bundleName')=='Dhad', str(mac.get('bundleName')))
+    ok('macos-info-plist-configured', mac.get('infoPlist')=='Info.plist', str(mac.get('infoPlist')))
+    ok('macos-entitlements-configured', mac.get('entitlements')=='Entitlements.plist', str(mac.get('entitlements')))
+    ok('macos-hardened-runtime', mac.get('hardenedRuntime') is True, str(mac.get('hardenedRuntime')))
     ok('dmg-background-configured', dmg.get('background')=='dmg/background.png', str(dmg))
     ok('dmg-drag-layout', dmg.get('appPosition') and dmg.get('applicationFolderPosition'), str(dmg))
     ok('nsis-hooks-configured', nsis.get('installerHooks')=='windows/nsis-hooks.nsh', str(nsis))
@@ -105,6 +115,15 @@ def main() -> int:
     ico_sizes=image_size(root/'src-tauri/icons/icon.ico')
     ok('ico-multi-resolution', isinstance(ico_sizes,list) and {(16,16),(32,32),(48,48),(256,256)}.issubset(set(ico_sizes)), str(ico_sizes))
 
+    with (root/'src-tauri/Info.plist').open('rb') as stream:
+        info_plist=plistlib.load(stream)
+    with (root/'src-tauri/Entitlements.plist').open('rb') as stream:
+        entitlements=plistlib.load(stream)
+    ok('info-plist-display-name', info_plist.get('CFBundleDisplayName')=='ضاد', str(info_plist.get('CFBundleDisplayName')))
+    generated_keys={'CFBundleExecutable','CFBundleIdentifier','CFBundleShortVersionString','CFBundleVersion','LSMinimumSystemVersion'}
+    ok('info-plist-does-not-override-generated-identity', not generated_keys.intersection(info_plist), str(sorted(generated_keys.intersection(info_plist))))
+    ok('entitlements-minimal-dictionary', isinstance(entitlements,dict) and not entitlements, str(entitlements))
+
     ET.parse(root/'src-tauri/windows/desktop-shortcut.wxs')
     hooks=(root/'src-tauri/windows/nsis-hooks.nsh').read_text(encoding='utf-8')
     ok('nsis-create-shortcut', 'CreateShortCut' in hooks and '$DESKTOP' in hooks, '')
@@ -113,7 +132,7 @@ def main() -> int:
     workflow=(root/'.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
     for token in ['macos-15','macos-15-intel','windows-2025','aarch64-apple-darwin','x86_64-apple-darwin','nsis,msi','tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
-    for token in ['v*.*.*','libwebkit2gtk-4.1-dev','libayatana-appindicator3-dev','tools/desktop-build-requirements.txt','tools/optimize_onnx_assets.py','tools/validate_tauri_config.py','tools/validate_desktop_release.py','TAURI_CLI_VERSION: "2.11.4"','cargo test','npm test']:
+    for token in ['v*.*.*','libwebkit2gtk-4.1-dev','libayatana-appindicator3-dev','tools/desktop-build-requirements.txt','tools/optimize_onnx_assets.py','tools/validate_tauri_config.py','tools/validate_desktop_release.py','TAURI_CLI_VERSION: "2.11.5"','dtolnay/rust-toolchain@1.97.1','cargo test','npm test','verify-macos-app.sh','APPLE_SIGNING_IDENTITY']:
         ok(f'workflow-validation:{token}', token in workflow, 'missing validation stage')
 
     landing=(root/'docs/index.html').read_text(encoding='utf-8')
@@ -123,8 +142,9 @@ def main() -> int:
     sh=(root/'scripts/build-desktop.sh').read_text(encoding='utf-8')
     bat=(root/'scripts/build-desktop.bat').read_text(encoding='utf-8')
     for label,text in [('sh',sh),('bat',bat)]:
-        for token in ['desktop-release.yml','validate_tauri_config.py','desktop-build-requirements.txt','optimize_onnx_assets.py','validate_desktop_release.py','2.11.4','cargo clippy','tauri build']:
+        for token in ['desktop-release.yml','validate_tauri_config.py','desktop-build-requirements.txt','optimize_onnx_assets.py','validate_desktop_release.py','2.11.5','cargo clippy','tauri build']:
             ok(f'build-{label}:{token}', token in text, 'missing build stage')
+    ok('build-sh:macos-bundle-verification', 'verify-macos-app.sh' in sh, 'macOS build must verify and launch-smoke the generated app')
 
     excluded_scan_parts={'.git','target','node_modules','.desktop-build','.audit-venv','.venv','venv','__pycache__','.pytest_cache','.ruff_cache','.mypy_cache'}
     files=[p for p in root.rglob('*') if p.is_file() and not any(part in excluded_scan_parts for part in p.relative_to(root).parts)]
@@ -153,6 +173,7 @@ def main() -> int:
     )
     ok('no-packaged-build-venv', build_venv_excluded, '.desktop-build must be excluded by Git, Tauri, and release packaging')
     ok('shell-build-script-executable', bool((root/'scripts/build-desktop.sh').stat().st_mode & 0o111), '')
+    ok('macos-verifier-script-executable', bool((root/'scripts/verify-macos-app.sh').stat().st_mode & 0o111), '')
 
     invalid_json=[]
     for path in (p for p in files if p.suffix.lower()=='.json'):
@@ -172,6 +193,19 @@ def main() -> int:
         try: ET.parse(path)
         except Exception as exc: invalid_xml.append(f'{path.relative_to(root)}: {exc}')
     ok('all-xml-svg-wxs-parses', not invalid_xml, str(invalid_xml[:10]))
+
+    wasm_api=(root/'rust/dhad-core-rs/src/wasm_api.rs').read_text(encoding='utf-8')
+    unsafe_calls=re.findall(r'(?m)^\s*let\s+\w+\s*=\s*read_input\(', wasm_api)
+    ok('rust-explicit-unsafe-read-input', not unsafe_calls and 'unsafe { read_input(ptr, len) }' in wasm_api, str(unsafe_calls))
+    tauri_lib=(root/'src-tauri/src/lib.rs').read_text(encoding='utf-8')
+    ok('macos-hud-effect-target-guarded', '#[cfg(target_os = "macos")]' in tauri_lib and 'Effect::HudWindow' in tauri_lib, '')
+    ok('windows-mica-effect-target-guarded', '#[cfg(target_os = "windows")]' in tauri_lib and 'Effect::Mica' in tauri_lib, '')
+    ok('window-effects-nonfatal', 'failed to apply platform window effects' in tauri_lib, '')
+    rust_toolchain=tomllib.loads((root/'rust-toolchain.toml').read_text(encoding='utf-8'))
+    ok('rust-toolchain-1.97.1', rust_toolchain.get('toolchain',{}).get('channel')=='1.97.1', str(rust_toolchain))
+    tauri_cargo=tomllib.loads((root/'src-tauri/Cargo.toml').read_text(encoding='utf-8'))
+    deps=tauri_cargo.get('dependencies',{})
+    ok('tauri-crate-pinned-2.11.5', deps.get('tauri',{}).get('version')=='=2.11.5', str(deps.get('tauri')))
 
     package_lock=json.loads((root/'web_demo/package-lock.json').read_text(encoding='utf-8'))
     ok('npm-lockfile-v3', package_lock.get('lockfileVersion')==3, str(package_lock.get('lockfileVersion')))

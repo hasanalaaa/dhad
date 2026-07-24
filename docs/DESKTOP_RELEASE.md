@@ -8,7 +8,7 @@
 ./scripts/build-desktop.sh
 ```
 
-The script creates an isolated `.desktop-build/venv`, installs the pinned ONNX tooling, validates and safely optimizes model metadata, runs JavaScript, Clippy, Rust formatting, and workspace tests, installs the Tauri 2 CLI when needed, and creates a DMG.
+The script creates an isolated `.desktop-build/venv`, installs the pinned ONNX tooling, validates and safely optimizes model metadata, runs JavaScript, Clippy, Rust formatting, and workspace tests, installs the Tauri 2 CLI when needed, creates a DMG, then verifies the generated `.app` metadata, executable permissions, Mach-O architecture, code signature, dynamic-library linkage, and native launch smoke test.
 
 ### Windows
 
@@ -23,9 +23,11 @@ Environment switches:
 - `DHAD_SKIP_WEB_TESTS=1` skips JavaScript tests.
 - `DHAD_SKIP_RUST_TESTS=1` skips Cargo formatting/tests.
 - `DHAD_SKIP_CLI_INSTALL=1` prevents automatic Tauri CLI installation.
-- Native release scripts and CI pin `tauri-cli` to `2.11.4`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before dependency installation or bundling.
+- Native release scripts and CI pin `tauri-cli` to `2.11.5`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before dependency installation or bundling.
 - Preserve the hidden `.github/` directory when copying or extracting the source archive; the build preflight requires `.github/workflows/desktop-release.yml`.
 - `DHAD_BUNDLES=dmg` or `DHAD_BUNDLES=nsis,msi` overrides bundle targets.
+- `DHAD_SKIP_MACOS_LAUNCH_SMOKE=1` skips only the post-build launch smoke test; structural and signing checks still run.
+- `DHAD_REQUIRE_NOTARIZED=1` additionally requires Gatekeeper assessment and a valid stapled notarization ticket.
 
 ## Automated releases
 
@@ -39,7 +41,7 @@ The generated bundles are attached to the matching GitHub Release through `tauri
 
 ## Signing
 
-Unsigned development bundles build without secrets. For public distribution, configure Apple Developer ID/notarization and Windows Authenticode secrets in GitHub before publishing production tags.
+Local macOS builds use the configured ad-hoc identity when no Apple identity is supplied. This permits executable-integrity checks but does not replace Developer ID signing or notarization for browser-delivered public releases. For public distribution, configure Apple Developer ID/notarization and Windows Authenticode secrets in GitHub before publishing production tags.
 
 
 ## Landing page deployment

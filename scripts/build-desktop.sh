@@ -13,7 +13,7 @@ command -v node >/dev/null 2>&1 || fail "Node.js 22 is required."
 command -v npm >/dev/null 2>&1 || fail "npm is required."
 command -v cargo >/dev/null 2>&1 || fail "Rust/Cargo is required."
 
-TAURI_CLI_VERSION="${DHAD_TAURI_CLI_VERSION:-2.11.4}"
+TAURI_CLI_VERSION="${DHAD_TAURI_CLI_VERSION:-2.11.5}"
 [[ -f ".github/workflows/desktop-release.yml" ]] || fail "Missing .github/workflows/desktop-release.yml. Preserve hidden directories when copying or extracting the release archive."
 [[ -f "src-tauri/tauri.conf.json" ]] || fail "Missing src-tauri/tauri.conf.json."
 python3 tools/validate_tauri_config.py --config src-tauri/tauri.conf.json || fail "Tauri configuration is incompatible with CLI 2.11.x."
@@ -51,8 +51,8 @@ fi
 if [[ "${DHAD_SKIP_RUST_TESTS:-0}" != "1" ]]; then
   log "Checking Rust formatting and workspace tests"
   cargo fmt --all -- --check
-  cargo clippy --workspace --all-targets --locked -- -D warnings
-  cargo test --workspace --locked
+  cargo clippy --workspace --all-targets -- -D warnings
+  cargo test --workspace
 fi
 
 INSTALLED_TAURI_VERSION="$(cargo tauri --version 2>/dev/null || true)"
@@ -66,5 +66,8 @@ fi
 
 log "Building native bundle(s): $BUNDLES"
 cargo tauri build --bundles "$BUNDLES" "$@"
+
+log "Verifying generated macOS application bundle"
+./scripts/verify-macos-app.sh
 
 log "Build complete. Bundles are under target/*/release/bundle or target/release/bundle."

@@ -1,6 +1,6 @@
 # Dhad Sovereign Release Validation
 
-- Passed: **63/63**
+- Passed: **69/69**
 - Errors: **0**
 
 ## Checks
@@ -9,6 +9,8 @@
 - PASS — `required:docs/assets/dhad-sovereign-hero.svg`: release file exists
 - PASS — `required:docs/MASTER_TRANSFORMATION_SPEC.md`: release file exists
 - PASS — `required:src-tauri/tauri.conf.json`: release file exists
+- PASS — `required:src-tauri/Info.plist`: release file exists
+- PASS — `required:src-tauri/Entitlements.plist`: release file exists
 - PASS — `required:src-tauri/capabilities/default.json`: release file exists
 - PASS — `required:src-tauri/capabilities/mini-assistant.json`: release file exists
 - PASS — `required:src-tauri/src/file_commands.rs`: release file exists
@@ -17,6 +19,8 @@
 - PASS — `required:tools/run_sovereign_validation_matrix.py`: release file exists
 - PASS — `required:tools/validate_tauri_config.py`: release file exists
 - PASS — `required:tools/package_release.py`: release file exists
+- PASS — `required:tools/verify_macos_bundle.py`: release file exists
+- PASS — `required:scripts/verify-macos-app.sh`: release file exists
 - PASS — `required:web_demo/mini-assistant.css`: release file exists
 - PASS — `required:web_demo/mini-assistant.js`: release file exists
 - PASS — `required:web_demo/ui/mini-assistant-runtime.test.mjs`: release file exists
@@ -25,7 +29,7 @@
 - PASS — `security:frame-ancestors`: frame embedding denied
 - PASS — `security:object-src`: plugin/object loading denied
 - PASS — `security:wasm`: WASM allowed explicitly
-- PASS — `tauri:schema-2.11-compatible`: tauri-cli 2.11.x
+- PASS — `tauri:schema-2.11-compatible`: tauri-cli 2.11.5 / tauri 2.11.5
 - PASS — `tauri:no-custom-headers`: unsupported app.security.headers removed
 - PASS — `tauri:no-no-redirection-bitmap`: unsupported window key removed
 - PASS — `tauri:no-bundle-vc-runtime`: unsupported Windows bundle key removed
@@ -33,8 +37,7 @@
 - PASS — `mini:transparent`: transparent native window
 - PASS — `mini:always-on-top`: floating overlay
 - PASS — `mini:focusable`: keyboard input
-- PASS — `mini:mica`: Windows Mica preference
-- PASS — `mini:mac-material`: macOS HUD material preference
+- PASS — `mini:no-cross-platform-static-effects`: platform effects are applied in target-guarded Rust code
 - PASS — `mini:zoom-disabled`: stable overlay scale
 - PASS — `capabilities:main-only`: editor capability is isolated
 - PASS — `capabilities:mini-only`: overlay capability is isolated
@@ -47,6 +50,9 @@
 - PASS — `files:commit-rename`: requires 'fs::rename(temp_path, destination)'
 - PASS — `files:windows-rollback`: requires 'rollback.bak'
 - PASS — `files:windows-restore`: requires 'fs::rename(backup_path, destination)'
+- PASS — `native:mac-hud-material`: requires 'Effect::HudWindow'
+- PASS — `native:windows-mica`: requires 'Effect::Mica'
+- PASS — `native:effects-nonfatal`: requires 'failed to apply platform window effects'
 - PASS — `shortcut:fallback`: requires 'Modifiers::CONTROL | Modifiers::ALT'
 - PASS — `overlay:recenter`: requires 'window.center()'
 - PASS — `overlay:restore-topmost`: requires 'set_always_on_top(true)'

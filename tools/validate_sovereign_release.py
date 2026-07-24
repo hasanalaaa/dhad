@@ -38,6 +38,8 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         "docs/assets/dhad-sovereign-hero.svg",
         "docs/MASTER_TRANSFORMATION_SPEC.md",
         "src-tauri/tauri.conf.json",
+        "src-tauri/Info.plist",
+        "src-tauri/Entitlements.plist",
         "src-tauri/capabilities/default.json",
         "src-tauri/capabilities/mini-assistant.json",
         "src-tauri/src/file_commands.rs",
@@ -46,6 +48,8 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         "tools/run_sovereign_validation_matrix.py",
         "tools/validate_tauri_config.py",
         "tools/package_release.py",
+        "tools/verify_macos_bundle.py",
+        "scripts/verify-macos-app.sh",
         "web_demo/mini-assistant.css",
         "web_demo/mini-assistant.js",
         "web_demo/ui/mini-assistant-runtime.test.mjs",
@@ -74,14 +78,13 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
 
     windows = {item.get("label"): item for item in config.get("app", {}).get("windows", [])}
     mini = windows.get("mini-assistant", {})
-    effects = mini.get("windowEffects", {}).get("effects", [])
+    configured_effects = mini.get("windowEffects")
     checks.extend(
         [
             Check("mini:transparent", mini.get("transparent") is True, "transparent native window"),
             Check("mini:always-on-top", mini.get("alwaysOnTop") is True, "floating overlay"),
             Check("mini:focusable", mini.get("focusable") is True, "keyboard input"),
-            Check("mini:mica", "mica" in effects, "Windows Mica preference"),
-            Check("mini:mac-material", "hudWindow" in effects, "macOS HUD material preference"),
+            Check("mini:no-cross-platform-static-effects", configured_effects is None, "platform effects are applied in target-guarded Rust code"),
             Check("mini:zoom-disabled", mini.get("zoomHotkeysEnabled") is False, "stable overlay scale"),
         ]
     )
@@ -110,6 +113,9 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
             check_contains("files:commit-rename", files, "fs::rename(temp_path, destination)"),
             check_contains("files:windows-rollback", files, "rollback.bak"),
             check_contains("files:windows-restore", files, "fs::rename(backup_path, destination)"),
+            check_contains("native:mac-hud-material", lib, "Effect::HudWindow"),
+            check_contains("native:windows-mica", lib, "Effect::Mica"),
+            check_contains("native:effects-nonfatal", lib, "failed to apply platform window effects"),
             check_contains("shortcut:fallback", lib, "Modifiers::CONTROL | Modifiers::ALT"),
             check_contains("overlay:recenter", tray, "window.center()"),
             check_contains("overlay:restore-topmost", tray, "set_always_on_top(true)"),

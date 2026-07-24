@@ -1,0 +1,37 @@
+name: Desktop Release
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+env:
+  TAURI_CLI_VERSION: "2.11.4"
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-15
+            target: aarch64-apple-darwin
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+          - os: windows-2025
+            target: x86_64-pc-windows-msvc
+            bundle: "nsis,msi"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Linux Dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libayatana-appindicator3-dev
+      - name: Setup Python & Tools
+        run: |
+          pip install -r tools/desktop-build-requirements.txt
+          python tools/optimize_onnx_assets.py
+          python tools/validate_tauri_config.py
+          python tools/validate_desktop_release.py
+      - name: Run Tests
+        run: |
+          cargo test
+          npm test
+      - name: Tauri Build
+        uses: tauri-apps/tauri-action@v1

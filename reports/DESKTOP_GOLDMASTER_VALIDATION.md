@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **441**
-- Checks passed: **101/101**
+- Files audited: **444**
+- Checks passed: **125/125**
 - Errors: **0**
 - Warnings: **0**
 
@@ -29,13 +29,23 @@
 - PASS — `required:tools/package_release.py`: missing or empty required release file
 - PASS — `required:tools/desktop-build-requirements.txt`: missing or empty required release file
 - PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
+- PASS — `required:tools/verify_macos_bundle.py`: missing or empty required release file
+- PASS — `required:scripts/verify-macos-app.sh`: missing or empty required release file
+- PASS — `required:src-tauri/Info.plist`: missing or empty required release file
+- PASS — `required:src-tauri/Entitlements.plist`: missing or empty required release file
 - PASS — `required:vercel.json`: missing or empty required release file
 - PASS — `required:docs/.nojekyll`: missing or empty required release file
-- PASS — `identifier`: com.dhad.app
-- PASS — `tauri-schema-2.11-compatible`: tauri-cli 2.11.x
+- PASS — `identifier`: com.dhad.desktop
+- PASS — `identifier-no-app-suffix`: com.dhad.desktop
+- PASS — `main-binary-name`: dhad-desktop
+- PASS — `tauri-schema-2.11-compatible`: tauri-cli 2.11.5 / tauri 2.11.5
 - PASS — `tauri-no-security-headers`: app.security.headers is unsupported by the pinned CLI
 - PASS — `tauri-no-no-redirection-bitmap`: unsupported app.windows key
 - PASS — `tauri-no-bundle-vc-runtime`: unsupported bundle.windows key
+- PASS — `macos-bundle-name-ascii-safe`: Dhad
+- PASS — `macos-info-plist-configured`: Info.plist
+- PASS — `macos-entitlements-configured`: Entitlements.plist
+- PASS — `macos-hardened-runtime`: True
 - PASS — `dmg-background-configured`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
 - PASS — `dmg-drag-layout`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
 - PASS — `nsis-hooks-configured`: {'compression': 'lzma', 'installMode': 'both', 'installerIcon': 'icons/icon.ico', 'uninstallerIcon': 'icons/icon.ico', 'headerImage': 'windows/nsis-header.bmp', 'sidebarImage': 'windows/nsis-sidebar.bmp', 'uninstallerHeaderImage': 'windows/nsis-header.bmp', 'installerHooks': 'windows/nsis-hooks.nsh', 'startMenuFolder': 'Dhad', 'languages': ['English']}
@@ -51,6 +61,9 @@
 - PASS — `dimensions:src-tauri/windows/wix-banner.bmp`: expected (493, 58), got (493, 58)
 - PASS — `dimensions:src-tauri/windows/wix-dialog.bmp`: expected (493, 312), got (493, 312)
 - PASS — `ico-multi-resolution`: [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
+- PASS — `info-plist-display-name`: ضاد
+- PASS — `info-plist-does-not-override-generated-identity`: []
+- PASS — `entitlements-minimal-dictionary`: {}
 - PASS — `nsis-create-shortcut`
 - PASS — `nsis-delete-shortcut`
 - PASS — `workflow:macos-15`: missing workflow contract
@@ -67,9 +80,12 @@
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing validation stage
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing validation stage
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing validation stage
-- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing validation stage
+- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing validation stage
+- PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing validation stage
 - PASS — `workflow-validation:cargo test`: missing validation stage
 - PASS — `workflow-validation:npm test`: missing validation stage
+- PASS — `workflow-validation:verify-macos-app.sh`: missing validation stage
+- PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing validation stage
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
 - PASS — `landing:data-download`: missing landing-page section
@@ -82,7 +98,7 @@
 - PASS — `build-sh:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-sh:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-sh:validate_desktop_release.py`: missing build stage
-- PASS — `build-sh:2.11.4`: missing build stage
+- PASS — `build-sh:2.11.5`: missing build stage
 - PASS — `build-sh:cargo clippy`: missing build stage
 - PASS — `build-sh:tauri build`: missing build stage
 - PASS — `build-bat:desktop-release.yml`: missing build stage
@@ -90,21 +106,29 @@
 - PASS — `build-bat:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-bat:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-bat:validate_desktop_release.py`: missing build stage
-- PASS — `build-bat:2.11.4`: missing build stage
+- PASS — `build-bat:2.11.5`: missing build stage
 - PASS — `build-bat:cargo clippy`: missing build stage
 - PASS — `build-bat:tauri build`: missing build stage
+- PASS — `build-sh:macos-bundle-verification`: macOS build must verify and launch-smoke the generated app
 - PASS — `no-broken-symlinks`: []
 - PASS — `no-case-insensitive-path-collisions`: []
 - PASS — `no-packaged-node-modules`: web_demo/node_modules must not be committed or packaged
 - PASS — `no-packaged-target`: Cargo target directory must not be packaged
 - PASS — `no-packaged-build-venv`: .desktop-build must be excluded by Git, Tauri, and release packaging
 - PASS — `shell-build-script-executable`
+- PASS — `macos-verifier-script-executable`
 - PASS — `all-json-parses`: []
 - PASS — `all-toml-parses`: []
 - PASS — `all-xml-svg-wxs-parses`: []
+- PASS — `rust-explicit-unsafe-read-input`: []
+- PASS — `macos-hud-effect-target-guarded`
+- PASS — `windows-mica-effect-target-guarded`
+- PASS — `window-effects-nonfatal`
+- PASS — `rust-toolchain-1.97.1`: {'toolchain': {'channel': '1.97.1', 'profile': 'minimal', 'components': ['clippy', 'rustfmt'], 'targets': ['wasm32-unknown-unknown']}}
+- PASS — `tauri-crate-pinned-2.11.5`: {'version': '=2.11.5', 'features': ['tray-icon']}
 - PASS — `npm-lockfile-v3`: 3
 - PASS — `critical-npm-dependencies-pinned`: []
 - PASS — `onnx-build-tool-pinned`: ['onnx==1.22.0']
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 441 files
+- PASS — `repository-file-count`: only 444 files

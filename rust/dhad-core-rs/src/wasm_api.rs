@@ -368,7 +368,7 @@ pub unsafe extern "C" fn dc_check(ptr: *const u8, len: usize) -> u64 {
 /// `ptr` must address `len` readable bytes in this module's linear memory for
 /// the duration of the call. A null pointer is valid only when `len == 0`.
 pub unsafe extern "C" fn dc_analyze(ptr: *const u8, len: usize, min_confidence: f64) -> u64 {
-    let token = read_input(ptr, len);
+    let token = unsafe { read_input(ptr, len) };
     let response = match MorphologicalAnalyzer::default().analyze(&token, min_confidence) {
         Ok(analyses) => serde_json::json!({ "analyses": analyses }).to_string(),
         Err(error) => serde_json::json!({ "error": error }).to_string(),

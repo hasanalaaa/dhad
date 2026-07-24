@@ -5,11 +5,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
-PROFILE = "tauri-cli 2.11.x"
+PROFILE = "tauri-cli 2.11.5 / tauri 2.11.5"
 
 ROOT_KEYS = {"$schema", "productName", "version", "identifier", "mainBinaryName", "build", "app", "bundle", "plugins"}
 BUILD_KEYS = {"beforeBuildCommand", "beforeDevCommand", "devUrl", "frontendDist", "additionalWatchFolders", "removeUnusedCommands", "windows"}
@@ -33,7 +34,7 @@ BUNDLE_KEYS = {
 }
 MACOS_KEYS = {
     "frameworks", "minimumSystemVersion", "exceptionDomain", "signingIdentity", "providerShortName", "entitlements", "infoPlist",
-    "dmg", "hardenedRuntime", "files", "bundleVersion"
+    "dmg", "hardenedRuntime", "files", "bundleVersion", "bundleName"
 }
 DMG_KEYS = {"background", "windowSize", "appPosition", "applicationFolderPosition"}
 POSITION_KEYS = {"x", "y"}
@@ -74,6 +75,20 @@ def validate_tauri_config(config: dict[str, Any]) -> list[str]:
     if config.get("$schema") != "https://schema.tauri.app/config/2":
         errors.append("$.$schema must be https://schema.tauri.app/config/2")
 
+    identifier = config.get("identifier")
+    if identifier != "com.dhad.desktop":
+        errors.append("$.identifier must be com.dhad.desktop")
+    if not isinstance(identifier, str) or not re.fullmatch(r"[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+", identifier):
+        errors.append("$.identifier must be a reverse-domain identifier containing only letters, digits, hyphens, and periods")
+    if isinstance(identifier, str) and identifier.lower().endswith(".app"):
+        errors.append("$.identifier must not include the .app bundle suffix")
+
+    main_binary = config.get("mainBinaryName")
+    if main_binary != "dhad-desktop":
+        errors.append("$.mainBinaryName must be dhad-desktop")
+    if isinstance(main_binary, str) and ("/" in main_binary or "\\" in main_binary or main_binary.endswith(".app")):
+        errors.append("$.mainBinaryName must be an extensionless file name, not a path or bundle name")
+
     build = config.get("build", {})
     _unknown(build, BUILD_KEYS, "$.build", errors)
     if "windows" in build:
@@ -103,6 +118,9 @@ def validate_tauri_config(config: dict[str, Any]) -> list[str]:
                 errors.append(f"$.app.windows[{index}].noRedirectionBitmap: {FORBIDDEN_PATHS['app.windows[].noRedirectionBitmap']}")
             if isinstance(window, dict) and "windowEffects" in window:
                 _unknown(window["windowEffects"], WINDOW_EFFECT_KEYS, f"$.app.windows[{index}].windowEffects", errors)
+                errors.append(
+                    f"$.app.windows[{index}].windowEffects must be omitted; Dhad applies HudWindow/Mica at runtime behind target_os guards"
+                )
 
     if isinstance(security, dict) and "headers" in security:
         errors.append(f"$.app.security.headers: {FORBIDDEN_PATHS['app.security.headers']}")
@@ -112,6 +130,17 @@ def validate_tauri_config(config: dict[str, Any]) -> list[str]:
     macos = bundle.get("macOS", {})
     if macos:
         _unknown(macos, MACOS_KEYS, "$.bundle.macOS", errors)
+        if macos.get("bundleName") != "Dhad":
+            errors.append("$.bundle.macOS.bundleName must be the ASCII-safe CFBundleName Dhad")
+        if macos.get("infoPlist") != "Info.plist":
+            errors.append("$.bundle.macOS.infoPlist must reference Info.plist")
+        if macos.get("entitlements") != "Entitlements.plist":
+            errors.append("$.bundle.macOS.entitlements must reference Entitlements.plist")
+        if macos.get("hardenedRuntime") is not True:
+            errors.append("$.bundle.macOS.hardenedRuntime must be true")
+        signing_identity = macos.get("signingIdentity")
+        if signing_identity is not None and not isinstance(signing_identity, str):
+            errors.append("$.bundle.macOS.signingIdentity must be a string or null")
         dmg = macos.get("dmg", {})
         if dmg:
             _unknown(dmg, DMG_KEYS, "$.bundle.macOS.dmg", errors)
@@ -145,6 +174,11 @@ def main() -> int:
         print(f"Tauri config parse failed: {exc}", file=sys.stderr)
         return 1
     errors = validate_tauri_config(config)
+    config_dir = args.config.resolve().parent
+    for relative_name in ("Info.plist", "Entitlements.plist"):
+        path = config_dir / relative_name
+        if not path.is_file() or path.stat().st_size == 0:
+            errors.append(f"$.bundle.macOS references missing or empty file: {path}")
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)

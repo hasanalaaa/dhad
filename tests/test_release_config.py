@@ -78,7 +78,7 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         "tools/desktop-build-requirements.txt", "tools/optimize_onnx_assets.py",
         "tools/validate_tauri_config.py", "tools/validate_desktop_release.py",
         "cargo test", "npm test", "tauri-apps/tauri-action@v1",
-        'TAURI_CLI_VERSION: "2.11.4"',
+        'TAURI_CLI_VERSION: "2.11.5"',
     ):
         assert contract in text
 
@@ -89,3 +89,56 @@ def test_desktop_build_environment_is_ignored_and_never_packaged():
     assert ".desktop-build" in EXCLUDED_DIRS
     assert ".desktop-build/" in (ROOT / ".gitignore").read_text(encoding="utf-8")
     assert ".desktop-build/" in (ROOT / ".tauriignore").read_text(encoding="utf-8")
+
+
+def test_macos_bundle_identity_and_native_launch_contracts_are_pinned():
+    import plistlib
+
+    config = json.loads((ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8"))
+    assert config["identifier"] == "com.dhad.desktop"
+    assert config["mainBinaryName"] == "dhad-desktop"
+    assert config["bundle"]["macOS"]["bundleName"] == "Dhad"
+    assert config["bundle"]["macOS"]["infoPlist"] == "Info.plist"
+    assert config["bundle"]["macOS"]["entitlements"] == "Entitlements.plist"
+    assert all("windowEffects" not in window for window in config["app"]["windows"])
+
+    with (ROOT / "src-tauri" / "Info.plist").open("rb") as stream:
+        info = plistlib.load(stream)
+    assert info["CFBundleDisplayName"] == "ضاد"
+    for generated_key in (
+        "CFBundleExecutable",
+        "CFBundleIdentifier",
+        "CFBundleShortVersionString",
+        "CFBundleVersion",
+        "LSMinimumSystemVersion",
+    ):
+        assert generated_key not in info
+
+    library = (ROOT / "src-tauri" / "src" / "lib.rs").read_text(encoding="utf-8")
+    assert '#[cfg(target_os = "macos")]' in library
+    assert "Effect::HudWindow" in library
+    assert '#[cfg(target_os = "windows")]' in library
+    assert "Effect::Mica" in library
+    assert "failed to apply platform window effects" in library
+
+
+def test_rust_unsafe_operations_are_explicit_for_rust_1_97():
+    source = (ROOT / "rust" / "dhad-core-rs" / "src" / "wasm_api.rs").read_text(encoding="utf-8")
+    assert "let token = unsafe { read_input(ptr, len) };" in source
+    assert "let token = read_input(ptr, len);" not in source
+
+    toolchain = tomllib.loads((ROOT / "rust-toolchain.toml").read_text(encoding="utf-8"))
+    assert toolchain["toolchain"]["channel"] == "1.97.1"
+
+
+def test_macos_bundle_verifier_and_ci_smoke_test_are_mandatory():
+    verifier = ROOT / "tools" / "verify_macos_bundle.py"
+    shell = ROOT / "scripts" / "verify-macos-app.sh"
+    workflow = (ROOT / ".github" / "workflows" / "desktop-release.yml").read_text(encoding="utf-8")
+    build_script = (ROOT / "scripts" / "build-desktop.sh").read_text(encoding="utf-8")
+
+    assert verifier.is_file() and verifier.stat().st_size > 0
+    assert shell.is_file() and shell.stat().st_mode & 0o111
+    assert "Verify signed macOS app bundle and native launch" in workflow
+    assert "DHAD_SKIP_MACOS_LAUNCH_SMOKE" in workflow
+    assert "verify-macos-app.sh" in build_script

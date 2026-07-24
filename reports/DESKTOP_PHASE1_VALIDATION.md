@@ -6,7 +6,7 @@
 ## Implemented
 
 - Added `src-tauri/` as a Rust workspace member.
-- Configured `com.dhad.app`, a 1280×800 resizable window, 900×600 minimum bounds, and direct `../web_demo` static assets.
+- Configured `com.dhad.desktop`, a 1280×800 resizable window, 900×600 minimum bounds, and direct `../web_demo` static assets.
 - Registered `analyze_text_native`, `paraphrase_native`, and `get_system_info`.
 - Bound native analysis to `dhad-core` `RuleSet` and `SyntaxEngine`.
 - Added deterministic native rewriting that reuses shared core normalization, tokenization, and sentence segmentation.

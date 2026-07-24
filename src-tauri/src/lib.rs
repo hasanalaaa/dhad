@@ -2,6 +2,43 @@ mod file_commands;
 mod native_commands;
 mod tray;
 
+#[cfg(target_os = "macos")]
+fn apply_platform_window_effects(app: &tauri::App) -> tauri::Result<()> {
+    use tauri::{
+        window::{Effect, EffectState, EffectsBuilder},
+        Manager,
+    };
+
+    if let Some(window) = app.get_webview_window("mini-assistant") {
+        window.set_effects(
+            EffectsBuilder::new()
+                .effect(Effect::HudWindow)
+                .state(EffectState::FollowsWindowActiveState)
+                .radius(18.0)
+                .build(),
+        )?;
+    }
+    Ok(())
+}
+
+#[cfg(target_os = "windows")]
+fn apply_platform_window_effects(app: &tauri::App) -> tauri::Result<()> {
+    use tauri::{
+        window::{Effect, EffectsBuilder},
+        Manager,
+    };
+
+    if let Some(window) = app.get_webview_window("mini-assistant") {
+        window.set_effects(EffectsBuilder::new().effect(Effect::Mica).build())?;
+    }
+    Ok(())
+}
+
+#[cfg(not(any(target_os = "macos", target_os = "windows")))]
+fn apply_platform_window_effects(_app: &tauri::App) -> tauri::Result<()> {
+    Ok(())
+}
+
 #[cfg(any(target_os = "macos", target_os = "windows"))]
 fn quick_assistant_shortcut() -> tauri_plugin_global_shortcut::Shortcut {
     use tauri_plugin_global_shortcut::{Code, Modifiers, Shortcut};
@@ -43,6 +80,11 @@ pub fn run() {
     builder
         .setup(|app| {
             tray::create_system_tray(app)?;
+
+            if let Err(error) = apply_platform_window_effects(app) {
+                // A compositor effect must never prevent the application from launching.
+                eprintln!("failed to apply platform window effects: {error}");
+            }
 
             #[cfg(any(target_os = "macos", target_os = "windows"))]
             {

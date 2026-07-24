@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T01:30:55.581513+00:00",
-  "file_count": 441,
-  "total_bytes": 180085070,
-  "checks_total": 101,
-  "checks_passed": 101,
+  "generated_at_utc": "2026-07-24T02:54:36.065527+00:00",
+  "file_count": 444,
+  "total_bytes": 180083763,
+  "checks_total": 125,
+  "checks_passed": 125,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -118,6 +118,26 @@
       "detail": "missing or empty required release file"
     },
     {
+      "name": "required:tools/verify_macos_bundle.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/verify-macos-app.sh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/Info.plist",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/Entitlements.plist",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
       "name": "required:vercel.json",
       "ok": true,
       "detail": "missing or empty required release file"
@@ -130,12 +150,22 @@
     {
       "name": "identifier",
       "ok": true,
-      "detail": "com.dhad.app"
+      "detail": "com.dhad.desktop"
+    },
+    {
+      "name": "identifier-no-app-suffix",
+      "ok": true,
+      "detail": "com.dhad.desktop"
+    },
+    {
+      "name": "main-binary-name",
+      "ok": true,
+      "detail": "dhad-desktop"
     },
     {
       "name": "tauri-schema-2.11-compatible",
       "ok": true,
-      "detail": "tauri-cli 2.11.x"
+      "detail": "tauri-cli 2.11.5 / tauri 2.11.5"
     },
     {
       "name": "tauri-no-security-headers",
@@ -151,6 +181,26 @@
       "name": "tauri-no-bundle-vc-runtime",
       "ok": true,
       "detail": "unsupported bundle.windows key"
+    },
+    {
+      "name": "macos-bundle-name-ascii-safe",
+      "ok": true,
+      "detail": "Dhad"
+    },
+    {
+      "name": "macos-info-plist-configured",
+      "ok": true,
+      "detail": "Info.plist"
+    },
+    {
+      "name": "macos-entitlements-configured",
+      "ok": true,
+      "detail": "Entitlements.plist"
+    },
+    {
+      "name": "macos-hardened-runtime",
+      "ok": true,
+      "detail": "True"
     },
     {
       "name": "dmg-background-configured",
@@ -226,6 +276,21 @@
       "name": "ico-multi-resolution",
       "ok": true,
       "detail": "[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]"
+    },
+    {
+      "name": "info-plist-display-name",
+      "ok": true,
+      "detail": "ضاد"
+    },
+    {
+      "name": "info-plist-does-not-override-generated-identity",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "entitlements-minimal-dictionary",
+      "ok": true,
+      "detail": "{}"
     },
     {
       "name": "nsis-create-shortcut",
@@ -308,7 +373,12 @@
       "detail": "missing validation stage"
     },
     {
-      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.4\"",
+      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.5\"",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:dtolnay/rust-toolchain@1.97.1",
       "ok": true,
       "detail": "missing validation stage"
     },
@@ -319,6 +389,16 @@
     },
     {
       "name": "workflow-validation:npm test",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:verify-macos-app.sh",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:APPLE_SIGNING_IDENTITY",
       "ok": true,
       "detail": "missing validation stage"
     },
@@ -383,7 +463,7 @@
       "detail": "missing build stage"
     },
     {
-      "name": "build-sh:2.11.4",
+      "name": "build-sh:2.11.5",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -423,7 +503,7 @@
       "detail": "missing build stage"
     },
     {
-      "name": "build-bat:2.11.4",
+      "name": "build-bat:2.11.5",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -436,6 +516,11 @@
       "name": "build-bat:tauri build",
       "ok": true,
       "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:macos-bundle-verification",
+      "ok": true,
+      "detail": "macOS build must verify and launch-smoke the generated app"
     },
     {
       "name": "no-broken-symlinks",
@@ -468,6 +553,11 @@
       "detail": ""
     },
     {
+      "name": "macos-verifier-script-executable",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "all-json-parses",
       "ok": true,
       "detail": "[]"
@@ -481,6 +571,36 @@
       "name": "all-xml-svg-wxs-parses",
       "ok": true,
       "detail": "[]"
+    },
+    {
+      "name": "rust-explicit-unsafe-read-input",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "macos-hud-effect-target-guarded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "windows-mica-effect-target-guarded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "window-effects-nonfatal",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "rust-toolchain-1.97.1",
+      "ok": true,
+      "detail": "{'toolchain': {'channel': '1.97.1', 'profile': 'minimal', 'components': ['clippy', 'rustfmt'], 'targets': ['wasm32-unknown-unknown']}}"
+    },
+    {
+      "name": "tauri-crate-pinned-2.11.5",
+      "ok": true,
+      "detail": "{'version': '=2.11.5', 'features': ['tray-icon']}"
     },
     {
       "name": "npm-lockfile-v3",
@@ -510,11 +630,11 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 441 files"
+      "detail": "only 444 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "f5e3e23ae165f6a48ac9381d4c055fdff99708b1dd3a638b6b3ae57c94b192bf",
+    "src-tauri/tauri.conf.json": "b94aef3eb143ff570b81740e38b5aebf6f57a8d7c2bb4cd3890b82b631436df7",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
     "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
@@ -526,16 +646,20 @@
     "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
-    "scripts/build-desktop.sh": "d797d4bbd064392c6f43ff510dfc67f00a371ee1f5b24bae234b95919255705a",
-    "scripts/build-desktop.bat": "074fbdfd13859a6acd80348f1d3d4c07f69f36b75dddc531e5b87aed3526da5e",
-    ".github/workflows/desktop-release.yml": "b1821c946f9af5aa1641db47f0e35318e7633ac87d42ef7e25ebe6c28b11ca99",
+    "scripts/build-desktop.sh": "b502008761e27d8675858b2a851a91338718c0ab608500ca9b3b222baab8e533",
+    "scripts/build-desktop.bat": "25fed88efcdc4bfb15eb3912969313cb1862e289375ad500bdc9cdd3cb0d82a8",
+    ".github/workflows/desktop-release.yml": "16d8d9b9d94d957351f984499046a883851053bc5baa681e4fa81e466740e437",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "9bee0bdf86d5175a4615710f567216d9c17831497ef6e4881d52b0e14217b8cb",
-    "tools/validate_desktop_release.py": "7e8d77382b2374ee12efc514de318bccb117bcc6f660fe6b3097e99ce0f29f5f",
-    "tools/validate_tauri_config.py": "20d04b23d556ec22de2a9d038388c212e1a013be22d28821e93eeb451e10e5b2",
-    "tools/package_release.py": "4114f9b1c8c2ebfb6cc9d282e1a126a0fa74fe5b0af4a2001d4d5123ffac1ccb",
+    "tools/validate_desktop_release.py": "9307d1ef52ae933fc8bb4cf0be0609581a090965fec7b8c5bbed502fb51d05ab",
+    "tools/validate_tauri_config.py": "75d931198285b1cc2b4c41718ad0c3084cd62a7d9e2d848d64e7be36a9266c51",
+    "tools/package_release.py": "526143ddd18ea054eebace8e4904d1dbde387ac85bc0dcdcec8a179202c74ec5",
     "tools/desktop-build-requirements.txt": "a85e651aac4f558b261fe59050b089ac7156724549d98996e58b9f27c0cff706",
     "tools/generate_release_inventory.py": "47908240787c2af386160b4c2b7a6beed37d1aae46c725855f49a48f21a2cce2",
+    "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
+    "scripts/verify-macos-app.sh": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
+    "src-tauri/Info.plist": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
+    "src-tauri/Entitlements.plist": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
     "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",
     "docs/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   }

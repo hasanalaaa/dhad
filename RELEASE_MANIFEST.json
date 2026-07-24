@@ -425,7 +425,7 @@
   },
   "desktop_phase_1": {
     "framework": "Tauri 2",
-    "app_identifier": "com.dhad.app",
+    "app_identifier": "com.dhad.desktop",
     "frontend_dist": "web_demo",
     "window": {
       "width": 1280,
