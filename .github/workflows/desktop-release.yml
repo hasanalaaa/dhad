@@ -39,7 +39,7 @@ jobs:
           cache-dependency-path: web_demo/package-lock.json
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
           cache: pip
@@ -130,7 +130,7 @@ jobs:
           cache-dependency-path: web_demo/package-lock.json
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.13"
           cache: pip
