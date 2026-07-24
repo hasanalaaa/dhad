@@ -1,4 +1,4 @@
-# Dhad Desktop Ultimate v1.0.15 — Final Validation
+# Dhad Desktop Ultimate v1.0.15 r2 — Final Validation
 
 ## Result
 
@@ -21,9 +21,17 @@
 - Workspace lock: **one complete root Cargo.lock**, local versions and Tauri pins validated.
 - Release workflow: draft-first; public release requires two DMGs, MSI, and NSIS before atomic publication.
 
+
+## Post-CI JavaScript contract correction
+
+- Hosted CI proved Python and locked Rust jobs green.
+- The full JavaScript run reached **112/114 passing**; the only failures were two stale `1.0.0` assertions in `web_demo/ui/gold-master.test.mjs`.
+- Those assertions now derive both the PWA cache namespace and extension version from `web_demo/package.json`.
+- The complete affected test file now passes **3/3** under Node 22, and a Python regression contract prevents hard-coded release versions from returning.
+
 ## Explicitly blocked in this execution environment
 
-- Full npm tests: package installation is unavailable in this offline container.
+- A fresh full npm rerun is unavailable in this offline container; hosted CI previously passed 112/114 and the exact two failing assertions were corrected and retested 3/3.
 - CRDT/Yjs and sync-backend tests requiring `pycrdt`/`fakeredis`.
 - ONNX Runtime test requiring `onnx`/`onnxruntime`.
 - Rust fmt/check/test and native Tauri bundles: Rust/Cargo and Linux development headers are not installed here.

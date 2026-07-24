@@ -361,3 +361,15 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
         '"cargo", "test", "--workspace", "--all-targets", "--locked"',
     ):
         assert contract in source
+
+
+def test_gold_master_javascript_contracts_follow_release_version() -> None:
+    root = Path(__file__).resolve().parents[1]
+    source = (root / "web_demo" / "ui" / "gold-master.test.mjs").read_text(encoding="utf-8")
+
+    assert 'const releaseVersion = webPackage.version' in source
+    assert 'gold-${escapedReleaseVersion}-desktop-goldmaster' in source
+    assert 'assert.equal(manifest.version, releaseVersion)' in source
+    assert 'assert.equal(manifest.version_name, `${releaseVersion} Gold Master`)' in source
+    assert r"gold-1\.0\.0" not in source
+    assert 'assert.equal(manifest.version, "1.0.0")' not in source

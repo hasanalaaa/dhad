@@ -1,5 +1,6 @@
 ## 1.0.15 — 2026-07-24 — Atomic, dependency-closed desktop release
 
+- Made Gold Master JavaScript contracts derive the PWA cache namespace and extension version from `web_demo/package.json`, eliminating stale hard-coded `1.0.0` assertions during release version promotion.
 - Promoted Python, Tauri, both Rust crates, the web package/lockfile, extension metadata, PWA cache namespace, and release manifest to one validated `1.0.15` version.
 - Replaced the incomplete member lockfiles with one complete workspace `Cargo.lock` and made CI, release CI, and local build scripts enforce `--locked` Rust checks.
 - Rebuilt `tools/build_web_dist.mjs` around an exact 44-file allowlist with module/document/PWA closure checks and cryptographic validation of ONNX, tokenizer, WASM, and ONNX Runtime assets.

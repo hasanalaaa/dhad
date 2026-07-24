@@ -1,7 +1,7 @@
 {
-  "release": "Dhad Desktop Ultimate v1.0.15",
-  "generated_at_utc": "2026-07-24T11:14:05+00:00",
-  "archive_name": "dhad-v1.0-Desktop-Ultimate-v15.zip",
+  "release": "Dhad Desktop Ultimate v1.0.15 r2",
+  "generated_at_utc": "2026-07-24T12:06:29+00:00",
+  "archive_name": "dhad-v1.0-Desktop-Ultimate-v15-r2.zip",
   "environment": {
     "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
     "python": "3.13.5",
@@ -72,10 +72,16 @@
       "blocked": 10,
       "timed_out": 0,
       "total": 52
+    },
+    "javascript_release_contract_regression": {
+      "status": "PASS",
+      "hosted_ci_before_fix": "112/114; only two stale hard-coded 1.0.0 assertions failed",
+      "targeted_after_fix": "3/3 tests in web_demo/ui/gold-master.test.mjs passed under Node 22",
+      "prevention": "Python hygiene regression requires package-derived cache and extension versions"
     }
   },
   "environment_blocked_not_passed": [
-    "npm test: node_modules cannot be installed in this offline container",
+    "fresh full npm rerun: dependency installation unavailable locally; hosted CI passed 112/114 before the exact two failing assertions were corrected and retested 3/3",
     "pycrdt-dependent CRDT/Yjs tests: pycrdt unavailable",
     "fakeredis-dependent sync backend tests: fakeredis unavailable",
     "ONNX Runtime backend test: onnx/onnxruntime unavailable",
