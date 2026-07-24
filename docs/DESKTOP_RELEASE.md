@@ -23,7 +23,7 @@ Environment switches:
 - `DHAD_SKIP_WEB_TESTS=1` skips JavaScript tests.
 - `DHAD_SKIP_RUST_TESTS=1` skips Cargo formatting/tests.
 - `DHAD_SKIP_CLI_INSTALL=1` prevents automatic Tauri CLI installation.
-- Native release scripts and CI pin `tauri-cli` to `2.11.5`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before dependency installation or bundling.
+- Native Cargo release scripts pin `tauri-cli` to `2.11.5`, while GitHub release jobs use the precompiled npm wrapper `@tauri-apps/cli@2.11.4`; `tools/validate_tauri_config.py` rejects incompatible configuration keys before dependency installation or bundling.
 - Preserve the hidden `.github/` directory when copying or extracting the source archive; the build preflight requires `.github/workflows/desktop-release.yml`.
 - `DHAD_BUNDLES=dmg` or `DHAD_BUNDLES=nsis,msi` overrides bundle targets.
 - `DHAD_SKIP_MACOS_LAUNCH_SMOKE=1` skips only the post-build launch smoke test; structural and signing checks still run.

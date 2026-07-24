@@ -33,8 +33,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 27979,
-      "sha256": "b763fabbff118df3f7d1df7d80e2fb953da3ce76d6e02ed53134e6328a8a82c9",
+      "bytes": 28842,
+      "sha256": "cc12a0080a3f47114c87e8f869a14118643d7cf5165d7aff6177f08ba2d3686c",
       "category": "configuration"
     },
     {
@@ -147,14 +147,14 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 2322,
-      "sha256": "90762ea6d8219ed4ae186e313c791893b733954c7a7c92766daafdfb422be405",
+      "bytes": 3570,
+      "sha256": "9920b333eaed087cdf253836c200f48b298dc4e05e4e9c4d7c9ca3b9e540ca36",
       "category": "configuration"
     },
     {
       "path": ".github/workflows/desktop-release.yml",
-      "bytes": 8103,
-      "sha256": "16d8d9b9d94d957351f984499046a883851053bc5baa681e4fa81e466740e437",
+      "bytes": 8608,
+      "sha256": "82866c60cf233f7c722c4f25a077269aa6df50db88b9273884c90e9d34a77387",
       "category": "configuration"
     },
     {
@@ -225,8 +225,8 @@
     },
     {
       "path": "docs/DESKTOP_RELEASE.md",
-      "bytes": 4386,
-      "sha256": "867fe89df5703377abc27633e24989071724778201b6d0153921251f8fd72bd1",
+      "bytes": 4469,
+      "sha256": "0797d4407c6aec8aed00e85f3d8e2fea535bd4c413f3e3be408fa76b3db76af4",
       "category": "documentation"
     },
     {
@@ -543,14 +543,14 @@
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.json",
-      "bytes": 21906,
-      "sha256": "56b03fd229d93e190fdcb7792c46cce1c93947bb0a03bcc829360249ce924688",
+      "bytes": 22838,
+      "sha256": "2deb3ba79d9d1672da60d1eed3501d35842c5bce813bf24f32a79902f797718c",
       "category": "documentation"
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.md",
-      "bytes": 11386,
-      "sha256": "ed2c51f45506beba782bca39942cfaeec885f5146400279d585c053d78be32cf",
+      "bytes": 11994,
+      "sha256": "4a441e7f744a63b73bcecba4b24d8ca3aaa23af54c4aa1a458d4c75081ee169b",
       "category": "documentation"
     },
     {
@@ -1827,8 +1827,8 @@
     },
     {
       "path": "tests/test_build_pipeline_hygiene.py",
-      "bytes": 9144,
-      "sha256": "616bb3b6a2984991aecef98e24a0bede9d732120d58ef59b1186a75a9af6c94c",
+      "bytes": 10320,
+      "sha256": "ec85934690a173e1c3a7953899ef3f35df6c2739e42f8153bd7a22510cfaae04",
       "category": "test"
     },
     {
@@ -1947,8 +1947,8 @@
     },
     {
       "path": "tests/test_release_config.py",
-      "bytes": 6069,
-      "sha256": "dc751ac6eba0758537fae06a4815ad25fecfed4cfcdf70eadb29752be638b241",
+      "bytes": 6171,
+      "sha256": "95eddd66dfe992e0a148bbe1b7220adbe211453dff5e3e502748eb3503583d6b",
       "category": "test"
     },
     {
@@ -2169,8 +2169,8 @@
     },
     {
       "path": "tools/validate_desktop_release.py",
-      "bytes": 20589,
-      "sha256": "30911444ee08c2e13b6eaab9625b70c4adcbe26d883817a14bab536d52af8a7c",
+      "bytes": 21028,
+      "sha256": "5402214f72426db1c609d53673d887072d0c25a36cd361cdc69b7af2230670f0",
       "category": "source"
     },
     {

@@ -2,7 +2,9 @@
 
 - Installed the complete official Tauri Linux prerequisite set before Rust workspace linting and tests.
 - Installed the web runtime in the Python job so Yrs/Yjs compatibility tests resolve `yjs` on clean runners.
-- Replaced source-built `cargo install tauri-cli` in release jobs with the pinned precompiled `@tauri-apps/cli@2.11.5`.
+- Fixed GitHub web audit bootstrap by installing `PyYAML==6.0.3` before `tools/audit_repository.py`.
+- Pinned the precompiled npm Tauri CLI wrapper to the published `@tauri-apps/cli@2.11.4` while retaining `tauri = 2.11.5` in Rust.
+- Replaced source-built `cargo install tauri-cli` in release jobs with the pinned precompiled `@tauri-apps/cli@2.11.4`.
 - Materialized Git LFS assets explicitly before integrity audits and release preparation.
 - Upgraded first-party GitHub setup actions to Node 24 based major versions and limited general CI pushes to `main`, preventing duplicate tag runs.
 

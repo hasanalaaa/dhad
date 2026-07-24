@@ -78,8 +78,9 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         "tools/desktop-build-requirements.txt", "tools/optimize_onnx_assets.py",
         "tools/validate_tauri_config.py", "tools/validate_desktop_release.py",
         "cargo test", "npm test", "tauri-apps/tauri-action@v1",
-        'TAURI_CLI_VERSION: "2.11.5"',
-        '@tauri-apps/cli@2.11.5', 'tauriScript: tauri',
+        'TAURI_CLI_VERSION: "2.11.4"',
+        '@tauri-apps/cli@2.11.4', 'tauriScript: tauri',
+        'tauri --version | grep -F "2.11.4"',
     ):
         assert contract in text
 

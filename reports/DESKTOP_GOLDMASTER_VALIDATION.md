@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
 - Files audited: **448**
-- Checks passed: **141/141**
+- Checks passed: **142/142**
 - Errors: **0**
 - Warnings: **0**
 
@@ -87,8 +87,8 @@
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
-- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$
-- PASS — `workflow-validation:@tauri-apps/cli@2.11.5`: missing workflow contract matching @tauri-apps/cli@2\.11\.5
+- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$
+- PASS — `workflow-validation:@tauri-apps/cli@2.11.4`: missing workflow contract matching @tauri-apps/cli@2\.11\.4
 - PASS — `workflow-validation:tauriScript: tauri`: missing workflow contract matching ^\s*tauriScript\s*:\s*tauri\s*$
 - PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
 - PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
@@ -101,6 +101,7 @@
 - PASS — `ci:ruff-check`: missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py
 - PASS — `ci:pytest`: missing CI contract: pytest -q
 - PASS — `ci:npm-test`: missing CI contract: npm test
+- PASS — `ci:repository-audit-pyyaml`: missing CI contract: PyYAML==6.0.3
 - PASS — `node-version-file`: local Node must match CI Node 22
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section

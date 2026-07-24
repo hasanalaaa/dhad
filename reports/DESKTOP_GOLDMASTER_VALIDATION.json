@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T06:31:17.634450+00:00",
+  "generated_at_utc": "2026-07-24T07:31:26.266104+00:00",
   "file_count": 448,
-  "total_bytes": 180117776,
-  "checks_total": 141,
-  "checks_passed": 141,
+  "total_bytes": 180119836,
+  "checks_total": 142,
+  "checks_passed": 142,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -408,14 +408,14 @@
       "detail": "missing workflow contract matching tools/validate_desktop_release\\.py"
     },
     {
-      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.5\"",
+      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.4\"",
       "ok": true,
-      "detail": "missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.5[\"\\']?\\s*$"
+      "detail": "missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.4[\"\\']?\\s*$"
     },
     {
-      "name": "workflow-validation:@tauri-apps/cli@2.11.5",
+      "name": "workflow-validation:@tauri-apps/cli@2.11.4",
       "ok": true,
-      "detail": "missing workflow contract matching @tauri-apps/cli@2\\.11\\.5"
+      "detail": "missing workflow contract matching @tauri-apps/cli@2\\.11\\.4"
     },
     {
       "name": "workflow-validation:tauriScript: tauri",
@@ -476,6 +476,11 @@
       "name": "ci:npm-test",
       "ok": true,
       "detail": "missing CI contract: npm test"
+    },
+    {
+      "name": "ci:repository-audit-pyyaml",
+      "ok": true,
+      "detail": "missing CI contract: PyYAML==6.0.3"
     },
     {
       "name": "node-version-file",
@@ -728,12 +733,12 @@
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
     "scripts/build-desktop.sh": "4476f9ac8f59b9f9b5b4bf110e9b07ee8db58da27134dfc57a9c0df9cfe6647c",
     "scripts/build-desktop.bat": "6abedefca3129adf3aa3ad62477bb8e9e4055c738da0b9c5bed4886048239769",
-    ".github/workflows/desktop-release.yml": "f1cacb12adb21372fc8a7f5b677e42d232e06783b5e3905b82977f0465fad3b3",
-    ".github/workflows/ci.yml": "ce899ac4292f267de76e14b5025e822731a82ec5408d5bdcea83ac949222b683",
+    ".github/workflows/desktop-release.yml": "82866c60cf233f7c722c4f25a077269aa6df50db88b9273884c90e9d34a77387",
+    ".github/workflows/ci.yml": "9920b333eaed087cdf253836c200f48b298dc4e05e4e9c4d7c9ca3b9e540ca36",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "dc0a60376cb12295403afe8af9131dba5f2bbaa534056d74c7e74b241c5094db",
+    "tools/validate_desktop_release.py": "5402214f72426db1c609d53673d887072d0c25a36cd361cdc69b7af2230670f0",
     "tools/validate_tauri_config.py": "75d931198285b1cc2b4c41718ad0c3084cd62a7d9e2d848d64e7be36a9266c51",
     "tools/package_release.py": "80ee86a41bc8086136b91e719ced1b610b372175589d79d402172301f9502fd4",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",

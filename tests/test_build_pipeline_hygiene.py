@@ -39,11 +39,11 @@ def test_workflow_contains_pinned_release_contracts() -> None:
     root = Path(__file__).resolve().parents[1]
     workflow = (root / ".github" / "workflows" / "desktop-release.yml").read_text(encoding="utf-8")
     for token in (
-        'TAURI_CLI_VERSION: "2.11.5"',
+        'TAURI_CLI_VERSION: "2.11.4"',
         "dtolnay/rust-toolchain@1.97.1",
         "verify-macos-app.sh",
         "APPLE_SIGNING_IDENTITY",
-        "@tauri-apps/cli@2.11.5",
+        "@tauri-apps/cli@2.11.4",
         "tauriScript: tauri",
         "build-essential",
         "libxdo-dev",
@@ -232,6 +232,7 @@ def test_ci_installs_cross_runtime_and_linux_system_dependencies() -> None:
     assert "actions/checkout@v5" in workflow
     assert "actions/setup-node@v5" in workflow
     assert "actions/setup-python@v7" in workflow
+    assert "PyYAML==6.0.3" in workflow
 
 
 def test_general_ci_does_not_run_again_for_release_tags() -> None:

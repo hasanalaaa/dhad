@@ -112,6 +112,9 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm test
+      - name: Install repository audit requirements
+        working-directory: .
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
       - name: Audit complete repository
         working-directory: .
         run: python tools/audit_repository.py --write-reports

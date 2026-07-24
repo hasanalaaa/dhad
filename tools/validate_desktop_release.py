@@ -148,10 +148,10 @@ def main() -> int:
         ("tools/validate_tauri_config.py", r"tools/validate_tauri_config\.py"),
         ("tools/validate_desktop_release.py", r"tools/validate_desktop_release\.py"),
         (
-            'TAURI_CLI_VERSION: "2.11.5"',
-            r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$',
+            'TAURI_CLI_VERSION: "2.11.4"',
+            r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$',
         ),
-        ("@tauri-apps/cli@2.11.5", r"@tauri-apps/cli@2\.11\.5"),
+        ("@tauri-apps/cli@2.11.4", r"@tauri-apps/cli@2\.11\.4"),
         ("tauriScript: tauri", r"^\s*tauriScript\s*:\s*tauri\s*$"),
         ("dtolnay/rust-toolchain@1.97.1", r"uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b"),
         ("cargo test", r"\bcargo\s+test\b"),
@@ -169,6 +169,7 @@ def main() -> int:
         'ruff-check': 'ruff check src tests tools benchmarks gunicorn_conf.py',
         'pytest': 'pytest -q',
         'npm-test': 'npm test',
+        'repository-audit-pyyaml': 'PyYAML==6.0.3',
     }
     for label, token in ci_contracts.items():
         ok(f'ci:{label}', token in ci_workflow, f'missing CI contract: {token}')
