@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **445**
-- Checks passed: **125/125**
+- Files audited: **448**
+- Checks passed: **136/136**
 - Errors: **0**
 - Warnings: **0**
 
@@ -22,6 +22,8 @@
 - PASS — `required:scripts/build-desktop.sh`: missing or empty required release file
 - PASS — `required:scripts/build-desktop.bat`: missing or empty required release file
 - PASS — `required:.github/workflows/desktop-release.yml`: missing or empty required release file
+- PASS — `required:.github/workflows/ci.yml`: missing or empty required release file
+- PASS — `required:.nvmrc`: missing or empty required release file
 - PASS — `required:docs/index.html`: missing or empty required release file
 - PASS — `required:tools/optimize_onnx_assets.py`: missing or empty required release file
 - PASS — `required:tools/validate_desktop_release.py`: missing or empty required release file
@@ -31,6 +33,8 @@
 - PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
 - PASS — `required:tools/verify_macos_bundle.py`: missing or empty required release file
 - PASS — `required:scripts/verify-macos-app.sh`: missing or empty required release file
+- PASS — `required:scripts/install-macos-app.sh`: missing or empty required release file
+- PASS — `required:tools/clean_repository.py`: missing or empty required release file
 - PASS — `required:src-tauri/Info.plist`: missing or empty required release file
 - PASS — `required:src-tauri/Entitlements.plist`: missing or empty required release file
 - PASS — `required:vercel.json`: missing or empty required release file
@@ -86,6 +90,13 @@
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
 - PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
 - PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
+- PASS — `ci:rust-toolchain-pinned`: missing CI contract: dtolnay/rust-toolchain@1.97.1
+- PASS — `ci:pythonpath-root-and-src`: missing CI contract: PYTHONPATH: ".:src"
+- PASS — `ci:node-22`: missing CI contract: node-version: "22"
+- PASS — `ci:ruff-check`: missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py
+- PASS — `ci:pytest`: missing CI contract: pytest -q
+- PASS — `ci:npm-test`: missing CI contract: npm test
+- PASS — `node-version-file`: local Node must match CI Node 22
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
 - PASS — `landing:data-download`: missing landing-page section
@@ -112,8 +123,8 @@
 - PASS — `build-sh:macos-bundle-verification`: macOS build must verify and launch-smoke the generated app
 - PASS — `no-broken-symlinks`: []
 - PASS — `no-case-insensitive-path-collisions`: []
-- PASS — `no-packaged-node-modules`: web_demo/node_modules must not be committed or packaged
-- PASS — `no-packaged-target`: Cargo target directory must not be packaged
+- PASS — `no-packaged-node-modules`: excluded by Git, Tauri, and release packaging
+- PASS — `no-packaged-target`: excluded by Git, Tauri, and release packaging
 - PASS — `no-packaged-build-venv`: excluded by Git, Tauri, and release packaging
 - PASS — `shell-build-script-executable`
 - PASS — `macos-verifier-script-executable`
@@ -128,7 +139,7 @@
 - PASS — `tauri-crate-pinned-2.11.5`: {'version': '=2.11.5', 'features': ['tray-icon']}
 - PASS — `npm-lockfile-v3`: 3
 - PASS — `critical-npm-dependencies-pinned`: []
-- PASS — `onnx-build-tool-pinned`: ['onnx==1.22.0']
+- PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 445 files
+- PASS — `repository-file-count`: only 448 files

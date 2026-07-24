@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T04:07:33.534919+00:00",
-  "file_count": 445,
-  "total_bytes": 180090659,
-  "checks_total": 125,
-  "checks_passed": 125,
+  "generated_at_utc": "2026-07-24T05:44:58.200894+00:00",
+  "file_count": 448,
+  "total_bytes": 180109494,
+  "checks_total": 136,
+  "checks_passed": 136,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -83,6 +83,16 @@
       "detail": "missing or empty required release file"
     },
     {
+      "name": "required:.github/workflows/ci.yml",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:.nvmrc",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
       "name": "required:docs/index.html",
       "ok": true,
       "detail": "missing or empty required release file"
@@ -124,6 +134,16 @@
     },
     {
       "name": "required:scripts/verify-macos-app.sh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/install-macos-app.sh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/clean_repository.py",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -403,6 +423,41 @@
       "detail": "missing workflow contract matching \\bAPPLE_SIGNING_IDENTITY\\b"
     },
     {
+      "name": "ci:rust-toolchain-pinned",
+      "ok": true,
+      "detail": "missing CI contract: dtolnay/rust-toolchain@1.97.1"
+    },
+    {
+      "name": "ci:pythonpath-root-and-src",
+      "ok": true,
+      "detail": "missing CI contract: PYTHONPATH: \".:src\""
+    },
+    {
+      "name": "ci:node-22",
+      "ok": true,
+      "detail": "missing CI contract: node-version: \"22\""
+    },
+    {
+      "name": "ci:ruff-check",
+      "ok": true,
+      "detail": "missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py"
+    },
+    {
+      "name": "ci:pytest",
+      "ok": true,
+      "detail": "missing CI contract: pytest -q"
+    },
+    {
+      "name": "ci:npm-test",
+      "ok": true,
+      "detail": "missing CI contract: npm test"
+    },
+    {
+      "name": "node-version-file",
+      "ok": true,
+      "detail": "local Node must match CI Node 22"
+    },
+    {
       "name": "landing:id=\"downloads\"",
       "ok": true,
       "detail": "missing landing-page section"
@@ -535,12 +590,12 @@
     {
       "name": "no-packaged-node-modules",
       "ok": true,
-      "detail": "web_demo/node_modules must not be committed or packaged"
+      "detail": "excluded by Git, Tauri, and release packaging"
     },
     {
       "name": "no-packaged-target",
       "ok": true,
-      "detail": "Cargo target directory must not be packaged"
+      "detail": "excluded by Git, Tauri, and release packaging"
     },
     {
       "name": "no-packaged-build-venv",
@@ -613,9 +668,9 @@
       "detail": "[]"
     },
     {
-      "name": "onnx-build-tool-pinned",
+      "name": "desktop-build-tools-pinned",
       "ok": true,
-      "detail": "['onnx==1.22.0']"
+      "detail": "['onnx==1.22.0', 'PyYAML==6.0.3']"
     },
     {
       "name": "no-obvious-embedded-private-keys",
@@ -630,7 +685,7 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 445 files"
+      "detail": "only 448 files"
     }
   ],
   "key_assets": {
@@ -646,18 +701,22 @@
     "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
-    "scripts/build-desktop.sh": "b502008761e27d8675858b2a851a91338718c0ab608500ca9b3b222baab8e533",
-    "scripts/build-desktop.bat": "25fed88efcdc4bfb15eb3912969313cb1862e289375ad500bdc9cdd3cb0d82a8",
+    "scripts/build-desktop.sh": "4476f9ac8f59b9f9b5b4bf110e9b07ee8db58da27134dfc57a9c0df9cfe6647c",
+    "scripts/build-desktop.bat": "6abedefca3129adf3aa3ad62477bb8e9e4055c738da0b9c5bed4886048239769",
     ".github/workflows/desktop-release.yml": "16d8d9b9d94d957351f984499046a883851053bc5baa681e4fa81e466740e437",
+    ".github/workflows/ci.yml": "90762ea6d8219ed4ae186e313c791893b733954c7a7c92766daafdfb422be405",
+    ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "2755c9424998b3a7cb55b06d883c5816205676f7021f12a1a9043b9dd773861a",
+    "tools/validate_desktop_release.py": "30911444ee08c2e13b6eaab9625b70c4adcbe26d883817a14bab536d52af8a7c",
     "tools/validate_tauri_config.py": "75d931198285b1cc2b4c41718ad0c3084cd62a7d9e2d848d64e7be36a9266c51",
-    "tools/package_release.py": "526143ddd18ea054eebace8e4904d1dbde387ac85bc0dcdcec8a179202c74ec5",
-    "tools/desktop-build-requirements.txt": "a85e651aac4f558b261fe59050b089ac7156724549d98996e58b9f27c0cff706",
+    "tools/package_release.py": "80ee86a41bc8086136b91e719ced1b610b372175589d79d402172301f9502fd4",
+    "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
     "tools/generate_release_inventory.py": "47908240787c2af386160b4c2b7a6beed37d1aae46c725855f49a48f21a2cce2",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
+    "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
+    "tools/clean_repository.py": "f35920c622ebc2d860d18b5172002a15e846fda9aa5b8d0d20e03ee69a79a3ed",
     "src-tauri/Info.plist": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
     "src-tauri/Entitlements.plist": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
     "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",

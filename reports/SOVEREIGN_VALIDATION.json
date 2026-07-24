@@ -1,8 +1,8 @@
 {
   "release": "Dhad v1.0.0 Sovereign Edition",
   "summary": {
-    "passed": 69,
-    "total": 69,
+    "passed": 71,
+    "total": 71,
     "errors": 0
   },
   "checks": [
@@ -72,6 +72,11 @@
       "detail": "release file exists"
     },
     {
+      "name": "required:tools/clean_repository.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
       "name": "required:tools/package_release.py",
       "passed": true,
       "detail": "release file exists"
@@ -83,6 +88,11 @@
     },
     {
       "name": "required:scripts/verify-macos-app.sh",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:scripts/install-macos-app.sh",
       "passed": true,
       "detail": "release file exists"
     },

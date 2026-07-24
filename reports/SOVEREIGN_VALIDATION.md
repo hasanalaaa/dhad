@@ -1,6 +1,6 @@
 # Dhad Sovereign Release Validation
 
-- Passed: **69/69**
+- Passed: **71/71**
 - Errors: **0**
 
 ## Checks
@@ -18,9 +18,11 @@
 - PASS — `required:src-tauri/src/tray.rs`: release file exists
 - PASS — `required:tools/run_sovereign_validation_matrix.py`: release file exists
 - PASS — `required:tools/validate_tauri_config.py`: release file exists
+- PASS — `required:tools/clean_repository.py`: release file exists
 - PASS — `required:tools/package_release.py`: release file exists
 - PASS — `required:tools/verify_macos_bundle.py`: release file exists
 - PASS — `required:scripts/verify-macos-app.sh`: release file exists
+- PASS — `required:scripts/install-macos-app.sh`: release file exists
 - PASS — `required:web_demo/mini-assistant.css`: release file exists
 - PASS — `required:web_demo/mini-assistant.js`: release file exists
 - PASS — `required:web_demo/ui/mini-assistant-runtime.test.mjs`: release file exists

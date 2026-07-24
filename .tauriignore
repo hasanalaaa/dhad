@@ -1,6 +1,7 @@
 # Local and temporary build environments
 .desktop-build/
 .audit-venv/
+.ci-venv/
 .venv/
 venv/
 

@@ -114,12 +114,12 @@ test("Yjs update reads are isolated by the documentId index", async () => {
 test("online recovery heals a previously rejected infrastructure flush", async () => {
   const storage = createStorage();
   await storage.enqueueOutbox({ id: "eventual", kind: "update", payload: [1] });
-  const originalListOutbox = storage.listOutbox.bind(storage);
+  const originalListDueOutbox = storage.listDueOutbox.bind(storage);
   let reads = 0;
-  storage.listOutbox = async () => {
+  storage.listDueOutbox = async (...args) => {
     reads += 1;
     if (reads === 1) throw new Error("temporary database failure");
-    return originalListOutbox();
+    return originalListDueOutbox(...args);
   };
   const onlineTarget = new EventTarget();
   const sent = [];

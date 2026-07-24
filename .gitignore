@@ -84,3 +84,6 @@ redis-data/
 
 # ONNX models are intentionally versioned via Git LFS; do not ignore *.onnx.
 .desktop-build/
+
+# Local CI parity environment
+.ci-venv/

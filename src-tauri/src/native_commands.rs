@@ -4,10 +4,10 @@ use std::{
     time::Instant,
 };
 
+use dhad_core::rules::{RuleMatch, RuleSet};
 use dhad_core::{
     normalize, sentence_spans, tokenize, DocumentParse, NormalizationMode, SyntaxEngine,
 };
-use dhad_core::rules::{RuleMatch, RuleSet};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 
@@ -18,12 +18,10 @@ const SAFETY_NOTICE: &str =
 static RULES: OnceLock<Result<RuleSet, String>> = OnceLock::new();
 static MULTISPACE: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"[ \t]{2,}").expect("valid spacing regex"));
-static SPACE_BEFORE_PUNCTUATION: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"\s+([،؛:,.!?؟])").expect("valid punctuation spacing regex")
-});
-static SPACE_AFTER_PUNCTUATION: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"([،؛:])([^\s\n])").expect("valid punctuation spacing regex")
-});
+static SPACE_BEFORE_PUNCTUATION: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"\s+([،؛:,.!?؟])").expect("valid punctuation spacing regex"));
+static SPACE_AFTER_PUNCTUATION: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"([،؛:])([^\s\n])").expect("valid punctuation spacing regex"));
 
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -133,10 +131,7 @@ fn rule_set() -> Result<&'static RuleSet, String> {
 fn resolve_diagnostics(candidates: Vec<RuleMatch>) -> Vec<RuleMatch> {
     let mut unique = std::collections::HashMap::new();
     for item in candidates {
-        unique.insert(
-            (item.rule_id.clone(), item.offset, item.length),
-            item,
-        );
+        unique.insert((item.rule_id.clone(), item.offset, item.length), item);
     }
     let mut ordered: Vec<_> = unique.into_values().collect();
     ordered.sort_by(|a, b| {
@@ -149,9 +144,9 @@ fn resolve_diagnostics(candidates: Vec<RuleMatch>) -> Vec<RuleMatch> {
     let mut accepted: Vec<RuleMatch> = Vec::new();
     for item in ordered {
         let end = item.offset + item.length;
-        let overlaps = accepted.iter().any(|other| {
-            item.offset < other.offset + other.length && other.offset < end
-        });
+        let overlaps = accepted
+            .iter()
+            .any(|other| item.offset < other.offset + other.length && other.offset < end);
         if !overlaps {
             accepted.push(item);
         }
@@ -360,7 +355,11 @@ fn academic_entries() -> &'static [(&'static str, &'static str, &'static str)] {
             "تشير النتائج إلى أن",
             "تجنب القطع غير المدعوم.",
         ),
-        ("أكيد", "على الأرجح", "استبدال الجزم بتقدير احتمالي أكثر دقة."),
+        (
+            "أكيد",
+            "على الأرجح",
+            "استبدال الجزم بتقدير احتمالي أكثر دقة.",
+        ),
         ("شيء", "عنصر", "استخدام مفردة أكثر تحديدًا."),
         ("أشياء", "عناصر", "استخدام جمع أكثر تحديدًا."),
     ]
@@ -368,11 +367,7 @@ fn academic_entries() -> &'static [(&'static str, &'static str, &'static str)] {
 
 fn creative_entries() -> &'static [(&'static str, &'static str, &'static str)] {
     &[
-        (
-            "بالإضافة إلى ذلك",
-            "وفوق ذلك",
-            "تنويع الرابط الإضافي.",
-        ),
+        ("بالإضافة إلى ذلك", "وفوق ذلك", "تنويع الرابط الإضافي."),
         ("ولكن", "ومع ذلك", "تنويع رابط الاستدراك."),
         ("لذلك", "ومن هنا", "تنويع رابط النتيجة."),
         ("في النهاية", "وفي المحصلة", "تنويع خاتمة الفكرة."),
@@ -381,7 +376,10 @@ fn creative_entries() -> &'static [(&'static str, &'static str, &'static str)] {
 }
 
 fn is_word_character(value: char) -> bool {
-    value.is_alphanumeric() || value == '_' || value == 'ـ' || ('\u{064b}'..='\u{065f}').contains(&value)
+    value.is_alphanumeric()
+        || value == '_'
+        || value == 'ـ'
+        || ('\u{064b}'..='\u{065f}').contains(&value)
 }
 
 fn bounded_occurrence(text: &str, source: &str, start_at: usize) -> Option<usize> {
@@ -391,8 +389,8 @@ fn bounded_occurrence(text: &str, source: &str, start_at: usize) -> Option<usize
         let before = text[..index].chars().next_back();
         let after_index = index + source.len();
         let after = text.get(after_index..)?.chars().next();
-        if before.map_or(true, |character| !is_word_character(character))
-            && after.map_or(true, |character| !is_word_character(character))
+        if before.is_none_or(|character| !is_word_character(character))
+            && after.is_none_or(|character| !is_word_character(character))
         {
             return Some(index);
         }
@@ -431,11 +429,7 @@ fn replace_literals(
     }
 }
 
-fn apply_concise_patterns(
-    output: &mut String,
-    limit: usize,
-    changes: &mut Vec<RewriteChange>,
-) {
+fn apply_concise_patterns(output: &mut String, limit: usize, changes: &mut Vec<RewriteChange>) {
     let entries = [
         ("في واقع الأمر", "", "حذف عبارة تمهيدية لا تضيف معنى."),
         ("في الحقيقة", "", "حذف عبارة تمهيدية لا تضيف معنى."),
@@ -459,10 +453,7 @@ fn apply_concise_patterns(
                         end += first.len_utf8();
                     }
                 }
-                loop {
-                    let Some(next) = output[end..].chars().next() else {
-                        break;
-                    };
+                while let Some(next) = output[end..].chars().next() {
                     if !next.is_whitespace() {
                         break;
                     }
@@ -488,11 +479,7 @@ fn apply_concise_patterns(
     }
 }
 
-fn remove_duplicate_words(
-    output: &mut String,
-    limit: usize,
-    changes: &mut Vec<RewriteChange>,
-) {
+fn remove_duplicate_words(output: &mut String, limit: usize, changes: &mut Vec<RewriteChange>) {
     loop {
         if changes.len() >= limit {
             break;
@@ -514,7 +501,8 @@ fn remove_duplicate_words(
         let Some((word, remove_start, remove_end)) = duplicate else {
             break;
         };
-        let Some((byte_start, byte_end)) = char_range_to_byte(output, remove_start, remove_end) else {
+        let Some((byte_start, byte_end)) = char_range_to_byte(output, remove_start, remove_end)
+        else {
             break;
         };
         let removed = output[byte_start..byte_end].to_string();
@@ -537,7 +525,7 @@ fn apply_dialect_conversions(
     changes: &mut Vec<RewriteChange>,
 ) {
     let mut ordered = conversions.to_vec();
-    ordered.sort_by(|a, b| b.offset.cmp(&a.offset));
+    ordered.sort_by_key(|item| std::cmp::Reverse(item.offset));
     for item in ordered {
         if changes.len() >= limit {
             break;
@@ -583,8 +571,7 @@ fn expand_structure(output: &mut String, intensity: usize, changes: &mut Vec<Rew
                 replacement: "بعبارة أوضح، ".to_string(),
                 offset: 0,
                 length: 0,
-                explanation: "إضافة تمهيد يوضح أن الصياغة التالية تفصيل للفكرة نفسها."
-                    .to_string(),
+                explanation: "إضافة تمهيد يوضح أن الصياغة التالية تفصيل للفكرة نفسها.".to_string(),
             });
         }
         return;
@@ -594,7 +581,8 @@ fn expand_structure(output: &mut String, intensity: usize, changes: &mut Vec<Rew
     let mut rebuilt = Vec::with_capacity(parts.len());
     let mut char_offset = 0;
     for (index, part) in parts.into_iter().enumerate() {
-        let starts_with_connector = part.starts_with('و') || part.starts_with('ف')
+        let starts_with_connector = part.starts_with('و')
+            || part.starts_with('ف')
             || ["ثم", "لكن", "لذلك", "إضافة", "في هذا", "بناء"]
                 .iter()
                 .any(|prefix| part.starts_with(prefix));
@@ -610,8 +598,7 @@ fn expand_structure(output: &mut String, intensity: usize, changes: &mut Vec<Rew
             replacement: connector.to_string(),
             offset: char_offset,
             length: 0,
-            explanation: "إظهار العلاقة الخطابية بين الجمل من دون إضافة ادعاء جديد."
-                .to_string(),
+            explanation: "إظهار العلاقة الخطابية بين الجمل من دون إضافة ادعاء جديد.".to_string(),
         });
         let expanded = format!("{connector}{part}");
         char_offset += expanded.chars().count() + 1;
@@ -643,8 +630,8 @@ fn build_candidate(
     } else {
         0.0
     };
-    let confidence = (0.9 - changed_ratio * 0.15 + changes.len().min(8) as f64 * 0.005)
-        .clamp(0.62, 0.97);
+    let confidence =
+        (0.9 - changed_ratio * 0.15 + changes.len().min(8) as f64 * 0.005).clamp(0.62, 0.97);
     let meaning_preservation =
         (0.99 - changed_ratio * 0.34 - changes.len() as f64 * 0.006).max(0.72);
     let brevity_delta = if source_len > 0.0 {

@@ -52,9 +52,7 @@ fn quick_assistant_fallback_shortcut() -> tauri_plugin_global_shortcut::Shortcut
 }
 
 #[cfg(any(target_os = "macos", target_os = "windows"))]
-fn is_quick_assistant_shortcut(
-    shortcut: &tauri_plugin_global_shortcut::Shortcut,
-) -> bool {
+fn is_quick_assistant_shortcut(shortcut: &tauri_plugin_global_shortcut::Shortcut) -> bool {
     shortcut == &quick_assistant_shortcut() || shortcut == &quick_assistant_fallback_shortcut()
 }
 

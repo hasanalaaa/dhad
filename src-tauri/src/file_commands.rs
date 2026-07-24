@@ -215,7 +215,9 @@ fn write_document_file_blocking(
 }
 
 #[tauri::command]
-pub async fn read_document_file(request: ReadDocumentRequest) -> Result<NativeDocumentFile, String> {
+pub async fn read_document_file(
+    request: ReadDocumentRequest,
+) -> Result<NativeDocumentFile, String> {
     tauri::async_runtime::spawn_blocking(move || read_document_file_blocking(request))
         .await
         .map_err(|error| error.to_string())?
@@ -238,7 +240,10 @@ mod tests {
     fn write_path_appends_missing_extension() {
         let path = std::env::temp_dir().join("dhad-document");
         let path = resolved_write_path(path.to_string_lossy().as_ref(), "txt").expect("valid path");
-        assert_eq!(path.extension().and_then(|value| value.to_str()), Some("txt"));
+        assert_eq!(
+            path.extension().and_then(|value| value.to_str()),
+            Some("txt")
+        );
     }
 
     #[test]

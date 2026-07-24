@@ -3,8 +3,8 @@
   "files": [
     {
       "path": ".dockerignore",
-      "bytes": 312,
-      "sha256": "e2df5ef91135cee6a668c7b435898e6478aa14582ba35e9468a12f5ecfcc97ae",
+      "bytes": 321,
+      "sha256": "7fc8ee441538122d0481eb6cf1691807091862e34bf4621e3149b184a4f6aae0",
       "category": "configuration"
     },
     {
@@ -15,14 +15,26 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 974,
-      "sha256": "3116746620f1497cb058a1890d42c579ec9daeffebffe2f1aba6ce3f87487222",
+      "bytes": 1015,
+      "sha256": "78e62306f2d5d796649d619d4be24b5f922d7aac8218ef7652837856c8ade1e6",
+      "category": "configuration"
+    },
+    {
+      "path": ".nvmrc",
+      "bytes": 3,
+      "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
+      "category": "configuration"
+    },
+    {
+      "path": ".tauriignore",
+      "bytes": 349,
+      "sha256": "3a8848bd7cd8fceea159bee082910a195607b63bc2283b150b1b7ad66b340d5c",
       "category": "configuration"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 25772,
-      "sha256": "af7a80582c7d78f203af8583e6445143ade3ec4a585fe3a8c54acc3c38f15b05",
+      "bytes": 27979,
+      "sha256": "b763fabbff118df3f7d1df7d80e2fb953da3ce76d6e02ed53134e6328a8a82c9",
       "category": "configuration"
     },
     {
@@ -75,8 +87,8 @@
     },
     {
       "path": "RELEASE_MANIFEST.json",
-      "bytes": 21270,
-      "sha256": "2ee645d11a3a4e482f17f7e471143c5837f03b44704f845c601cdebeca51a32d",
+      "bytes": 21274,
+      "sha256": "b0f574b076357f43afba31d9a1864c22e0df7ef5413aaf3fefbd8aaea38765b4",
       "category": "configuration"
     },
     {
@@ -105,8 +117,8 @@
     },
     {
       "path": "pyproject.toml",
-      "bytes": 2249,
-      "sha256": "022e8646c920ba25046432690506b355b6a0fc56d72a4a1745b84e1bc9c8cc12",
+      "bytes": 2311,
+      "sha256": "24be12039f29e67873843486eaa3d2bb40a118c161c94de36b619f4b30831741",
       "category": "configuration"
     },
     {
@@ -118,7 +130,7 @@
     {
       "path": "rust-toolchain.toml",
       "bytes": 123,
-      "sha256": "64b70335d7640d48f88598072b562f09bda841cba6c483c35f23842639b9a716",
+      "sha256": "8426022dcf3cbd6b106cda60c0aa89ad194a12d2a0931b0e8f580d4f0f3c5fa5",
       "category": "configuration"
     },
     {
@@ -135,14 +147,14 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "bytes": 2290,
-      "sha256": "34b9286a9773f81b7ee4d1d1dc5a5df042604709f29976f6a3c2b965ea5fe1e7",
+      "bytes": 2322,
+      "sha256": "90762ea6d8219ed4ae186e313c791893b733954c7a7c92766daafdfb422be405",
       "category": "configuration"
     },
     {
       "path": ".github/workflows/desktop-release.yml",
-      "bytes": 5329,
-      "sha256": "68e4936eb7451e3c05c5c20fb03a9f3deadbdc91aec22e0a84f9146ddf5260dd",
+      "bytes": 8103,
+      "sha256": "16d8d9b9d94d957351f984499046a883851053bc5baa681e4fa81e466740e437",
       "category": "configuration"
     },
     {
@@ -213,8 +225,8 @@
     },
     {
       "path": "docs/DESKTOP_RELEASE.md",
-      "bytes": 2891,
-      "sha256": "0a1ca01dd779e03e0efdbf16aa0d83974ae5088992814136b038c22a155559c5",
+      "bytes": 4386,
+      "sha256": "867fe89df5703377abc27633e24989071724778201b6d0153921251f8fd72bd1",
       "category": "documentation"
     },
     {
@@ -531,20 +543,20 @@
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.json",
-      "bytes": 15922,
-      "sha256": "4d4cecf7e92d2a7351c3c6c02850fe80281b9eed5a83fb3a0abcd20a9af69595",
+      "bytes": 21906,
+      "sha256": "56b03fd229d93e190fdcb7792c46cce1c93947bb0a03bcc829360249ce924688",
       "category": "documentation"
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.md",
-      "bytes": 8072,
-      "sha256": "5067309ccdce9dd284fc880c1101b908c47590f26bb5f9af3d7270dd533f72b5",
+      "bytes": 11386,
+      "sha256": "ed2c51f45506beba782bca39942cfaeec885f5146400279d585c053d78be32cf",
       "category": "documentation"
     },
     {
       "path": "reports/DESKTOP_ONNX_ASSET_MANIFEST.json",
       "bytes": 941,
-      "sha256": "7eacffdc7fd1f63c2809a7bf73e228459ba608350cecdda1c57e0d7c3edb037d",
+      "sha256": "54080b860461f58adbfcb2707c5ef473f797fc5f68d570550b19624c253ba032",
       "category": "documentation"
     },
     {
@@ -555,8 +567,8 @@
     },
     {
       "path": "reports/DESKTOP_PHASE1_VALIDATION.md",
-      "bytes": 2068,
-      "sha256": "b4d71c286deda025f93d485a69ca4c39f76cbd1ecb0e47250304a080e2a5ec1b",
+      "bytes": 2072,
+      "sha256": "c90e4a8ad548ef1b3e4186276292d590c71e9552b43cae246039bb66ca09d1a7",
       "category": "documentation"
     },
     {
@@ -620,27 +632,15 @@
       "category": "documentation"
     },
     {
-      "path": "reports/SOVEREIGN_TEST_MATRIX.json",
-      "bytes": 26556,
-      "sha256": "c357b2b2d5bd54700d083c0d41d3f59d402d174d40799d0fc8841cf73a44d21e",
-      "category": "documentation"
-    },
-    {
-      "path": "reports/SOVEREIGN_TEST_MATRIX.md",
-      "bytes": 6962,
-      "sha256": "b72d25b1807cc00718d1d0a8171c165f775ec50a61a3f4bca60e43e043f49dc4",
-      "category": "documentation"
-    },
-    {
       "path": "reports/SOVEREIGN_VALIDATION.json",
-      "bytes": 8107,
-      "sha256": "03b1496780ebf41b5a75f423b7f775b62fc3cd2c4edaeca99cbc1d85d99dc96c",
+      "bytes": 9203,
+      "sha256": "96751a6b256711de515508e1a8ff058b8b603c7e53c77ebcfa797bfc16e53d43",
       "category": "documentation"
     },
     {
       "path": "reports/SOVEREIGN_VALIDATION.md",
-      "bytes": 4516,
-      "sha256": "e9d5535265427586676bb05e5754fb55eb1d7474bf295f12e05ba2761817c283",
+      "bytes": 5164,
+      "sha256": "dec9c45e9d71a488e110ce19ef367c3edfa3c83a702ac541f4847e8e1d112b76",
       "category": "documentation"
     },
     {
@@ -1053,8 +1053,8 @@
     },
     {
       "path": "rust/dhad-core-rs/src/wasm_api.rs",
-      "bytes": 16527,
-      "sha256": "4d282a05766a14f80e1bcc1ce862f694bb9bc50b57f1748fdac7dd592e05e9c7",
+      "bytes": 16538,
+      "sha256": "17d0311af96401a87d83aefb2d420ce444d2f7d0863c9492e8f0dd1cd3737b80",
       "category": "source"
     },
     {
@@ -1095,14 +1095,26 @@
     },
     {
       "path": "scripts/build-desktop.bat",
-      "bytes": 3233,
-      "sha256": "a4a1692b86b1fe4a1fb9a9b7327e674892e9c3af4147f42c41fd920dae973f74",
+      "bytes": 3381,
+      "sha256": "6abedefca3129adf3aa3ad62477bb8e9e4055c738da0b9c5bed4886048239769",
       "category": "configuration"
     },
     {
       "path": "scripts/build-desktop.sh",
-      "bytes": 2923,
-      "sha256": "28d5643f8a84871a8f80778b21a737ee8a6c2b2c50180f89d38b53a4627d9d11",
+      "bytes": 3460,
+      "sha256": "4476f9ac8f59b9f9b5b4bf110e9b07ee8db58da27134dfc57a9c0df9cfe6647c",
+      "category": "configuration"
+    },
+    {
+      "path": "scripts/install-macos-app.sh",
+      "bytes": 1594,
+      "sha256": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
+      "category": "configuration"
+    },
+    {
+      "path": "scripts/verify-macos-app.sh",
+      "bytes": 1098,
+      "sha256": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
       "category": "configuration"
     },
     {
@@ -1119,8 +1131,8 @@
     },
     {
       "path": "src/dhad/analytics.py",
-      "bytes": 4894,
-      "sha256": "b852cd16c72fc07cc3f74eb71f9b737513419f2860d0927cdfa7eb076b5b4387",
+      "bytes": 4866,
+      "sha256": "a23a4b9817da4a0e2a9a7e89ed10738e6ee32ae586f9162192d0f8705b264cb9",
       "category": "source"
     },
     {
@@ -1185,8 +1197,8 @@
     },
     {
       "path": "src/dhad/intelligence.py",
-      "bytes": 13284,
-      "sha256": "741d0a17031016b9fb311662e380fd399359cf928bcb8aa5df5c48f84a732a09",
+      "bytes": 13272,
+      "sha256": "d4c4e265b9b01dd23cdfa033bc3b27673d6db1f39709b666a2abe238c1d15344",
       "category": "source"
     },
     {
@@ -1599,8 +1611,20 @@
     },
     {
       "path": "src-tauri/Cargo.toml",
-      "bytes": 783,
-      "sha256": "d771b55339d5b572425f719d9f77d2e4d6b07e9c34592fc72d2a77538c6c543d",
+      "bytes": 804,
+      "sha256": "f58de7018464620e9e9683fc91e459e4d01753714b7e831eae1fff018e0a0aaf",
+      "category": "configuration"
+    },
+    {
+      "path": "src-tauri/Entitlements.plist",
+      "bytes": 189,
+      "sha256": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
+      "category": "configuration"
+    },
+    {
+      "path": "src-tauri/Info.plist",
+      "bytes": 664,
+      "sha256": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
       "category": "configuration"
     },
     {
@@ -1617,8 +1641,8 @@
     },
     {
       "path": "src-tauri/tauri.conf.json",
-      "bytes": 4469,
-      "sha256": "f5e3e23ae165f6a48ac9381d4c055fdff99708b1dd3a638b6b3ae57c94b192bf",
+      "bytes": 4456,
+      "sha256": "b94aef3eb143ff570b81740e38b5aebf6f57a8d7c2bb4cd3890b82b631436df7",
       "category": "configuration"
     },
     {
@@ -1713,14 +1737,14 @@
     },
     {
       "path": "src-tauri/src/file_commands.rs",
-      "bytes": 8204,
-      "sha256": "f7ff7eef3668a7effb781e7c5213946d91a72cb5c65fde66f963a0c421c61cb8",
+      "bytes": 8245,
+      "sha256": "62fadeb148a9c6c630568ea04fdbcc88183ff26576d87ec6d1e32eefac8956bb",
       "category": "configuration"
     },
     {
       "path": "src-tauri/src/lib.rs",
-      "bytes": 3283,
-      "sha256": "3e39739ab5292af6148232217054c65f26a39e02771d73bb60e32fefcc11691c",
+      "bytes": 4560,
+      "sha256": "36ebfd236e91a27775b52f147c5cf76bf0fa51fad5a54308b9c3517eefea8229",
       "category": "configuration"
     },
     {
@@ -1731,14 +1755,14 @@
     },
     {
       "path": "src-tauri/src/native_commands.rs",
-      "bytes": 25540,
-      "sha256": "468733d7dec5c8689f9ea0c24f91afc9d3c641f3ebf38f39ee01ba071f632051",
+      "bytes": 25433,
+      "sha256": "5e63cd7d59d1321c1264a47522c576dee4c0d79bf48588c901c6d7b6d00c337b",
       "category": "configuration"
     },
     {
       "path": "src-tauri/src/tray.rs",
-      "bytes": 4607,
-      "sha256": "b9475bf2abebca6de23df808f541454dc08b5ed7609e188d4bd4ea5e69440aab",
+      "bytes": 4584,
+      "sha256": "bb0b3f931013bc77a3b281b12bb652fa12477e4a66c0e4a2f385c3f82949ec34",
       "category": "configuration"
     },
     {
@@ -1799,6 +1823,12 @@
       "path": "tests/test_benchmark_seed.py",
       "bytes": 292,
       "sha256": "ad186b9caffb53ec6a18613edc45c016da7878a695063785f9ba5c98fc7c2d1f",
+      "category": "test"
+    },
+    {
+      "path": "tests/test_build_pipeline_hygiene.py",
+      "bytes": 9144,
+      "sha256": "616bb3b6a2984991aecef98e24a0bede9d732120d58ef59b1186a75a9af6c94c",
       "category": "test"
     },
     {
@@ -1868,6 +1898,12 @@
       "category": "test"
     },
     {
+      "path": "tests/test_macos_bundle_verifier.py",
+      "bytes": 1984,
+      "sha256": "ef84e8e6d0086438543293ed65bcf40e7654d124f96b4c4f150a36d738efc0b4",
+      "category": "test"
+    },
+    {
       "path": "tests/test_morphology.py",
       "bytes": 7098,
       "sha256": "cb9f6ee294b05f45ba470e3dfe479043662f3e2b42e8971fc176bce3ca86f058",
@@ -1911,8 +1947,8 @@
     },
     {
       "path": "tests/test_release_config.py",
-      "bytes": 2871,
-      "sha256": "229400fea258ae3f8edbf008968c21fb02f4a784728590af5e105f2fdacfc309",
+      "bytes": 6069,
+      "sha256": "dc751ac6eba0758537fae06a4815ad25fecfed4cfcdf70eadb29752be638b241",
       "category": "test"
     },
     {
@@ -2037,8 +2073,8 @@
     },
     {
       "path": "tools/audit_repository.py",
-      "bytes": 14550,
-      "sha256": "6ebeaaa2ade565cc62c7fff565fc86bb1473bcf843d3edb5eba32fb277cd34c8",
+      "bytes": 15167,
+      "sha256": "f9449226be2e9c6d294406e1ea93cd463c49a97c6c9a632c749d1167bfe6c9cd",
       "category": "source"
     },
     {
@@ -2060,9 +2096,15 @@
       "category": "source"
     },
     {
+      "path": "tools/clean_repository.py",
+      "bytes": 2925,
+      "sha256": "f35920c622ebc2d860d18b5172002a15e846fda9aa5b8d0d20e03ee69a79a3ed",
+      "category": "source"
+    },
+    {
       "path": "tools/desktop-build-requirements.txt",
-      "bytes": 13,
-      "sha256": "a85e651aac4f558b261fe59050b089ac7156724549d98996e58b9f27c0cff706",
+      "bytes": 27,
+      "sha256": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
       "category": "source"
     },
     {
@@ -2109,14 +2151,14 @@
     },
     {
       "path": "tools/optimize_onnx_assets.py",
-      "bytes": 4844,
-      "sha256": "9bee0bdf86d5175a4615710f567216d9c17831497ef6e4881d52b0e14217b8cb",
+      "bytes": 6207,
+      "sha256": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
       "category": "source"
     },
     {
       "path": "tools/package_release.py",
-      "bytes": 3450,
-      "sha256": "e5184f7ceb497bde024e145567c7aa8a48411fc8d4e5ea075935a85a6335b47c",
+      "bytes": 5541,
+      "sha256": "80ee86a41bc8086136b91e719ced1b610b372175589d79d402172301f9502fd4",
       "category": "source"
     },
     {
@@ -2127,26 +2169,32 @@
     },
     {
       "path": "tools/validate_desktop_release.py",
-      "bytes": 12681,
-      "sha256": "e9b16b7da8bbdec65846aa4fb7b8ba18ebaaac25f7e3b5db10f5468066dd4701",
+      "bytes": 20589,
+      "sha256": "30911444ee08c2e13b6eaab9625b70c4adcbe26d883817a14bab536d52af8a7c",
       "category": "source"
     },
     {
       "path": "tools/validate_sovereign_release.py",
-      "bytes": 10450,
-      "sha256": "1d9ff80133e58a22e788120f3b7820f1de127f138289275d44914bf5617e9476",
+      "bytes": 11315,
+      "sha256": "8f3ba4b6c4f706669a2c8cd04c3b06b87fe0a1280781f7e7bd188459957aacbd",
       "category": "source"
     },
     {
       "path": "tools/validate_tauri_config.py",
-      "bytes": 8017,
-      "sha256": "20d04b23d556ec22de2a9d038388c212e1a013be22d28821e93eeb451e10e5b2",
+      "bytes": 10226,
+      "sha256": "75d931198285b1cc2b4c41718ad0c3084cd62a7d9e2d848d64e7be36a9266c51",
       "category": "source"
     },
     {
       "path": "tools/vendor_onnxruntime_web.mjs",
       "bytes": 2094,
       "sha256": "63417251f7c8be1879a4178c25f12c11bc64945b517320c171bf6e2175b95ea2",
+      "category": "source"
+    },
+    {
+      "path": "tools/verify_macos_bundle.py",
+      "bytes": 8728,
+      "sha256": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
       "category": "source"
     },
     {
@@ -2541,8 +2589,8 @@
     },
     {
       "path": "web_demo/storage/db.test.mjs",
-      "bytes": 7186,
-      "sha256": "8d297d4ed65f32c7e43e5dda250baff569665e4f1a111d680e6fc63e83e4eeb4",
+      "bytes": 7212,
+      "sha256": "209728335e89cf1caa555dc75abe87f2d664c5634c6ba0fcb7961635b057f036",
       "category": "source"
     },
     {

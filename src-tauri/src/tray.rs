@@ -73,10 +73,7 @@ pub fn create_system_tray<R: Runtime>(app: &App<R>) -> tauri::Result<()> {
     let quick_item = MenuItem::with_id(app, "quick-check", QUICK_CHECK_LABEL, true, None::<&str>)?;
     let settings_item = MenuItem::with_id(app, "settings", "الإعدادات", true, None::<&str>)?;
     let quit_item = MenuItem::with_id(app, "quit", "إنهاء", true, None::<&str>)?;
-    let menu = Menu::with_items(
-        app,
-        &[&open_item, &quick_item, &settings_item, &quit_item],
-    )?;
+    let menu = Menu::with_items(app, &[&open_item, &quick_item, &settings_item, &quit_item])?;
 
     let mut builder = TrayIconBuilder::new()
         .tooltip("ضاد — مساعد الكتابة العربية")

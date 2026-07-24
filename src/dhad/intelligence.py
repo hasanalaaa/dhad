@@ -9,7 +9,6 @@ local, and deterministic.
 
 from __future__ import annotations
 
-import math
 from collections import Counter
 from dataclasses import dataclass
 from enum import Enum

@@ -149,8 +149,17 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         checks.append(check_contains(f"readme:{marker.lower().replace(' ', '-')}", readme, f"## {marker}"))
 
     if include_cleanliness:
-        ignored_transient_names = {".git", ".desktop-build", ".audit-venv", ".venv", "venv"}
-        forbidden_names = {"node_modules", "target", ".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
+        ignored_transient_names = {
+            ".git",
+            ".desktop-build",
+            ".audit-venv",
+            ".ci-venv",
+            ".venv",
+            "venv",
+            "node_modules",
+            "target",
+        }
+        forbidden_names = {".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
         forbidden_suffixes = {".log", ".tmp", ".temp", ".bak", ".pyc", ".pyo"}
         violations: list[str] = []
         for path in root.rglob("*"):

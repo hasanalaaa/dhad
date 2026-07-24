@@ -1,11 +1,27 @@
 ## v1.0.7 — Repository audit hardening
 
+## v1.0.9 — CI parity and transient-output isolation
+
+- Fixed Python Ruff failures caused by two unused imports.
+- Applied Rust 1.97.1 formatting and Clippy recommendations in the desktop crate.
+- Excluded `.ci-venv`, `node_modules`, and Cargo `target` outputs from source audits while retaining strict ZIP exclusion checks.
+- Added regression contracts for local CI parity environments and post-test release validation.
+
+
 - Exclude internal `.git` metadata from Sovereign release cleanliness checks.
 - Add regression coverage for Finder-created `.git/.DS_Store` files on macOS.
 - Preserve strict checks for generated artifacts in the actual distributable source tree.
 
 # Changelog
 
+
+## 1.0.8 — CI determinism and recovery test repair
+
+- Pinned the general CI Rust toolchain to 1.97.1 to match `rust-toolchain.toml`.
+- Added deterministic pytest import paths for the repository-local `tools` package.
+- Repaired the IndexedDB recovery test to fault the actual `listDueOutbox` read path.
+- Reformatted the desktop release validator to satisfy Ruff E701/E702 checks.
+- Added `.nvmrc` so local JavaScript tests use the same Node 22 runtime as GitHub Actions.
 
 ## [1.0.5] - 2026-07-24
 

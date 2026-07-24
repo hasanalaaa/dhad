@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_DIRS = {
     ".git",
     ".audit-venv",
+    ".ci-venv",
     ".desktop-build",
     ".pytest_cache",
     ".ruff_cache",

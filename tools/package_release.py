@@ -12,7 +12,7 @@ import zipfile
 from pathlib import Path
 
 EXCLUDED_DIRS = {
-    ".git", ".desktop-build", ".audit-venv", ".pytest_cache", ".ruff_cache",
+    ".git", ".desktop-build", ".audit-venv", ".ci-venv", ".pytest_cache", ".ruff_cache",
     ".mypy_cache", "__pycache__", "node_modules", "target", "venv", ".venv",
 }
 EXCLUDED_NAMES = {".DS_Store", "Thumbs.db", "Desktop.ini"}
@@ -74,7 +74,7 @@ def package(root: Path, output: Path) -> tuple[int, str]:
             raise RuntimeError(f"archive is missing required paths: {missing}")
         if bad:
             raise RuntimeError(f"CRC failure in archive entry: {bad}")
-        excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/__pycache__/")
+        excluded_archive_fragments=("/.git/", "/node_modules/", "/target/", "/.desktop-build/", "/.audit-venv/", "/.ci-venv/", "/__pycache__/")
         if any(any(fragment in f"/{name}" for fragment in excluded_archive_fragments) for name in names):
             raise RuntimeError("archive contains excluded build, cache, or VCS directories")
         forbidden_basenames = {".DS_Store", "Thumbs.db", "Desktop.ini"}

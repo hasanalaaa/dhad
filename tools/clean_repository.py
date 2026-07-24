@@ -14,7 +14,7 @@ import shutil
 import sys
 from pathlib import Path
 
-PRUNED_DIRS = {".git", ".desktop-build", ".audit-venv", ".venv", "venv", "node_modules", "target"}
+PRUNED_DIRS = {".git", ".desktop-build", ".audit-venv", ".ci-venv", ".venv", "venv", "node_modules", "target"}
 REMOVABLE_DIRS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".mypy_cache", ".pyright", ".nox", ".tox"}
 REMOVABLE_NAMES = {".DS_Store", "Thumbs.db", "Desktop.ini", ".coverage"}
 REMOVABLE_SUFFIXES = {".pyc", ".pyo", ".swp", ".tmp", ".temp", ".bak"}

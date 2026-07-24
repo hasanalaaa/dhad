@@ -161,3 +161,54 @@ def test_sovereign_cleanliness_ignores_git_metadata(tmp_path: Path) -> None:
     cleanliness = next(item for item in checks if item.name == "clean:generated-artifacts")
     assert cleanliness.passed, cleanliness.detail
 
+
+
+def test_general_ci_matches_pinned_toolchains_and_import_paths() -> None:
+    root = Path(__file__).resolve().parents[1]
+    workflow = (root / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    pyproject = (root / "pyproject.toml").read_text(encoding="utf-8")
+
+    assert "dtolnay/rust-toolchain@1.97.1" in workflow
+    assert 'PYTHONPATH: ".:src"' in workflow
+    assert 'node-version: "22"' in workflow
+    assert 'pythonpath = [".", "src"]' in pyproject
+    assert 'addopts = ["--import-mode=prepend"]' in pyproject
+
+
+def test_outbox_recovery_fault_injection_targets_due_scan() -> None:
+    root = Path(__file__).resolve().parents[1]
+    test_source = (root / "web_demo" / "storage" / "db.test.mjs").read_text(encoding="utf-8")
+
+    assert "storage.listDueOutbox = async (...args)" in test_source
+    assert "originalListDueOutbox(...args)" in test_source
+    assert "storage.listOutbox = async ()" not in test_source
+
+def test_release_audits_ignore_local_ci_and_compiler_outputs(tmp_path: Path) -> None:
+    root = Path(__file__).resolve().parents[1]
+    desktop_validator = (root / "tools" / "validate_desktop_release.py").read_text(encoding="utf-8")
+    sovereign_validator = (root / "tools" / "validate_sovereign_release.py").read_text(encoding="utf-8")
+    auditor = (root / "tools" / "audit_repository.py").read_text(encoding="utf-8")
+    packager = (root / "tools" / "package_release.py").read_text(encoding="utf-8")
+
+    assert "'.ci-venv'" in desktop_validator
+    assert '".ci-venv"' in sovereign_validator
+    assert '".ci-venv"' in auditor
+    assert '".ci-venv"' in packager
+    assert "'node_modules' in package_excluded_dirs" in desktop_validator
+    assert "'target' in package_excluded_dirs" in desktop_validator
+    assert '"node_modules",' in sovereign_validator
+    assert '"target",' in sovereign_validator
+
+
+def test_python_and_rust_ci_lint_regressions_are_fixed() -> None:
+    root = Path(__file__).resolve().parents[1]
+    analytics = (root / "src" / "dhad" / "analytics.py").read_text(encoding="utf-8")
+    intelligence = (root / "src" / "dhad" / "intelligence.py").read_text(encoding="utf-8")
+    native = (root / "src-tauri" / "src" / "native_commands.rs").read_text(encoding="utf-8")
+
+    assert "from typing import Sequence" not in analytics
+    assert "import math" not in intelligence
+    assert ".is_none_or(" in native
+    assert "while let Some(next)" in native
+    assert "sort_by_key(|item| std::cmp::Reverse(item.offset))" in native
+
