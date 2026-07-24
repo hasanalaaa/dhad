@@ -1,5 +1,13 @@
 # Changelog
 
+
+## [1.0.5] - 2026-07-24
+
+### Fixed
+- Restrict ONNX release optimization to first-party assets and exclude `.desktop-build`, dependency trees, and compiler output.
+- Make GitHub Actions contract validation tolerant of valid YAML quoting and spacing.
+- Validate `.desktop-build` exclusions from the local packaging source rather than a fragile runtime import.
+
 ## 1.0.0 Sovereign Edition — 2026-07-24
 
 ### Native desktop and security

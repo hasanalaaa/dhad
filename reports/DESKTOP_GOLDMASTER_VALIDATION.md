@@ -1,8 +1,8 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **444**
-- Checks passed: **125/125**
-- Errors: **0**
+- Files audited: **443**
+- Checks passed: **121/125**
+- Errors: **4**
 - Warnings: **0**
 
 ## Results
@@ -73,19 +73,19 @@
 - PASS — `workflow:x86_64-apple-darwin`: missing workflow contract
 - PASS — `workflow:nsis,msi`: missing workflow contract
 - PASS — `workflow:tauri-apps/tauri-action@v1`: missing workflow contract
-- PASS — `workflow-validation:v*.*.*`: missing validation stage
-- PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing validation stage
-- PASS — `workflow-validation:libayatana-appindicator3-dev`: missing validation stage
-- PASS — `workflow-validation:tools/desktop-build-requirements.txt`: missing validation stage
-- PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing validation stage
-- PASS — `workflow-validation:tools/validate_tauri_config.py`: missing validation stage
-- PASS — `workflow-validation:tools/validate_desktop_release.py`: missing validation stage
-- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing validation stage
-- PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing validation stage
-- PASS — `workflow-validation:cargo test`: missing validation stage
-- PASS — `workflow-validation:npm test`: missing validation stage
-- PASS — `workflow-validation:verify-macos-app.sh`: missing validation stage
-- PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing validation stage
+- PASS — `workflow-validation:v*.*.*`: missing workflow contract matching ["\']v\*\.\*\.\*["\']
+- PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing workflow contract matching \blibwebkit2gtk-4\.1-dev\b
+- PASS — `workflow-validation:libayatana-appindicator3-dev`: missing workflow contract matching \blibayatana-appindicator3-dev\b
+- PASS — `workflow-validation:tools/desktop-build-requirements.txt`: missing workflow contract matching tools/desktop-build-requirements\.txt
+- PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
+- PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
+- PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
+- FAIL — `workflow-validation:TAURI_CLI_VERSION: "2.11.5"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$
+- FAIL — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
+- PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
+- PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
+- FAIL — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
+- FAIL — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
 - PASS — `landing:data-download`: missing landing-page section
@@ -114,7 +114,7 @@
 - PASS — `no-case-insensitive-path-collisions`: []
 - PASS — `no-packaged-node-modules`: web_demo/node_modules must not be committed or packaged
 - PASS — `no-packaged-target`: Cargo target directory must not be packaged
-- PASS — `no-packaged-build-venv`: .desktop-build must be excluded by Git, Tauri, and release packaging
+- PASS — `no-packaged-build-venv`: excluded by Git, Tauri, and release packaging
 - PASS — `shell-build-script-executable`
 - PASS — `macos-verifier-script-executable`
 - PASS — `all-json-parses`: []
@@ -131,4 +131,4 @@
 - PASS — `onnx-build-tool-pinned`: ['onnx==1.22.0']
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 444 files
+- PASS — `repository-file-count`: only 443 files

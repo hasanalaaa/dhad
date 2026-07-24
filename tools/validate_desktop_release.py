@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import plistlib
@@ -12,13 +13,33 @@ import tomllib
 import xml.etree.ElementTree as ET
 
 try:
-    from .package_release import EXCLUDED_DIRS as PACKAGE_EXCLUDED_DIRS
     from .validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
 except ImportError:  # Direct script execution from tools/.
-    from package_release import EXCLUDED_DIRS as PACKAGE_EXCLUDED_DIRS
     from validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
 from datetime import datetime, timezone
 from pathlib import Path
+
+
+def _has_ignore_rule(text: str, directory: str) -> bool:
+    expected = {directory, directory.rstrip("/") + "/", "/" + directory.rstrip("/") + "/"}
+    rules = {line.strip() for line in text.splitlines() if line.strip() and not line.lstrip().startswith("#")}
+    return bool(expected & rules)
+
+
+def _read_literal_string_set(path: Path, variable: str) -> set[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in tree.body:
+        if isinstance(node, (ast.Assign, ast.AnnAssign)):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            if any(isinstance(target, ast.Name) and target.id == variable for target in targets):
+                value = ast.literal_eval(node.value)
+                if isinstance(value, (set, list, tuple)) and all(isinstance(item, str) for item in value):
+                    return set(value)
+    return set()
+
+
+def _workflow_contract(text: str, pattern: str) -> bool:
+    return re.search(pattern, text, flags=re.MULTILINE) is not None
 
 
 def image_size(path: Path):
@@ -132,8 +153,23 @@ def main() -> int:
     workflow=(root/'.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
     for token in ['macos-15','macos-15-intel','windows-2025','aarch64-apple-darwin','x86_64-apple-darwin','nsis,msi','tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
-    for token in ['v*.*.*','libwebkit2gtk-4.1-dev','libayatana-appindicator3-dev','tools/desktop-build-requirements.txt','tools/optimize_onnx_assets.py','tools/validate_tauri_config.py','tools/validate_desktop_release.py','TAURI_CLI_VERSION: "2.11.5"','dtolnay/rust-toolchain@1.97.1','cargo test','npm test','verify-macos-app.sh','APPLE_SIGNING_IDENTITY']:
-        ok(f'workflow-validation:{token}', token in workflow, 'missing validation stage')
+    workflow_contracts = [
+        ('v*.*.*', r'["\']v\*\.\*\.\*["\']'),
+        ('libwebkit2gtk-4.1-dev', r'\blibwebkit2gtk-4\.1-dev\b'),
+        ('libayatana-appindicator3-dev', r'\blibayatana-appindicator3-dev\b'),
+        ('tools/desktop-build-requirements.txt', r'tools/desktop-build-requirements\.txt'),
+        ('tools/optimize_onnx_assets.py', r'tools/optimize_onnx_assets\.py'),
+        ('tools/validate_tauri_config.py', r'tools/validate_tauri_config\.py'),
+        ('tools/validate_desktop_release.py', r'tools/validate_desktop_release\.py'),
+        ('TAURI_CLI_VERSION: "2.11.5"', r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.5["\']?\s*$'),
+        ('dtolnay/rust-toolchain@1.97.1', r'uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b'),
+        ('cargo test', r'\bcargo\s+test\b'),
+        ('npm test', r'\bnpm\s+test\b'),
+        ('verify-macos-app.sh', r'(?:^|[\s./])verify-macos-app\.sh\b'),
+        ('APPLE_SIGNING_IDENTITY', r'\bAPPLE_SIGNING_IDENTITY\b'),
+    ]
+    for label, pattern in workflow_contracts:
+        ok(f'workflow-validation:{label}', _workflow_contract(workflow, pattern), f'missing workflow contract matching {pattern}')
 
     landing=(root/'docs/index.html').read_text(encoding='utf-8')
     for token in ['id="downloads"','الخصوصية','data-download','data-live-demo','dhad-demo-url','web_demo','privacy-diagram']:
@@ -166,12 +202,18 @@ def main() -> int:
     ok('no-packaged-target', not (root/'target').exists(), 'Cargo target directory must not be packaged')
     gitignore=(root/'.gitignore').read_text(encoding='utf-8')
     tauriignore=(root/'.tauriignore').read_text(encoding='utf-8') if (root/'.tauriignore').is_file() else ''
-    build_venv_excluded=(
-        '.desktop-build' in PACKAGE_EXCLUDED_DIRS
-        and '.desktop-build/' in gitignore
-        and '.desktop-build/' in tauriignore
+    package_excluded_dirs = _read_literal_string_set(root/'tools/package_release.py', 'EXCLUDED_DIRS')
+    build_venv_contracts = {
+        'package_release.py': '.desktop-build' in package_excluded_dirs,
+        '.gitignore': _has_ignore_rule(gitignore, '.desktop-build'),
+        '.tauriignore': _has_ignore_rule(tauriignore, '.desktop-build'),
+    }
+    missing_build_venv_contracts = [name for name, present in build_venv_contracts.items() if not present]
+    ok(
+        'no-packaged-build-venv',
+        not missing_build_venv_contracts,
+        'missing .desktop-build exclusion in: ' + ', '.join(missing_build_venv_contracts) if missing_build_venv_contracts else 'excluded by Git, Tauri, and release packaging',
     )
-    ok('no-packaged-build-venv', build_venv_excluded, '.desktop-build must be excluded by Git, Tauri, and release packaging')
     ok('shell-build-script-executable', bool((root/'scripts/build-desktop.sh').stat().st_mode & 0o111), '')
     ok('macos-verifier-script-executable', bool((root/'scripts/verify-macos-app.sh').stat().st_mode & 0o111), '')
 

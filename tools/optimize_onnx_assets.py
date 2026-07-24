@@ -15,7 +15,38 @@ import os
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
+
+
+EXCLUDED_SCAN_DIRS = {
+    ".git", ".desktop-build", ".audit-venv", ".venv", "venv",
+    "node_modules", "target", "__pycache__", ".pytest_cache",
+    ".ruff_cache", ".mypy_cache",
+}
+
+
+def discover_models(root: Path, model_roots: Iterable[Path] | None = None) -> list[Path]:
+    """Return only first-party ONNX assets, never models installed in build tooling.
+
+    The local build venv contains hundreds of ONNX backend fixtures. Scanning those
+    is both incorrect and extremely noisy, so every generated/dependency directory
+    is pruned regardless of where the virtual environment lives.
+    """
+    candidates: list[Path] = []
+    search_roots = list(model_roots or [root])
+    for search_root in search_roots:
+        if not search_root.exists():
+            continue
+        for path in search_root.rglob("*.onnx"):
+            try:
+                relative = path.resolve().relative_to(root)
+            except ValueError:
+                continue
+            if any(part in EXCLUDED_SCAN_DIRS for part in relative.parts):
+                continue
+            if path.is_file():
+                candidates.append(path.resolve())
+    return sorted(set(candidates))
 
 
 def sha256(path: Path) -> str:
@@ -94,9 +125,11 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--root', default='.')
     ap.add_argument('--write-manifest', action='store_true')
+    ap.add_argument('--model-root', action='append', default=[], help='Optional first-party model directory, relative to --root; may be repeated.')
     args = ap.parse_args()
     root = Path(args.root).resolve()
-    models = sorted(p for p in root.rglob('*.onnx') if '.git' not in p.parts and 'target' not in p.parts)
+    requested_roots = [(root / item).resolve() for item in args.model_root]
+    models = discover_models(root, requested_roots or None)
     if not models:
         raise SystemExit('No ONNX assets found.')
     records = [optimize(p) for p in models]
