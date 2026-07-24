@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Dhad — ضاد</title>
+  <desc id="desc">Abstract Arabic letter Dhad intertwined with an NLP node graph. Obsidian and graphite surfaces with copper and gold accents.</desc>
+
+  <defs>
+    <!-- Obsidian depth field -->
+    <radialGradient id="obsidian" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#161B21"/>
+      <stop offset="55%" stop-color="#0E1216"/>
+      <stop offset="100%" stop-color="#080A0D"/>
+    </radialGradient>
+    <!-- Copper stroke sweep -->
+    <linearGradient id="copper" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8C5A2E"/>
+      <stop offset="45%" stop-color="#B87333"/>
+      <stop offset="80%" stop-color="#E0A05C"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+    <!-- Gold node core -->
+    <radialGradient id="gold" cx="35%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#F0CE6E"/>
+      <stop offset="60%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#9A7A20"/>
+    </radialGradient>
+    <!-- Soft copper halo for the glyph -->
+    <filter id="halo" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7"/>
+    </filter>
+    <!-- Graphite hairline grid, 32 px module -->
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1A2027" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- ══ Ground ══ -->
+  <rect width="512" height="512" rx="96" fill="url(#obsidian)"/>
+  <rect width="512" height="512" rx="96" fill="url(#grid)" opacity="0.55"/>
+  <!-- Graphite orbital ring, r = 226 -->
+  <circle cx="256" cy="256" r="226" fill="none" stroke="#2A313A" stroke-width="1.5"/>
+  <circle cx="256" cy="256" r="226" fill="none" stroke="#B87333" stroke-width="1.5"
+          stroke-dasharray="4 174.97" stroke-linecap="round" opacity="0.9"
+          transform="rotate(-90 256 256)"/>
+
+  <!-- ══ Node lattice (behind the glyph) ══ -->
+  <g stroke="#3A4350" stroke-width="1.25" opacity="0.85">
+    <line x1="300" y1="132" x2="352" y2="212"/>
+    <line x1="300" y1="132" x2="120" y2="268"/>
+    <line x1="300" y1="132" x2="392" y2="268"/>
+    <line x1="120" y1="268" x2="256" y2="396"/>
+    <line x1="392" y1="268" x2="256" y2="396"/>
+    <line x1="352" y1="212" x2="392" y2="268"/>
+    <line x1="352" y1="212" x2="256" y2="396"/>
+  </g>
+
+  <!-- ══ The Dhad glyph, abstracted ══ -->
+  <!-- Halo pass -->
+  <g fill="none" stroke="#B87333" stroke-width="14" stroke-linecap="round" opacity="0.35" filter="url(#halo)">
+    <path d="M120 268 A136 136 0 1 0 392 268"/>
+    <path d="M392 268 C392 214 348 190 318 212 C296 228 304 258 330 258 C350 258 360 242 356 226"/>
+  </g>
+  <!-- Crisp pass -->
+  <g fill="none" stroke="url(#copper)" stroke-width="14" stroke-linecap="round">
+    <!-- Bowl: lower arc of the letter body -->
+    <path d="M120 268 A136 136 0 1 0 392 268"/>
+    <!-- Head loop of ض -->
+    <path d="M392 268 C392 214 348 190 318 212 C296 228 304 258 330 258 C350 258 360 242 356 226"/>
+  </g>
+
+  <!-- ══ Nodes on the glyph's anchor geometry ══ -->
+  <g stroke="#0E1216" stroke-width="3">
+    <circle cx="120" cy="268" r="9"  fill="#2A313A"/>
+    <circle cx="392" cy="268" r="9"  fill="#2A313A"/>
+    <circle cx="256" cy="396" r="9"  fill="#2A313A"/>
+    <circle cx="352" cy="212" r="8"  fill="url(#copper)"/>
+    <circle cx="330" cy="258" r="6.5" fill="url(#copper)"/>
+  </g>
+  <!-- The i'jam dot of ض as the network's gold source node -->
+  <circle cx="300" cy="132" r="15" fill="url(#gold)" stroke="#0E1216" stroke-width="3"/>
+  <circle cx="300" cy="132" r="24" fill="none" stroke="#D4AF37" stroke-width="1.25" opacity="0.5"/>
+</svg>

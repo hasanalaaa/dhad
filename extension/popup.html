@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>إعدادات ضاد</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="shared.js"></script>
+  <script src="popup.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="icons/icon-48.png" width="42" height="42" alt="">
+    <div><h1>ضاد</h1><p>مساعد الكتابة العربية</p></div>
+    <label class="switch" title="تشغيل الإضافة"><input id="enabled" type="checkbox"><span></span></label>
+  </header>
+  <main>
+    <label class="field">
+      <span>عنوان خادم ضاد</span>
+      <input id="apiBase" type="url" inputmode="url" placeholder="http://127.0.0.1:8010" autocomplete="off">
+    </label>
+    <div class="status" id="status" data-state="idle">لم يُختبر الاتصال بعد.</div>
+    <fieldset>
+      <legend>الاقتراحات المعروضة</legend>
+      <label><input id="showStyle" type="checkbox"> الأسلوب والوضوح</label>
+      <label><input id="showDialect" type="checkbox"> اللهجات والتحويل إلى الفصحى</label>
+    </fieldset>
+    <label class="field">
+      <span>وضع إعادة الصياغة الافتراضي</span>
+      <select id="rewriteMode">
+        <option value="formal">رسمي</option><option value="concise">موجز</option><option value="expand">موسّع</option><option value="creative">إبداعي</option><option value="academic">أكاديمي</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>زمن الانتظار بعد الكتابة</span>
+      <select id="debounceMs">
+        <option value="400">سريع — 0.4 ثانية</option>
+        <option value="700">متوازن — 0.7 ثانية</option>
+        <option value="1200">هادئ — 1.2 ثانية</option>
+      </select>
+    </label>
+    <div class="actions">
+      <button id="testButton" class="secondary" type="button">اختبار الاتصال</button>
+      <button id="saveButton" class="primary" type="button">حفظ</button>
+    </div>
+    <p class="privacy">لا ترسل الإضافة النص إلا إلى الخادم المكتوب أعلاه. الخادم المحلي هو الخيار الافتراضي.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1833 @@
+{
+ "format": 1,
+ "source": "dhad rule engine (literal subset)",
+ "rule_count": 130,
+ "rules": [
+  {
+   "id": "MAQSURA_FI",
+   "pattern": "فى",
+   "suggestions": [
+    "في"
+   ],
+   "message": "الصواب: «في» بالياء المنقوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "حرف الجر «في» يُكتب بياء منقوطة، لا بألف مقصورة."
+  },
+  {
+   "id": "MAQSURA_ALLADHI",
+   "pattern": "الذى",
+   "suggestions": [
+    "الذي"
+   ],
+   "message": "الصواب: «الذي» بالياء المنقوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "MAQSURA_ALLATI",
+   "pattern": "التى",
+   "suggestions": [
+    "التي"
+   ],
+   "message": "الصواب: «التي» بالياء المنقوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "MAQSURA_HATTA",
+   "pattern": "حتي",
+   "suggestions": [
+    "حتى"
+   ],
+   "message": "الصواب: «حتى» بالألف المقصورة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "MAQSURA_MATA",
+   "pattern": "متي",
+   "suggestions": [
+    "متى"
+   ],
+   "message": "الصواب: «متى» بالألف المقصورة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "MAQSURA_ILA_YA",
+   "pattern": "إلي",
+   "suggestions": [
+    "إلى"
+   ],
+   "message": "غالبًا تقصد «إلى» بالألف المقصورة",
+   "category": "spelling",
+   "severity": "warning",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": false,
+   "explanation": "«إلي» صحيحة فقط بمعنى (إليّ = لي أنا)؛ حرف الجر يُكتب «إلى»."
+  },
+  {
+   "id": "MAQSURA_ALA",
+   "pattern": "علي",
+   "suggestions": [
+    "على"
+   ],
+   "message": "إن كنت تقصد حرف الجر فهو «على» بالألف المقصورة",
+   "category": "spelling",
+   "severity": "hint",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": false,
+   "explanation": "«علي» اسم عَلَم صحيح، أما حرف الجر فيُكتب «على». راجع السياق."
+  },
+  {
+   "id": "WORD_LAKIN",
+   "pattern": "لاكن",
+   "suggestions": [
+    "لكن"
+   ],
+   "message": "الصواب: «لكن» بلا ألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "تُنطق «لاكن» لكن ألفها محذوفة رسمًا مثل: هذا، ذلك، الرحمن."
+  },
+  {
+   "id": "WORD_HADHA",
+   "pattern": "هاذا",
+   "suggestions": [
+    "هذا"
+   ],
+   "message": "الصواب: «هذا» بلا ألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_HADHIHI",
+   "pattern": "هاذه",
+   "suggestions": [
+    "هذه"
+   ],
+   "message": "الصواب: «هذه» بلا ألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_DHALIK",
+   "pattern": "ذالك",
+   "suggestions": [
+    "ذلك"
+   ],
+   "message": "الصواب: «ذلك» بلا ألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_ALLADHI_DOUBLE",
+   "pattern": "اللذي",
+   "suggestions": [
+    "الذي"
+   ],
+   "message": "الصواب: «الذي» بلام واحدة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«اللذَينِ» للمثنى فقط؛ المفرد: الذي."
+  },
+  {
+   "id": "WORD_ALLATI_DOUBLE",
+   "pattern": "اللتي",
+   "suggestions": [
+    "التي"
+   ],
+   "message": "الصواب: «التي» بلام واحدة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "PHRASE_INSHALLAH",
+   "pattern": "انشاء الله",
+   "suggestions": [
+    "إن شاء الله"
+   ],
+   "message": "الصواب: «إن شاء الله» — ثلاث كلمات",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«إنشاء» من البناء والتأسيس! المقصود: إنْ (شرطية) + شاءَ (فعل) + الله."
+  },
+  {
+   "id": "PHRASE_INSHALLAH2",
+   "pattern": "إنشاء الله",
+   "suggestions": [
+    "إن شاء الله"
+   ],
+   "message": "الصواب: «إن شاء الله» — ثلاث كلمات",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«إنشاء» مصدر أنشأ (بمعنى البناء)، والمقصود هنا فعل المشيئة."
+  },
+  {
+   "id": "PHRASE_INSHALLAH3",
+   "pattern": "انشالله",
+   "suggestions": [
+    "إن شاء الله"
+   ],
+   "message": "الصواب: «إن شاء الله» — ثلاث كلمات",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "PHRASE_MASHALLAH",
+   "pattern": "ماشاء الله",
+   "suggestions": [
+    "ما شاء الله"
+   ],
+   "message": "الصواب: «ما شاء الله» بفصل «ما»",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_LIAN",
+   "pattern": "لان",
+   "suggestions": [
+    "لأن",
+    "لئن"
+   ],
+   "message": "هل تقصد «لأن» التعليلية؟",
+   "category": "spelling",
+   "severity": "warning",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": false,
+   "explanation": "«لان» فعل (من اللين)؛ أداة التعليل تُكتب «لأن» بالهمزة."
+  },
+  {
+   "id": "WORD_ABADAN",
+   "pattern": "ابدا",
+   "suggestions": [
+    "أبدًا",
+    "أبدأ",
+    "ابدأ"
+   ],
+   "message": "راجع الهمزة: أبدًا / أبدأ / ابدأ",
+   "category": "spelling",
+   "severity": "warning",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": false,
+   "explanation": "«أبدًا» ظرف، «أبدأ» مضارع متكلم، «ابدأ» أمر بهمزة وصل."
+  },
+  {
+   "id": "GRAMMAR_SAWFA_LAN",
+   "pattern": "سوف لن",
+   "suggestions": [
+    "لن"
+   ],
+   "message": "«سوف لن» تركيب خاطئ — الصواب «لن» وحدها",
+   "category": "grammar",
+   "severity": "error",
+   "confidence": 0.9,
+   "priority": 60,
+   "autofix": false,
+   "explanation": "«سوف» للإثبات المستقبلي و«لن» للنفي المستقبلي، ولا يجتمعان."
+  },
+  {
+   "id": "GRAMMAR_LAZAL",
+   "pattern": "لا زال",
+   "suggestions": [
+    "ما زال"
+   ],
+   "message": "الأفصح في الاستمرار: «ما زال»",
+   "category": "grammar",
+   "severity": "warning",
+   "confidence": 0.9,
+   "priority": 60,
+   "autofix": false,
+   "explanation": "«لا زال» تُستخدم للدعاء (لا زالت دارك عامرة)؛ وللاستمرار الأفصح «ما زال»."
+  },
+  {
+   "id": "GRAMMAR_LAZAL2",
+   "pattern": "لازال",
+   "suggestions": [
+    "ما زال"
+   ],
+   "message": "الأفصح: «ما زال» مفصولة",
+   "category": "grammar",
+   "severity": "warning",
+   "confidence": 0.9,
+   "priority": 60,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_ISM",
+   "pattern": "الإسم",
+   "suggestions": [
+    "الاسم"
+   ],
+   "message": "الصواب: «الاسم» — همزة وصل لا قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«اسم» تبدأ بهمزة وصل، فلا تُرسم همزتها بعد «ال»: الاسم."
+  },
+  {
+   "id": "WORD_IBN",
+   "pattern": "الإبن",
+   "suggestions": [
+    "الابن"
+   ],
+   "message": "الصواب: «الابن» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_INTIZAR",
+   "pattern": "الإنتظار",
+   "suggestions": [
+    "الانتظار"
+   ],
+   "message": "الصواب: «الانتظار» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "مصادر الأفعال الخماسية والسداسية (انتظار، استقبال...) تبدأ بهمزة وصل."
+  },
+  {
+   "id": "WORD_IJTIMA",
+   "pattern": "الإجتماع",
+   "suggestions": [
+    "الاجتماع"
+   ],
+   "message": "الصواب: «الاجتماع» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_INTIKHABAT",
+   "pattern": "الإنتخابات",
+   "suggestions": [
+    "الانتخابات"
+   ],
+   "message": "الصواب: «الانتخابات» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_ISTIQBAL",
+   "pattern": "الإستقبال",
+   "suggestions": [
+    "الاستقبال"
+   ],
+   "message": "الصواب: «الاستقبال» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "WORD_ISTIKHDAM",
+   "pattern": "الإستخدام",
+   "suggestions": [
+    "الاستخدام"
+   ],
+   "message": "الصواب: «الاستخدام» — همزة وصل",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "EG_IZZAY",
+   "pattern": "ازاي",
+   "suggestions": [
+    "كيف"
+   ],
+   "message": "عامية مصرية: «إزاي» — بالفصحى: كيف",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_DILWAQTI",
+   "pattern": "دلوقتي",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "عامية مصرية: «دلوقتي» — بالفصحى: الآن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_AYIZ",
+   "pattern": "عايز",
+   "suggestions": [
+    "أريد"
+   ],
+   "message": "عامية مصرية: «عايز» — بالفصحى: أريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_AWIZ",
+   "pattern": "عاوز",
+   "suggestions": [
+    "أريد"
+   ],
+   "message": "عامية مصرية: «عاوز» — بالفصحى: أريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_MAFISH",
+   "pattern": "مفيش",
+   "suggestions": [
+    "لا يوجد"
+   ],
+   "message": "عامية مصرية: «مفيش» — بالفصحى: لا يوجد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_KIDA",
+   "pattern": "كده",
+   "suggestions": [
+    "هكذا"
+   ],
+   "message": "عامية مصرية: «كده» — بالفصحى: هكذا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "EG_NAHARDA",
+   "pattern": "النهارده",
+   "suggestions": [
+    "اليوم"
+   ],
+   "message": "عامية مصرية: «النهارده» — بالفصحى: اليوم",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_WISH",
+   "pattern": "وش",
+   "suggestions": [
+    "ماذا"
+   ],
+   "message": "عامية خليجية: «وش» — بالفصحى: ماذا / ما",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_WISHLON",
+   "pattern": "وشلون",
+   "suggestions": [
+    "كيف"
+   ],
+   "message": "عامية خليجية: «وشلون» — بالفصحى: كيف",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_ABGHA",
+   "pattern": "ابغى",
+   "suggestions": [
+    "أريد"
+   ],
+   "message": "عامية خليجية: «أبغى» — بالفصحى: أريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_TABGHA",
+   "pattern": "تبغى",
+   "suggestions": [
+    "تريد"
+   ],
+   "message": "عامية خليجية: «تبغى» — بالفصحى: تريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_YABGHA",
+   "pattern": "يبغى",
+   "suggestions": [
+    "يريد"
+   ],
+   "message": "عامية خليجية: «يبغى» — بالفصحى: يريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_TABI",
+   "pattern": "تبي",
+   "suggestions": [
+    "تريد"
+   ],
+   "message": "عامية خليجية: «تبي» — بالفصحى: تريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_DAHEEN",
+   "pattern": "دحين",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "عامية حجازية: «دحين» — بالفصحى: الآن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_WAYID",
+   "pattern": "وايد",
+   "suggestions": [
+    "كثيرًا"
+   ],
+   "message": "عامية خليجية: «وايد» — بالفصحى: كثير / كثيرًا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "GF_MUB",
+   "pattern": "مب",
+   "suggestions": [
+    "ليس"
+   ],
+   "message": "عامية خليجية: «مب» — بالفصحى: ليس",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_SHLONAK",
+   "pattern": "شلونك",
+   "suggestions": [
+    "كيف حالك"
+   ],
+   "message": "عامية عراقية: «شلونك» — بالفصحى: كيف حالك",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_SHLON",
+   "pattern": "شلون",
+   "suggestions": [
+    "كيف"
+   ],
+   "message": "عامية عراقية: «شلون» — بالفصحى: كيف",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_SHINU",
+   "pattern": "شنو",
+   "suggestions": [
+    "ماذا"
+   ],
+   "message": "عامية عراقية: «شنو» — بالفصحى: ماذا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_MINU",
+   "pattern": "منو",
+   "suggestions": [
+    "مَن"
+   ],
+   "message": "عامية عراقية: «منو» — بالفصحى: مَن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_WEN",
+   "pattern": "وين",
+   "suggestions": [
+    "أين"
+   ],
+   "message": "عامية: «وين» — بالفصحى: أين",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_SHAKU_MAKU",
+   "pattern": "شكو ماكو",
+   "suggestions": [
+    "ما الجديد؟"
+   ],
+   "message": "عامية عراقية: «شكو ماكو» — بالفصحى: ما الجديد؟",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_HASSA",
+   "pattern": "هسه",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "عامية عراقية: «هسه» — بالفصحى: الآن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_CHAN",
+   "pattern": "چان",
+   "suggestions": [
+    "كان"
+   ],
+   "message": "عامية عراقية: «چان» — بالفصحى: كان",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_KHOSH",
+   "pattern": "خوش",
+   "suggestions": [
+    "جيد"
+   ],
+   "message": "عامية عراقية: «خوش» — بالفصحى: جيد / حسن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_YIMTA",
+   "pattern": "يمته",
+   "suggestions": [
+    "متى"
+   ],
+   "message": "عامية عراقية: «يمته» — بالفصحى: متى",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_BESH",
+   "pattern": "بيش",
+   "suggestions": [
+    "بكم"
+   ],
+   "message": "عامية عراقية: «بيش» — بالفصحى: بكم",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_SHGAD",
+   "pattern": "شقد",
+   "suggestions": [
+    "كم"
+   ],
+   "message": "عامية عراقية: «شقد» — بالفصحى: كم",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "IQ_HICHI",
+   "pattern": "هيچي",
+   "suggestions": [
+    "هكذا"
+   ],
+   "message": "عامية عراقية: «هيچي» — بالفصحى: هكذا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_SHU",
+   "pattern": "شو",
+   "suggestions": [
+    "ماذا"
+   ],
+   "message": "عامية شامية: «شو» — بالفصحى: ماذا / ما",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_HEK",
+   "pattern": "هيك",
+   "suggestions": [
+    "هكذا"
+   ],
+   "message": "عامية شامية: «هيك» — بالفصحى: هكذا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_HALLAQ",
+   "pattern": "هلق",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "عامية شامية: «هلق» — بالفصحى: الآن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_HALLA",
+   "pattern": "هلأ",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "عامية شامية: «هلأ» — بالفصحى: الآن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_KTIR",
+   "pattern": "كتير",
+   "suggestions": [
+    "كثيرًا"
+   ],
+   "message": "عامية شامية: «كتير» — بالفصحى: كثير / كثيرًا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_MNIH",
+   "pattern": "منيح",
+   "suggestions": [
+    "جيد"
+   ],
+   "message": "عامية شامية: «منيح» — بالفصحى: جيد / حسن",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_BADDI",
+   "pattern": "بدي",
+   "suggestions": [
+    "أريد"
+   ],
+   "message": "عامية شامية: «بدي» — بالفصحى: أريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_BADDAK",
+   "pattern": "بدك",
+   "suggestions": [
+    "تريد"
+   ],
+   "message": "عامية شامية: «بدك» — بالفصحى: تريد",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_LESH",
+   "pattern": "ليش",
+   "suggestions": [
+    "لماذا"
+   ],
+   "message": "عامية: «ليش» — بالفصحى: لماذا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_MISHAN",
+   "pattern": "مشان",
+   "suggestions": [
+    "لأجل"
+   ],
+   "message": "عامية شامية: «مشان» — بالفصحى: لأجل / من أجل",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_SHWAY",
+   "pattern": "شوي",
+   "suggestions": [
+    "قليلًا"
+   ],
+   "message": "عامية: «شوي» — بالفصحى: قليلًا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_MBARIH",
+   "pattern": "مبارح",
+   "suggestions": [
+    "أمس"
+   ],
+   "message": "عامية شامية: «مبارح» — بالفصحى: أمس",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "LV_BUKRA",
+   "pattern": "بكرا",
+   "suggestions": [
+    "غدًا"
+   ],
+   "message": "عامية: «بكرا» — بالفصحى: غدًا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "SH_MU",
+   "pattern": "مو",
+   "suggestions": [
+    "ليس"
+   ],
+   "message": "عامية (عراقية/خليجية/شامية): «مو» — بالفصحى: ليس",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "SH_ASHAN",
+   "pattern": "عشان",
+   "suggestions": [
+    "لأجل"
+   ],
+   "message": "عامية: «عشان» — بالفصحى: لأجل / لكي",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "SH_SHWAYA",
+   "pattern": "شوية",
+   "suggestions": [
+    "قليل"
+   ],
+   "message": "عامية: «شوية» — بالفصحى: قليل / بعض",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "SH_LISSA",
+   "pattern": "لسه",
+   "suggestions": [
+    "ما زال"
+   ],
+   "message": "عامية: «لسه» — بالفصحى: ما زال / بعدُ",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "SH_BARDO",
+   "pattern": "برضه",
+   "suggestions": [
+    "أيضًا"
+   ],
+   "message": "عامية: «برضه» — بالفصحى: أيضًا",
+   "category": "dialect",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 30,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_ILA",
+   "pattern": "الى",
+   "suggestions": [
+    "إلى"
+   ],
+   "message": "الصواب: «إلى» بهمزة تحت الألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«إلى» حرف جر يبدأ بهمزة قطع مكسورة، فتُكتب الهمزة تحت الألف."
+  },
+  {
+   "id": "HAMZA_IDHA",
+   "pattern": "اذا",
+   "suggestions": [
+    "إذا"
+   ],
+   "message": "الصواب: «إذا» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«إذا» الشرطية تبدأ بهمزة قطع مكسورة."
+  },
+  {
+   "id": "HAMZA_ANA",
+   "pattern": "انا",
+   "suggestions": [
+    "أنا"
+   ],
+   "message": "الصواب: «أنا» بهمزة فوق الألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "ضمير المتكلم «أنا» يبدأ بهمزة قطع مفتوحة."
+  },
+  {
+   "id": "HAMZA_ANTA",
+   "pattern": "انت",
+   "suggestions": [
+    "أنت"
+   ],
+   "message": "الصواب: «أنت» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "ضمائر المخاطب (أنتَ، أنتِ، أنتم) تبدأ بهمزة قطع."
+  },
+  {
+   "id": "HAMZA_ANTUM",
+   "pattern": "انتم",
+   "suggestions": [
+    "أنتم"
+   ],
+   "message": "الصواب: «أنتم» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AKTHAR",
+   "pattern": "اكثر",
+   "suggestions": [
+    "أكثر"
+   ],
+   "message": "الصواب: «أكثر» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "أفعل التفضيل (أكثر، أفضل، أكبر...) تبدأ بهمزة قطع مفتوحة."
+  },
+  {
+   "id": "HAMZA_AFDAL",
+   "pattern": "افضل",
+   "suggestions": [
+    "أفضل"
+   ],
+   "message": "الصواب: «أفضل» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AHSAN",
+   "pattern": "احسن",
+   "suggestions": [
+    "أحسن"
+   ],
+   "message": "الصواب: «أحسن» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AKBAR",
+   "pattern": "اكبر",
+   "suggestions": [
+    "أكبر"
+   ],
+   "message": "الصواب: «أكبر» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AQAL",
+   "pattern": "اقل",
+   "suggestions": [
+    "أقل"
+   ],
+   "message": "الصواب: «أقل» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AWWAL",
+   "pattern": "اول",
+   "suggestions": [
+    "أول"
+   ],
+   "message": "الصواب: «أول» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AHAD",
+   "pattern": "احد",
+   "suggestions": [
+    "أحد"
+   ],
+   "message": "الصواب: «أحد» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AHAMM",
+   "pattern": "اهم",
+   "suggestions": [
+    "أهم"
+   ],
+   "message": "الصواب: «أهم» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AYDAN",
+   "pattern": "ايضا",
+   "suggestions": [
+    "أيضًا",
+    "أيضا"
+   ],
+   "message": "الصواب: «أيضًا» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_ALAAN",
+   "pattern": "الان",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "الصواب: «الآن» بمدّة على الألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "أصلها «الأَأْن»، فتُدمج الهمزتان في ألف ممدودة: الآن."
+  },
+  {
+   "id": "HAMZA_ALAAN2",
+   "pattern": "الأن",
+   "suggestions": [
+    "الآن"
+   ],
+   "message": "الصواب: «الآن» بالمدّة لا بالهمزة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AKHAR",
+   "pattern": "اخر",
+   "suggestions": [
+    "آخر",
+    "أخّر"
+   ],
+   "message": "هل تقصد «آخر» بالمدّة؟",
+   "category": "spelling",
+   "severity": "warning",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": false,
+   "explanation": "«آخر» (بمعنى الأخير أو المغاير) تُكتب بمدّة على الألف."
+  },
+  {
+   "id": "HAMZA_ASIF",
+   "pattern": "اسف",
+   "suggestions": [
+    "آسف"
+   ],
+   "message": "الصواب: «آسف» بالمدّة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_AMS",
+   "pattern": "امس",
+   "suggestions": [
+    "أمس"
+   ],
+   "message": "الصواب: «أمس» بهمزة قطع",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAMZA_INTERNET",
+   "pattern": "الانترنت",
+   "suggestions": [
+    "الإنترنت"
+   ],
+   "message": "الصواب: «الإنترنت» بهمزة تحت الألف",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_QAM_BI_ZIYARA",
+   "pattern": "قام بزيارة",
+   "suggestions": [
+    "زار"
+   ],
+   "message": "أوجز: «زار» بدل «قام بزيارة»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": "استخدام الفعل مباشرة أقوى وأوجز من «قام بـ + مصدر»."
+  },
+  {
+   "id": "STYLE_QAM_BI_KITABA",
+   "pattern": "قام بكتابة",
+   "suggestions": [
+    "كتب"
+   ],
+   "message": "أوجز: «كتب» بدل «قام بكتابة»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_QAM_BI_IDAD",
+   "pattern": "قام بإعداد",
+   "suggestions": [
+    "أعدّ"
+   ],
+   "message": "أوجز: «أعدّ» بدل «قام بإعداد»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_AJRA_ITTISAL",
+   "pattern": "أجرى اتصالا",
+   "suggestions": [
+    "اتصل"
+   ],
+   "message": "أوجز: «اتصل» بدل «أجرى اتصالًا»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_HADHA_WA_QAD",
+   "pattern": "هذا وقد",
+   "suggestions": [
+    "وقد"
+   ],
+   "message": "«هذا وقد» حشو صحفي — احذف «هذا»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_JIDDAN_JIDDAN",
+   "pattern": "جدا جدا",
+   "suggestions": [
+    "جدًا"
+   ],
+   "message": "تكرار «جدًا» يضعف الأسلوب",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_NAFS_ALWAQT",
+   "pattern": "وفي نفس الوقت",
+   "suggestions": [
+    "وفي الوقت نفسه"
+   ],
+   "message": "الأفصح: «في الوقت نفسه»",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": "يفضّل اللغويون تأخير «نفس» توكيدًا: الوقت نفسه."
+  },
+  {
+   "id": "STYLE_MUBAROK",
+   "pattern": "مبروك",
+   "suggestions": [
+    "مبارك"
+   ],
+   "message": "الأفصح: «مبارك» من البركة",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": "«مبروك» من بَرَكَ البعيرُ! والتهنئة من البركة: مبارك."
+  },
+  {
+   "id": "STYLE_RAGHM_AN",
+   "pattern": "بالرغم عن",
+   "suggestions": [
+    "بالرغم من"
+   ],
+   "message": "الصواب: «بالرغم من»",
+   "category": "style",
+   "severity": "error",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "STYLE_TAWAJUD",
+   "pattern": "متواجد",
+   "suggestions": [
+    "موجود",
+    "حاضر"
+   ],
+   "message": "الأدق: «موجود» — «التواجد» من الوَجْد (العاطفة)",
+   "category": "style",
+   "severity": "hint",
+   "confidence": 0.72,
+   "priority": 20,
+   "autofix": false,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_MADRASA",
+   "pattern": "المدرسه",
+   "suggestions": [
+    "المدرسة"
+   ],
+   "message": "الصواب: «المدرسة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "التاء المربوطة تُنطق هاءً عند الوقف لكنها تُكتب «ة». جرّب النطق مع التنوين: مدرسةٌ."
+  },
+  {
+   "id": "TAA_MADINA",
+   "pattern": "المدينه",
+   "suggestions": [
+    "المدينة"
+   ],
+   "message": "الصواب: «المدينة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_SANA",
+   "pattern": "السنه",
+   "suggestions": [
+    "السنة"
+   ],
+   "message": "الصواب: «السنة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_HAYA",
+   "pattern": "الحياه",
+   "suggestions": [
+    "الحياة"
+   ],
+   "message": "الصواب: «الحياة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_SALA",
+   "pattern": "الصلاه",
+   "suggestions": [
+    "الصلاة"
+   ],
+   "message": "الصواب: «الصلاة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_ZAKA",
+   "pattern": "الزكاه",
+   "suggestions": [
+    "الزكاة"
+   ],
+   "message": "الصواب: «الزكاة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_LUGHA",
+   "pattern": "اللغه",
+   "suggestions": [
+    "اللغة"
+   ],
+   "message": "الصواب: «اللغة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_JAMIA",
+   "pattern": "الجامعه",
+   "suggestions": [
+    "الجامعة"
+   ],
+   "message": "الصواب: «الجامعة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_HUKUMA",
+   "pattern": "الحكومه",
+   "suggestions": [
+    "الحكومة"
+   ],
+   "message": "الصواب: «الحكومة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_SHARIKA",
+   "pattern": "الشركه",
+   "suggestions": [
+    "الشركة"
+   ],
+   "message": "الصواب: «الشركة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_MINTAQA",
+   "pattern": "المنطقه",
+   "suggestions": [
+    "المنطقة"
+   ],
+   "message": "الصواب: «المنطقة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_MARHALA",
+   "pattern": "المرحله",
+   "suggestions": [
+    "المرحلة"
+   ],
+   "message": "الصواب: «المرحلة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_KHUTTA",
+   "pattern": "الخطه",
+   "suggestions": [
+    "الخطة"
+   ],
+   "message": "الصواب: «الخطة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_MUSHKILA",
+   "pattern": "المشكله",
+   "suggestions": [
+    "المشكلة"
+   ],
+   "message": "الصواب: «المشكلة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_TARIQA",
+   "pattern": "الطريقه",
+   "suggestions": [
+    "الطريقة"
+   ],
+   "message": "الصواب: «الطريقة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_NATIJA",
+   "pattern": "النتيجه",
+   "suggestions": [
+    "النتيجة"
+   ],
+   "message": "الصواب: «النتيجة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_QISSA",
+   "pattern": "القصه",
+   "suggestions": [
+    "القصة"
+   ],
+   "message": "الصواب: «القصة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_KALIMA",
+   "pattern": "الكلمه",
+   "suggestions": [
+    "الكلمة"
+   ],
+   "message": "الصواب: «الكلمة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_JUMLA",
+   "pattern": "الجمله",
+   "suggestions": [
+    "الجملة"
+   ],
+   "message": "الصواب: «الجملة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_FATRA",
+   "pattern": "الفتره",
+   "suggestions": [
+    "الفترة"
+   ],
+   "message": "الصواب: «الفترة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "TAA_MARRA",
+   "pattern": "المره",
+   "suggestions": [
+    "المرة"
+   ],
+   "message": "الصواب: «المرة» بالتاء المربوطة",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAA_MIYAH",
+   "pattern": "المياة",
+   "suggestions": [
+    "المياه"
+   ],
+   "message": "الصواب: «المياه» بالهاء",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": "«مياه» جمع ماء، والهاء هنا أصلية وليست تاء تأنيث."
+  },
+  {
+   "id": "HAA_ITTIJAH",
+   "pattern": "اتجاة",
+   "suggestions": [
+    "اتجاه"
+   ],
+   "message": "الصواب: «اتجاه» بالهاء",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  },
+  {
+   "id": "HAA_ALLAH",
+   "pattern": "اللة",
+   "suggestions": [
+    "الله"
+   ],
+   "message": "الصواب: «الله» بالهاء",
+   "category": "spelling",
+   "severity": "error",
+   "confidence": 0.99,
+   "priority": 80,
+   "autofix": true,
+   "explanation": ""
+  }
+ ]
+}

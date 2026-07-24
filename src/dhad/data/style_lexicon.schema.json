@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhad.dev/schemas/style-lexicon-v1.json",
+  "title": "Dhad style lexicon",
+  "type": "object",
+  "required": ["version", "phrases", "tone_signals", "nominalization_rewrites"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {"type": "string", "minLength": 1},
+    "phrases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "pattern", "replacements", "message", "explanation", "confidence", "profiles"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^STYLE_[A-Z0-9_]+$"},
+          "kind": {"enum": ["redundancy", "wordiness", "cliche", "archaic", "awkward"]},
+          "pattern": {"type": "string", "minLength": 2},
+          "replacements": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+          "message": {"type": "string", "minLength": 1},
+          "explanation": {"type": "string", "minLength": 1},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "profiles": {
+            "type": "array",
+            "items": {"enum": ["general", "academic", "administrative", "journalistic", "educational", "friendly", "literary"]},
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "tone_signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tone", "pattern", "weight", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "tone": {"enum": ["formal", "objective", "assertive", "persuasive", "conversational", "neutral"]},
+          "pattern": {"type": "string", "minLength": 1},
+          "weight": {"type": "number", "exclusiveMinimum": 0, "maximum": 5},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "nominalization_rewrites": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["masculine", "feminine", "plural"],
+        "additionalProperties": false,
+        "properties": {
+          "masculine": {"type": "string", "minLength": 2},
+          "feminine": {"type": "string", "minLength": 2},
+          "plural": {"type": "string", "minLength": 2}
+        }
+      }
+    }
+  }
+}

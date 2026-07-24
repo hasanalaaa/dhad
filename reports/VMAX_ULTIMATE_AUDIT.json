@@ -1,0 +1,43 @@
+{
+  "schema": "dhad-vmax-audit-v1",
+  "generated_at_utc": "2026-07-23T01:08:02.894927+00:00",
+  "root": "dhad",
+  "files_audited": 319,
+  "bytes_audited": 176580451,
+  "counts_by_category": {
+    "configuration": 30,
+    "documentation": 72,
+    "binary-asset": 15,
+    "source": 163,
+    "test": 39
+  },
+  "bytes_by_category": {
+    "configuration": 132023,
+    "documentation": 328081,
+    "binary-asset": 164168843,
+    "source": 11741932,
+    "test": 209572
+  },
+  "source_symbols": {
+    "python_classes": 197,
+    "python_functions": 1189,
+    "javascript_functions": 884,
+    "rust_functions": 177
+  },
+  "checks": {
+    "javascript_syntax": {
+      "status": "passed",
+      "detail": "JavaScript syntax verified: 35 first-party files"
+    },
+    "shell_syntax": {
+      "status": "passed",
+      "detail": "1 script(s) checked"
+    },
+    "python_compileall": {
+      "status": "passed",
+      "detail": ""
+    }
+  },
+  "findings": [],
+  "status": "passed"
+}

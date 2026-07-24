@@ -1,0 +1,125 @@
+{
+  "project": "Dhad",
+  "phase": "Desktop Phase 1",
+  "date": "2026-07-23",
+  "checks": [
+    {
+      "name": "workspace includes src-tauri",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "Tauri package depends on shared Rust core",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "Tauri v2 dependencies configured",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "application identifier",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "window dimensions",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "minimum window dimensions",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "window resizable",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "frontendDist resolves to web_demo",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "global Tauri API enabled",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "main capability applies to main window",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "required desktop files exist",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "macOS ICNS magic",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "Windows ICO magic",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "Rust lexical structure: src-tauri/src/main.rs",
+      "status": "passed",
+      "detail": "stack=[], state=code"
+    },
+    {
+      "name": "Rust lexical structure: src-tauri/src/lib.rs",
+      "status": "passed",
+      "detail": "stack=[], state=code"
+    },
+    {
+      "name": "Rust lexical structure: src-tauri/src/native_commands.rs",
+      "status": "passed",
+      "detail": "stack=[], state=code"
+    },
+    {
+      "name": "Rust lexical structure: src-tauri/build.rs",
+      "status": "passed",
+      "detail": "stack=[], state=code"
+    },
+    {
+      "name": "Rust commands registered",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "desktop adapter invokes all native commands",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "browser fallback retained",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "PWA precaches desktop adapter",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "no dependency/build directories packaged",
+      "status": "passed",
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "passed": 22,
+    "failed": 0,
+    "focused_node_tests": 26,
+    "focused_node_failures": 0,
+    "native_cargo_check": "not-run: cargo/rustc unavailable in execution environment",
+    "full_npm_test": "dependency-gated: package gateway did not provide yjs/onnxruntime-web/fake-indexeddb locally"
+  }
+}

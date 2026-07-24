@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "counts": {
+    "python_files": 103,
+    "html_files": 6,
+    "yaml_files": 15,
+    "raster_images": 26
+  },
+  "errors": [],
+  "dependency_independent_node_tests": 99,
+  "deferred_test_files": [
+    {
+      "path": "web_demo/collaboration/secure-yjs-provider.test.mjs",
+      "declared_test_calls": 4
+    },
+    {
+      "path": "web_demo/storage/db.test.mjs",
+      "declared_test_calls": 9
+    }
+  ],
+  "deferred_reason": "npm registry DNS/network access unavailable in this execution environment; GitHub Actions installs locked dependencies and runs the full npm test command."
+}

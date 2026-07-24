@@ -1,0 +1,22 @@
+{
+  "name": "@dhad/web-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test neural/*.test.mjs collaboration/*.test.mjs storage/*.test.mjs pwa/*.test.mjs ui/*.test.mjs analysis/*.test.mjs intelligence/*.test.mjs rewriting/*.test.mjs analytics/*.test.mjs templates/*.test.mjs themes/*.test.mjs documents/*.test.mjs shared/*.test.mjs packed_bridge_test.mjs",
+    "vendor:ort": "node ../tools/vendor_onnxruntime_web.mjs",
+    "check": "node ../tools/check_javascript.mjs"
+  },
+  "dependencies": {
+    "onnxruntime-web": "1.27.0",
+    "yjs": "13.6.31"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "6.2.4"
+  },
+  "engines": {
+    "node": ">=22 <23",
+    "npm": ">=10"
+  }
+}

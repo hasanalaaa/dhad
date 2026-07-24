@@ -1,0 +1,75 @@
+Dhad Desktop Gold Master — Directory Inventory
+================================================
+Source base: dhad-v1.0-Desktop-Phase2.zip
+Files inventoried: 421
+Total bytes: 179818853
+
+Top-level inventory:
+- .dockerignore: 1 files, 312 bytes
+- .gitattributes: 1 files, 365 bytes
+- .github: 3 files, 7233 bytes
+- .gitignore: 1 files, 974 bytes
+- CHANGELOG.md: 1 files, 23336 bytes
+- CODE_OF_CONDUCT.md: 1 files, 5754 bytes
+- CONTRIBUTING.md: 1 files, 3564 bytes
+- Cargo.lock: 1 files, 8637 bytes
+- Cargo.toml: 1 files, 404 bytes
+- Dockerfile: 1 files, 1672 bytes
+- LICENSE: 1 files, 34020 bytes
+- Makefile: 1 files, 653 bytes
+- README.md: 1 files, 21217 bytes
+- RELEASE_MANIFEST.json: 1 files, 18077 bytes
+- SECURITY.md: 1 files, 5731 bytes
+- SHA256SUMS.txt: 1 files, 626 bytes
+- benchmarks: 5 files, 9799 bytes
+- desktop: 2 files, 1563 bytes
+- docker-compose.yml: 1 files, 2494 bytes
+- docs: 34 files, 255165 bytes
+- extension: 13 files, 51007 bytes
+- gunicorn_conf.py: 1 files, 2468 bytes
+- mobile: 1 files, 1075 bytes
+- pyproject.toml: 1 files, 2249 bytes
+- reports: 75 files, 527310 bytes
+- requirements-dev.lock: 1 files, 992 bytes
+- rust: 19 files, 4146811 bytes
+- rust-toolchain.toml: 1 files, 123 bytes
+- scripts: 2 files, 4585 bytes
+- src: 82 files, 6142580 bytes
+- src-tauri: 29 files, 2512445 bytes
+- tests: 41 files, 223733 bytes
+- tools: 16 files, 92517 bytes
+- vercel.json: 1 files, 431 bytes
+- web_demo: 78 files, 165708931 bytes
+
+Extension counts:
+- .py: 103
+- .md: 76
+- .json: 63
+- .js: 31
+- .mjs: 29
+- .png: 20
+- .rs: 19
+- .yaml: 10
+- .txt: 9
+- .jsonl: 7
+- [no extension]: 7
+- .html: 6
+- .css: 5
+- .toml: 5
+- .yml: 5
+- .bmp: 4
+- .wasm: 4
+- .lock: 3
+- .onnx: 2
+- .sh: 2
+- .bat: 1
+- .desktop: 1
+- .icns: 1
+- .ico: 1
+- .nsh: 1
+- .sha256: 1
+- .svg: 1
+- .typed: 1
+- .webmanifest: 1
+- .wxs: 1
+- .zlib: 1

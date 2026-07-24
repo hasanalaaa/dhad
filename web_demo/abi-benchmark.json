@@ -1,0 +1,35 @@
+{
+  "methodology": "interleaved same-binary packed ABI vs pre-Phase-2 JSON bridge",
+  "cases": [
+    {
+      "label": "sentence",
+      "unicode_scalars": 55,
+      "iterations": 500,
+      "packed_p50_ms": 0.09612500000000068,
+      "packed_p95_ms": 0.1753750000000025,
+      "json_p50_ms": 0.10429200000001515,
+      "json_p95_ms": 0.18054100000000517,
+      "p50_speedup_percent": 7.830897863703143
+    },
+    {
+      "label": "paragraph",
+      "unicode_scalars": 440,
+      "iterations": 250,
+      "packed_p50_ms": 0.6676249999999868,
+      "packed_p95_ms": 0.7999590000000012,
+      "json_p50_ms": 0.7587919999999713,
+      "json_p95_ms": 0.8972909999999956,
+      "p50_speedup_percent": 12.014755031680343
+    },
+    {
+      "label": "document",
+      "unicode_scalars": 9900,
+      "iterations": 60,
+      "packed_p50_ms": 14.907832999999755,
+      "packed_p95_ms": 15.845791999999847,
+      "json_p50_ms": 17.138958000000002,
+      "json_p95_ms": 17.865958999999975,
+      "p50_speedup_percent": 13.017856744851391
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhad.dev/schemas/rule-v2.json",
+  "title": "Dhad Rule Schema v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "type",
+    "category",
+    "severity",
+    "message",
+    "examples",
+    "confidence",
+    "priority",
+    "autofix",
+    "tags",
+    "references",
+    "profiles"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 2},
+    "id": {"type": "string", "pattern": "^[A-Z0-9_:-]+$", "minLength": 3},
+    "type": {
+      "enum": ["literal", "regex", "token_sequence", "context", "exception", "document"]
+    },
+    "category": {"enum": ["spelling", "grammar", "style", "punctuation", "dialect"]},
+    "severity": {"enum": ["error", "warning", "hint"]},
+    "pattern": {"type": "string", "minLength": 1},
+    "regex": {"type": "string", "minLength": 1},
+    "tokens": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {"type": "string", "minLength": 1},
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "literal": {"type": "string", "minLength": 1},
+              "regex": {"type": "string", "minLength": 1},
+              "optional": {"type": "boolean"}
+            },
+            "oneOf": [
+              {"required": ["literal"]},
+              {"required": ["regex"]}
+            ]
+          }
+        ]
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "before": {"type": "string"},
+        "after": {"type": "string"},
+        "window": {"type": "integer", "minimum": 1, "maximum": 500}
+      }
+    },
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scope"],
+        "properties": {
+          "pattern": {"type": "string", "minLength": 1},
+          "regex": {"type": "string", "minLength": 1},
+          "scope": {"enum": ["match", "window", "sentence"]},
+          "window": {"type": "integer", "minimum": 1, "maximum": 500}
+        },
+        "oneOf": [
+          {"required": ["pattern"]},
+          {"required": ["regex"]}
+        ]
+      }
+    },
+    "target_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {"enum": ["consistency", "occurrence"]},
+        "variants": {
+          "type": "array",
+          "minItems": 2,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "preferred": {"type": "string", "minLength": 1},
+        "pattern": {"type": "string", "minLength": 1},
+        "regex": {"type": "string", "minLength": 1},
+        "min_occurrences": {"type": "integer", "minimum": 1},
+        "report": {"enum": ["first", "all"]}
+      },
+      "required": ["mode"]
+    },
+    "prefixes": {
+      "oneOf": [
+        {"type": "boolean"},
+        {"type": "array", "items": {"type": "string", "minLength": 1}}
+      ]
+    },
+    "suggestion": {"type": "string"},
+    "suggestions": {"type": "array", "items": {"type": "string"}},
+    "message": {"type": "string", "minLength": 1},
+    "explanation": {"type": "string"},
+    "examples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bad", "good"],
+      "properties": {
+        "bad": {"type": "string", "minLength": 1},
+        "good": {"type": "string", "minLength": 1}
+      }
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "priority": {"type": "integer", "minimum": -1000, "maximum": 1000},
+    "autofix": {"type": "boolean"},
+    "tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "references": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "profiles": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"type": {"const": "literal"}}},
+      "then": {"required": ["pattern"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "regex"}}},
+      "then": {"required": ["regex"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "token_sequence"}}},
+      "then": {"required": ["tokens"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "context"}}},
+      "then": {
+        "required": ["context"],
+        "anyOf": [{"required": ["pattern"]}, {"required": ["regex"]}]
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "exception"}}},
+      "then": {
+        "required": ["target_rules"],
+        "anyOf": [{"required": ["pattern"]}, {"required": ["regex"]}]
+      }
+    },
+    {
+      "if": {"properties": {"type": {"const": "document"}}},
+      "then": {"required": ["document"]}
+    }
+  ]
+}

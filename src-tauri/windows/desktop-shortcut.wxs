@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="DhadDesktopShortcut" Guid="*">
+        <Shortcut
+          Id="DhadDesktopShortcutLink"
+          Name="ضاد"
+          Description="مساعد الكتابة العربية"
+          Target="[INSTALLDIR]dhad-desktop.exe"
+          WorkingDirectory="INSTALLDIR" />
+        <RegistryValue
+          Root="HKCU"
+          Key="Software\Dhad\Desktop"
+          Name="DesktopShortcut"
+          Type="integer"
+          Value="1"
+          KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>

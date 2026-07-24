@@ -1,0 +1,15 @@
+{
+  "abi": "dhad-packed-diagnostics-v1",
+  "fast": {
+    "optimization": "wasm-opt -O3",
+    "pre_wasm_opt_bytes": 1705309,
+    "wasm_bytes": 1570968,
+    "gzip_bytes": 660747
+  },
+  "small": {
+    "optimization": "wasm-opt -Oz",
+    "pre_wasm_opt_bytes": 1476766,
+    "wasm_bytes": 1321133,
+    "gzip_bytes": 579870
+  }
+}

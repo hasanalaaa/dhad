@@ -1,0 +1,260 @@
+- schema_version: 2
+  id: LV_SHU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شو
+  exceptions: []
+  suggestion: ماذا
+  message: 'عامية شامية: «شو» — بالفصحى: ماذا / ما'
+  explanation: ''
+  examples:
+    bad: شو صار بالاجتماع؟
+    good: ماذا حدث في الاجتماع؟
+- schema_version: 2
+  id: LV_HEK
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هيك
+  exceptions: []
+  suggestion: هكذا
+  message: 'عامية شامية: «هيك» — بالفصحى: هكذا'
+  explanation: ''
+  examples:
+    bad: ليش عملت هيك؟
+    good: لماذا فعلت هكذا؟
+- schema_version: 2
+  id: LV_HALLAQ
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هلق
+  exceptions: []
+  suggestion: الآن
+  message: 'عامية شامية: «هلق» — بالفصحى: الآن'
+  explanation: ''
+  examples:
+    bad: هلق رجعت من الشغل
+    good: الآن عدت من العمل
+- schema_version: 2
+  id: LV_HALLA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هلأ
+  exceptions: []
+  suggestion: الآن
+  message: 'عامية شامية: «هلأ» — بالفصحى: الآن'
+  explanation: ''
+  examples:
+    bad: هلأ بطلع من البيت
+    good: الآن أخرج من البيت
+- schema_version: 2
+  id: LV_KTIR
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: كتير
+  exceptions: []
+  suggestion: كثيرًا
+  message: 'عامية شامية: «كتير» — بالفصحى: كثير / كثيرًا'
+  explanation: ''
+  examples:
+    bad: الفيلم حلو كتير
+    good: الفيلم جميل كثيرًا
+- schema_version: 2
+  id: LV_MNIH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: منيح
+  exceptions: []
+  suggestion: جيد
+  message: 'عامية شامية: «منيح» — بالفصحى: جيد / حسن'
+  explanation: ''
+  examples:
+    bad: الوضع منيح اليوم
+    good: الوضع جيد اليوم
+- schema_version: 2
+  id: LV_BADDI
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بدي
+  exceptions: []
+  suggestion: أريد
+  message: 'عامية شامية: «بدي» — بالفصحى: أريد'
+  explanation: ''
+  examples:
+    bad: بدي نام بكير
+    good: أريد النوم مبكرًا
+- schema_version: 2
+  id: LV_BADDAK
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بدك
+  exceptions: []
+  suggestion: تريد
+  message: 'عامية شامية: «بدك» — بالفصحى: تريد'
+  explanation: ''
+  examples:
+    bad: بدك تيجي معنا؟
+    good: هل تريد المجيء معنا؟
+- schema_version: 2
+  id: LV_LESH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ليش
+  exceptions: []
+  suggestion: لماذا
+  message: 'عامية: «ليش» — بالفصحى: لماذا'
+  explanation: ''
+  examples:
+    bad: ليش تأخرت اليوم؟
+    good: لماذا تأخرت اليوم؟
+- schema_version: 2
+  id: LV_MISHAN
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مشان
+  exceptions: []
+  suggestion: لأجل
+  message: 'عامية شامية: «مشان» — بالفصحى: لأجل / من أجل'
+  explanation: ''
+  examples:
+    bad: جيت مشان اشوفك
+    good: جئت لأجل رؤيتك
+- schema_version: 2
+  id: LV_SHWAY
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شوي
+  exceptions: []
+  suggestion: قليلًا
+  message: 'عامية: «شوي» — بالفصحى: قليلًا'
+  explanation: ''
+  examples:
+    bad: استنى شوي لو سمحت
+    good: انتظر قليلًا لو سمحت
+- schema_version: 2
+  id: LV_MBARIH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مبارح
+  exceptions: []
+  suggestion: أمس
+  message: 'عامية شامية: «مبارح» — بالفصحى: أمس'
+  explanation: ''
+  examples:
+    bad: شفتك مبارح بالسوق
+    good: رأيتك أمس في السوق
+- schema_version: 2
+  id: LV_BUKRA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بكرا
+  exceptions: []
+  suggestion: غدًا
+  message: 'عامية: «بكرا» — بالفصحى: غدًا'
+  explanation: ''
+  examples:
+    bad: منشوفك بكرا الصبح
+    good: نراك غدًا صباحًا

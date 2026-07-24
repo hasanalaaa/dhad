@@ -1,0 +1,19 @@
+{
+  "package": "onnxruntime-web",
+  "version": "1.27.0",
+  "license": "MIT",
+  "assets": {
+    "ort.webgpu.min.mjs": {
+      "bytes": 67169,
+      "sha256": "46988a5a025f49449850f39f95eb0d21e40e67b3beb13a0b54efd3ab5d83f60e"
+    },
+    "ort-wasm-simd-threaded.asyncify.mjs": {
+      "bytes": 47507,
+      "sha256": "7236653b8565da4046e459cd0e274123419a1d9f1f8f18fd36c28058346ca655"
+    },
+    "ort-wasm-simd-threaded.asyncify.wasm": {
+      "bytes": 24254953,
+      "sha256": "7e83cd6cee77e478bc96a7e91b198144fb5e4126287daf1f9b54bb195ebcd55a"
+    }
+  }
+}

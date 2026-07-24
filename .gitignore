@@ -1,0 +1,17 @@
+venv/
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+rust/dhad-core-rs/target/
+target/
+*.zip
+*.tar.gz
+*.wheel
+*.whl
+dist/
+*.onnx
+.DS_Store
+.vscode/
+.idea/
+.playwright-cli/

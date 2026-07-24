@@ -1,0 +1,480 @@
+- schema_version: 2
+  id: TAA_MADRASA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المدرسه
+  exceptions: []
+  suggestion: المدرسة
+  message: 'الصواب: «المدرسة» بالتاء المربوطة'
+  explanation: 'التاء المربوطة تُنطق هاءً عند الوقف لكنها تُكتب «ة». جرّب النطق مع التنوين: مدرسةٌ.'
+  examples:
+    bad: ذهبت إلى المدرسه
+    good: ذهبت إلى المدرسة
+- schema_version: 2
+  id: TAA_MADINA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المدينه
+  exceptions: []
+  suggestion: المدينة
+  message: 'الصواب: «المدينة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: سكنت في المدينه
+    good: سكنت في المدينة
+- schema_version: 2
+  id: TAA_SANA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: السنه
+  exceptions: []
+  suggestion: السنة
+  message: 'الصواب: «السنة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: في هذه السنه
+    good: في هذه السنة
+- schema_version: 2
+  id: TAA_HAYA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الحياه
+  exceptions: []
+  suggestion: الحياة
+  message: 'الصواب: «الحياة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: الحياه جميلة
+    good: الحياة جميلة
+- schema_version: 2
+  id: TAA_SALA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الصلاه
+  exceptions: []
+  suggestion: الصلاة
+  message: 'الصواب: «الصلاة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: حان وقت الصلاه
+    good: حان وقت الصلاة
+- schema_version: 2
+  id: TAA_ZAKA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الزكاه
+  exceptions: []
+  suggestion: الزكاة
+  message: 'الصواب: «الزكاة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: أخرج الزكاه
+    good: أخرج الزكاة
+- schema_version: 2
+  id: TAA_LUGHA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اللغه
+  exceptions: []
+  suggestion: اللغة
+  message: 'الصواب: «اللغة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: اللغه العربية
+    good: اللغة العربية
+- schema_version: 2
+  id: TAA_JAMIA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الجامعه
+  exceptions: []
+  suggestion: الجامعة
+  message: 'الصواب: «الجامعة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: تخرجت من الجامعه
+    good: تخرجت من الجامعة
+- schema_version: 2
+  id: TAA_HUKUMA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الحكومه
+  exceptions: []
+  suggestion: الحكومة
+  message: 'الصواب: «الحكومة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: أعلنت الحكومه
+    good: أعلنت الحكومة
+- schema_version: 2
+  id: TAA_SHARIKA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الشركه
+  exceptions: []
+  suggestion: الشركة
+  message: 'الصواب: «الشركة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: أسس الشركه
+    good: أسس الشركة
+- schema_version: 2
+  id: TAA_MINTAQA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المنطقه
+  exceptions: []
+  suggestion: المنطقة
+  message: 'الصواب: «المنطقة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: في هذه المنطقه
+    good: في هذه المنطقة
+- schema_version: 2
+  id: TAA_MARHALA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المرحله
+  exceptions: []
+  suggestion: المرحلة
+  message: 'الصواب: «المرحلة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: بدأت المرحله الأولى
+    good: بدأت المرحلة الأولى
+- schema_version: 2
+  id: TAA_KHUTTA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الخطه
+  exceptions: []
+  suggestion: الخطة
+  message: 'الصواب: «الخطة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: نفذنا الخطه
+    good: نفذنا الخطة
+- schema_version: 2
+  id: TAA_MUSHKILA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المشكله
+  exceptions: []
+  suggestion: المشكلة
+  message: 'الصواب: «المشكلة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: حللنا المشكله
+    good: حللنا المشكلة
+- schema_version: 2
+  id: TAA_TARIQA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الطريقه
+  exceptions: []
+  suggestion: الطريقة
+  message: 'الصواب: «الطريقة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: بهذه الطريقه
+    good: بهذه الطريقة
+- schema_version: 2
+  id: TAA_NATIJA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: النتيجه
+  exceptions: []
+  suggestion: النتيجة
+  message: 'الصواب: «النتيجة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: ظهرت النتيجه
+    good: ظهرت النتيجة
+- schema_version: 2
+  id: TAA_QISSA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: القصه
+  exceptions: []
+  suggestion: القصة
+  message: 'الصواب: «القصة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: قرأت القصه
+    good: قرأت القصة
+- schema_version: 2
+  id: TAA_KALIMA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الكلمه
+  exceptions: []
+  suggestion: الكلمة
+  message: 'الصواب: «الكلمة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: هذه الكلمه صعبة
+    good: هذه الكلمة صعبة
+- schema_version: 2
+  id: TAA_JUMLA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الجمله
+  exceptions: []
+  suggestion: الجملة
+  message: 'الصواب: «الجملة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: أعد كتابة الجمله
+    good: أعد كتابة الجملة
+- schema_version: 2
+  id: TAA_FATRA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الفتره
+  exceptions: []
+  suggestion: الفترة
+  message: 'الصواب: «الفترة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: خلال هذه الفتره
+    good: خلال هذه الفترة
+- schema_version: 2
+  id: TAA_MARRA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المره
+  exceptions: []
+  suggestion: المرة
+  message: 'الصواب: «المرة» بالتاء المربوطة'
+  explanation: ''
+  examples:
+    bad: في المره القادمة
+    good: في المرة القادمة
+- schema_version: 2
+  id: HAA_MIYAH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: المياة
+  exceptions: []
+  suggestion: المياه
+  message: 'الصواب: «المياه» بالهاء'
+  explanation: «مياه» جمع ماء، والهاء هنا أصلية وليست تاء تأنيث.
+  examples:
+    bad: شربت المياة
+    good: شربت المياه
+- schema_version: 2
+  id: HAA_ITTIJAH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اتجاة
+  exceptions: []
+  suggestion: اتجاه
+  message: 'الصواب: «اتجاه» بالهاء'
+  explanation: ''
+  examples:
+    bad: سار في اتجاة خاطئ
+    good: سار في اتجاه خاطئ
+- schema_version: 2
+  id: HAA_ALLAH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اللة
+  exceptions: []
+  suggestion: الله
+  message: 'الصواب: «الله» بالهاء'
+  explanation: ''
+  examples:
+    bad: بسم اللة الرحمن
+    good: بسم الله الرحمن

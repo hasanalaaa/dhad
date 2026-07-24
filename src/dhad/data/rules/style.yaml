@@ -1,0 +1,203 @@
+- schema_version: 2
+  id: STYLE_QAM_BI_ZIYARA
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: قام بزيارة
+  exceptions: []
+  suggestion: زار
+  message: 'أوجز: «زار» بدل «قام بزيارة»'
+  explanation: استخدام الفعل مباشرة أقوى وأوجز من «قام بـ + مصدر».
+  examples:
+    bad: قام بزيارة المتحف
+    good: زار المتحف
+- schema_version: 2
+  id: STYLE_QAM_BI_KITABA
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: قام بكتابة
+  exceptions: []
+  suggestion: كتب
+  message: 'أوجز: «كتب» بدل «قام بكتابة»'
+  explanation: ''
+  examples:
+    bad: قام بكتابة التقرير
+    good: كتب التقرير
+- schema_version: 2
+  id: STYLE_QAM_BI_IDAD
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: قام بإعداد
+  exceptions: []
+  suggestion: أعدّ
+  message: 'أوجز: «أعدّ» بدل «قام بإعداد»'
+  explanation: ''
+  examples:
+    bad: قام بإعداد الدراسة
+    good: أعدّ الدراسة
+- schema_version: 2
+  id: STYLE_AJRA_ITTISAL
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: أجرى اتصالا
+  exceptions: []
+  suggestion: اتصل
+  message: 'أوجز: «اتصل» بدل «أجرى اتصالًا»'
+  explanation: ''
+  examples:
+    bad: أجرى اتصالا بالوزير
+    good: اتصل بالوزير
+- schema_version: 2
+  id: STYLE_HADHA_WA_QAD
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هذا وقد
+  exceptions: []
+  suggestion: وقد
+  message: «هذا وقد» حشو صحفي — احذف «هذا»
+  explanation: ''
+  examples:
+    bad: هذا وقد وصل الوفد
+    good: وقد وصل الوفد
+- schema_version: 2
+  id: STYLE_JIDDAN_JIDDAN
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: جدا جدا
+  exceptions: []
+  suggestion: جدًا
+  message: تكرار «جدًا» يضعف الأسلوب
+  explanation: ''
+  examples:
+    bad: الأمر مهم جدا جدا
+    good: الأمر مهم جدًا
+- schema_version: 2
+  id: STYLE_NAFS_ALWAQT
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: وفي نفس الوقت
+  exceptions: []
+  suggestions:
+  - وفي الوقت نفسه
+  message: 'الأفصح: «في الوقت نفسه»'
+  explanation: 'يفضّل اللغويون تأخير «نفس» توكيدًا: الوقت نفسه.'
+  examples:
+    bad: وفي نفس الوقت كان يقرأ
+    good: وفي الوقت نفسه كان يقرأ
+- schema_version: 2
+  id: STYLE_MUBAROK
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مبروك
+  exceptions: []
+  suggestion: مبارك
+  message: 'الأفصح: «مبارك» من البركة'
+  explanation: '«مبروك» من بَرَكَ البعيرُ! والتهنئة من البركة: مبارك.'
+  examples:
+    bad: مبروك النجاح
+    good: مبارك النجاح
+- schema_version: 2
+  id: STYLE_RAGHM_AN
+  type: literal
+  category: style
+  severity: error
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بالرغم عن
+  exceptions: []
+  suggestion: بالرغم من
+  message: 'الصواب: «بالرغم من»'
+  explanation: ''
+  examples:
+    bad: بالرغم عن التعب واصلنا
+    good: بالرغم من التعب واصلنا
+- schema_version: 2
+  id: STYLE_TAWAJUD
+  type: literal
+  category: style
+  severity: hint
+  confidence: 0.72
+  priority: 20
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: متواجد
+  exceptions: []
+  suggestions:
+  - موجود
+  - حاضر
+  message: 'الأدق: «موجود» — «التواجد» من الوَجْد (العاطفة)'
+  explanation: ''
+  examples:
+    bad: المدير متواجد في مكتبه
+    good: المدير موجود في مكتبه

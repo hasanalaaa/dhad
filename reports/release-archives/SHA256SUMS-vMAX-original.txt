@@ -1,0 +1,3 @@
+3926c91d09a8e73f99ecba2d90f2218f68750f99f6b0b2089cade2f2ed6b9d17  dhad-vMAX.zip
+251ab0dde1dff0a1d30a403138c868124256891e368d0f52f6e26debe19d126c  dist/dhad-1.0.0rc1-py3-none-any.whl
+d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186  web_demo/models/model_int8.onnx

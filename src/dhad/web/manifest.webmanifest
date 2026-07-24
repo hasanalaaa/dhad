@@ -1,0 +1,23 @@
+{
+  "name": "ضاد — ذكاء الكتابة العربية",
+  "short_name": "ضاد",
+  "description": "محرر عربي ذكي مفتوح المصدر يعمل محليًا ويحترم الخصوصية.",
+  "lang": "ar",
+  "dir": "rtl",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#07100d",
+  "theme_color": "#0a1512",
+  "orientation": "any",
+  "icons": [
+    {"src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ],
+  "shortcuts": [
+    {"name": "محرر ضاد", "short_name": "المحرر", "url": "/", "icons": [{"src": "/static/icons/icon-192.png", "sizes": "192x192"}]},
+    {"name": "مرجع API", "short_name": "API", "url": "/docs"}
+  ]
+}

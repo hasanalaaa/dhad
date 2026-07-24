@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>ضاد — التدقيق السريع</title>
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="mini-assistant.css">
+</head>
+<body>
+<main class="mini-shell">
+  <header class="mini-titlebar" data-tauri-drag-region>
+    <div class="mini-brand" data-tauri-drag-region>
+      <img src="icons/icon-192.png" alt="" aria-hidden="true">
+      <div data-tauri-drag-region>
+        <strong data-tauri-drag-region>ضاد السريع</strong>
+        <span data-tauri-drag-region id="nativeStatus">Rust IPC محلي</span>
+      </div>
+    </div>
+    <div class="title-actions">
+      <span class="privacy-pill" title="لا يغادر النص جهازك">محلي</span>
+      <span class="shortcut-hint" id="shortcutHint">⌥ Space</span>
+      <button class="icon-button" id="btnHide" type="button" aria-label="إخفاء النافذة">×</button>
+    </div>
+  </header>
+
+  <section class="composer" aria-label="نص التدقيق السريع">
+    <textarea id="quickText" spellcheck="false" autocomplete="off" placeholder="الصق النص هنا… سيبدأ التدقيق المحلي تلقائيًا."></textarea>
+    <div class="composer-actions">
+      <button class="soft-button" id="btnPaste" type="button">لصق</button>
+      <button class="soft-button" id="btnClear" type="button">مسح</button>
+      <span class="spacer"></span>
+      <select id="rewriteMode" aria-label="نمط إعادة الصياغة">
+        <option value="formal">رسمي</option>
+        <option value="concise">مختصر</option>
+        <option value="academic">أكاديمي</option>
+        <option value="creative">إبداعي</option>
+        <option value="expand">موسّع</option>
+      </select>
+      <button class="primary-button" id="btnRewrite" type="button">إعادة صياغة</button>
+      <button class="accent-button" id="btnCheck" type="button">تدقيق الآن</button>
+    </div>
+    <div class="composer-meta" aria-live="polite">
+      <span id="characterCount">0 حرف</span>
+      <span>⌘/Ctrl + Enter للتدقيق · Shift + Enter لإعادة الصياغة</span>
+    </div>
+  </section>
+
+  <section class="result-panel" aria-live="polite" aria-busy="false">
+    <div class="result-head">
+      <div>
+        <strong id="resultTitle">جاهز</strong>
+        <span id="resultMeta">ألصق نصًا للبدء</span>
+        <span class="performance-status" id="performanceStatus">جاهز للاستجابة المحلية</span>
+      </div>
+      <button class="soft-button" id="btnCopyCurrent" type="button" disabled>نسخ النتيجة</button>
+    </div>
+    <div id="resultBody" class="result-body">
+      <div class="empty-result">
+        <span>ض</span>
+        <p>التدقيق وإعادة الصياغة يعملان محليًا دون إرسال النص إلى خادم.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mini-footer">
+    <label class="auto-hide"><input id="autoHide" type="checkbox"> إخفاء تلقائي عند فقدان التركيز</label>
+    <span class="privacy-note">محلي وآمن</span>
+    <button class="link-button" id="btnOpenMain" type="button">افتح المحرر الكامل</button>
+  </footer>
+</main>
+<script type="module" src="mini-assistant.js"></script>
+</body>
+</html>

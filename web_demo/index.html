@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0c0f14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ضاد">
+<title>ضاد — محرر الكتابة العربية الذكي</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo-frame" id="logoFrame">
+      <img src="icons/icon-192.png" alt="شعار ضاد" class="dhad-logo" id="logoImg">
+      <span class="logo-mono" id="logoMono" hidden>ض</span>
+    </span>
+    <span class="brand-text">
+      <strong class="brand-name">ضاد</strong>
+      <span class="brand-tag">مدقق عربي حتمي يعمل بالكامل داخل متصفحك</span>
+    </span>
+  </div>
+
+  <div class="topbar-stats" role="status" aria-live="polite">
+    <span class="stat"><b id="statRules">…</b><i>قاعدة</i></span>
+    <span class="stat-sep"></span>
+    <span class="stat"><b id="statWords">0</b><i>كلمة</i></span>
+    <span class="stat-sep"></span>
+    <span class="stat"><b id="statIssues">0</b><i>ملاحظة</i></span>
+    <span class="stat-sep"></span>
+    <span class="stat"><b id="statLatency">—</b><i>زمن الفحص</i></span>
+  </div>
+
+  <div class="engine-badge" role="status" aria-live="polite" title="dhad-core-rs يعمل محليًا عبر WebAssembly، ولا يغادر نصك جهازك">
+    <span class="engine-dot" id="engineDot"></span>
+    <span id="engineLabel">جارٍ تحميل المحرك…</span>
+  </div>
+</header>
+
+<section class="intelligence-strip" aria-label="بصمة الكتابة" aria-live="polite">
+  <div class="insight-card tone-card">
+    <span class="insight-label">النبرة</span>
+    <strong id="wiTone">—</strong>
+    <small id="wiToneConfidence">ابدأ الكتابة لرصد النبرة</small>
+  </div>
+  <div class="insight-card">
+    <span class="insight-label">الوضوح</span>
+    <strong><span id="wiClarity">100</span><small>/100</small></strong>
+    <small id="wiComplexity">تعقيد منخفض</small>
+  </div>
+  <div class="insight-card">
+    <span class="insight-label">ثراء المفردات</span>
+    <strong><span id="wiRichness">0</span><small>%</small></strong>
+    <small id="wiDensity">كثافة متوازنة</small>
+  </div>
+  <div class="insight-card">
+    <span class="insight-label">السجل اللغوي</span>
+    <strong id="wiDialect">فصحى</strong>
+    <small id="wiDialectCount">لا تحويلات مقترحة</small>
+  </div>
+  <div class="intelligence-actions">
+    <div id="toneChips" class="tone-chips" role="group" aria-label="أهداف النبرة المقترحة"></div>
+    <div class="status-row">
+      <span id="connectivityStatus" class="connectivity-status" role="status" aria-live="polite"></span>
+      <button class="tb-btn ghost" id="btnLexicon" type="button" aria-haspopup="dialog" aria-controls="lexiconDialog">
+        المعجم والقواعد
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="gold-command-bar" aria-label="أدوات Gold Master">
+  <div class="command-primary">
+    <button class="tb-btn primary" id="btnRewrite" type="button" aria-haspopup="dialog" aria-controls="rewriteDialog">إعادة الصياغة</button>
+    <button class="tb-btn" id="btnTemplates" type="button" aria-haspopup="dialog" aria-controls="templateDialog">القوالب الذكية</button>
+    <button class="tb-btn" id="btnAnalytics" type="button" aria-haspopup="dialog" aria-controls="analyticsDialog">تحليلات المستند</button>
+  </div>
+  <div class="command-secondary">
+    <button class="tb-btn ghost" id="btnImport" type="button">استيراد مستند</button>
+    <input id="documentFile" type="file" accept=".txt,.md,.docx,.pdf,text/plain,text/markdown,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden>
+    <button class="tb-btn ghost" id="btnExport" type="button" aria-haspopup="dialog" aria-controls="exportDialog">تصدير</button>
+    <label class="theme-picker" for="themeSelect"><span>المظهر</span>
+      <select id="themeSelect" aria-label="مظهر الواجهة">
+        <option value="system">تلقائي</option><option value="light">فاتح</option><option value="dark">داكن</option><option value="contrast">تباين عالٍ</option>
+      </select>
+    </label>
+  </div>
+</section>
+
+<main class="workspace">
+
+  <!-- ══ Editor column ══ -->
+  <section class="editor-card" aria-label="محرر النص">
+
+    <div class="toolbar">
+      <div class="toolbar-group">
+        <button class="tb-btn ghost" id="btnInstall" hidden title="تثبيت ضاد للعمل دون اتصال">
+          تثبيت التطبيق
+        </button>
+        <button class="tb-btn primary" id="btnCheck" aria-pressed="true" title="فحص شامل: إملاء ونحو وأسلوب ولهجات">
+          <svg viewBox="0 0 24 24"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          تدقيق النص
+        </button>
+        <button class="tb-btn" id="btnTashkeel" title="تشكيل جزئي تجريبي للكلمات الشائعة">
+          <svg viewBox="0 0 24 24"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m14.3-5.3-2.1 2.1M8.8 15.2l-2.1 2.1m0-10.6 2.1 2.1m6.4 6.4 2.1 2.1"/></svg>
+          تشكيل
+          <sup class="beta">تجريبي</sup>
+        </button>
+        <button class="tb-btn" id="btnStyle" aria-pressed="false" title="ملاحظات الأسلوب والنحو فقط">
+          <svg viewBox="0 0 24 24"><path d="M4 20h16M6.5 16 14 8.5a2.1 2.1 0 0 1 3 3L9.5 19 5 20l1.5-4Z"/></svg>
+          الأسلوب
+        </button>
+        <button class="tb-btn" id="btnMsa" aria-pressed="false" title="اقتراح مقابلات فصيحة للألفاظ العامية">
+          <svg viewBox="0 0 24 24"><path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/></svg>
+          تحويل للفصحى
+        </button>
+      </div>
+
+      <div class="toolbar-group">
+        <button class="tb-btn ghost" id="btnFixAll" hidden>
+          <svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg>
+          إصلاح الكل <span class="pill" id="fixCount">0</span>
+        </button>
+        <button class="tb-btn ghost icon-only" id="btnCopy" title="نسخ النص" aria-label="نسخ النص">
+          <svg viewBox="0 0 24 24"><path d="M8 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2M6 8h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/></svg>
+        </button>
+        <button class="tb-btn ghost icon-only" id="btnClear" title="مسح النص" aria-label="مسح النص">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M6 18 18 6"/></svg>
+        </button>
+
+        <span class="mic-wrap">
+          <button class="mic-btn" id="btnMic" title="إملاء صوتي بالعربية" aria-label="بدء الإملاء الصوتي">
+            <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm6-3a6 6 0 0 1-12 0M12 18v3"/></svg>
+          </button>
+          <select class="mic-lang" id="micLang" title="لهجة الإملاء" aria-label="لهجة الإملاء الصوتي">
+            <option value="ar-IQ">عراقي</option>
+            <option value="ar-SA">سعودي</option>
+            <option value="ar-EG">مصري</option>
+          </select>
+        </span>
+      </div>
+    </div>
+
+    <div class="editor-shell">
+      <div id="editorOverlay" class="editor-overlay" aria-hidden="true"></div>
+      <div id="editor" class="editor" contenteditable="true" spellcheck="false"
+           role="textbox" aria-multiline="true" aria-label="نص المستند" aria-describedby="footHint"
+           data-placeholder="اكتب هنا، أو اضغط زر الميكروفون وأملِ نصك…"></div>
+      <div class="editor-foot">
+        <span id="footHint">يُدقَّق النص لحظيًا أثناء الكتابة، وكل شيء يجري محليًا في جهازك.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Sidebar ══ -->
+  <aside class="sidebar" aria-label="الملاحظات">
+    <div class="side-head">
+      <h2>الملاحظات</h2>
+      <div class="filters" id="filters" role="group" aria-label="تصفية الملاحظات">
+        <button class="chip active" data-cat="all" aria-pressed="true">الكل</button>
+        <button class="chip" data-cat="spelling" aria-pressed="false">إملاء</button>
+        <button class="chip" data-cat="grammar" aria-pressed="false">نحو</button>
+        <button class="chip" data-cat="style" aria-pressed="false">أسلوب</button>
+        <button class="chip" data-cat="dialect" aria-pressed="false">فصحى</button>
+        <button class="chip" data-cat="tashkeel" aria-pressed="false">تشكيل</button>
+      </div>
+    </div>
+    <ul id="issues" class="issues" aria-label="قائمة الملاحظات"></ul>
+    <div class="empty-state" id="emptyState">
+      <div class="empty-glyph">✓</div>
+      <p>لا ملاحظات — نصّك سليم.</p>
+    </div>
+  </aside>
+</main>
+
+<!-- Floating hover card -->
+<div id="hoverCard" class="hover-card" role="dialog" aria-label="تفاصيل الملاحظة" hidden>
+  <div class="hc-head">
+    <span class="hc-rule" id="hcRule"></span>
+    <span class="hc-sev" id="hcSev"></span>
+  </div>
+  <div class="hc-swap">
+    <s id="hcWrong"></s>
+    <svg class="hc-arrow" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
+    <b id="hcRight"></b>
+  </div>
+  <p class="hc-msg" id="hcMsg"></p>
+  <p class="hc-explain" id="hcExplain"></p>
+  <div class="hc-actions">
+    <button class="hc-apply" id="hcApply">تطبيق</button>
+    <button class="hc-dismiss" id="hcDismiss">تجاهل مرة</button>
+    <button class="hc-dismiss hc-disable" id="hcDisableRule">تعطيل القاعدة</button>
+  </div>
+</div>
+
+<dialog id="lexiconDialog" class="lexicon-dialog" aria-labelledby="lexiconTitle">
+  <form method="dialog" class="lexicon-panel" id="lexiconForm">
+    <div class="dialog-head">
+      <div>
+        <span class="eyebrow">تخصيص محلي وخاص</span>
+        <h2 id="lexiconTitle">المعجم الشخصي وتجاوز القواعد</h2>
+      </div>
+      <button class="dialog-close" value="cancel" aria-label="إغلاق">×</button>
+    </div>
+    <p class="dialog-copy">أضف أسماءً ومصطلحاتٍ صحيحة لعملك، أو أعد تفعيل القواعد التي عطّلتها. تُحفظ الإعدادات على هذا الجهاز فقط.</p>
+    <label class="field-label" for="lexiconWords">الكلمات المسموح بها</label>
+    <textarea id="lexiconWords" rows="7" maxlength="24000" placeholder="كلمة أو مصطلح في كل سطر، أو افصل بينها بفاصلة"></textarea>
+    <div class="dialog-section">
+      <div class="section-title">
+        <span>القواعد المعطلة</span>
+        <small id="disabledRuleCount">0 قاعدة</small>
+      </div>
+      <ul id="disabledRulesList" class="disabled-rules-list"></ul>
+      <p id="noDisabledRules" class="muted-note">لا توجد قواعد معطلة.</p>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="tb-btn ghost" id="btnResetPreferences">إعادة الضبط</button>
+      <button type="submit" class="tb-btn primary" value="save">حفظ محليًا</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="rewriteDialog" class="gold-dialog" aria-labelledby="rewriteTitle">
+  <section class="gold-panel">
+    <div class="dialog-head"><div><span class="eyebrow">Offline-first</span><h2 id="rewriteTitle">إعادة صياغة ذكية</h2></div><button class="dialog-close" data-close="rewriteDialog" aria-label="إغلاق">×</button></div>
+    <p class="dialog-copy">اختر الهدف. تُنتج ضاد بدائل محافظة على المعنى محليًا، ولا تضيف حقائق أو مصادر غير موجودة.</p>
+    <div class="segmented" id="rewriteModes" role="radiogroup" aria-label="نمط إعادة الصياغة"></div>
+    <div id="rewriteCandidates" class="rewrite-candidates" aria-live="polite"></div>
+  </section>
+</dialog>
+
+<dialog id="templateDialog" class="gold-dialog" aria-labelledby="templateTitle">
+  <section class="gold-panel wide">
+    <div class="dialog-head"><div><span class="eyebrow">قوالب بلا اختلاق</span><h2 id="templateTitle">مساعد الكتابة والقوالب</h2></div><button class="dialog-close" data-close="templateDialog" aria-label="إغلاق">×</button></div>
+    <div class="template-layout">
+      <div>
+        <label class="field-label" for="templateSelect">نوع المستند</label><select id="templateSelect"></select>
+        <label class="field-label" for="templateTone">النبرة</label><select id="templateTone"></select>
+        <form id="templateFields" class="template-fields"></form>
+      </div>
+      <div class="template-preview-wrap"><span class="field-label">المعاينة</span><pre id="templatePreview" class="template-preview"></pre><p id="templateMissing" class="muted-note"></p>
+        <div class="dialog-actions"><button class="tb-btn ghost" id="btnTemplateInsert" type="button">إدراج عند المؤشر</button><button class="tb-btn primary" id="btnTemplateReplace" type="button">استبدال المستند</button></div>
+      </div>
+    </div>
+  </section>
+</dialog>
+
+<dialog id="analyticsDialog" class="gold-dialog" aria-labelledby="analyticsTitle">
+  <section class="gold-panel wide">
+    <div class="dialog-head"><div><span class="eyebrow">قياس قابل للتفسير</span><h2 id="analyticsTitle">لوحة تحليلات الكتابة</h2></div><button class="dialog-close" data-close="analyticsDialog" aria-label="إغلاق">×</button></div>
+    <div class="analytics-grid">
+      <article><span>الوضوح</span><strong id="gaClarity">—</strong><small id="gaClarityTrend"></small></article>
+      <article><span>التفاعل</span><strong id="gaEngagement">—</strong><small id="gaEngagementTrend"></small></article>
+      <article><span>ثراء المفردات</span><strong id="gaRichness">—</strong><small id="gaRichnessTrend"></small></article>
+      <article><span>وقت القراءة</span><strong id="gaReading">—</strong><small id="gaSpeaking"></small></article>
+      <article><span>توازن النبرة</span><strong id="gaToneBalance">—</strong><small id="gaToneDominant"></small></article>
+      <article><span>التعقيد</span><strong id="gaComplexity">—</strong><small id="gaCounts"></small></article>
+    </div>
+    <h3>خريطة حرارة الجمل</h3><div id="sentenceHeatmap" class="sentence-heatmap"></div>
+  </section>
+</dialog>
+
+<dialog id="exportDialog" class="gold-dialog" aria-labelledby="exportTitle">
+  <section class="gold-panel compact">
+    <div class="dialog-head"><div><span class="eyebrow">تنسيقات قياسية</span><h2 id="exportTitle">تصدير المستند</h2></div><button class="dialog-close" data-close="exportDialog" aria-label="إغلاق">×</button></div>
+    <label class="field-label" for="documentTitle">اسم المستند</label><input id="documentTitle" value="مستند-ضاد" maxlength="160">
+    <div class="export-grid" role="group" aria-label="صيغة التصدير">
+      <button class="tb-btn" data-export="docx" type="button">DOCX</button><button class="tb-btn" data-export="pdf" type="button">PDF</button><button class="tb-btn" data-export="md" type="button">Markdown</button><button class="tb-btn" data-export="txt" type="button">TXT</button>
+    </div>
+    <p class="muted-note">DOCX يحفظ العناوين والتوكيد والقوائم. PDF يستخدم طباعة المتصفح للحفاظ على العرض. استخراج PDF الوارد يعتمد على وجود طبقة نص.</p>
+  </section>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{"id":"clean-001","text":"ذهبت إلى المدرسة صباحًا.","expected":[]}
+{"id":"clean-002","text":"إنشاء المشروع يحتاج إلى خطة واضحة.","expected":[]}
+{"id":"clean-003","text":"والى الوالي رجلًا مسؤولًا عن المهمة.","expected":[]}
+{"id":"clean-004","text":"نعم، نعم أوافق على المقترح.","expected":[]}
+{"id":"clean-005","text":"في ذلك الحين كان الوقت متأخرًا، وما زال الطريق طويلًا.","expected":[]}
+{"id":"clean-006","text":"قرأت ثلاثة كتب خلال أربعة أيام.","expected":[]}
+{"id":"clean-007","text":"كتبت ثلاث رسائل في خمس ساعات.","expected":[]}
+{"id":"clean-008","text":"هذا نص عربي سليم وواضح.","expected":[]}
+{"id":"clean-009","text":"قال الأستاذ: هل انتهى العمل؟","expected":[]}
+{"id":"clean-010","text":"شاهدت فيديو جميلًا عن اللغة العربية.","expected":[]}
+{"id":"error-001","text":"ذهبت الى المدرسه","expected":[{"rule_id":"HAMZA_ILA","target":"الى"},{"rule_id":"TAA_MADRASA","target":"المدرسه"}]}
+{"id":"error-002","text":"انا انتظر النتيجه","expected":[{"rule_id":"HAMZA_ANA","target":"انا"},{"rule_id":"TAA_NATIJA","target":"النتيجه"}]}
+{"id":"error-003","text":"سأزورك انشاء الله","expected":[{"rule_id":"PHRASE_INSHALLAH","target":"انشاء الله"}]}
+{"id":"error-004","text":"عملت ثلاثة سنوات","expected":[{"rule_id":"AGREEMENT_NUM_FEM_NOUN","target":"ثلاثة سنوات"}]}
+{"id":"error-005","text":"قرأت ثلاث كتب","expected":[{"rule_id":"AGREEMENT_NUM_MASC_NOUN","target":"ثلاث كتب"}]}
+{"id":"error-006","text":"كيف حالك?","expected":[{"rule_id":"PUNCT_LATIN_QMARK","target":"?"}]}
+{"id":"error-007","text":"جاء زيد, ثم عمرو","expected":[{"rule_id":"PUNCT_LATIN_COMMA","target":","}]}
+{"id":"error-008","text":"انتهى الأمر .","expected":[{"rule_id":"PUNCT_SPACE_BEFORE","target":" ."}]}
+{"id":"error-009","text":"ذهبت إلى إلى السوق","expected":[{"rule_id":"STYLE_REPEATED_WORD","target":"إلى إلى"}]}
+{"id":"error-010","text":"مرحبـــــا بكم","expected":[{"rule_id":"STYLE_TATWEEL","target":"ـــــ"}]}
+{"id":"dialect-001","text":"شلونك؟ اكو شغل هسه","expected":[{"rule_id":"IQ_SHLONAK","target":"شلونك"},{"rule_id":"IQ_AKU","target":"اكو"},{"rule_id":"IQ_HASSA","target":"هسه"}]}
+{"id":"dialect-002","text":"دلوقتي عايز أروح","expected":[{"rule_id":"EG_DILWAQTI","target":"دلوقتي"},{"rule_id":"DIALECT_DESIRE_CONTEXT","target":"عايز أروح"}]}

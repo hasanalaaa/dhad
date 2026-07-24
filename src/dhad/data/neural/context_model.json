@@ -1,0 +1,86 @@
+{
+  "version": "1.0.0",
+  "window": 2,
+  "temperature": 0.82,
+  "tasks": {
+    "word_sense": {
+      "كتب": {
+        "candidates": {
+          "كتب|verb|كتب": {
+            "bias": 0.10,
+            "weights": {
+              "bos": 0.35,
+              "right_pos1:noun": 1.25,
+              "right_pos1:proper_noun": 1.35,
+              "next_definite": 0.80,
+              "candidate_verb_before_nominal": 1.10,
+              "left1:أن": 1.20,
+              "right1:الطالب": 0.90,
+              "right1:سامر": 0.90,
+              "right1:علي": 0.90,
+              "right1:حسن": 0.90
+            }
+          },
+          "كتاب|noun|كتب": {
+            "bias": 0.00,
+            "weights": {
+              "left1:ثلاثة": 2.40,
+              "left1:ثلاث": 1.70,
+              "right_pos1:adjective": 2.30,
+              "candidate_noun_before_adjective": 1.45,
+              "right1:مفيدة": 1.30
+            }
+          }
+        }
+      }
+    },
+    "contextual_spelling": {
+      "علم": {
+        "candidates": {
+          "علم": {
+            "bias": 0.15,
+            "weights": {
+              "left1:رفع": 3.20,
+              "left1:رفرف": 2.80,
+              "right1:البلاد": 2.40,
+              "right1:الدولة": 2.20
+            }
+          },
+          "عالم": {
+            "bias": -0.35,
+            "weights": {
+              "left1:زار": 3.40,
+              "left1:قابل": 3.20,
+              "right1:الفيزياء": 3.40,
+              "right1:الكيمياء": 3.20,
+              "right1:الفلك": 3.20
+            }
+          }
+        }
+      },
+      "عالم": {
+        "candidates": {
+          "عالم": {
+            "bias": 0.15,
+            "weights": {
+              "left1:زار": 3.20,
+              "left1:قابل": 3.00,
+              "right1:الفيزياء": 3.20,
+              "right1:الكيمياء": 3.00,
+              "right1:الفلك": 3.00
+            }
+          },
+          "علم": {
+            "bias": -0.35,
+            "weights": {
+              "left1:رفع": 3.50,
+              "left1:رفرف": 3.20,
+              "right1:البلاد": 3.20,
+              "right1:الدولة": 3.00
+            }
+          }
+        }
+      }
+    }
+  }
+}

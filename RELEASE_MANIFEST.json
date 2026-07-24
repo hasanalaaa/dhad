@@ -1,0 +1,473 @@
+{
+  "project": "Dhad",
+  "version": "1.0.0",
+  "python_version": "1.0.0",
+  "completed_phase": "Ultimate Dream Release v1.0.0 Sovereign Edition",
+  "phase_name": "Hardened native Tauri desktop, least-privilege windows, resilient file I/O, refined floating assistant, showcase documentation, and reproducible release validation",
+  "tests_passed": 1777,
+  "quality": {
+    "ruff": "clean",
+    "format": "verified",
+    "compileall": "verified",
+    "placeholder_code": false,
+    "wheel_contents": "verified",
+    "wheel_installation": "verified-outside-source-tree",
+    "installed_api_security_privacy": "verified",
+    "installed_benchmark": "verified",
+    "dockerfile_static_validation": "verified",
+    "compose_yaml": "verified",
+    "container_runtime_build": "not-run-docker-unavailable-in-build-environment",
+    "rust_tests_passed": 16,
+    "rust_clippy_warnings_as_errors": "clean",
+    "javascript_syntax": "57 first-party files verified",
+    "javascript_tests_passed": 101,
+    "offline_browser_proof": "WASM + WebGPU neural model + IndexedDB restore verified",
+    "main_thread_long_tasks_over_50ms": 0,
+    "ci_workflow": ".github/workflows/ci.yml",
+    "development_lock": "requirements-dev.lock",
+    "repository_audit": "438 clean release files; generated caches and temporary build artifacts removed",
+    "local_python_validation": {
+      "available_suites": "1777 passed, 0 failed",
+      "redis_sync_backend": "not-run: redis/fakeredis unavailable",
+      "native_crdt": "not-run: pycrdt unavailable",
+      "onnx_python_backend": "not-run: native onnxruntime unavailable"
+    },
+    "rust_local_revalidation": "blocked: Cargo/rustc unavailable on packaging host; strict CI retained",
+    "sovereign_desktop_audit": "87/87 passed across 438 clean release files",
+    "sovereign_contracts": "59/59 passed including final cleanliness gate",
+    "sovereign_test_matrix": {
+      "passed_checks": 41,
+      "failed_checks": 0,
+      "blocked_checks": 10,
+      "timed_out_checks": 0,
+      "note": "Blocked entries are missing external dependencies/toolchains and are not counted as passes."
+    },
+    "javascript_tests_available": "101 passed, 0 failed; secure Yjs and IndexedDB tests blocked by unavailable npm registry dependencies",
+    "mini_assistant_runtime_boot": "passed",
+    "native_installer_builds": "not-run: macOS and Windows runners unavailable on Linux packaging host",
+    "rust_tests_scope": "16 tests belong to the prior Gold Master baseline; Sovereign Rust revalidation is blocked on this host and remains mandatory in CI"
+  },
+  "governance": {
+    "license": "full verbatim GNU AGPL-3.0 text",
+    "code_of_conduct": "Contributor Covenant 2.1, bilingual",
+    "security_policy": "supported versions, private reporting, declared limitations",
+    "visual_identity": "docs/logo.svg (obsidian/graphite/copper), CLI banner"
+  },
+  "production": {
+    "docker": "multi-stage Python 3.12 slim",
+    "runtime_user": "non-root uid 10001",
+    "server": "Gunicorn with standalone uvicorn-worker",
+    "healthcheck": "/api/health",
+    "compose_bind_default": "127.0.0.1:8010",
+    "filesystem": "read-only with /tmp tmpfs",
+    "linux_capabilities": "all dropped",
+    "no_new_privileges": true
+  },
+  "security": {
+    "max_text_characters_default": 50000,
+    "max_request_bytes_default": 262144,
+    "rate_limiter": "per-process asynchronous token bucket",
+    "rate_limit_default": "120 requests per 60 seconds",
+    "api_key_authentication": "optional via DHAD_API_KEYS",
+    "accepted_credentials": [
+      "X-API-Key",
+      "Authorization: Bearer"
+    ],
+    "validation_input_echo": false,
+    "analysis_cache_control": "no-store",
+    "websocket_authentication": "X-API-Key and Authorization: Bearer",
+    "websocket_rate_limiting": "text control and binary/data frames",
+    "browser_transport_limits": {
+      "max_inbound_bytes_default": 524288,
+      "max_outbound_bytes_default": 524288,
+      "max_buffered_bytes_default": 4194304
+    },
+    "http_content_length": "negative and conflicting duplicate values rejected",
+    "tauri_desktop": {
+      "csp": "explicit restrictive policy with local-only IPC and required WASM/eval allowances for vendored ONNX runtime",
+      "freeze_prototype": true,
+      "cross_origin_isolation": "COOP same-origin + COEP require-corp",
+      "capabilities": "separate local-only main and mini-assistant capability sets",
+      "window_hardening": "devtools/link preview/browser extensions/zoom hotkeys disabled",
+      "document_writes": "staged create-new write, fsync, commit rename, Windows rollback recovery"
+    }
+  },
+  "privacy": {
+    "zero_request_body_logging": true,
+    "masked_types": [
+      "email",
+      "phone",
+      "url"
+    ],
+    "masking_strategy": "unique same-length Unicode Private-Use sentinels",
+    "offset_preservation": true,
+    "public_surfaces_protected": [
+      "Dhad API",
+      "REST",
+      "SDK",
+      "CLI",
+      "LSP",
+      "VoiceProfile learning"
+    ],
+    "restoration_after_generation": true,
+    "defensive_log_filter": true
+  },
+  "v2_phase_1": {
+    "module": "dhad.stylometry",
+    "feature_dimensions": 40,
+    "profile_schema_version": "1",
+    "profile_storage": "aggregate Welford statistics only, non-reversible",
+    "personalization_policy": "style matches annotated/re-weighted only; errors never suppressed",
+    "public_api": [
+      "extract_fingerprint",
+      "VoiceProfile",
+      "personalize_matches",
+      "Dhad.learn_voice",
+      "Dhad.voice_report"
+    ]
+  },
+  "benchmark": {
+    "dataset": "dhad-controlled-gold-v1",
+    "test_cases": 750,
+    "span_precision": 0.8602329450915142,
+    "span_recall": 0.9538745387453874,
+    "span_f0_5": 0.8774609640190089,
+    "false_positives_per_1000_words": 6.35112656887948,
+    "sentence_exact_accuracy": 0.8626666666666667,
+    "previous_f0_5": 0.8774609640190089,
+    "core_scope_unchanged": true
+  },
+  "vmax_phase_1": {
+    "overlap_resolution": "O(n log n), AVL in Python and BTreeMap in Rust",
+    "literal_rules": "single Aho-Corasick scan in Python and Rust",
+    "analysis_context": "shared immutable tokens, normalized forms, sentence index, and syntax parse",
+    "sentence_segmentation": "linear on dot-dense lines",
+    "pii_overlap": "O(log n)",
+    "pii_restore": "O(n + protected spans)",
+    "benchmark_report": "reports/vmax_phase1_benchmark.json"
+  },
+  "vmax_phase_5": {
+    "pwa": "atomic versioned precache; CacheFirst immutable NLP assets; StaleWhileRevalidate app shell",
+    "offline_neural_model": "web_demo/models/model_int8.onnx, SHA-256 pinned",
+    "indexeddb": "documents, Yjs updates, outbox, personal dictionaries, settings",
+    "rendering": "worker analysis, composited overlay, frame-batched diagnostics, virtualized issue cards",
+    "performance_browser_case": "19,506 characters, 2,500 diagnostics, 8 rendered cards, zero observed long tasks over 50ms",
+    "report": "docs/VMAX_PHASE_5_REPORT_AR.md"
+  },
+  "limitations": [
+    "Rate limiting is in-memory per worker and is not distributed across nodes.",
+    "API keys are static environment secrets, not multi-tenant identity or OAuth.",
+    "PII masking covers the requested e-mail, phone, and URL patterns; it is not a comprehensive DLP system.",
+    "The controlled benchmark is template-generated and must not be quoted as natural-corpus accuracy.",
+    "No third-party penetration test or published production load/SLO report was completed.",
+    "Docker and Compose were statically validated; a container runtime was unavailable in the build environment.",
+    "SBOM generation, supply-chain signing, distributed queues, and backup/failure drills remain future work.",
+    "A real multi-node Redis chaos/load test with TLS and ACL remains required before an Internet-facing production deployment.",
+    "The 0.09ms response target is not an SLA; latency is measured at runtime and depends on text length, hardware, and backend.",
+    "Native macOS DMG and Windows NSIS/MSI installers were not built on the Linux packaging host; platform CI must produce and smoke-test them.",
+    "Cargo/rustc and selected npm/Python dependency packages were unavailable in the packaging environment, so those entries remain explicitly blocked in the validation matrix."
+  ],
+  "artifacts": [
+    "README.md",
+    "LICENSE",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "Cargo.toml",
+    "pyproject.toml",
+    "docker-compose.yml",
+    "docs/logo.svg",
+    "docs/STATE_OF_THE_ENGINE_AR.md",
+    "docs/MASTER_PLAN_V2_AR.md",
+    "docs/PHASE_12_REPORT_AR.md",
+    "docs/VMAX_PHASE_1_REPORT_AR.md",
+    "docs/VMAX_PHASE_5_REPORT_AR.md",
+    "reports/vmax_phase1_benchmark.json",
+    "reports/REPOSITORY_CLEANUP_AUDIT.md",
+    "reports/vmax_phase5_report.json",
+    "web_demo/models/model_int8.onnx",
+    "web_demo/dhad_core.wasm",
+    "web_demo/dhad_core.fast.wasm",
+    "web_demo/dhad_core.small.wasm",
+    "src/dhad/stylometry.py",
+    "tests/test_stylometry.py",
+    "tools/audit_repository.py",
+    "tools/check_javascript.mjs",
+    "Makefile",
+    "rust-toolchain.toml",
+    ".github/dependabot.yml",
+    "reports/VMAX_OMNI_EVOLUTION_REPORT.md",
+    "reports/VMAX_OMNI_FINAL_VALIDATION.md",
+    "reports/VMAX_OMNI_AUDIT.json",
+    "reports/VMAX_OMNI_AUDIT.md",
+    "reports/VMAX_OMNI_INVENTORY.json",
+    "reports/VMAX_APEX_EVOLUTION_REPORT.md",
+    "reports/VMAX_APEX_FINAL_VALIDATION.md",
+    "reports/VMAX_APEX_AUDIT.json",
+    "reports/VMAX_APEX_AUDIT.md",
+    "reports/VMAX_APEX_INVENTORY.json",
+    "src/dhad/intelligence.py",
+    "tests/test_intelligence.py",
+    "web_demo/intelligence/writing-intelligence.js",
+    "web_demo/intelligence/writing-intelligence.test.mjs",
+    "web_demo/intelligence/apex-ui.test.mjs",
+    "docs/GOLD_MASTER_PRODUCT_SPEC.md",
+    "reports/GOLD_MASTER_EVOLUTION_REPORT.md",
+    "reports/GOLD_MASTER_FINAL_VALIDATION.md",
+    "reports/GOLD_MASTER_AUDIT.json",
+    "reports/GOLD_MASTER_AUDIT.md",
+    "reports/GOLD_MASTER_INVENTORY.json",
+    "src/dhad/rewriting.py",
+    "src/dhad/analytics.py",
+    "src/dhad/templates.py",
+    "tests/test_gold_master.py",
+    "web_demo/rewriting/offline-rewriter.js",
+    "web_demo/analytics/writing-analytics.js",
+    "web_demo/templates/smart-templates.js",
+    "web_demo/documents/document-io.js",
+    "web_demo/themes/theme-controller.js",
+    "web_demo/shared/capabilities.js",
+    "docs/MASTER_TRANSFORMATION_SPEC.md",
+    "docs/assets/dhad-sovereign-hero.svg",
+    "src-tauri/capabilities/mini-assistant.json",
+    "tools/validate_sovereign_release.py",
+    "tools/run_sovereign_validation_matrix.py",
+    "tests/test_sovereign_release.py",
+    "web_demo/ui/mini-assistant-runtime.test.mjs",
+    "reports/SOVEREIGN_TEST_MATRIX.md"
+  ],
+  "repository_release": {
+    "archive_name": "dhad-v1.0-Desktop-Ultimate.zip",
+    "profile": "Dhad v1.0.0 Sovereign Edition offline-first desktop source release with required runtime binaries and platform bundling configuration",
+    "excluded_from_archive": [
+      ".git history",
+      "Python virtual environments",
+      "node_modules",
+      "test and linter caches",
+      "build distributions",
+      "nested release archives",
+      "macOS metadata and temporary files"
+    ],
+    "preserved_large_assets": [
+      "web_demo/models/model_int8.onnx",
+      "web_demo/neural/fixtures/student-fixture.onnx",
+      "web_demo/dhad_core.wasm",
+      "web_demo/dhad_core.fast.wasm",
+      "web_demo/dhad_core.small.wasm",
+      "web_demo/vendor/onnxruntime-web/ort-wasm-simd-threaded.asyncify.wasm"
+    ],
+    "git_lfs": "*.onnx tracked by .gitattributes",
+    "rust_workspace": "Cargo.toml",
+    "ci_jobs": [
+      "python",
+      "rust-and-wasm",
+      "web-and-repository-audit"
+    ]
+  },
+  "vmax_ultimate": {
+    "archive_name": "dhad-vMAX-Ultimate.zip",
+    "repository_files_audited": 319,
+    "audit_findings": 0,
+    "source_symbols_inventoried": {
+      "python_classes": 197,
+      "python_functions": 1189,
+      "rust_functions": 177,
+      "javascript_functions_static_approximation": 881
+    },
+    "major_hardening": [
+      "atomic concurrent neural initialization and bounded verified asset streaming",
+      "WebSocket frame and buffered-byte backpressure with observed async callbacks",
+      "strict HTTP framing and consistent HTTP/WebSocket API-key authentication",
+      "tracked sync-hub tasks and deterministic cancellation-safe shutdown",
+      "indexed IndexedDB Yjs reads and recoverable outbox flush sequencing",
+      "Service Worker lifecycle-safe stale-while-revalidate updates",
+      "workspace-level Rust/WASM profiles, strict CI, Dependabot, and repository SHA-256 inventory",
+      "self-healing secure Yjs outbound queue, explicit outbox recovery error reporting, and leak-free worker dispatch failures"
+    ],
+    "reports": [
+      "reports/VMAX_ULTIMATE_UPGRADE_REPORT.md",
+      "reports/VMAX_ULTIMATE_AUDIT.json",
+      "reports/VMAX_ULTIMATE_AUDIT.md",
+      "reports/VMAX_ULTIMATE_INVENTORY.json"
+    ],
+    "local_validation": {
+      "javascript": "62 passed, 0 failed",
+      "python_available_suites": "1754 passed, 1 skipped",
+      "redis_sync_backend": "11 passed, 0 failed",
+      "python_compileall": "passed",
+      "javascript_syntax": "35 first-party files passed",
+      "shell_syntax": "passed",
+      "rust": "not re-executed locally: cargo/rustc unavailable",
+      "native_crdt": "not re-executed locally: compatible pycrdt unavailable",
+      "onnx_python": "skipped: native onnxruntime unavailable",
+      "docker_runtime": "not re-executed locally: Docker unavailable"
+    }
+  },
+  "vmax_omni": {
+    "archive_name": "dhad-vMAX-Omni.zip",
+    "repository_files_audited": 324,
+    "audit_findings": 0,
+    "major_evolution": [
+      "recovery/live cursor deduplication and bounded Redis Stream replay",
+      "strict WebSocket ordering, backpressure, and cancellation-safe lifecycle",
+      "bounded HTTP framing, rate-limiter state, and backend analysis concurrency",
+      "single-allocation neural super-batches and abortable verified asset loading",
+      "self-healing neural workers after crash, timeout, or dispatch failure",
+      "atomic IndexedDB Yjs sequencing and indexed bounded outbox recovery",
+      "bounded E2EE inputs and pending key packages with old-key zeroization",
+      "tiered PWA caching with optional on-demand offline neural assets",
+      "expanded RTL accessibility and explicit degraded/offline error recovery",
+      "deterministic Omni inventory and release validation evidence"
+    ],
+    "reports": [
+      "reports/VMAX_OMNI_EVOLUTION_REPORT.md",
+      "reports/VMAX_OMNI_FINAL_VALIDATION.md",
+      "reports/VMAX_OMNI_AUDIT.json",
+      "reports/VMAX_OMNI_AUDIT.md",
+      "reports/VMAX_OMNI_INVENTORY.json"
+    ],
+    "local_validation": {
+      "python_available_suites": "1760 passed",
+      "rust_parity_python_module": "1 module skipped: compiled dhad_core unavailable",
+      "javascript_available_suites": "61 passed, 0 failed",
+      "javascript_syntax": "35 first-party files passed",
+      "python_compileall": "passed",
+      "shell_syntax": "passed",
+      "repository_audit": "passed with zero findings",
+      "rust": "not re-executed locally: cargo/rustc unavailable",
+      "native_crdt": "not re-executed locally: pycrdt unavailable",
+      "redis_sync_backend": "not re-executed locally: fakeredis/redis unavailable",
+      "browser_yjs_indexeddb": "not re-executed locally: yjs/fake-indexeddb unavailable",
+      "onnx_python": "not executed locally: native onnxruntime unavailable",
+      "docker_runtime": "not executed locally: Docker unavailable"
+    },
+    "source_symbols_inventoried": {
+      "python_classes": 200,
+      "python_functions": 1211,
+      "rust_functions": 177,
+      "javascript_functions_static_approximation": 917
+    }
+  },
+  "vmax_apex": {
+    "archive_name": "dhad-vMAX-Apex.zip",
+    "major_evolution": [
+      "unified explainable writing-intelligence report across Python SDK and REST",
+      "real-time academic, formal, casual, and persuasive tone analysis with actionable chips",
+      "offline regional dialect detection and review-only Modern Standard Arabic conversion bridge",
+      "live clarity, complexity, lexical richness, hapax, clause, and sentence-density metrics",
+      "source-anchored interactive linguistic explanations for every diagnostic",
+      "persistent device-local custom lexicon and rule overrides shared by worker and API contracts",
+      "accessible RTL intelligence dashboard, keyboard issue navigation, ARIA tooltips, and connectivity feedback",
+      "single-parse backend intelligence path with reusable AnalysisContext",
+      "Rust tokenizer code-point offsets without a document-sized byte lookup table",
+      "one-pass aggressive normalization without temporary mapped strings or token vectors",
+      "Apex PWA cache generation including the offline intelligence module"
+    ],
+    "reports": [
+      "reports/VMAX_APEX_EVOLUTION_REPORT.md",
+      "reports/VMAX_APEX_FINAL_VALIDATION.md",
+      "reports/VMAX_APEX_AUDIT.json",
+      "reports/VMAX_APEX_AUDIT.md",
+      "reports/VMAX_APEX_INVENTORY.json"
+    ],
+    "local_validation": {
+      "python_available_suites": "1766 passed",
+      "javascript_available_suites": "73 passed, 0 failed",
+      "python_compileall": "passed",
+      "javascript_syntax": "38 first-party files passed",
+      "shell_syntax": "passed",
+      "rust": "not re-executed locally: cargo/rustc unavailable; parity tests retained for CI",
+      "native_crdt": "not re-executed locally: pycrdt unavailable",
+      "redis_sync_backend": "not re-executed locally: redis/fakeredis unavailable",
+      "browser_yjs_indexeddb": "not re-executed locally: yjs/fake-indexeddb unavailable",
+      "docker_runtime": "not executed locally: Docker unavailable",
+      "repository_audit": "passed with zero findings"
+    },
+    "repository_files_audited": 334,
+    "audit_findings": 0
+  },
+  "gold_master": {
+    "archive_name": "dhad-v1.0-GoldMaster.zip",
+    "product_spec": "docs/GOLD_MASTER_PRODUCT_SPEC.md",
+    "capabilities": [
+      "five-mode conservative smart rewriting with provenance and safe fact preservation",
+      "client-side TXT, Markdown, semantic DOCX, and PDF document workflows",
+      "sentence heatmaps and longitudinal writing analytics stored locally",
+      "six fact-bounded smart templates with explicit required fields",
+      "shared PWA and Chrome/Edge extension capability contract",
+      "system, light, dark, and high-contrast themes with accessible RTL interactions",
+      "formatting-preserving corrections, rewrites, template insertion, and voice dictation"
+    ],
+    "reports": [
+      "reports/GOLD_MASTER_EVOLUTION_REPORT.md",
+      "reports/GOLD_MASTER_FINAL_VALIDATION.md",
+      "reports/GOLD_MASTER_AUDIT.json",
+      "reports/GOLD_MASTER_AUDIT.md",
+      "reports/GOLD_MASTER_INVENTORY.json"
+    ],
+    "local_validation": {
+      "python_available_suites": "1776 passed, 0 failed",
+      "javascript_available_suites": "91 passed, 0 failed",
+      "javascript_syntax": "51 first-party files passed",
+      "python_compileall": "passed",
+      "shell_syntax": "passed",
+      "native_crdt": "not-run: pycrdt unavailable",
+      "redis_sync_backend": "not-run: redis/fakeredis unavailable",
+      "browser_yjs_indexeddb": "not-run: yjs/fake-indexeddb unavailable",
+      "rust": "not-run: cargo/rustc unavailable",
+      "docker_runtime": "not-run: Docker unavailable",
+      "repository_audit": "357 repository files audited; zero findings",
+      "zip_integrity": "passed; every final archive entry CRC-tested"
+    },
+    "repository_files_audited": 357,
+    "audit_findings": 0,
+    "archive_entries": 360
+  },
+  "desktop_phase_1": {
+    "framework": "Tauri 2",
+    "app_identifier": "com.dhad.app",
+    "frontend_dist": "web_demo",
+    "window": {
+      "width": 1280,
+      "height": 800,
+      "min_width": 900,
+      "min_height": 600,
+      "resizable": true
+    },
+    "native_commands": [
+      "analyze_text_native",
+      "paraphrase_native",
+      "get_system_info"
+    ],
+    "browser_fallback": "WASM/WebWorker retained through web_demo/js/desktop-adapter.js",
+    "bundle_targets": [
+      "macOS DMG",
+      "Windows NSIS EXE"
+    ],
+    "validation_report": "reports/DESKTOP_PHASE1_VALIDATION.md",
+    "focused_javascript_tests": "26 passed, 0 failed",
+    "native_compile": "not-run: cargo/rustc unavailable in execution environment"
+  },
+  "sovereign_edition": {
+    "specification": "docs/MASTER_TRANSFORMATION_SPEC.md",
+    "hero_asset": "docs/assets/dhad-sovereign-hero.svg",
+    "contract_validator": "tools/validate_sovereign_release.py",
+    "test_matrix_runner": "tools/run_sovereign_validation_matrix.py",
+    "test_matrix_report": "reports/SOVEREIGN_TEST_MATRIX.md",
+    "native_overlay_test": "web_demo/ui/mini-assistant-runtime.test.mjs",
+    "floating_assistant": {
+      "native_materials": [
+        "Windows Mica",
+        "macOS HUD material"
+      ],
+      "accessibility": [
+        "RTL",
+        "keyboard focus",
+        "IME composition",
+        "reduced motion",
+        "high contrast"
+      ],
+      "performance_policy": "native CPU work uses spawn_blocking; UI reports measured latency without claiming a fixed SLA"
+    }
+  }
+}

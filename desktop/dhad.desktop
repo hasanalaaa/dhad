@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Dhad — ضاد
+Comment=Arabic writing intelligence on your device
+Exec=dhad-desktop
+Icon=dhad
+Terminal=false
+Categories=Office;Education;Utility;
+StartupNotify=true

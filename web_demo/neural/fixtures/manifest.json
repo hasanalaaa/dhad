@@ -1,0 +1,30 @@
+{
+  "format": 1,
+  "id": "dhad-browser-student-fixture",
+  "contract": "dhad-context-embedding-ranker-v1",
+  "model": {
+    "url": "student-fixture.onnx",
+    "sha256": "78a24c2c966a6013db875a7261b1ec49f4807d6a20da438759b3147d441aea55",
+    "expectedBytes": 549,
+    "quantization": "uint8"
+  },
+  "tokenizer": {
+    "type": "wordpiece",
+    "url": "vocab.txt",
+    "sha256": "aece53cf6f5f7edcdb59dfd50290ce418a2a875aa6890b8de873d6a1147986ad",
+    "lowercase": false
+  },
+  "inputs": {
+    "inputIds": "input_ids",
+    "attentionMask": "attention_mask"
+  },
+  "output": {
+    "name": "last_hidden_state"
+  },
+  "maxLength": 16,
+  "thresholds": {
+    "confidence": 0.999,
+    "margin": 0.99,
+    "temperature": 0.02
+  }
+}

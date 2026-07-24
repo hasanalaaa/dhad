@@ -1,0 +1,72 @@
+{
+  "phase": 3,
+  "generated_at": "2026-07-22T19:45:00+03:00",
+  "contract": "dhad-context-embedding-ranker-v1",
+  "runtime": {
+    "onnxruntime_web_version": "1.27.0",
+    "execution_provider_order": [
+      "webgpu",
+      "wasm"
+    ],
+    "vendored_runtime_bytes": 24369629,
+    "worker_batch_limit": 64,
+    "confidence_threshold": 0.999,
+    "margin_threshold": 0.99
+  },
+  "production_student": {
+    "id": "distiluse-arabic-morphology-int8-cad4541",
+    "revision": "cad454171d918d9873a2701ba245054b6c1760dd",
+    "quantization": "int8",
+    "model_bytes": 135080470,
+    "model_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
+    "vocabulary_bytes": 995526,
+    "vocabulary_sha256": "fe0fda7c425b48c516fc8f160d594c8022a0808447475c1a7c6d6479763f310c"
+  },
+  "browser_proof": {
+    "webgpu_exposed": true,
+    "provider": "webgpu-preferred",
+    "fixture_first_inference_ms": 127.4,
+    "fixture_cached_inference_ms": 21.1,
+    "fixture_ui_heartbeat": {
+      "interval_ms": 5,
+      "elapsed_ms": 344.6,
+      "ticks": 63
+    },
+    "production_observed_inference_ms": [
+      1252.6,
+      899.8,
+      827.8
+    ],
+    "production_ui_heartbeat": {
+      "interval_ms": 5,
+      "elapsed_ms": 914.4,
+      "ticks": 182
+    },
+    "production_decision": {
+      "confidence": 0.9531295185635446,
+      "margin": 0.9062590371270892,
+      "abstained": true,
+      "reason": "low_confidence"
+    }
+  },
+  "verification": {
+    "python": {
+      "passed": 1771,
+      "skipped": 1
+    },
+    "rust": {
+      "passed": 16,
+      "clippy_warnings": 0
+    },
+    "javascript_and_abi": {
+      "passed": 22
+    },
+    "ruff_errors": 0,
+    "browser_production_model": "passed"
+  },
+  "claims_not_made": [
+    "The 0.999 decision threshold is not a measured 99.9 percent accuracy claim.",
+    "The observed browser timings are environment-specific samples, not cross-device benchmarks.",
+    "The base embedding model is infrastructure for a distilled student and is not claimed to match Grammarly accuracy without a calibrated Arabic evaluation corpus."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "dataset": "dhad-controlled-gold-v1",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "synthetic": true,
+  "generation_seed": 240721,
+  "total_cases": 5000,
+  "double_review_cases": 1000,
+  "splits": {
+    "train": 3500,
+    "dev": 750,
+    "test": 750
+  },
+  "domains": {
+    "journalism": 834,
+    "academic": 834,
+    "administrative": 833,
+    "educational": 833,
+    "social": 833,
+    "dialect": 833
+  },
+  "dialects": {
+    "msa": 4167,
+    "iraqi": 209,
+    "gulf": 208,
+    "levantine": 208,
+    "egyptian": 208
+  },
+  "files": {
+    "train.jsonl": {
+      "cases": 3500,
+      "sha256": "b2ab266782c290a6e6a81ef27af261af432066e1863c82edaf2747ed644282fa"
+    },
+    "dev.jsonl": {
+      "cases": 750,
+      "sha256": "3132cf2d53f9bd54539a9921526f54a5f752d80da273544488459559fd46a0c7"
+    },
+    "test.jsonl": {
+      "cases": 750,
+      "sha256": "69eab6b38dd5a69fd9b201f52fcbd9a1569250e1f6d6a43d1f6e8e3628eb476d"
+    },
+    "double_review.jsonl": {
+      "cases": 1000,
+      "sha256": "c3e3b449ae34074a56e1d1fcc61b412ae5ebe2c5e09dae829a80a1009d4866cb"
+    }
+  },
+  "limitations": [
+    "Controlled template corpus; not naturally occurring user text.",
+    "Double review is two independent technical annotation passes, not human adjudication.",
+    "Publishable real-world accuracy requires licensed natural corpora and human review."
+  ]
+}

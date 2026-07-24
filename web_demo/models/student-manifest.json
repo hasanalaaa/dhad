@@ -1,0 +1,36 @@
+{
+  "format": 1,
+  "id": "distiluse-arabic-morphology-int8-cad4541",
+  "contract": "dhad-context-embedding-ranker-v1",
+  "provenance": {
+    "repository": "Xenova/distiluse-base-multilingual-cased-v2",
+    "revision": "cad454171d918d9873a2701ba245054b6c1760dd",
+    "upstreamTask": "feature-extraction",
+    "license": "apache-2.0"
+  },
+  "model": {
+    "url": "model_int8.onnx",
+    "sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
+    "expectedBytes": 135080470,
+    "quantization": "int8"
+  },
+  "tokenizer": {
+    "type": "wordpiece",
+    "url": "distiluse-vocab.txt",
+    "sha256": "fe0fda7c425b48c516fc8f160d594c8022a0808447475c1a7c6d6479763f310c",
+    "lowercase": false
+  },
+  "inputs": {
+    "inputIds": "input_ids",
+    "attentionMask": "attention_mask"
+  },
+  "output": {
+    "name": "last_hidden_state"
+  },
+  "maxLength": 128,
+  "thresholds": {
+    "confidence": 0.999,
+    "margin": 0.99,
+    "temperature": 0.02
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {"type": "string", "minLength": 1},
+    "window": {"type": "integer", "minimum": 1, "maximum": 5},
+    "temperature": {"type": "number", "exclusiveMinimum": 0},
+    "tasks": {
+      "type": "object",
+      "required": ["word_sense", "contextual_spelling"],
+      "additionalProperties": false,
+      "properties": {
+        "word_sense": {"$ref": "#/$defs/task"},
+        "contextual_spelling": {"$ref": "#/$defs/task"}
+      }
+    }
+  },
+  "$defs": {
+    "task": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/entry"}
+    },
+    "entry": {
+      "type": "object",
+      "required": ["candidates"],
+      "additionalProperties": false,
+      "properties": {
+        "candidates": {
+          "type": "object",
+          "minProperties": 2,
+          "additionalProperties": {"$ref": "#/$defs/candidate"}
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bias": {"type": "number"},
+        "weights": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        }
+      }
+    }
+  }
+}

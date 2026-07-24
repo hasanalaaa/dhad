@@ -1,0 +1,617 @@
+TAP version 13
+# Subtest: deterministic checks cross the worker boundary and preserve Arabic diagnostics
+ok 1 - deterministic checks cross the worker boundary and preserve Arabic diagnostics
+  ---
+  duration_ms: 15.102763
+  type: 'test'
+  ...
+# Subtest: worker protocol rejects malformed responses
+ok 2 - worker protocol rejects malformed responses
+  ---
+  duration_ms: 0.549276
+  type: 'test'
+  ...
+# Subtest: synchronous worker dispatch failures reject cleanly without leaking pending work
+ok 3 - synchronous worker dispatch failures reject cleanly without leaking pending work
+  ---
+  duration_ms: 0.356819
+  type: 'test'
+  ...
+# Subtest: analysis preferences cross the worker boundary with bounded copies
+ok 4 - analysis preferences cross the worker boundary with bounded copies
+  ---
+  duration_ms: 0.234668
+  type: 'test'
+  ...
+# Subtest: analysis preferences reject unbounded payloads before worker dispatch
+ok 5 - analysis preferences reject unbounded payloads before worker dispatch
+  ---
+  duration_ms: 0.195571
+  type: 'test'
+  ...
+# Subtest: desktop adapter keeps the browser fallback active outside Tauri
+ok 6 - desktop adapter keeps the browser fallback active outside Tauri
+  ---
+  duration_ms: 9.052059
+  type: 'test'
+  ...
+# Subtest: desktop adapter reports a browser backend outside Tauri
+ok 7 - desktop adapter reports a browser backend outside Tauri
+  ---
+  duration_ms: 0.466503
+  type: 'test'
+  ...
+# Subtest: desktop adapter constructs the existing worker client as browser fallback
+ok 8 - desktop adapter constructs the existing worker client as browser fallback
+  ---
+  duration_ms: 0.25607
+  type: 'test'
+  ...
+# Subtest: analytics produces bounded document metrics and sentence heatmap offsets
+ok 9 - analytics produces bounded document metrics and sentence heatmap offsets
+  ---
+  duration_ms: 1.171729
+  type: 'test'
+  ...
+# Subtest: analytics trend compares with the most recent baseline
+ok 10 - analytics trend compares with the most recent baseline
+  ---
+  duration_ms: 0.174529
+  type: 'test'
+  ...
+# Subtest: X25519 peers derive directional AES-256-GCM keys and decrypt Arabic
+ok 11 - X25519 peers derive directional AES-256-GCM keys and decrypt Arabic
+  ---
+  duration_ms: 15.780189
+  type: 'test'
+  ...
+# Subtest: identity pinning rejects a server-substituted key announcement
+ok 12 - identity pinning rejects a server-substituted key announcement
+  ---
+  duration_ms: 2.728911
+  type: 'test'
+  ...
+# Subtest: authenticated ciphertext tampering and replay are both rejected
+ok 13 - authenticated ciphertext tampering and replay are both rejected
+  ---
+  duration_ms: 4.589654
+  type: 'test'
+  ...
+# Subtest: bounded replay window accepts out-of-order unique messages
+ok 14 - bounded replay window accepts out-of-order unique messages
+  ---
+  duration_ms: 4.220617
+  type: 'test'
+  ...
+# Subtest: epoch rotation invalidates old ciphertext and requires fresh peer keys
+ok 15 - epoch rotation invalidates old ciphertext and requires fresh peer keys
+  ---
+  duration_ms: 6.584736
+  type: 'test'
+  ...
+# Subtest: leader distributes one room epoch key over pinned X25519 channels
+ok 16 - leader distributes one room epoch key over pinned X25519 channels
+  ---
+  duration_ms: 11.984613
+  type: 'test'
+  ...
+# Subtest: group members cannot forge another member's signed broadcast
+ok 17 - group members cannot forge another member's signed broadcast
+  ---
+  duration_ms: 3.757649
+  type: 'test'
+  ...
+# Subtest: duplicate epoch announcements never reset replay state
+ok 18 - duplicate epoch announcements never reset replay state
+  ---
+  duration_ms: 11.55807
+  type: 'test'
+  ...
+# Subtest: zero sequence envelopes are rejected before any cryptographic work
+ok 19 - zero sequence envelopes are rejected before any cryptographic work
+  ---
+  duration_ms: 6.121028
+  type: 'test'
+  ...
+# Subtest: replacing a group epoch key zeroizes the previous raw key material
+ok 20 - replacing a group epoch key zeroizes the previous raw key material
+  ---
+  duration_ms: 3.678461
+  type: 'test'
+  ...
+# Subtest: full-jitter exponential backoff is bounded and capped
+ok 21 - full-jitter exponential backoff is bounded and capped
+  ---
+  duration_ms: 4.657345
+  type: 'test'
+  ...
+# Subtest: reconnect URLs carry the last durable Redis stream cursor
+ok 22 - reconnect URLs carry the last durable Redis stream cursor
+  ---
+  duration_ms: 0.597146
+  type: 'test'
+  ...
+# Subtest: unexpected disconnect schedules a reconnect, explicit close does not
+ok 23 - unexpected disconnect schedules a reconnect, explicit close does not
+  ---
+  duration_ms: 0.3027
+  type: 'test'
+  ...
+# Subtest: open callback lets the secure provider announce every reconnect epoch
+ok 24 - open callback lets the secure provider announce every reconnect epoch
+  ---
+  duration_ms: 0.23585
+  type: 'test'
+  ...
+# Subtest: async frame failures are reported without becoming unhandled rejections
+ok 25 - async frame failures are reported without becoming unhandled rejections
+  ---
+  duration_ms: 0.728872
+  type: 'test'
+  ...
+# Subtest: inbound and outbound byte budgets enforce memory backpressure
+ok 26 - inbound and outbound byte budgets enforce memory backpressure
+  ---
+  duration_ms: 0.536166
+  type: 'test'
+  ...
+# Subtest: durable cursor advances only after the consumer commits a frame
+ok 27 - durable cursor advances only after the consumer commits a frame
+  ---
+  duration_ms: 0.38402
+  type: 'test'
+  ...
+# Subtest: inbound frames are consumed strictly in wire order
+ok 28 - inbound frames are consumed strictly in wire order
+  ---
+  duration_ms: 0.874749
+  type: 'test'
+  ...
+# Subtest: authentication and protocol close codes do not reconnect forever
+ok 29 - authentication and protocol close codes do not reconnect forever
+  ---
+  duration_ms: 1.077399
+  type: 'test'
+  ...
+# Subtest: markdown conversion preserves headings, emphasis and lists
+ok 30 - markdown conversion preserves headings, emphasis and lists
+  ---
+  duration_ms: 2.089813
+  type: 'test'
+  ...
+# Subtest: stored ZIP writer and reader round-trip entries safely
+ok 31 - stored ZIP writer and reader round-trip entries safely
+  ---
+  duration_ms: 0.600492
+  type: 'test'
+  ...
+# Subtest: DOCX export/import preserves semantic Arabic blocks offline
+ok 32 - DOCX export/import preserves semantic Arabic blocks offline
+  ---
+  duration_ms: 1.570271
+  type: 'test'
+  ...
+# Subtest: document names are safe and DOCX XML fallback escapes content
+ok 33 - document names are safe and DOCX XML fallback escapes content
+  ---
+  duration_ms: 0.368897
+  type: 'test'
+  ...
+# Subtest: Apex shell exposes the five writing-intelligence capabilities accessibly
+ok 34 - Apex shell exposes the five writing-intelligence capabilities accessibly
+  ---
+  duration_ms: 5.961461
+  type: 'test'
+  ...
+# Subtest: Apex app persists local lexicon and rule overrides and renders ARIA tooltips
+ok 35 - Apex app persists local lexicon and rule overrides and renders ARIA tooltips
+  ---
+  duration_ms: 4.103853
+  type: 'test'
+  ...
+# Subtest: Apex intelligence module is part of the atomic offline shell
+ok 36 - Apex intelligence module is part of the atomic offline shell
+  ---
+  duration_ms: 1.787093
+  type: 'test'
+  ...
+# Subtest: tone intelligence ranks academic and persuasive evidence transparently
+ok 37 - tone intelligence ranks academic and persuasive evidence transparently
+  ---
+  duration_ms: 8.739275
+  type: 'test'
+  ...
+# Subtest: dialect bridge preserves code-point offsets and creates review-only matches
+ok 38 - dialect bridge preserves code-point offsets and creates review-only matches
+  ---
+  duration_ms: 0.467354
+  type: 'test'
+  ...
+# Subtest: readability exposes clarity, richness, density, and complexity bounds
+ok 39 - readability exposes clarity, richness, density, and complexity bounds
+  ---
+  duration_ms: 0.311292
+  type: 'test'
+  ...
+# Subtest: custom lexicon parser normalizes duplicates and enforces hard bounds
+ok 40 - custom lexicon parser normalizes duplicates and enforces hard bounds
+  ---
+  duration_ms: 1.279009
+  type: 'test'
+  ...
+# Subtest: local lexicon and rule overrides filter diagnostics without mutating input
+ok 41 - local lexicon and rule overrides filter diagnostics without mutating input
+  ---
+  duration_ms: 0.233116
+  type: 'test'
+  ...
+# Subtest: interactive explanations provide fallback reasoning for every diagnostic
+ok 42 - interactive explanations provide fallback reasoning for every diagnostic
+  ---
+  duration_ms: 0.242991
+  type: 'test'
+  ...
+# Subtest: initialization is delegated to the dedicated module worker
+ok 43 - initialization is delegated to the dedicated module worker
+  ---
+  duration_ms: 1.144299
+  type: 'test'
+  ...
+# Subtest: a valid decision resolves to the exact original Rust candidate object
+ok 44 - a valid decision resolves to the exact original Rust candidate object
+  ---
+  duration_ms: 4.085276
+  type: 'test'
+  ...
+# Subtest: forged, out-of-range, or mismatched worker selections are rejected
+ok 45 - forged, out-of-range, or mismatched worker selections are rejected
+  ---
+  duration_ms: 1.224077
+  type: 'test'
+  ...
+# Subtest: abstentions carry no candidate and preserve the strict confidence decision
+ok 46 - abstentions carry no candidate and preserve the strict confidence decision
+  ---
+  duration_ms: 0.638928
+  type: 'test'
+  ...
+# Subtest: rankMany crosses the worker boundary once and validates every grouped decision
+ok 47 - rankMany crosses the worker boundary once and validates every grouped decision
+  ---
+  duration_ms: 1.248825
+  type: 'test'
+  ...
+# Subtest: dispose terminates the worker and rejects outstanding work
+ok 48 - dispose terminates the worker and rejects outstanding work
+  ---
+  duration_ms: 0.320365
+  type: 'test'
+  ...
+# Subtest: a crashed worker is discarded and the next initialization uses a fresh worker
+ok 49 - a crashed worker is discarded and the next initialization uses a fresh worker
+  ---
+  duration_ms: 0.364632
+  type: 'test'
+  ...
+# Subtest: a synchronous postMessage failure cannot poison future retries
+ok 50 - a synchronous postMessage failure cannot poison future retries
+  ---
+  duration_ms: 0.325494
+  type: 'test'
+  ...
+# Subtest: stableSoftmax remains normalized for extreme logits
+ok 51 - stableSoftmax remains normalized for extreme logits
+  ---
+  duration_ms: 1.327922
+  type: 'test'
+  ...
+# Subtest: candidate selection can only return an exact Rust candidate
+ok 52 - candidate selection can only return an exact Rust candidate
+  ---
+  duration_ms: 0.236181
+  type: 'test'
+  ...
+# Subtest: candidate selection abstains below the 99.9 percent gate
+ok 53 - candidate selection abstains below the 99.9 percent gate
+  ---
+  duration_ms: 0.549576
+  type: 'test'
+  ...
+# Subtest: rank request validation rejects malformed or duplicate candidate identities
+ok 54 - rank request validation rejects malformed or duplicate candidate identities
+  ---
+  duration_ms: 0.6197
+  type: 'test'
+  ...
+# Subtest: WordPiece maps Arabic text to padded model tensors without inventing ids
+ok 55 - WordPiece maps Arabic text to padded model tensors without inventing ids
+  ---
+  duration_ms: 2.238193
+  type: 'test'
+  ...
+# Subtest: WordPiece uses greedy continuation pieces and bounded unknown handling
+ok 56 - WordPiece uses greedy continuation pieces and bounded unknown handling
+  ---
+  duration_ms: 0.251594
+  type: 'test'
+  ...
+# Subtest: Rust parse alternatives become immutable, source-anchored ranking requests
+ok 57 - Rust parse alternatives become immutable, source-anchored ranking requests
+  ---
+  duration_ms: 0.358242
+  type: 'test'
+  ...
+# Subtest: mean pooling and cosine logits rank only the supplied embedding rows
+ok 58 - mean pooling and cosine logits rank only the supplied embedding rows
+  ---
+  duration_ms: 0.369378
+  type: 'test'
+  ...
+# Subtest: model manifest requires a pinned INT8 model and a 99.9 percent gate
+ok 59 - model manifest requires a pinned INT8 model and a 99.9 percent gate
+  ---
+  duration_ms: 1.332959
+  type: 'test'
+  ...
+# Subtest: session creation attempts WebGPU first and falls back to WASM SIMD
+ok 60 - session creation attempts WebGPU first and falls back to WASM SIMD
+  ---
+  duration_ms: 0.726118
+  type: 'test'
+  ...
+# Subtest: session creation skips WebGPU when the browser exposes no adapter
+ok 61 - session creation skips WebGPU when the browser exposes no adapter
+  ---
+  duration_ms: 0.202752
+  type: 'test'
+  ...
+# Subtest: candidate batch is one context row plus only candidate-derived rows
+ok 62 - candidate batch is one context row plus only candidate-derived rows
+  ---
+  duration_ms: 2.636484
+  type: 'test'
+  ...
+# Subtest: multiple morphology decisions are coalesced into one contiguous inference batch
+ok 63 - multiple morphology decisions are coalesced into one contiguous inference batch
+  ---
+  duration_ms: 0.631668
+  type: 'test'
+  ...
+# Subtest: feed construction follows manifest names and declared integer dtypes
+ok 64 - feed construction follows manifest names and declared integer dtypes
+  ---
+  duration_ms: 0.243381
+  type: 'test'
+  ...
+# Subtest: verified asset loading rejects oversized payloads before buffering them
+ok 65 - verified asset loading rejects oversized payloads before buffering them
+  ---
+  duration_ms: 15.822151
+  type: 'test'
+  ...
+# Subtest: verified asset streaming accepts an exact pre-sized payload
+ok 66 - verified asset streaming accepts an exact pre-sized payload
+  ---
+  duration_ms: 7.811888
+  type: 'test'
+  ...
+# Subtest: concurrent runtime initialization coalesces into one model session
+ok 67 - concurrent runtime initialization coalesces into one model session
+  ---
+  duration_ms: 4.172405
+  type: 'test'
+  ...
+# Subtest: disposing during initialization aborts in-flight model network work
+ok 68 - disposing during initialization aborts in-flight model network work
+  ---
+  duration_ms: 0.685999
+  type: 'test'
+  ...
+# Subtest: super batches reject duplicate request ids before allocating inference tensors
+ok 69 - super batches reject duplicate request ids before allocating inference tensors
+  ---
+  duration_ms: 0.206667
+  type: 'test'
+  ...
+# packed ABI bridge lifecycle + parity: PASS
+# Subtest: web_demo/packed_bridge_test.mjs
+ok 12 - web_demo/packed_bridge_test.mjs
+  ---
+  duration_ms: 220.63871
+  type: 'test'
+  ...
+# Subtest: cache policy separates immutable NLP assets from the revalidated app shell
+ok 71 - cache policy separates immutable NLP assets from the revalidated app shell
+  ---
+  duration_ms: 16.988593
+  type: 'test'
+  ...
+# Subtest: the atomic precache is complete, unique, and entirely local
+ok 72 - the atomic precache is complete, unique, and entirely local
+  ---
+  duration_ms: 9.623548
+  type: 'test'
+  ...
+# Subtest: manifest is installable and points at local maskable icons
+ok 73 - manifest is installable and points at local maskable icons
+  ---
+  duration_ms: 1.311828
+  type: 'test'
+  ...
+# Subtest: the HTML shell registers the module service worker and provides offline metadata
+ok 74 - the HTML shell registers the module service worker and provides offline metadata
+  ---
+  duration_ms: 2.800327
+  type: 'test'
+  ...
+# Subtest: service-worker background refreshes are attached to the fetch lifecycle
+ok 75 - service-worker background refreshes are attached to the fetch lifecycle
+  ---
+  duration_ms: 0.909711
+  type: 'test'
+  ...
+# Subtest: the production neural worker keeps benign ONNX provider diagnostics out of the error console
+ok 76 - the production neural worker keeps benign ONNX provider diagnostics out of the error console
+  ---
+  duration_ms: 1.234483
+  type: 'test'
+  ...
+# Subtest: rewriter exposes all five Gold modes and deterministic bounded alternatives
+ok 77 - rewriter exposes all five Gold modes and deterministic bounded alternatives
+  ---
+  duration_ms: 29.13102
+  type: 'test'
+  ...
+# Subtest: formal rewriting consumes reviewed dialect offsets without inventing content
+ok 78 - formal rewriting consumes reviewed dialect offsets without inventing content
+  ---
+  duration_ms: 0.314256
+  type: 'test'
+  ...
+# Subtest: rewriter validates mode, text and alternative bounds
+ok 79 - rewriter validates mode, text and alternative bounds
+  ---
+  duration_ms: 0.369729
+  type: 'test'
+  ...
+# Subtest: Gold capability contract covers every product surface
+ok 80 - Gold capability contract covers every product surface
+  ---
+  duration_ms: 1.294392
+  type: 'test'
+  ...
+# Subtest: Gold templates cover core professional writing jobs
+ok 81 - Gold templates cover core professional writing jobs
+  ---
+  duration_ms: 1.04348
+  type: 'test'
+  ...
+# Subtest: template generation never hides missing required facts
+ok 82 - template generation never hides missing required facts
+  ---
+  duration_ms: 0.485961
+  type: 'test'
+  ...
+# Subtest: template generation rejects undeclared fields and invalid tones
+ok 83 - template generation rejects undeclared fields and invalid tones
+  ---
+  duration_ms: 1.161074
+  type: 'test'
+  ...
+# Subtest: theme resolution supports system, light, dark and AAA contrast mode
+ok 84 - theme resolution supports system, light, dark and AAA contrast mode
+  ---
+  duration_ms: 0.609836
+  type: 'test'
+  ...
+# Subtest: theme controller persists explicit preference
+ok 85 - theme controller persists explicit preference
+  ---
+  duration_ms: 0.717355
+  type: 'test'
+  ...
+# Subtest: Phase 2 config defines a hidden frameless always-on-top mini assistant
+ok 86 - Phase 2 config defines a hidden frameless always-on-top mini assistant
+  ---
+  duration_ms: 4.481704
+  type: 'test'
+  ...
+# Subtest: tray and hotkey sources use main-thread dispatch and requested Arabic actions
+ok 87 - tray and hotkey sources use main-thread dispatch and requested Arabic actions
+  ---
+  duration_ms: 1.154414
+  type: 'test'
+  ...
+# Subtest: mini assistant exposes check, rewrite, copy-back and auto-hide controls
+ok 88 - mini assistant exposes check, rewrite, copy-back and auto-hide controls
+  ---
+  duration_ms: 1.053013
+  type: 'test'
+  ...
+# Subtest: native document adapter preserves browser fallback
+ok 89 - native document adapter preserves browser fallback
+  ---
+  duration_ms: 0.182411
+  type: 'test'
+  ...
+# Subtest: native document adapter opens and reads a selected file
+ok 90 - native document adapter opens and reads a selected file
+  ---
+  duration_ms: 0.722773
+  type: 'test'
+  ...
+# Subtest: native document adapter saves Blob bytes through Rust IPC
+ok 91 - native document adapter saves Blob bytes through Rust IPC
+  ---
+  duration_ms: 0.424731
+  type: 'test'
+  ...
+# Subtest: Gold Master shell exposes rewriting, documents, analytics, templates and themes accessibly
+ok 92 - Gold Master shell exposes rewriting, documents, analytics, templates and themes accessibly
+  ---
+  duration_ms: 4.031396
+  type: 'test'
+  ...
+# Subtest: all Gold modules are part of the atomic offline shell
+ok 93 - all Gold modules are part of the atomic offline shell
+  ---
+  duration_ms: 1.010921
+  type: 'test'
+  ...
+# Subtest: browser extension exposes the same Gold service capabilities
+ok 94 - browser extension exposes the same Gold service capabilities
+  ---
+  duration_ms: 2.078726
+  type: 'test'
+  ...
+# Subtest: mini assistant boots with all Sovereign UI bindings defined
+ok 95 - mini assistant boots with all Sovereign UI bindings defined
+  ---
+  duration_ms: 19.809881
+  type: 'test'
+  ...
+# Subtest: overlay segments preserve the source while isolating diagnostics
+ok 96 - overlay segments preserve the source while isolating diagnostics
+  ---
+  duration_ms: 1.685452
+  type: 'test'
+  ...
+# Subtest: issue virtualization renders a bounded overscanned window
+ok 97 - issue virtualization renders a bounded overscanned window
+  ---
+  duration_ms: 0.34367
+  type: 'test'
+  ...
+# Subtest: overlay segmentation stays within the 50ms main-thread budget for 10k matches
+ok 98 - overlay segmentation stays within the 50ms main-thread budget for 10k matches
+  ---
+  duration_ms: 8.555031
+  type: 'test'
+  ...
+# Subtest: large overlays are split into bounded animation-frame batches
+ok 99 - large overlays are split into bounded animation-frame batches
+  ---
+  duration_ms: 0.774009
+  type: 'test'
+  ...
+# Subtest: the editor integrates composited overlay, worker checks, persistence, and sidebar virtualization
+ok 100 - the editor integrates composited overlay, worker checks, persistence, and sidebar virtualization
+  ---
+  duration_ms: 4.471589
+  type: 'test'
+  ...
+# Subtest: the Arabic editor exposes keyboard and assistive-technology state
+ok 101 - the Arabic editor exposes keyboard and assistive-technology state
+  ---
+  duration_ms: 1.136357
+  type: 'test'
+  ...
+1..101
+# tests 101
+# suites 0
+# pass 101
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 471.326739

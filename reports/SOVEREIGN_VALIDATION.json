@@ -1,0 +1,325 @@
+{
+  "release": "Dhad v1.0.0 Sovereign Edition",
+  "summary": {
+    "passed": 63,
+    "total": 63,
+    "errors": 0
+  },
+  "checks": [
+    {
+      "name": "required:README.md",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:docs/assets/dhad-sovereign-hero.svg",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:docs/MASTER_TRANSFORMATION_SPEC.md",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/tauri.conf.json",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/capabilities/default.json",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/capabilities/mini-assistant.json",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/src/file_commands.rs",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/src/native_commands.rs",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:src-tauri/src/tray.rs",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:tools/run_sovereign_validation_matrix.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:tools/validate_tauri_config.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:tools/package_release.py",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:web_demo/mini-assistant.css",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:web_demo/mini-assistant.js",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "required:web_demo/ui/mini-assistant-runtime.test.mjs",
+      "passed": true,
+      "detail": "release file exists"
+    },
+    {
+      "name": "security:csp-enabled",
+      "passed": true,
+      "detail": "explicit CSP object"
+    },
+    {
+      "name": "security:freeze-prototype",
+      "passed": true,
+      "detail": "Object.prototype frozen"
+    },
+    {
+      "name": "security:frame-ancestors",
+      "passed": true,
+      "detail": "frame embedding denied"
+    },
+    {
+      "name": "security:object-src",
+      "passed": true,
+      "detail": "plugin/object loading denied"
+    },
+    {
+      "name": "security:wasm",
+      "passed": true,
+      "detail": "WASM allowed explicitly"
+    },
+    {
+      "name": "tauri:schema-2.11-compatible",
+      "passed": true,
+      "detail": "tauri-cli 2.11.x"
+    },
+    {
+      "name": "tauri:no-custom-headers",
+      "passed": true,
+      "detail": "unsupported app.security.headers removed"
+    },
+    {
+      "name": "tauri:no-no-redirection-bitmap",
+      "passed": true,
+      "detail": "unsupported window key removed"
+    },
+    {
+      "name": "tauri:no-bundle-vc-runtime",
+      "passed": true,
+      "detail": "unsupported Windows bundle key removed"
+    },
+    {
+      "name": "windows:no-downgrade",
+      "passed": true,
+      "detail": "installer downgrade protection"
+    },
+    {
+      "name": "mini:transparent",
+      "passed": true,
+      "detail": "transparent native window"
+    },
+    {
+      "name": "mini:always-on-top",
+      "passed": true,
+      "detail": "floating overlay"
+    },
+    {
+      "name": "mini:focusable",
+      "passed": true,
+      "detail": "keyboard input"
+    },
+    {
+      "name": "mini:mica",
+      "passed": true,
+      "detail": "Windows Mica preference"
+    },
+    {
+      "name": "mini:mac-material",
+      "passed": true,
+      "detail": "macOS HUD material preference"
+    },
+    {
+      "name": "mini:zoom-disabled",
+      "passed": true,
+      "detail": "stable overlay scale"
+    },
+    {
+      "name": "capabilities:main-only",
+      "passed": true,
+      "detail": "editor capability is isolated"
+    },
+    {
+      "name": "capabilities:mini-only",
+      "passed": true,
+      "detail": "overlay capability is isolated"
+    },
+    {
+      "name": "capabilities:mini-no-dialog",
+      "passed": true,
+      "detail": "overlay does not receive file-dialog permissions"
+    },
+    {
+      "name": "capabilities:local",
+      "passed": true,
+      "detail": "capabilities reject remote origins"
+    },
+    {
+      "name": "native:analysis-worker",
+      "passed": true,
+      "detail": "requires 'spawn_blocking(move || analyze_text_native_blocking'"
+    },
+    {
+      "name": "native:rewrite-worker",
+      "passed": true,
+      "detail": "requires 'spawn_blocking(move || paraphrase_native_blocking'"
+    },
+    {
+      "name": "files:create-new-temp",
+      "passed": true,
+      "detail": "requires '.create_new(true)'"
+    },
+    {
+      "name": "files:sync-before-commit",
+      "passed": true,
+      "detail": "requires 'file.sync_all()'"
+    },
+    {
+      "name": "files:commit-rename",
+      "passed": true,
+      "detail": "requires 'fs::rename(temp_path, destination)'"
+    },
+    {
+      "name": "files:windows-rollback",
+      "passed": true,
+      "detail": "requires 'rollback.bak'"
+    },
+    {
+      "name": "files:windows-restore",
+      "passed": true,
+      "detail": "requires 'fs::rename(backup_path, destination)'"
+    },
+    {
+      "name": "shortcut:fallback",
+      "passed": true,
+      "detail": "requires 'Modifiers::CONTROL | Modifiers::ALT'"
+    },
+    {
+      "name": "overlay:recenter",
+      "passed": true,
+      "detail": "requires 'window.center()'"
+    },
+    {
+      "name": "overlay:restore-topmost",
+      "passed": true,
+      "detail": "requires 'set_always_on_top(true)'"
+    },
+    {
+      "name": "ui:character-count",
+      "passed": true,
+      "detail": "requires 'id=\"characterCount\"'"
+    },
+    {
+      "name": "ui:performance-status",
+      "passed": true,
+      "detail": "requires 'id=\"performanceStatus\"'"
+    },
+    {
+      "name": "ui:reduced-motion",
+      "passed": true,
+      "detail": "requires 'prefers-reduced-motion'"
+    },
+    {
+      "name": "ui:high-contrast",
+      "passed": true,
+      "detail": "requires 'prefers-contrast: more'"
+    },
+    {
+      "name": "ui:ime-aware",
+      "passed": true,
+      "detail": "requires 'compositionstart'"
+    },
+    {
+      "name": "ui:composited-focus",
+      "passed": true,
+      "detail": "requires 'requestAnimationFrame(() => requestAnimationFrame'"
+    },
+    {
+      "name": "ui:mini-shell-binding",
+      "passed": true,
+      "detail": "requires 'const miniShell = document.querySelector(\".mini-shell\")'"
+    },
+    {
+      "name": "ui:character-count-binding",
+      "passed": true,
+      "detail": "requires 'const characterCount = $(\"characterCount\")'"
+    },
+    {
+      "name": "ui:performance-binding",
+      "passed": true,
+      "detail": "requires 'const performanceStatus = $(\"performanceStatus\")'"
+    },
+    {
+      "name": "ui:autohide-timer",
+      "passed": true,
+      "detail": "requires 'let autoHideTimer = 0'"
+    },
+    {
+      "name": "ui:composition-state",
+      "passed": true,
+      "detail": "requires 'let isComposing = false'"
+    },
+    {
+      "name": "ui:overlay-positioning",
+      "passed": true,
+      "detail": "requires 'position: relative'"
+    },
+    {
+      "name": "readme:product-positioning",
+      "passed": true,
+      "detail": "requires '## Product positioning'"
+    },
+    {
+      "name": "readme:architecture",
+      "passed": true,
+      "detail": "requires '## Architecture'"
+    },
+    {
+      "name": "readme:privacy-boundary",
+      "passed": true,
+      "detail": "requires '## Privacy boundary'"
+    },
+    {
+      "name": "readme:desktop-builds",
+      "passed": true,
+      "detail": "requires '## Desktop builds'"
+    },
+    {
+      "name": "readme:verification",
+      "passed": true,
+      "detail": "requires '## Verification'"
+    },
+    {
+      "name": "clean:generated-artifacts",
+      "passed": true,
+      "detail": "clean"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ضاد",
+  "version": "1.0.0",
+  "identifier": "com.dhad.app",
+  "build": {
+    "frontendDist": "../web_demo"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "ضاد — مساعد الكتابة العربية",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 900,
+        "minHeight": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "devtools": false,
+        "allowLinkPreview": false,
+        "browserExtensionsEnabled": false,
+        "zoomHotkeysEnabled": false,
+        "dragDropEnabled": true,
+        "backgroundColor": "#0B0E14"
+      },
+      {
+        "label": "mini-assistant",
+        "title": "ضاد — التدقيق السريع",
+        "url": "mini-assistant.html",
+        "width": 760,
+        "height": 580,
+        "minWidth": 580,
+        "minHeight": 440,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "visible": false,
+        "focus": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": true,
+        "maxWidth": 920,
+        "maxHeight": 760,
+        "maximizable": false,
+        "minimizable": false,
+        "closable": true,
+        "focusable": true,
+        "acceptFirstMouse": true,
+        "allowLinkPreview": false,
+        "browserExtensionsEnabled": false,
+        "zoomHotkeysEnabled": false,
+        "transparent": true,
+        "visibleOnAllWorkspaces": true,
+        "backgroundColor": "#00000000",
+        "windowEffects": {
+          "effects": [
+            "mica",
+            "hudWindow"
+          ],
+          "state": "followsWindowActiveState",
+          "radius": 18
+        }
+      }
+    ],
+    "security": {
+      "freezePrototype": true,
+      "csp": {
+        "default-src": "'self'",
+        "base-uri": "'self'",
+        "object-src": "'none'",
+        "frame-ancestors": "'none'",
+        "form-action": "'self'",
+        "script-src": "'self' 'wasm-unsafe-eval' 'unsafe-eval'",
+        "style-src": "'self'",
+        "img-src": "'self' data: blob:",
+        "font-src": "'self' data:",
+        "connect-src": "'self' ipc: http://ipc.localhost",
+        "worker-src": "'self' blob:",
+        "media-src": "'self' blob:"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Productivity",
+    "publisher": "Dhad Project",
+    "homepage": "https://github.com/dhad-project/dhad",
+    "copyright": "Copyright © 2026 Dhad Project",
+    "shortDescription": "مساعد كتابة عربي محلي وآمن",
+    "longDescription": "ضاد هو مساعد كتابة عربي يعمل محليًا ويدعم التدقيق والتحليل وإعادة الصياغة مع تطبيق سطح مكتب أصلي.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "10.15",
+      "hardenedRuntime": true,
+      "dmg": {
+        "background": "dmg/background.png",
+        "appPosition": {
+          "x": 180,
+          "y": 190
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 190
+        },
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        }
+      }
+    },
+    "windows": {
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper",
+        "silent": true
+      },
+      "nsis": {
+        "compression": "lzma",
+        "installMode": "both",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "headerImage": "windows/nsis-header.bmp",
+        "sidebarImage": "windows/nsis-sidebar.bmp",
+        "uninstallerHeaderImage": "windows/nsis-header.bmp",
+        "installerHooks": "windows/nsis-hooks.nsh",
+        "startMenuFolder": "Dhad",
+        "languages": [
+          "English"
+        ]
+      },
+      "wix": {
+        "bannerPath": "windows/wix-banner.bmp",
+        "dialogImagePath": "windows/wix-dialog.bmp",
+        "fragmentPaths": [
+          "windows/desktop-shortcut.wxs"
+        ],
+        "componentRefs": [
+          "DhadDesktopShortcut"
+        ],
+        "language": "en-US",
+        "upgradeCode": "279f422c-ff6b-528a-962b-dea62c4bb547"
+      },
+      "allowDowngrades": false
+    }
+  }
+}

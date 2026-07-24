@@ -1,0 +1,26 @@
+{
+  "generated_at_utc": "2026-07-23T21:08:08.344410+00:00",
+  "model_count": 2,
+  "total_bytes": 135081019,
+  "duplicates": [],
+  "models": [
+    {
+      "path": "web_demo/models/model_int8.onnx",
+      "before_bytes": 135080470,
+      "before_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
+      "after_bytes": 135080470,
+      "after_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
+      "changed": false,
+      "status": "verified; optional onnx package not installed"
+    },
+    {
+      "path": "web_demo/neural/fixtures/student-fixture.onnx",
+      "before_bytes": 549,
+      "before_sha256": "78a24c2c966a6013db875a7261b1ec49f4807d6a20da438759b3147d441aea55",
+      "after_bytes": 549,
+      "after_sha256": "78a24c2c966a6013db875a7261b1ec49f4807d6a20da438759b3147d441aea55",
+      "changed": false,
+      "status": "verified; optional onnx package not installed"
+    }
+  ]
+}

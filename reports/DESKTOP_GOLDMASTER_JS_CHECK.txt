@@ -1,0 +1,5 @@
+
+> @dhad/web-demo@1.0.0 check
+> node ../tools/check_javascript.mjs
+
+JavaScript syntax verified: 56 first-party files

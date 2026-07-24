@@ -1,0 +1,180 @@
+- schema_version: 2
+  id: GF_WISH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: وش
+  exceptions: []
+  suggestion: ماذا
+  message: 'عامية خليجية: «وش» — بالفصحى: ماذا / ما'
+  explanation: ''
+  examples:
+    bad: وش تبي من السوق؟
+    good: ماذا تريد من السوق؟
+- schema_version: 2
+  id: GF_WISHLON
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: وشلون
+  exceptions: []
+  suggestion: كيف
+  message: 'عامية خليجية: «وشلون» — بالفصحى: كيف'
+  explanation: ''
+  examples:
+    bad: وشلون صار الاختبار؟
+    good: كيف صار الاختبار؟
+- schema_version: 2
+  id: GF_ABGHA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ابغى
+  exceptions: []
+  suggestion: أريد
+  message: 'عامية خليجية: «أبغى» — بالفصحى: أريد'
+  explanation: ''
+  examples:
+    bad: ابغى اروح البيت
+    good: أريد الذهاب إلى البيت
+- schema_version: 2
+  id: GF_TABGHA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: تبغى
+  exceptions: []
+  suggestion: تريد
+  message: 'عامية خليجية: «تبغى» — بالفصحى: تريد'
+  explanation: ''
+  examples:
+    bad: تبغى شيئًا من المقهى؟
+    good: هل تريد شيئًا من المقهى؟
+- schema_version: 2
+  id: GF_YABGHA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: يبغى
+  exceptions: []
+  suggestion: يريد
+  message: 'عامية خليجية: «يبغى» — بالفصحى: يريد'
+  explanation: ''
+  examples:
+    bad: يبغى ينام مبكرًا
+    good: يريد أن ينام مبكرًا
+- schema_version: 2
+  id: GF_TABI
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: تبي
+  exceptions: []
+  suggestion: تريد
+  message: 'عامية خليجية: «تبي» — بالفصحى: تريد'
+  explanation: ''
+  examples:
+    bad: تبي قهوة؟
+    good: هل تريد قهوة؟
+- schema_version: 2
+  id: GF_DAHEEN
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: دحين
+  exceptions: []
+  suggestion: الآن
+  message: 'عامية حجازية: «دحين» — بالفصحى: الآن'
+  explanation: ''
+  examples:
+    bad: دحين وصلنا المطار
+    good: الآن وصلنا المطار
+- schema_version: 2
+  id: GF_WAYID
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: وايد
+  exceptions: []
+  suggestion: كثيرًا
+  message: 'عامية خليجية: «وايد» — بالفصحى: كثير / كثيرًا'
+  explanation: ''
+  examples:
+    bad: الجو حار وايد
+    good: الجو حار كثيرًا
+- schema_version: 2
+  id: GF_MUB
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مب
+  exceptions: []
+  suggestion: ليس
+  message: 'عامية خليجية: «مب» — بالفصحى: ليس'
+  explanation: ''
+  examples:
+    bad: هذا مب صحيح
+    good: هذا ليس صحيحًا

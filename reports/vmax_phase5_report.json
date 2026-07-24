@@ -1,0 +1,54 @@
+{
+  "phase": 5,
+  "generated_at": "2026-07-22T23:30:00+03:00",
+  "pwa": {
+    "cache_version": "vmax-5.0.0",
+    "immutable_strategy": "CacheFirst",
+    "shell_strategy": "StaleWhileRevalidate",
+    "atomic_precache": true,
+    "offline_model_bytes": 135080470,
+    "offline_model_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186"
+  },
+  "storage": {
+    "database": "dhad-vmax",
+    "version": 1,
+    "stores": [
+      "documents",
+      "yjsUpdates",
+      "outbox",
+      "dictionaries",
+      "settings"
+    ],
+    "atomic_rollback_verified": true,
+    "quota_retry_verified": true,
+    "online_outbox_recovery_verified": true
+  },
+  "browser": {
+    "offline_reload": "passed",
+    "console_errors": 0,
+    "console_warnings": 0,
+    "rules": 130,
+    "neural_provider": "webgpu-preferred",
+    "indexeddb_restore": "passed",
+    "stress_characters": 19500,
+    "stress_diagnostics": 2500,
+    "stress_rendered_sidebar_cards": 7,
+    "long_tasks_over_50ms": 0
+  },
+  "verification": {
+    "python_passed": 1788,
+    "python_skipped": 1,
+    "rust_passed": 16,
+    "clippy_warnings": 0,
+    "javascript_passed": 53,
+    "wheel_bytes": 484247,
+    "wheel_clean_install": "passed",
+    "installed_routes": 22
+  },
+  "archive": {
+    "path": "dhad-vMAX.zip",
+    "checksum_file": "reports/release-archives/SHA256SUMS-vMAX-original.txt",
+    "integrity_command": "unzip -t dhad-vMAX.zip",
+    "status": "historical release artifact; omitted from the clean source archive"
+  }
+}

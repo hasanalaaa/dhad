@@ -1,0 +1,3960 @@
+{
+  "schema_version": 1,
+  "version": "1.1.0",
+  "license": "AGPL-3.0-or-later",
+  "entries": [
+    {
+      "lemma": "أخير",
+      "root": "أخر",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 6900,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أخيرة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أربع",
+      "root": "ربع",
+      "pattern": "أفعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "semantic": "numeral"
+      },
+      "forms": [
+        {
+          "form": "أربعة",
+          "features": {
+            "gender": "masculine_form"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أسبوع",
+      "root": "سبع",
+      "pattern": "أفعول",
+      "pos": "noun",
+      "frequency": 6100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أسابيع",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أستاذ",
+      "root": "أستاذ",
+      "pattern": "جامد",
+      "pos": "noun",
+      "frequency": 7000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أساتذة",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "أستاذة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أعلن",
+      "root": "علن",
+      "pattern": "أفعل",
+      "pos": "verb",
+      "frequency": 6100,
+      "features": {},
+      "forms": [
+        {
+          "form": "يعلن",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أمر",
+      "root": "أمر",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 9600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أمور",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أمس",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 13000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أن",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 21250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أنا",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 15750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أنت",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 15500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أنتم",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 15250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أنهى",
+      "root": "نهي",
+      "pattern": "أفعل",
+      "pos": "verb",
+      "frequency": 4700,
+      "features": {},
+      "forms": [
+        {
+          "form": "ينهي",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "أو",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 19000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أيضًا",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 12500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "إذ",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 17750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "إذا",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 18000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "إصدار",
+      "root": "صدر",
+      "pattern": "إفعال",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "إصدارات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "إلى",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 24500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "إن",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 21000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "إنسان",
+      "root": "أنس",
+      "pattern": "إفعال",
+      "pos": "noun",
+      "frequency": 7800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "ناس",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "إنسانة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اتجاه",
+      "root": "وجه",
+      "pattern": "افتعال",
+      "pos": "noun",
+      "frequency": 5600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "اتجاهات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اتصال",
+      "root": "وصل",
+      "pattern": "افتعال",
+      "pos": "verbal_noun",
+      "frequency": 5800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "اتصالات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اتصل",
+      "root": "وصل",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 5800,
+      "features": {},
+      "forms": [
+        {
+          "form": "يتصل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اتصال",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اجتماع",
+      "root": "جمع",
+      "pattern": "افتعال",
+      "pos": "verbal_noun",
+      "frequency": 7200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "اجتماعات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اجتمع",
+      "root": "جمع",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 5400,
+      "features": {},
+      "forms": [
+        {
+          "form": "يجتمع",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اجتماع",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اختبار",
+      "root": "خبر",
+      "pattern": "افتعال",
+      "pos": "verbal_noun",
+      "frequency": 6000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "اختبارات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اختبر",
+      "root": "خبر",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 3800,
+      "features": {},
+      "forms": [
+        {
+          "form": "يختبر",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اختبار",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "استخدام",
+      "root": "خدم",
+      "pattern": "استفعال",
+      "pos": "verbal_noun",
+      "frequency": 7100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "استخدامات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "استخدم",
+      "root": "خدم",
+      "pattern": "استفعل",
+      "pos": "verb",
+      "frequency": 7200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يستخدم",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "استخدام",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "استقبال",
+      "root": "قبل",
+      "pattern": "استفعال",
+      "pos": "verbal_noun",
+      "frequency": 4300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "استقبل",
+      "root": "قبل",
+      "pattern": "استفعل",
+      "pos": "verb",
+      "frequency": 4200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يستقبل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "استقبال",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "استمر",
+      "root": "مرر",
+      "pattern": "استفعل",
+      "pos": "verb",
+      "frequency": 5200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يستمر",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "اكتمل",
+      "root": "كمل",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 4300,
+      "features": {},
+      "forms": [
+        {
+          "form": "يكتمل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "سيكتمل",
+          "features": {
+            "aspect": "future"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "الآن",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 13500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "التي",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 16250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "الذي",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 16500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "الذين",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 16000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "اليوم",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 13250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "انتخابات",
+      "root": "نخب",
+      "pattern": "افتعال",
+      "pos": "noun",
+      "frequency": 4500,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "انتخاب",
+          "features": {
+            "number": "singular"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "انتخب",
+      "root": "نخب",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 3500,
+      "features": {},
+      "forms": [
+        {
+          "form": "ينتخب",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "انتخابات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "انتظار",
+      "root": "نظر",
+      "pattern": "افتعال",
+      "pos": "verbal_noun",
+      "frequency": 4200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "انتظر",
+      "root": "نظر",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 4600,
+      "features": {},
+      "forms": [
+        {
+          "form": "ينتظر",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "انتظار",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "انتهى",
+      "root": "نهي",
+      "pattern": "افتعل",
+      "pos": "verb",
+      "frequency": 6200,
+      "features": {},
+      "forms": [
+        {
+          "form": "ينتهي",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "بدأ",
+      "root": "بدأ",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 7400,
+      "features": {},
+      "forms": [
+        {
+          "form": "يبدأ",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "ابدأ",
+          "features": {
+            "mood": "imperative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "برمج",
+      "root": "برمج",
+      "pattern": "فعلل",
+      "pos": "verb",
+      "frequency": 3100,
+      "features": {},
+      "forms": [
+        {
+          "form": "يبرمج",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "برمجة",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "برمجة",
+      "root": "برمج",
+      "pattern": "فعللة",
+      "pos": "verbal_noun",
+      "frequency": 4600,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "برمجي",
+      "root": "برمج",
+      "pattern": "فعللي",
+      "pos": "adjective",
+      "frequency": 4800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "برمجية",
+          "features": {
+            "gender": "feminine"
+          }
+        },
+        {
+          "form": "البرمجي",
+          "features": {
+            "definiteness": "definite"
+          }
+        },
+        {
+          "form": "البرمجية",
+          "features": {
+            "gender": "feminine",
+            "definiteness": "definite"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "بعد",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 22750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "بعض",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 11750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "بل",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 18750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "بيان",
+      "root": "بين",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 7600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "بيانات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "بيانات",
+      "root": "بين",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 8200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "بيان",
+          "features": {
+            "number": "singular"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "بين",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 23500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "تالي",
+      "root": "تلو",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 6200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "التالية",
+          "features": {
+            "gender": "feminine",
+            "definiteness": "definite"
+          }
+        },
+        {
+          "form": "التالي",
+          "features": {
+            "definiteness": "definite"
+          }
+        },
+        {
+          "form": "تالية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "تحليل",
+      "root": "حلل",
+      "pattern": "تفعيل",
+      "pos": "verbal_noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "تحليلات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "تغير",
+      "root": "غير",
+      "pattern": "تفعل",
+      "pos": "verb",
+      "frequency": 4300,
+      "features": {},
+      "forms": [
+        {
+          "form": "يتغير",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "تغيير",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "تقرير",
+      "root": "قرر",
+      "pattern": "تفعيل",
+      "pos": "noun",
+      "frequency": 8100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "تقارير",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "تلك",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 16750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ثلاث",
+      "root": "ثلث",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "semantic": "numeral"
+      },
+      "forms": [
+        {
+          "form": "ثلاثة",
+          "features": {
+            "gender": "masculine_form"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "ثم",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 19250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "جاء",
+      "root": "جيء",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 7000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يأتي",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "جئت",
+          "features": {
+            "person": "1s"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جامعة",
+      "root": "جمع",
+      "pattern": "فاعلة",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "جامعات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جدا",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 12250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "جدول",
+      "root": "جدل",
+      "pattern": "فعلل",
+      "pos": "noun",
+      "frequency": 5700,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "جداول",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جديد",
+      "root": "جدد",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 7500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "جديدة",
+          "features": {
+            "gender": "feminine"
+          }
+        },
+        {
+          "form": "جدد",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جذر",
+      "root": "جذر",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 5300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "جذور",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جملة",
+      "root": "جمل",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 6200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "جمل",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "جميع",
+      "root": "جمع",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 9600,
+      "features": {
+        "quantifier": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "جميل",
+      "root": "جمل",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 7300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "جميلة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حاضر",
+      "root": "حضر",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 5200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "حاضرة",
+          "features": {
+            "gender": "feminine"
+          }
+        },
+        {
+          "form": "حاضرون",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حال",
+      "root": "حول",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 8800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أحوال",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حالي",
+      "root": "حول",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "حالية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حتى",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 18250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "حسن",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3200,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "حضر",
+      "root": "حضر",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 4800,
+      "features": {},
+      "forms": [
+        {
+          "form": "يحضر",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حلل",
+      "root": "حلل",
+      "pattern": "فعلل",
+      "pos": "verb",
+      "frequency": 4200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يحلل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "تحليل",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "حول",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 21750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "حياة",
+      "root": "حيي",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 7000,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "حين",
+      "root": "حين",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 8000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أحيان",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "خاطئ",
+      "root": "خطأ",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 5900,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "خاطئة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "خطة",
+      "root": "خطط",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "خطط",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "خلال",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 22250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "خمس",
+      "root": "خمس",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "semantic": "numeral"
+      },
+      "forms": [
+        {
+          "form": "خمسة",
+          "features": {
+            "gender": "masculine_form"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "داخلي",
+      "root": "دخل",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 6200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "داخلية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "دراسة",
+      "root": "درس",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 7200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "دراسات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "درس",
+      "root": "درس",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "دروس",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "دقيقة",
+      "root": "دقق",
+      "pattern": "فعيلة",
+      "pos": "noun",
+      "frequency": 5300,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "دقائق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "دون",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 22000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ذلك",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 17000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ذهب",
+      "root": "ذهب",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 7200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يذهب",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اذهب",
+          "features": {
+            "mood": "imperative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "راجع",
+      "root": "رجع",
+      "pattern": "فاعل",
+      "pos": "verb",
+      "frequency": 5900,
+      "features": {},
+      "forms": [
+        {
+          "form": "يراجع",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "مراجعة",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "رجل",
+      "root": "رجل",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 8800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "رجال",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "رسالة",
+      "root": "رسل",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "رسائل",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "رقم",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 11000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "زال",
+      "root": "زول",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 6200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يزال",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "ما زال",
+          "features": {
+            "construction": "negative_continuative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "زكاة",
+      "root": "زكو",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 3200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "زيد",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3200,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "سابقة",
+      "root": "سبق",
+      "pattern": "فاعلة",
+      "pos": "noun",
+      "frequency": 3900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "سوابق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "سارة",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3500,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ساعة",
+      "root": "سوع",
+      "pattern": "فاعلة",
+      "pos": "noun",
+      "frequency": 7200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "ساعات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "سامر",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3100,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "سجل",
+      "root": "سجل",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "سجلات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "سليم",
+      "root": "سلم",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 6100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "سليمة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "سوق",
+      "root": "سوق",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 7600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أسواق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شارك",
+      "root": "شرك",
+      "pattern": "فاعل",
+      "pos": "verb",
+      "frequency": 5000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يشارك",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "شاركوا",
+          "features": {
+            "person": "3mp"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شرح",
+      "root": "شرح",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 5200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يشرح",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شركة",
+      "root": "شرك",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "شركات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شغل",
+      "root": "شغل",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أشغال",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شيء",
+      "root": "شيء",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 9000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أشياء",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "صباح",
+      "root": "صبح",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "صباحًا",
+          "features": {
+            "case": "accusative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "صحيح",
+      "root": "صحح",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 7300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "صحيحة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "صرف",
+      "root": "صرف",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 5400,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "صرفي",
+      "root": "صرف",
+      "pattern": "فعلي",
+      "pos": "adjective",
+      "frequency": 4300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "صرفية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "صلاة",
+      "root": "صلو",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 5500,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "صلوات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "ضاد",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3000,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "طالب",
+      "root": "طلب",
+      "pattern": "فاعل",
+      "pos": "noun",
+      "frequency": 7900,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "طلاب",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "طالبة",
+          "features": {
+            "gender": "feminine"
+          }
+        },
+        {
+          "form": "طالبات",
+          "features": {
+            "number": "plural",
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "طريق",
+      "root": "طرق",
+      "pattern": "فعيل",
+      "pos": "noun",
+      "frequency": 8200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "طرق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "طريقة",
+      "root": "طرق",
+      "pattern": "فعيلة",
+      "pos": "noun",
+      "frequency": 7400,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "طرق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "طويل",
+      "root": "طول",
+      "pattern": "فعيل",
+      "pos": "adjective",
+      "frequency": 7100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "طويلة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "عربي",
+      "root": "عرب",
+      "pattern": "فعيل",
+      "pos": "noun",
+      "frequency": 7800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "عربية",
+          "features": {
+            "gender": "feminine"
+          }
+        },
+        {
+          "form": "عرب",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "على",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 24250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "عمر",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3400,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "عمرو",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3100,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "عمل",
+      "root": "عمل",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 9000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يعمل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اعمل",
+          "features": {
+            "mood": "imperative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "عن",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 24000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "عند",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 23250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "غدًا",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 12750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "غير",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 11250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "فترة",
+      "root": "فتر",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 6400,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "فترات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "فريق",
+      "root": "فرق",
+      "pattern": "فعيل",
+      "pos": "noun",
+      "frequency": 7300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "فرق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "فهم",
+      "root": "فهم",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 6400,
+      "features": {},
+      "forms": [
+        {
+          "form": "يفهم",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "في",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 25000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "فيديو",
+      "root": null,
+      "pattern": null,
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "loanword": true
+      },
+      "forms": [
+        {
+          "form": "فيديوهات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "قال",
+      "root": "قول",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 15000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يقول",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "قل",
+          "features": {
+            "mood": "imperative"
+          }
+        },
+        {
+          "form": "قيل",
+          "features": {
+            "voice": "passive"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "قام",
+      "root": "قوم",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 12000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يقوم",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3m"
+          }
+        },
+        {
+          "form": "قم",
+          "features": {
+            "mood": "imperative",
+            "person": "2m"
+          }
+        },
+        {
+          "form": "قامت",
+          "features": {
+            "aspect": "perfect",
+            "person": "3f"
+          }
+        },
+        {
+          "form": "قاموا",
+          "features": {
+            "aspect": "perfect",
+            "person": "3mp"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "قبل",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 22500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "قد",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 19500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "قرأ",
+      "root": "قرأ",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 8200,
+      "features": {},
+      "forms": [
+        {
+          "form": "يقرأ",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اقرأ",
+          "features": {
+            "mood": "imperative"
+          }
+        },
+        {
+          "form": "قراءة",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "قراءة",
+      "root": "قرأ",
+      "pattern": "فعالة",
+      "pos": "verbal_noun",
+      "frequency": 6100,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "قرار",
+      "root": "قرر",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 7600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "قرارات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "قصة",
+      "root": "قصص",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 4800,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "قصص",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كاتب",
+      "root": "كتب",
+      "pattern": "فاعل",
+      "pos": "noun",
+      "frequency": 5200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "كتاب",
+          "features": {
+            "relation": "derived"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كاف",
+      "root": "كفي",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 5100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "كافية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كان",
+      "root": "كون",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 19000,
+      "features": {},
+      "forms": [
+        {
+          "form": "يكون",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "كنت",
+          "features": {
+            "person": "1_or_2"
+          }
+        },
+        {
+          "form": "كانوا",
+          "features": {
+            "person": "3mp"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كتاب",
+      "root": "كتب",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 12000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "كتب",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كتابة",
+      "root": "كتب",
+      "pattern": "فعالة",
+      "pos": "verbal_noun",
+      "frequency": 6000,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "كتب",
+      "root": "كتب",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 9500,
+      "features": {},
+      "forms": [
+        {
+          "form": "يكتب",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "اكتب",
+          "features": {
+            "mood": "imperative"
+          }
+        },
+        {
+          "form": "مكتوب",
+          "features": {
+            "voice": "passive_participle"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كل",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 12000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "كلمة",
+      "root": "كلم",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 7600,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "كلمات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كود",
+      "root": "كود",
+      "pattern": "جامد",
+      "pos": "noun",
+      "frequency": 4800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أكواد",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "كيف",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 12000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "لا",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 20250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "لاحقة",
+      "root": "لحق",
+      "pattern": "فاعلة",
+      "pos": "noun",
+      "frequency": 3900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "لواحق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "لجنة",
+      "root": "لجن",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 5700,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "لجان",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "لدى",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 23000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "لغة",
+      "root": "لغو",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 8000,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "لغات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "لغوي",
+      "root": "لغو",
+      "pattern": "فعلي",
+      "pos": "adjective",
+      "frequency": 5200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "لغوية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "لكن",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 18500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "لم",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 20500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "لن",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 20750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ما",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 20000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "ماء",
+      "root": "موه",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 8500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مياه",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "متأخر",
+      "root": "أخر",
+      "pattern": "متفعل",
+      "pos": "adjective",
+      "frequency": 5500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "متأخرة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "محرك",
+      "root": "حرك",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 6100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "محركات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مدرسة",
+      "root": "درس",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 7500,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مدارس",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مدينة",
+      "root": "مدن",
+      "pattern": "فعيلة",
+      "pos": "noun",
+      "frequency": 7200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مدن",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مراجعة",
+      "root": "رجع",
+      "pattern": "مفاعلة",
+      "pos": "verbal_noun",
+      "frequency": 7300,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مراجعات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مرة",
+      "root": "مرر",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 7100,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مرات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مرجع",
+      "root": "رجع",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 7000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مراجع",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مرحلة",
+      "root": "رحل",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 7600,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مراحل",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مركز",
+      "root": "ركز",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 6200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مراكز",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مسؤول",
+      "root": "سأل",
+      "pattern": "مفعول",
+      "pos": "noun",
+      "frequency": 5700,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مسؤولون",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مسؤولين",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مسؤولة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مستخدم",
+      "root": "خدم",
+      "pattern": "مستفعل",
+      "pos": "noun",
+      "frequency": 6200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مستخدمون",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مستخدمين",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مشروع",
+      "root": "شرع",
+      "pattern": "مفعول",
+      "pos": "noun",
+      "frequency": 8200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مشروعات",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مشاريع",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مشكلة",
+      "root": "شكل",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 7000,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مشكلات",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مشاكل",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مع",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 23750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "معتمد",
+      "root": "عمد",
+      "pattern": "مفتعل",
+      "pos": "adjective",
+      "frequency": 5600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "معتمدة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "معجم",
+      "root": "عجم",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 5000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "معاجم",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "معلن",
+      "root": "علن",
+      "pattern": "مفعل",
+      "pos": "adjective",
+      "frequency": 4300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "معلنة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "معلومة",
+      "root": "علم",
+      "pattern": "مفعولة",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "معلومات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "معنى",
+      "root": "عني",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "معان",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "معيار",
+      "root": "عير",
+      "pattern": "مفعال",
+      "pos": "noun",
+      "frequency": 6100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "معايير",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مفيد",
+      "root": "فيد",
+      "pattern": "مفعل",
+      "pos": "adjective",
+      "frequency": 5400,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مفيدة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مقترح",
+      "root": "طرح",
+      "pattern": "مفتعل",
+      "pos": "noun",
+      "frequency": 4800,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مقترحات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مكتبة",
+      "root": "كتب",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 5600,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مكتبات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "ملاحظة",
+      "root": "لحظ",
+      "pattern": "مفاعلة",
+      "pos": "noun",
+      "frequency": 6000,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "ملاحظات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "ملف",
+      "root": "لفف",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "ملفات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "من",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 24750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "مناسب",
+      "root": "نسب",
+      "pattern": "مفاعل",
+      "pos": "adjective",
+      "frequency": 5700,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مناسبة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "منطقة",
+      "root": "نطق",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 6100,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مناطق",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مهم",
+      "root": "همم",
+      "pattern": "مفعل",
+      "pos": "adjective",
+      "frequency": 7000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مهمة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مهمة",
+      "root": "همم",
+      "pattern": "مفعلة",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "مهام",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "مهندس",
+      "root": "هندس",
+      "pattern": "مفعلل",
+      "pos": "noun",
+      "frequency": 5600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "مهندسون",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مهندسين",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "مهندسات",
+          "features": {
+            "number": "plural",
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "موظف",
+      "root": "وظف",
+      "pattern": "مفعل",
+      "pos": "noun",
+      "frequency": 6500,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "موظفون",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "موظفين",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "موظفة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نتيجة",
+      "root": "نتج",
+      "pattern": "فعيلة",
+      "pos": "noun",
+      "frequency": 6900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "نتائج",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نحن",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 14250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "نحو",
+      "root": "نحو",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 5700,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "نسخة",
+      "root": "نسخ",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 6800,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "نسخ",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نشر",
+      "root": "نشر",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 5800,
+      "features": {},
+      "forms": [
+        {
+          "form": "ينشر",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نص",
+      "root": "نصص",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 9200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "نصوص",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نظام",
+      "root": "نظم",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 8000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أنظمة",
+          "features": {
+            "number": "plural"
+          }
+        },
+        {
+          "form": "نظم",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نفس",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 11500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "نقاش",
+      "root": "نقش",
+      "pattern": "فعال",
+      "pos": "noun",
+      "frequency": 5000,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "نقاشات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نهائي",
+      "root": "نهي",
+      "pattern": "فعال",
+      "pos": "adjective",
+      "frequency": 6100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "نهائية",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "هذا",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 17500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هذه",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 17250,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هل",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 19750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هم",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 14500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هنا",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 14000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هناك",
+      "root": null,
+      "pattern": null,
+      "pos": "adverb",
+      "frequency": 13750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هو",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 15000,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هي",
+      "root": null,
+      "pattern": null,
+      "pos": "pronoun",
+      "frequency": 14750,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "هيئة",
+      "root": "هيأ",
+      "pattern": "فعلة",
+      "pos": "noun",
+      "frequency": 5200,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "هيئات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "واضح",
+      "root": "وضح",
+      "pattern": "فاعل",
+      "pos": "adjective",
+      "frequency": 6700,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "واضحة",
+          "features": {
+            "gender": "feminine"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "والى",
+      "root": "ولي",
+      "pattern": "فاعل",
+      "pos": "verb",
+      "frequency": 1800,
+      "features": {},
+      "forms": [
+        {
+          "form": "يوالي",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "موالاة",
+          "features": {
+            "pos": "verbal_noun"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "والي",
+      "root": "ولي",
+      "pattern": "فاعل",
+      "pos": "noun",
+      "frequency": 4300,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "ولاة",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وجد",
+      "root": "وجد",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 6300,
+      "features": {},
+      "forms": [
+        {
+          "form": "يوجد",
+          "features": {
+            "voice": "passive"
+          }
+        },
+        {
+          "form": "يجد",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وزارة",
+      "root": "وزر",
+      "pattern": "فعالة",
+      "pos": "noun",
+      "frequency": 5900,
+      "features": {
+        "gender": "feminine"
+      },
+      "forms": [
+        {
+          "form": "وزارات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وزن",
+      "root": "وزن",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 5100,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أوزان",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وصل",
+      "root": "وصل",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 6800,
+      "features": {},
+      "forms": [
+        {
+          "form": "يصل",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "صل",
+          "features": {
+            "mood": "imperative"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وضح",
+      "root": "وضح",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 5100,
+      "features": {},
+      "forms": [
+        {
+          "form": "يوضح",
+          "features": {
+            "aspect": "imperfect"
+          }
+        },
+        {
+          "form": "توضح",
+          "features": {
+            "aspect": "imperfect"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "وضوح",
+      "root": "وضح",
+      "pattern": "فعول",
+      "pos": "verbal_noun",
+      "frequency": 5200,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": []
+    },
+    {
+      "lemma": "وفق",
+      "root": null,
+      "pattern": null,
+      "pos": "particle",
+      "frequency": 21500,
+      "features": {
+        "closed_class": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "وقت",
+      "root": "وقت",
+      "pattern": "فعل",
+      "pos": "noun",
+      "frequency": 9600,
+      "features": {
+        "gender": "masculine"
+      },
+      "forms": [
+        {
+          "form": "أوقات",
+          "features": {
+            "number": "plural"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "يوسف",
+      "root": null,
+      "pattern": null,
+      "pos": "proper_noun",
+      "frequency": 3300,
+      "features": {
+        "named_entity": true
+      },
+      "forms": []
+    },
+    {
+      "lemma": "أراد",
+      "root": "رود",
+      "pattern": "أفعل",
+      "pos": "verb",
+      "frequency": 8400,
+      "features": {},
+      "forms": [
+        {
+          "form": "أريد",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1s"
+          }
+        },
+        {
+          "form": "نريد",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1p"
+          }
+        },
+        {
+          "form": "تريد",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2_or_3f"
+          }
+        },
+        {
+          "form": "يريد",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3m"
+          }
+        },
+        {
+          "form": "تريدون",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2p"
+          }
+        },
+        {
+          "form": "يريدون",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3p"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "لعب",
+      "root": "لعب",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 5200,
+      "features": {},
+      "forms": [
+        {
+          "form": "ألعب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1s"
+          }
+        },
+        {
+          "form": "نلعب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1p"
+          }
+        },
+        {
+          "form": "تلعب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2_or_3f"
+          }
+        },
+        {
+          "form": "يلعب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3m"
+          }
+        },
+        {
+          "form": "تلعبون",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2p"
+          }
+        },
+        {
+          "form": "يلعبون",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3p"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "نام",
+      "root": "نوم",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 5100,
+      "features": {},
+      "forms": [
+        {
+          "form": "أنام",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1s"
+          }
+        },
+        {
+          "form": "ننام",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1p"
+          }
+        },
+        {
+          "form": "تنام",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2_or_3f"
+          }
+        },
+        {
+          "form": "ينام",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3m"
+          }
+        }
+      ]
+    },
+    {
+      "lemma": "شرب",
+      "root": "شرب",
+      "pattern": "فعل",
+      "pos": "verb",
+      "frequency": 4700,
+      "features": {},
+      "forms": [
+        {
+          "form": "أشرب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1s"
+          }
+        },
+        {
+          "form": "نشرب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "1p"
+          }
+        },
+        {
+          "form": "تشرب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "2_or_3f"
+          }
+        },
+        {
+          "form": "يشرب",
+          "features": {
+            "aspect": "imperfect",
+            "person": "3m"
+          }
+        }
+      ]
+    }
+  ]
+}

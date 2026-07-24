@@ -1,0 +1,292 @@
+{
+  "dhad_version": "0.7.0",
+  "dataset": "dhad-controlled-gold-v1",
+  "split": "test",
+  "cases": 750,
+  "words": 13226,
+  "span": {
+    "true_positives": 475,
+    "false_positives": 84,
+    "false_negatives": 67,
+    "precision": 0.8497316636851521,
+    "recall": 0.8763837638376384,
+    "f0.5": 0.8549316054715622
+  },
+  "correction": {
+    "true_positives": 475,
+    "false_positives": 84,
+    "false_negatives": 67,
+    "precision": 0.8497316636851521,
+    "recall": 0.8763837638376384,
+    "f0.5": 0.8549316054715622
+  },
+  "sentence_exact_accuracy": 0.8253333333333334,
+  "sentence_error_detection": {
+    "true_positives": 398,
+    "false_positives": 0,
+    "false_negatives": 19,
+    "precision": 1.0,
+    "recall": 0.9544364508393285,
+    "f0.5": 0.9905425584868094
+  },
+  "mean_reciprocal_rank": 1.0,
+  "false_positives_per_1000_words": 6.35112656887948,
+  "slices": {
+    "domain": {
+      "academic": {
+        "cases": 167,
+        "words": 2986,
+        "span": {
+          "true_positives": 81,
+          "false_positives": 0,
+          "false_negatives": 3,
+          "precision": 1.0,
+          "recall": 0.9642857142857143,
+          "f0.5": 0.9926470588235292
+        },
+        "correction": {
+          "true_positives": 81,
+          "false_positives": 0,
+          "false_negatives": 3,
+          "precision": 1.0,
+          "recall": 0.9642857142857143,
+          "f0.5": 0.9926470588235292
+        },
+        "sentence_exact_accuracy": 0.9820359281437125,
+        "false_positives_per_1000_words": 0.0
+      },
+      "administrative": {
+        "cases": 83,
+        "words": 1478,
+        "span": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "correction": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "sentence_exact_accuracy": 1.0,
+        "false_positives_per_1000_words": 0.0
+      },
+      "dialect": {
+        "cases": 167,
+        "words": 3018,
+        "span": {
+          "true_positives": 166,
+          "false_positives": 28,
+          "false_negatives": 42,
+          "precision": 0.8556701030927835,
+          "recall": 0.7980769230769231,
+          "f0.5": 0.8434959349593497
+        },
+        "correction": {
+          "true_positives": 166,
+          "false_positives": 28,
+          "false_negatives": 42,
+          "precision": 0.8556701030927835,
+          "recall": 0.7980769230769231,
+          "f0.5": 0.8434959349593497
+        },
+        "sentence_exact_accuracy": 0.6646706586826348,
+        "false_positives_per_1000_words": 9.27766732935719
+      },
+      "educational": {
+        "cases": 166,
+        "words": 2952,
+        "span": {
+          "true_positives": 74,
+          "false_positives": 28,
+          "false_negatives": 9,
+          "precision": 0.7254901960784313,
+          "recall": 0.891566265060241,
+          "f0.5": 0.7535641547861508
+        },
+        "correction": {
+          "true_positives": 74,
+          "false_positives": 28,
+          "false_negatives": 9,
+          "precision": 0.7254901960784313,
+          "recall": 0.891566265060241,
+          "f0.5": 0.7535641547861508
+        },
+        "sentence_exact_accuracy": 0.7951807228915663,
+        "false_positives_per_1000_words": 9.48509485094851
+      },
+      "journalism": {
+        "cases": 84,
+        "words": 1401,
+        "span": {
+          "true_positives": 80,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "precision": 1.0,
+          "recall": 0.9523809523809523,
+          "f0.5": 0.9900990099009901
+        },
+        "correction": {
+          "true_positives": 80,
+          "false_positives": 0,
+          "false_negatives": 4,
+          "precision": 1.0,
+          "recall": 0.9523809523809523,
+          "f0.5": 0.9900990099009901
+        },
+        "sentence_exact_accuracy": 0.9523809523809523,
+        "false_positives_per_1000_words": 0.0
+      },
+      "social": {
+        "cases": 83,
+        "words": 1391,
+        "span": {
+          "true_positives": 74,
+          "false_positives": 28,
+          "false_negatives": 9,
+          "precision": 0.7254901960784313,
+          "recall": 0.891566265060241,
+          "f0.5": 0.7535641547861508
+        },
+        "correction": {
+          "true_positives": 74,
+          "false_positives": 28,
+          "false_negatives": 9,
+          "precision": 0.7254901960784313,
+          "recall": 0.891566265060241,
+          "f0.5": 0.7535641547861508
+        },
+        "sentence_exact_accuracy": 0.5903614457831325,
+        "false_positives_per_1000_words": 20.1294033069734
+      }
+    },
+    "dialect": {
+      "egyptian": {
+        "cases": 41,
+        "words": 738,
+        "span": {
+          "true_positives": 82,
+          "false_positives": 14,
+          "false_negatives": 0,
+          "precision": 0.8541666666666666,
+          "recall": 1.0,
+          "f0.5": 0.8798283261802574
+        },
+        "correction": {
+          "true_positives": 82,
+          "false_positives": 14,
+          "false_negatives": 0,
+          "precision": 0.8541666666666666,
+          "recall": 1.0,
+          "f0.5": 0.8798283261802574
+        },
+        "sentence_exact_accuracy": 0.6585365853658537,
+        "false_positives_per_1000_words": 18.97018970189702
+      },
+      "gulf": {
+        "cases": 42,
+        "words": 756,
+        "span": {
+          "true_positives": 84,
+          "false_positives": 14,
+          "false_negatives": 42,
+          "precision": 0.8571428571428571,
+          "recall": 0.6666666666666666,
+          "f0.5": 0.8108108108108107
+        },
+        "correction": {
+          "true_positives": 84,
+          "false_positives": 14,
+          "false_negatives": 42,
+          "precision": 0.8571428571428571,
+          "recall": 0.6666666666666666,
+          "f0.5": 0.8108108108108107
+        },
+        "sentence_exact_accuracy": 0.0,
+        "false_positives_per_1000_words": 18.51851851851852
+      },
+      "iraqi": {
+        "cases": 42,
+        "words": 760,
+        "span": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "correction": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "sentence_exact_accuracy": 1.0,
+        "false_positives_per_1000_words": 0.0
+      },
+      "levantine": {
+        "cases": 42,
+        "words": 764,
+        "span": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "correction": {
+          "true_positives": 0,
+          "false_positives": 0,
+          "false_negatives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f0.5": 1.0
+        },
+        "sentence_exact_accuracy": 1.0,
+        "false_positives_per_1000_words": 0.0
+      },
+      "msa": {
+        "cases": 583,
+        "words": 10208,
+        "span": {
+          "true_positives": 309,
+          "false_positives": 56,
+          "false_negatives": 25,
+          "precision": 0.8465753424657534,
+          "recall": 0.9251497005988024,
+          "f0.5": 0.8612040133779264
+        },
+        "correction": {
+          "true_positives": 309,
+          "false_positives": 56,
+          "false_negatives": 25,
+          "precision": 0.8465753424657534,
+          "recall": 0.9251497005988024,
+          "f0.5": 0.8612040133779264
+        },
+        "sentence_exact_accuracy": 0.8713550600343053,
+        "false_positives_per_1000_words": 5.4858934169279
+      }
+    }
+  },
+  "failures": [],
+  "categories": [],
+  "phase5_regression": {
+    "baseline_version": "0.6.0",
+    "precision_delta": 0.0,
+    "recall_delta": 0.0,
+    "f0.5_delta": 0.0,
+    "fp_per_1000_delta": 0.0,
+    "mechanical_scope_unchanged": true
+  }
+}

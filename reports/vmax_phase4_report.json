@@ -1,0 +1,76 @@
+{
+  "phase": 4,
+  "generated_at": "2026-07-22T22:38:57+03:00",
+  "status": "accepted-local",
+  "contracts": [
+    "dhad-yjs-update-v1",
+    "dhad-sync-v4",
+    "dhad-e2ee-v1"
+  ],
+  "crdt": {
+    "engine": "pycrdt 0.14.1 backed by Rust/Yrs",
+    "yjs_binary_compatibility": "bidirectional test passed",
+    "state_vectors": true,
+    "binary_delta_updates": true,
+    "sticky_indexes": true,
+    "garbage_collection": true,
+    "legacy_visible_text_migration": true
+  },
+  "sync": {
+    "redis_client": "redis-py 8.0.1 asyncio",
+    "live_fanout": "Redis Pub/Sub",
+    "journal": "Redis Streams",
+    "resume_cursors": true,
+    "encrypted_snapshots": true,
+    "paged_recovery": true,
+    "pubsub_gap_recovery": true,
+    "slow_peer_isolation": true
+  },
+  "e2ee": {
+    "identity": "Ed25519 pinned fingerprints",
+    "key_agreement": "X25519",
+    "kdf": "HKDF-SHA-256",
+    "payload_cipher": "AES-256-GCM",
+    "group_epochs": true,
+    "signed_broadcasts": true,
+    "replay_window": 256,
+    "automatic_encrypted_checkpoints": true
+  },
+  "verification": {
+    "python": {
+      "passed": 1788,
+      "skipped": 1,
+      "warnings_as_errors": true
+    },
+    "javascript_and_wasm": {
+      "passed": 37,
+      "npm_audit_vulnerabilities": 0
+    },
+    "rust": {
+      "passed": 16,
+      "clippy_warnings": 0
+    },
+    "ruff_errors": 0,
+    "pip_check": "passed",
+    "clean_wheel_install": "passed"
+  },
+  "synthetic_fanout": {
+    "connections": 2000,
+    "recipients_per_publish": 1999,
+    "payload_bytes": 1024,
+    "iterations": 30,
+    "fanout_ms_p50": 0.4510625,
+    "fanout_ms_p95": 0.465334,
+    "scope": "in-process bounded-mailbox enqueue; excludes sockets, Redis, and crypto"
+  },
+  "external_validation_not_run": [
+    "real Redis multi-node chaos/load test",
+    "production deployment",
+    "cross-region network latency benchmark"
+  ],
+  "claims_not_made": [
+    "The synthetic mailbox benchmark is not a production throughput guarantee.",
+    "fakeredis validation is not a substitute for a real Redis cluster test.",
+    "The server cannot recover E2EE keys without an authenticated online room leader."
+  ]
+}

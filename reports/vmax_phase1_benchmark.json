@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "phase": "vMAX-gate0-phase1",
+  "measured_at": "2026-07-22",
+  "environment": {
+    "hardware": "Apple M3 Max (Mac15,11)",
+    "os": "Darwin 25.5.0 arm64",
+    "python": "3.14.6",
+    "rust": "1.97.1",
+    "node": "26.5.0"
+  },
+  "python_full_check": {
+    "sentence_55_chars": {
+      "before_p50_ms": 0.452,
+      "after_p50_ms": 0.327,
+      "after_p95_ms": 0.341
+    },
+    "paragraph_440_chars": {
+      "before_p50_ms": 3.63,
+      "after_p50_ms": 2.579,
+      "after_p95_ms": 2.609
+    },
+    "document_9900_chars": {
+      "before_p50_ms": 79.12,
+      "after_p50_ms": 56.396,
+      "after_p95_ms": 56.817
+    }
+  },
+  "wasm_full_check": {
+    "rules": 130,
+    "binary_bytes": 5530924,
+    "sentence_55_chars": {
+      "before_p50_ms": 0.114,
+      "after_p50_ms": 0.102,
+      "after_p95_ms": 0.161
+    },
+    "paragraph_440_chars": {
+      "before_p50_ms": 0.853,
+      "after_p50_ms": 0.735,
+      "after_p95_ms": 0.787
+    },
+    "document_9900_chars": {
+      "before_p50_ms": 19.437,
+      "after_p50_ms": 16.223,
+      "after_p95_ms": 16.427
+    }
+  },
+  "incremental_10009_words": {
+    "characters": 58904,
+    "matches": 1782,
+    "before_full_recheck_ms": 466.4,
+    "after_full_recheck_ms": 306.9,
+    "before_edit_p50_ms": 4.67,
+    "after_edit_p50_ms": 3.67,
+    "after_edit_p95_ms": 5.36,
+    "speedup_vs_full_p50": 84
+  },
+  "verification": {
+    "python": "1767 passed, 1 skipped, warnings treated as errors",
+    "rust": "15 passed; fmt and clippy -D warnings clean",
+    "javascript": "all project JavaScript passed node --check",
+    "wasm_parity": "10/10 golden documents identical to Python oracle",
+    "wheel": "1.0.0rc1 built and installed offline with server+production extras"
+  },
+  "notes": [
+    "Before/after values are same-host engineering measurements, not cross-hardware guarantees.",
+    "WASM size and ABI work are intentionally deferred to vMAX Phase 2."
+  ]
+}

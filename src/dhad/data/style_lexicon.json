@@ -1,0 +1,199 @@
+{
+  "version": "1.0.0",
+  "phrases": [
+    {
+      "id": "STYLE_REDUNDANT_CURRENT_TIME",
+      "kind": "redundancy",
+      "pattern": "في هذا الوقت الراهن",
+      "replacements": ["حاليًا"],
+      "message": "العبارة تجمع دلالات زمنية متكررة.",
+      "explanation": "«الوقت» و«الراهن» و«هذا» تؤدي معنى الحاضر نفسه؛ تكفي «حاليًا» في أغلب السياقات.",
+      "confidence": 0.94,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_REDUNDANT_IF_CASE",
+      "kind": "redundancy",
+      "pattern": "في حالة إذا",
+      "replacements": ["إذا"],
+      "message": "«في حالة» زائدة قبل أداة الشرط.",
+      "explanation": "أداة الشرط «إذا» تؤدي معنى الحالة والشرط وحدها.",
+      "confidence": 0.97,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_REDUNDANT_ALL_EVERY",
+      "kind": "redundancy",
+      "pattern": "كافة جميع",
+      "replacements": ["جميع"],
+      "message": "كلمتا «كافة» و«جميع» تؤديان معنى واحدًا هنا.",
+      "explanation": "استخدام أحد اللفظين أوضح وأوجز.",
+      "confidence": 0.98,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_REDUNDANT_SHARED_COOPERATION",
+      "kind": "redundancy",
+      "pattern": "تعاون مشترك بين الطرفين",
+      "replacements": ["تعاون بين الطرفين"],
+      "message": "المشاركة متضمنة في معنى التعاون.",
+      "explanation": "التعاون فعل مشترك بطبيعته، لذا يمكن حذف «مشترك» من دون فقد المعنى.",
+      "confidence": 0.91,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_REDUNDANT_FREE_NO_CHARGE",
+      "kind": "redundancy",
+      "pattern": "مجاني دون مقابل",
+      "replacements": ["مجاني"],
+      "message": "«دون مقابل» تكرر معنى «مجاني».",
+      "explanation": "يكفي وصف الخدمة بأنها مجانية ما لم يكن السياق القانوني يحتاج توكيدًا صريحًا.",
+      "confidence": 0.93,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_REDUNDANT_PREVIOUSLY_ALREADY",
+      "kind": "redundancy",
+      "pattern": "سبق وأن",
+      "replacements": ["سبق أن"],
+      "message": "الواو زائدة بين «سبق» و«أن».",
+      "explanation": "الصياغة المباشرة «سبق أن» أخف وأوضح.",
+      "confidence": 0.96,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_WORDY_REGARDING_SUBJECT",
+      "kind": "wordiness",
+      "pattern": "فيما يتعلق بموضوع",
+      "replacements": ["بشأن"],
+      "message": "يمكن اختصار العبارة من دون تغيير معناها.",
+      "explanation": "«بشأن» تؤدي وظيفة الربط نفسها بصياغة أكثر مباشرة.",
+      "confidence": 0.90,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_WORDY_TIME_PERIOD",
+      "kind": "wordiness",
+      "pattern": "في غضون فترة زمنية قدرها",
+      "replacements": ["خلال"],
+      "message": "التركيب أطول من المعنى المطلوب.",
+      "explanation": "«خلال» تسبق المدة مباشرة وتزيل كلمات لا تضيف معلومة.",
+      "confidence": 0.94,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_WORDY_BASED_ON_PREVIOUS",
+      "kind": "wordiness",
+      "pattern": "بناء على ما تقدم ذكره",
+      "replacements": ["بناءً على ما سبق"],
+      "message": "يمكن تبسيط الإحالة إلى الكلام السابق.",
+      "explanation": "الصياغة المقترحة أقصر وتحافظ على المرجع نفسه.",
+      "confidence": 0.91,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_CLICHE_END_OF_DAY",
+      "kind": "cliche",
+      "pattern": "في نهاية المطاف",
+      "replacements": ["في النهاية"],
+      "message": "تعبير شائع مستهلك؛ قد تكون الصياغة المباشرة أوضح.",
+      "explanation": "البديل يختصر العبارة ويحافظ على المعنى في النصوص المعلوماتية.",
+      "confidence": 0.76,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_CLICHE_RING_ALARM",
+      "kind": "cliche",
+      "pattern": "دق ناقوس الخطر",
+      "replacements": ["حذّر"],
+      "message": "استعارة صحفية شائعة قد تضعف الدقة.",
+      "explanation": "استخدم فعلًا يحدد الحدث، مثل «حذّر»، عندما لا تكون الصورة البلاغية مقصودة.",
+      "confidence": 0.74,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_CLICHE_DOTS_ON_LETTERS",
+      "kind": "cliche",
+      "pattern": "وضع النقاط على الحروف",
+      "replacements": ["أوضح التفاصيل", "حسم المسألة"],
+      "message": "تعبير مجازي مستهلك؛ اختر فعلًا يصف المقصود بدقة.",
+      "explanation": "البديل المناسب يتوقف على ما إذا كان المقصود التوضيح أم الحسم.",
+      "confidence": 0.72,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_ARCHAIC_AFOREMENTIONED",
+      "kind": "archaic",
+      "pattern": "آنف الذكر",
+      "replacements": ["المذكور سابقًا"],
+      "message": "تعبير إداري قديم نسبيًا؛ يمكن تحديثه.",
+      "explanation": "«المذكور سابقًا» أوضح لمعظم القراء المعاصرين.",
+      "confidence": 0.82,
+      "profiles": ["general", "academic", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_ARCHAIC_IN_VIEW_OF_ABOVE",
+      "kind": "archaic",
+      "pattern": "إزاء ما تقدم",
+      "replacements": ["بناءً على ما سبق"],
+      "message": "الصياغة رسمية قديمة ويمكن جعلها أوضح.",
+      "explanation": "البديل يحافظ على العلاقة المنطقية بلغة إدارية معاصرة.",
+      "confidence": 0.80,
+      "profiles": ["general", "academic", "journalistic", "educational", "friendly"]
+    },
+    {
+      "id": "STYLE_AWKWARD_HIDDEN_FROM_NONE",
+      "kind": "awkward",
+      "pattern": "لا يخفى على أحد أن",
+      "replacements": ["من الواضح أن", "تُظهر المعطيات أن"],
+      "message": "العبارة تفترض اتفاق الجميع بدل تقديم دليل.",
+      "explanation": "في النص الموضوعي، صرّح بدرجة اليقين أو أسند الحكم إلى معطيات محددة.",
+      "confidence": 0.84,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational"]
+    },
+    {
+      "id": "STYLE_AWKWARD_DECISION_PASSIVE",
+      "kind": "awkward",
+      "pattern": "تم من قبل اللجنة اتخاذ القرار",
+      "replacements": ["اتخذت اللجنة القرار"],
+      "message": "ترتيب العبارة يفصل الفعل عن فاعله ويثقل الجملة.",
+      "explanation": "الصياغة الفعلية المباشرة تحدد الجهة المسؤولة وتقلل الكلمات.",
+      "confidence": 0.97,
+      "profiles": ["general", "academic", "administrative", "journalistic", "educational", "friendly"]
+    }
+  ],
+  "tone_signals": [
+    {"tone": "formal", "pattern": "يرجى", "weight": 2.2, "reason": "صيغة طلب مؤسسية"},
+    {"tone": "formal", "pattern": "استنادا إلى", "weight": 2.0, "reason": "إحالة قانونية أو مؤسسية"},
+    {"tone": "formal", "pattern": "بموجب", "weight": 2.1, "reason": "تركيب قانوني رسمي"},
+    {"tone": "formal", "pattern": "نود إفادتكم", "weight": 2.5, "reason": "صيغة مراسلات رسمية"},
+    {"tone": "formal", "pattern": "وتفضلوا بقبول", "weight": 2.6, "reason": "خاتمة مراسلات رسمية"},
+    {"tone": "objective", "pattern": "تشير البيانات", "weight": 2.4, "reason": "إسناد الادعاء إلى بيانات"},
+    {"tone": "objective", "pattern": "أظهرت النتائج", "weight": 2.4, "reason": "إسناد الادعاء إلى نتائج"},
+    {"tone": "objective", "pattern": "وفق النتائج", "weight": 2.0, "reason": "ربط الاستنتاج بالنتائج"},
+    {"tone": "objective", "pattern": "بلغت النسبة", "weight": 1.8, "reason": "عرض قياس كمي"},
+    {"tone": "assertive", "pattern": "يجب", "weight": 1.8, "reason": "إلزام صريح"},
+    {"tone": "assertive", "pattern": "لا بد", "weight": 2.0, "reason": "ضرورة مؤكدة"},
+    {"tone": "assertive", "pattern": "بلا شك", "weight": 2.1, "reason": "توكيد قطعي"},
+    {"tone": "assertive", "pattern": "نؤكد", "weight": 2.0, "reason": "توكيد مباشر"},
+    {"tone": "persuasive", "pattern": "ندعو إلى", "weight": 2.2, "reason": "دعوة القارئ إلى فعل"},
+    {"tone": "persuasive", "pattern": "نوصي ب", "weight": 2.0, "reason": "توصية مباشرة"},
+    {"tone": "persuasive", "pattern": "من الضروري", "weight": 1.8, "reason": "حجة ضرورة"},
+    {"tone": "persuasive", "pattern": "ينبغي", "weight": 1.5, "reason": "توجيه أو توصية"},
+    {"tone": "conversational", "pattern": "برأيي", "weight": 2.0, "reason": "إبداء رأي شخصي مباشر"},
+    {"tone": "conversational", "pattern": "أظن أن", "weight": 1.8, "reason": "صياغة شخصية محادثية"},
+    {"tone": "conversational", "pattern": "يا أصدقاء", "weight": 2.3, "reason": "نداء مباشر وودي"},
+    {"tone": "conversational", "pattern": "ببساطة", "weight": 1.0, "reason": "إشارة تفسيرية محادثية"}
+  ],
+  "nominalization_rewrites": {
+    "إجراء": {"masculine": "أجرى", "feminine": "أجرت", "plural": "أجروا"},
+    "تحليل": {"masculine": "حلّل", "feminine": "حلّلت", "plural": "حلّلوا"},
+    "تنفيذ": {"masculine": "نفّذ", "feminine": "نفّذت", "plural": "نفّذوا"},
+    "تقديم": {"masculine": "قدّم", "feminine": "قدّمت", "plural": "قدّموا"},
+    "مراجعة": {"masculine": "راجع", "feminine": "راجعت", "plural": "راجعوا"},
+    "توضيح": {"masculine": "وضّح", "feminine": "وضّحت", "plural": "وضّحوا"},
+    "زيارة": {"masculine": "زار", "feminine": "زارت", "plural": "زاروا"},
+    "كتابة": {"masculine": "كتب", "feminine": "كتبت", "plural": "كتبوا"},
+    "إعداد": {"masculine": "أعدّ", "feminine": "أعدّت", "plural": "أعدّوا"}
+  }
+}

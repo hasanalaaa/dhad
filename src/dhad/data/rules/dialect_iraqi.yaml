@@ -1,0 +1,306 @@
+- schema_version: 2
+  id: IQ_SHLONAK
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شلونك
+  exceptions: []
+  suggestion: كيف حالك
+  message: 'عامية عراقية: «شلونك» — بالفصحى: كيف حالك'
+  explanation: ''
+  examples:
+    bad: شلونك اليوم؟
+    good: كيف حالك اليوم؟
+- schema_version: 2
+  id: IQ_SHLON
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شلون
+  exceptions: []
+  suggestion: كيف
+  message: 'عامية عراقية: «شلون» — بالفصحى: كيف'
+  explanation: ''
+  examples:
+    bad: شلون سويتها؟
+    good: كيف فعلتها؟
+- schema_version: 2
+  id: IQ_SHINU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شنو
+  exceptions: []
+  suggestion: ماذا
+  message: 'عامية عراقية: «شنو» — بالفصحى: ماذا'
+  explanation: ''
+  examples:
+    bad: شنو رأيك بالموضوع؟
+    good: ما رأيك في الموضوع؟
+- schema_version: 2
+  id: IQ_MINU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: منو
+  exceptions: []
+  suggestion: مَن
+  message: 'عامية عراقية: «منو» — بالفصحى: مَن'
+  explanation: ''
+  examples:
+    bad: منو جاء اليوم؟
+    good: مَن جاء اليوم؟
+- schema_version: 2
+  id: IQ_WEN
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: وين
+  exceptions: []
+  suggestion: أين
+  message: 'عامية: «وين» — بالفصحى: أين'
+  explanation: ''
+  examples:
+    bad: وين رحت أمس؟
+    good: أين ذهبت أمس؟
+- schema_version: 2
+  id: IQ_AKU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اكو
+  prefixes:
+  - و
+  - ف
+  exceptions: []
+  suggestion: يوجد
+  message: 'عامية عراقية: «اكو» — بالفصحى: يوجد / هناك'
+  explanation: ''
+  examples:
+    bad: اكو ناس بالخارج
+    good: يوجد ناس في الخارج
+- schema_version: 2
+  id: IQ_MAKU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ماكو
+  prefixes:
+  - و
+  - ف
+  exceptions: []
+  suggestion: لا يوجد
+  message: 'عامية عراقية: «ماكو» — بالفصحى: لا يوجد'
+  explanation: ''
+  examples:
+    bad: ماكو وقت اليوم
+    good: لا يوجد وقت اليوم
+- schema_version: 2
+  id: IQ_SHAKU_MAKU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شكو ماكو
+  exceptions: []
+  suggestion: ما الجديد؟
+  message: 'عامية عراقية: «شكو ماكو» — بالفصحى: ما الجديد؟'
+  explanation: ''
+  examples:
+    bad: شكو ماكو عندكم؟
+    good: ما الجديد عندكم؟
+- schema_version: 2
+  id: IQ_HASSA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هسه
+  exceptions: []
+  suggestion: الآن
+  message: 'عامية عراقية: «هسه» — بالفصحى: الآن'
+  explanation: ''
+  examples:
+    bad: هسه وصلت للبيت
+    good: الآن وصلت إلى البيت
+- schema_version: 2
+  id: IQ_CHAN
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: چان
+  exceptions: []
+  suggestion: كان
+  message: 'عامية عراقية: «چان» — بالفصحى: كان'
+  explanation: ''
+  examples:
+    bad: چان يومًا جميلًا
+    good: كان يومًا جميلًا
+- schema_version: 2
+  id: IQ_KHOSH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: خوش
+  exceptions: []
+  suggestion: جيد
+  message: 'عامية عراقية: «خوش» — بالفصحى: جيد / حسن'
+  explanation: ''
+  examples:
+    bad: هذا خوش كتاب
+    good: هذا كتاب جيد
+- schema_version: 2
+  id: IQ_YIMTA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: يمته
+  exceptions: []
+  suggestion: متى
+  message: 'عامية عراقية: «يمته» — بالفصحى: متى'
+  explanation: ''
+  examples:
+    bad: يمته نسافر؟
+    good: متى نسافر؟
+- schema_version: 2
+  id: IQ_BESH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بيش
+  exceptions: []
+  suggestion: بكم
+  message: 'عامية عراقية: «بيش» — بالفصحى: بكم'
+  explanation: ''
+  examples:
+    bad: بيش هذا الكتاب؟
+    good: بكم هذا الكتاب؟
+- schema_version: 2
+  id: IQ_SHGAD
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شقد
+  exceptions: []
+  suggestion: كم
+  message: 'عامية عراقية: «شقد» — بالفصحى: كم'
+  explanation: ''
+  examples:
+    bad: شقد صار عمرك؟
+    good: كم صار عمرك؟
+- schema_version: 2
+  id: IQ_HICHI
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هيچي
+  exceptions: []
+  suggestion: هكذا
+  message: 'عامية عراقية: «هيچي» — بالفصحى: هكذا'
+  explanation: ''
+  examples:
+    bad: ليش تسوي هيچي؟
+    good: لماذا تفعل هكذا؟

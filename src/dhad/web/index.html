@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1512">
+  <meta name="description" content="ضاد — محرر عربي ذكي يعمل محليًا ويحترم خصوصيتك">
+  <title>ضاد — محرر العربية الذكي</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" sizes="192x192" href="/static/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#editor">انتقل إلى المحرر</a>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand" aria-label="ضاد">
+      <div class="brand-mark" aria-hidden="true">ض</div>
+      <div>
+        <h1>ضاد</h1>
+        <p>ذكاء الكتابة العربية — محلي، مفتوح، قابل للتفسير</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <span id="connectionStatus" class="status-pill" data-state="loading">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>جارٍ الاتصال…</span>
+      </span>
+      <button id="themeToggle" class="icon-button" type="button" aria-label="تبديل المظهر" title="تبديل المظهر">◐</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="editor-card" aria-labelledby="editorHeading">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">مساحة الكتابة</p>
+          <h2 id="editorHeading">اكتب بطريقتك، ودع ضاد يشرح اقتراحاته</h2>
+        </div>
+        <div class="toolbar" aria-label="أدوات المحرر">
+          <label class="select-control">
+            <span>الملف الأسلوبي</span>
+            <select id="styleProfile">
+              <option value="general">عام</option>
+              <option value="academic">أكاديمي</option>
+              <option value="administrative">إداري</option>
+              <option value="journalistic">صحفي</option>
+              <option value="educational">تعليمي</option>
+              <option value="friendly">ودّي</option>
+              <option value="literary">أدبي</option>
+            </select>
+          </label>
+          <button id="sampleButton" class="button button-ghost" type="button">نص تجريبي</button>
+          <button id="clearButton" class="button button-ghost" type="button">مسح</button>
+          <button id="analyzeButton" class="button button-primary" type="button">تحليل الآن</button>
+        </div>
+      </div>
+
+      <div class="editor-stage">
+        <label class="visually-hidden" for="editor">النص العربي</label>
+        <textarea id="editor" dir="rtl" spellcheck="false" autocomplete="off" placeholder="ابدأ الكتابة هنا…"></textarea>
+        <div id="analysisPreview" class="analysis-preview" aria-label="معاينة الملاحظات" aria-live="polite"></div>
+      </div>
+
+      <div class="editor-footer">
+        <div class="metrics" aria-label="إحصاءات النص">
+          <span><strong id="wordCount">0</strong> كلمة</span>
+          <span><strong id="characterCount">0</strong> حرف</span>
+          <span><strong id="issueCount">0</strong> ملاحظة</span>
+        </div>
+        <p class="privacy-note">النص يُرسل فقط إلى خادم ضاد الذي اخترته. الإعداد الافتراضي محلي على جهازك.</p>
+      </div>
+    </section>
+
+    <aside class="insights-card" aria-labelledby="insightsHeading">
+      <div class="panel-header compact">
+        <div>
+          <p class="eyebrow">لوحة التحليل</p>
+          <h2 id="insightsHeading">النتائج</h2>
+        </div>
+        <span id="busyIndicator" class="busy-indicator" hidden>يحلّل…</span>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="أنواع التحليل">
+        <button class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="issuesPanel" data-tab="issues">التدقيق</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="stylePanel" data-tab="style">الأسلوب</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="dialectPanel" data-tab="dialect">اللهجة</button>
+        <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="diacriticsPanel" data-tab="diacritics">التشكيل</button>
+      </div>
+
+      <section id="issuesPanel" class="tab-panel is-active" role="tabpanel" data-panel="issues">
+        <div id="issueFilters" class="filter-row" aria-label="ترشيح الملاحظات">
+          <button type="button" class="filter-chip is-active" data-category="all">الكل</button>
+          <button type="button" class="filter-chip" data-category="spelling">إملاء</button>
+          <button type="button" class="filter-chip" data-category="grammar">نحو</button>
+          <button type="button" class="filter-chip" data-category="style">أسلوب</button>
+          <button type="button" class="filter-chip" data-category="dialect">لهجة</button>
+        </div>
+        <div id="issuesList" class="result-list"></div>
+      </section>
+
+      <section id="stylePanel" class="tab-panel" role="tabpanel" data-panel="style" hidden>
+        <div id="styleSummary" class="summary-grid"></div>
+        <div id="styleList" class="result-list"></div>
+      </section>
+
+      <section id="dialectPanel" class="tab-panel" role="tabpanel" data-panel="dialect" hidden>
+        <div id="dialectSummary"></div>
+      </section>
+
+      <section id="diacriticsPanel" class="tab-panel" role="tabpanel" data-panel="diacritics" hidden>
+        <div class="diacritics-controls">
+          <label class="select-control grow">
+            <span>مستوى التشكيل</span>
+            <select id="diacriticsMode">
+              <option value="full">كامل</option>
+              <option value="core">بنية الكلمة</option>
+              <option value="endings">أواخر الكلمات</option>
+            </select>
+          </label>
+          <button id="diacritizeButton" class="button button-primary" type="button">تشكيل النص</button>
+        </div>
+        <div id="diacriticsOutput" class="generated-output" aria-live="polite"></div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <span>ضاد v<span id="appVersion">—</span></span>
+    <a href="/docs" target="_blank" rel="noreferrer">واجهة API</a>
+    <a href="/redoc" target="_blank" rel="noreferrer">مرجع المطورين</a>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>تحتاج واجهة ضاد إلى JavaScript. تبقى واجهة REST متاحة على <code>/docs</code>.</noscript>
+</body>
+</html>

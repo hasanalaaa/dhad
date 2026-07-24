@@ -1,0 +1,23 @@
+[workspace]
+members = ["rust/dhad-core-rs", "src-tauri"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/dhad-project/dhad"
+
+[profile.release]
+lto = "fat"
+opt-level = 3
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+
+[profile.wasm-fast]
+inherits = "release"
+opt-level = 3
+
+[profile.wasm-small]
+inherits = "release"
+opt-level = "z"

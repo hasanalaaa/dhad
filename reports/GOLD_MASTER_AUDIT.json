@@ -1,0 +1,47 @@
+{
+  "schema": "dhad-gold-master-audit-v1",
+  "generated_at_utc": "2026-07-24T00:56:02.087385+00:00",
+  "root": "dhad",
+  "files_audited": 437,
+  "bytes_audited": 179993949,
+  "counts_by_category": {
+    "configuration": 53,
+    "documentation": 117,
+    "binary-asset": 26,
+    "source": 199,
+    "test": 42
+  },
+  "bytes_by_category": {
+    "configuration": 1925885,
+    "documentation": 837471,
+    "binary-asset": 164916733,
+    "source": 12088752,
+    "test": 225108
+  },
+  "source_symbols": {
+    "python_classes": 236,
+    "python_functions": 1313,
+    "javascript_functions": 1167,
+    "rust_functions": 238
+  },
+  "checks": {
+    "javascript_syntax": {
+      "status": "passed",
+      "detail": "JavaScript syntax verified: 57 first-party files"
+    },
+    "shell_syntax": {
+      "status": "passed",
+      "detail": "2 script(s) checked"
+    },
+    "python_compileall": {
+      "status": "passed",
+      "detail": ""
+    },
+    "rust_workspace": {
+      "status": "skipped",
+      "detail": "cargo is unavailable in this validation environment"
+    }
+  },
+  "findings": [],
+  "status": "passed"
+}

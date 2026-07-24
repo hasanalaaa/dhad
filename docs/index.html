@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c11">
+  <meta name="description" content="ضاد — مساعد كتابة عربي محلي وآمن لسطح المكتب والويب.">
+  <meta name="dhad-release-base" content="">
+  <meta name="dhad-demo-url" content="../web_demo/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ضاد — الذكاء الكتابي العربي على جهازك">
+  <meta property="og:description" content="تدقيق وإعادة صياغة عربية محلية على macOS وWindows.">
+  <meta property="og:image" content="screenshot.png">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <title>ضاد — الذكاء الكتابي العربي على جهازك</title>
+  <style>
+    :root{--bg:#080b10;--panel:#10151d;--panel2:#151b24;--text:#f7f1e7;--muted:#aeb6c2;--copper:#b87333;--gold:#d4af37;--line:rgba(255,255,255,.09);--shadow:0 30px 90px rgba(0,0,0,.45)}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:radial-gradient(circle at 75% 5%,rgba(184,115,51,.15),transparent 28%),radial-gradient(circle at 10% 35%,rgba(212,175,55,.08),transparent 22%),var(--bg);color:var(--text);font-family:"Noto Sans Arabic","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.75}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 72%)}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 36px));margin:auto}.nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0;position:relative;z-index:2}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}.brand img{width:44px;height:44px;border-radius:13px;box-shadow:0 8px 30px rgba(184,115,51,.25)}.navlinks{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:.93rem}.navlinks a:hover{color:var(--text)}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;padding:76px 0 96px}.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;border:1px solid rgba(212,175,55,.25);border-radius:999px;background:rgba(212,175,55,.06);color:#e3c66f;font-size:.86rem}.dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}h1{font-size:clamp(2.9rem,6vw,5.7rem);line-height:1.12;margin:22px 0 18px;letter-spacing:-.045em}.gradient{background:linear-gradient(120deg,#f8f2e8 15%,#e8b16f 55%,#d4af37);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:1.18rem;color:var(--muted);max-width:650px;margin:0 0 32px}.actions{display:flex;flex-wrap:wrap;gap:13px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 20px;border-radius:14px;border:1px solid var(--line);font-weight:750;transition:.2s transform,.2s border-color,.2s background}.btn:hover{transform:translateY(-2px);border-color:rgba(212,175,55,.45)}.btn.primary{background:linear-gradient(135deg,#c27a38,#9d5d28);border-color:transparent;box-shadow:0 16px 45px rgba(184,115,51,.25)}.micro{display:flex;flex-wrap:wrap;gap:18px;margin-top:26px;color:#8f99a8;font-size:.85rem}.micro span:before{content:"✓";color:#d4af37;margin-left:7px}
+    .app-shot{position:relative}.glow{position:absolute;inset:12% 15%;background:rgba(184,115,51,.28);filter:blur(70px);border-radius:50%}.window{position:relative;border:1px solid rgba(255,255,255,.13);border-radius:23px;padding:12px;background:rgba(18,23,31,.78);backdrop-filter:blur(18px);box-shadow:var(--shadow);transform:perspective(1200px) rotateY(5deg) rotateX(2deg)}.bar{height:35px;display:flex;align-items:center;gap:8px;padding:0 8px}.bar i{width:10px;height:10px;border-radius:50%;background:#36404e}.bar i:first-child{background:#bd6944}.bar i:nth-child(2){background:#d3a245}.bar i:nth-child(3){background:#5f9e6b}.window img{display:block;width:100%;border-radius:14px;border:1px solid rgba(255,255,255,.06)}
+    section{padding:90px 0}.section-head{max-width:760px;margin-bottom:36px}.kicker{color:#d7aa61;font-weight:750;font-size:.9rem}.section-head h2{font-size:clamp(2rem,4vw,3.4rem);line-height:1.25;margin:8px 0 12px}.section-head p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(20,26,35,.92),rgba(12,16,22,.92));box-shadow:0 16px 48px rgba(0,0,0,.18)}.icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:rgba(184,115,51,.13);border:1px solid rgba(184,115,51,.2);color:#e1aa67;font-size:1.2rem}.card h3{margin:17px 0 7px}.card p{margin:0;color:var(--muted);font-size:.94rem}
+    .downloads{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.download-panel{border:1px solid var(--line);border-radius:24px;padding:28px;background:rgba(16,21,29,.88)}.badges{display:grid;gap:12px}.badge{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 18px;border-radius:16px;background:#171d26;border:1px solid rgba(255,255,255,.08);transition:.2s}.badge:hover{border-color:rgba(212,175,55,.42);transform:translateY(-2px)}.badge b{display:block}.badge small{color:var(--muted)}.arrow{font-size:1.2rem;color:#e0af66}.requirements{margin:18px 0 0;color:var(--muted);font-size:.88rem}.requirements strong{color:var(--text)}
+    .privacy{display:grid;grid-template-columns:.85fr 1.15fr;gap:38px;align-items:center}.privacy-list{display:grid;gap:14px}.privacy-item{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}.privacy-item b{color:#f4ede2}.privacy-item p{margin:2px 0 0;color:var(--muted);font-size:.92rem}.privacy-diagram{min-height:430px;border-radius:25px;border:1px solid var(--line);background:radial-gradient(circle at 50% 45%,rgba(184,115,51,.13),transparent 42%),#0d1219;padding:24px;display:grid;place-items:center;overflow:hidden}.privacy-diagram svg{width:100%;height:auto}.node-box{fill:#151c26;stroke:#394453;stroke-width:1.2}.node-local{fill:#271b12;stroke:#b87333;stroke-width:1.4}.edge{stroke:#566274;stroke-width:1.4;fill:none}.edge-private{stroke:#d4af37;stroke-width:2;fill:none;stroke-dasharray:5 7}.diagram-label{fill:#f5efe5;font-size:15px;font-family:Arial,sans-serif}.diagram-sub{fill:#9fa9b7;font-size:11px;font-family:Arial,sans-serif}
+    .cta{padding:52px;border:1px solid rgba(212,175,55,.22);border-radius:28px;background:linear-gradient(130deg,rgba(184,115,51,.14),rgba(17,22,30,.9));display:flex;align-items:center;justify-content:space-between;gap:28px}.cta h2{margin:0 0 6px;font-size:2rem}.cta p{margin:0;color:var(--muted)}footer{padding:36px 0 48px;color:#87919f;font-size:.88rem}.footer-row{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:28px}
+    @media(max-width:900px){.hero,.downloads,.privacy{grid-template-columns:1fr}.hero{padding-top:38px}.app-shot{max-width:700px}.window{transform:none}.grid{grid-template-columns:1fr 1fr}.navlinks a:not(.btn){display:none}.cta{align-items:flex-start;flex-direction:column}}
+    @media(max-width:610px){.wrap{width:min(100% - 24px,1160px)}h1{font-size:2.75rem}.grid{grid-template-columns:1fr}.hero{gap:34px}.actions .btn{width:100%}.cta{padding:30px}.footer-row{flex-direction:column}.privacy-diagram{min-height:330px}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#top"><img src="logo.svg" alt="شعار ضاد"><span>ضاد</span></a>
+    <nav class="navlinks" aria-label="التنقل الرئيسي"><a href="#features">المزايا</a><a href="#privacy">الخصوصية</a><a href="#downloads">التنزيل</a><a class="btn" href="../web_demo/index.html" data-live-demo>جرّب نسخة الويب</a></nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> إصدار سطح المكتب 1.0</div>
+        <h1>اكتب العربية<br><span class="gradient">بوضوح وثقة.</span></h1>
+        <p class="lead">تدقيق لغوي، تحليل أسلوبي، وإعادة صياغة فورية داخل تطبيق أصلي سريع. النص يبقى على جهازك افتراضيًا، وتعمل الأدوات الأساسية حتى دون اتصال.</p>
+        <div class="actions"><a class="btn primary" href="#downloads">تنزيل تطبيق سطح المكتب</a><a class="btn" href="../web_demo/index.html" data-live-demo>فتح العرض الحي</a></div>
+        <div class="micro"><span>macOS وWindows</span><span>اختصار عالمي</span><span>معالجة محلية</span></div>
+      </div>
+      <div class="app-shot"><div class="glow"></div><div class="window"><div class="bar"><i></i><i></i><i></i></div><img src="screenshot.png" alt="واجهة محرر ضاد"></div></div>
+    </div>
+
+    <section id="features" class="wrap">
+      <div class="section-head"><span class="kicker">مساعد كتابة متكامل</span><h2>من الفكرة الأولى إلى النص النهائي.</h2><p>واجهة عربية مصممة للعمل اليومي، مع محرك Rust محلي وطبقة WebAssembly متوافقة مع الويب وPWA.</p></div>
+      <div class="grid">
+        <article class="card"><div class="icon">✓</div><h3>تدقيق عربي عميق</h3><p>كشف الأخطاء الإملائية والنحوية والأسلوبية مع اقتراحات قابلة للتطبيق مباشرة.</p></article>
+        <article class="card"><div class="icon">↻</div><h3>إعادة صياغة فورية</h3><p>بدائل واضحة ومهنية تحافظ على المعنى والسياق بدل الاستبدال السطحي للكلمات.</p></article>
+        <article class="card"><div class="icon">⌥</div><h3>مساعد عائم</h3><p>افتح التدقيق السريع من أي تطبيق عبر Option+Space على macOS أو Alt+Space على Windows.</p></article>
+        <article class="card"><div class="icon">◫</div><h3>استيراد وتصدير أصلي</h3><p>حوارات نظامية لملفات DOCX وPDF وMarkdown وTXT، مع تجربة متسقة على المنصتين.</p></article>
+        <article class="card"><div class="icon">⚡</div><h3>محرك Rust محلي</h3><p>تنفيذ أصلي منخفض التأخير عبر Tauri IPC مع رجوع تلقائي إلى WASM في المتصفح.</p></article>
+        <article class="card"><div class="icon">☁</div><h3>يعمل دون اتصال</h3><p>تظل وظائف التحرير الأساسية متاحة محليًا، دون فرض رفع النصوص إلى خدمة سحابية.</p></article>
+      </div>
+    </section>
+
+    <section id="downloads" class="wrap downloads">
+      <div class="section-head"><span class="kicker">تنزيلات سطح المكتب</span><h2>اختر نظامك وابدأ.</h2><p>توجّه الأزرار إلى أحدث إصدار موثوق في GitHub Releases. تتحقق صفحة الإصدار من المعمارية والصيغة قبل التثبيت.</p><p class="requirements"><strong>المتطلبات:</strong> macOS 10.15 أو أحدث، أو Windows 10/11 مع WebView2.</p></div>
+      <div class="download-panel badges">
+        <a class="badge" data-download="mac-arm" href="#"><span><b>macOS — Apple Silicon</b><small>DMG لأجهزة M1 وما بعدها</small></span><span class="arrow">←</span></a>
+        <a class="badge" data-download="mac-intel" href="#"><span><b>macOS — Intel</b><small>DMG لأجهزة Intel</small></span><span class="arrow">←</span></a>
+        <a class="badge" data-download="windows-exe" href="#"><span><b>Windows — Setup EXE</b><small>مثبّت NSIS مع اختصار سطح المكتب</small></span><span class="arrow">←</span></a>
+        <a class="badge" data-download="windows-msi" href="#"><span><b>Windows — MSI</b><small>حزمة مؤسسات Windows</small></span><span class="arrow">←</span></a>
+      </div>
+    </section>
+
+    <section id="privacy" class="wrap privacy">
+      <div>
+        <div class="section-head"><span class="kicker">الخصوصية في البنية</span><h2>نصك لا يحتاج إلى مغادرة جهازك.</h2><p>تُفضّل بنية ضاد التنفيذ المحلي، وتفصل بوضوح بين واجهة التحرير ومحرك التحليل وأصول النماذج.</p></div>
+        <div class="privacy-list">
+          <div class="privacy-item"><span class="dot"></span><div><b>Local-first</b><p>تحليل Rust وONNX وWASM محلي داخل التطبيق.</p></div></div>
+          <div class="privacy-item"><span class="dot"></span><div><b>صلاحيات محدودة</b><p>قدرات Tauri مقيدة للنوافذ والأوامر المطلوبة فقط.</p></div></div>
+          <div class="privacy-item"><span class="dot"></span><div><b>لا مزامنة إجبارية</b><p>يمكن تشغيل المحرر والتدقيق دون حساب أو اتصال دائم.</p></div></div>
+        </div>
+      </div>
+      <div class="privacy-diagram" role="img" aria-label="مخطط بنية الخصوصية المحلية">
+        <svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg">
+          <path class="edge" d="M175 112 C260 112 255 200 335 200"/><path class="edge-private" d="M385 200 C470 200 455 112 545 112"/><path class="edge" d="M385 230 C470 230 455 320 545 320"/>
+          <rect class="node-box" x="35" y="65" width="170" height="95" rx="18"/><text class="diagram-label" x="120" y="105" text-anchor="middle">Editor UI</text><text class="diagram-sub" x="120" y="130" text-anchor="middle">Tauri WebView</text>
+          <rect class="node-local" x="275" y="160" width="150" height="110" rx="20"/><text class="diagram-label" x="350" y="203" text-anchor="middle">Local Core</text><text class="diagram-sub" x="350" y="228" text-anchor="middle">Rust IPC + WASM</text><text class="diagram-sub" x="350" y="247" text-anchor="middle">No upload required</text>
+          <rect class="node-box" x="515" y="65" width="170" height="95" rx="18"/><text class="diagram-label" x="600" y="105" text-anchor="middle">ONNX Models</text><text class="diagram-sub" x="600" y="130" text-anchor="middle">Bundled on device</text>
+          <rect class="node-box" x="515" y="275" width="170" height="95" rx="18"/><text class="diagram-label" x="600" y="315" text-anchor="middle">Local Files</text><text class="diagram-sub" x="600" y="340" text-anchor="middle">Native dialogs</text>
+          <text class="diagram-sub" x="465" y="180">private execution boundary</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="wrap"><div class="cta"><div><h2>ابدأ الكتابة مع ضاد.</h2><p>جرّب الويب الآن، أو نزّل النسخة الأصلية لأفضل أداء.</p></div><div class="actions"><a class="btn primary" href="#downloads">تنزيل سطح المكتب</a><a class="btn" href="../web_demo/index.html" data-live-demo>العرض الحي</a></div></div></section>
+  </main>
+
+  <footer class="wrap"><div class="footer-row"><span>© 2026 مشروع ضاد. مرخّص وفق AGPL-3.0-or-later.</span><span>محرك عربي محلي · Tauri 2 · Rust · WebAssembly</span></div></footer>
+  <script>
+    (() => {
+      const explicit = document.querySelector('meta[name="dhad-release-base"]')?.content.trim();
+      const demoUrl = document.querySelector('meta[name="dhad-demo-url"]')?.content.trim() || '../web_demo/index.html';
+      document.querySelectorAll('[data-live-demo]').forEach((link) => { link.href = demoUrl; });
+      let release = explicit;
+      if (!release && location.hostname.endsWith('.github.io')) {
+        const owner = location.hostname.split('.')[0];
+        const repo = location.pathname.split('/').filter(Boolean)[0];
+        if (owner && repo) release = `https://github.com/${owner}/${repo}/releases/latest`;
+      }
+      if (!release) release = 'https://github.com/dhad-project/dhad/releases/latest';
+      document.querySelectorAll('[data-download]').forEach((link) => {
+        link.href = release;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      });
+    })();
+  </script>
+</body>
+</html>

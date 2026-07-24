@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/docs/index.html" },
+    { "source": "/logo.svg", "destination": "/docs/logo.svg" },
+    { "source": "/screenshot.png", "destination": "/docs/screenshot.png" },
+    { "source": "/demo", "destination": "/web_demo/index.html" },
+    { "source": "/demo/:path*", "destination": "/web_demo/:path*" }
+  ]
+}

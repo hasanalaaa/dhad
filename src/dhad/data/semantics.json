@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "license": "AGPL-3.0-or-later",
+  "variant_groups": [
+    {
+      "id": "masuul",
+      "variants": ["مسؤول", "مسئول"],
+      "canonical": "مسؤول",
+      "message": "تختلف كتابة كلمة «مسؤول» داخل المستند."
+    },
+    {
+      "id": "hundred",
+      "variants": ["مئة", "مائة"],
+      "canonical": "مئة",
+      "message": "استُخدمت صيغتان مختلفتان لكتابة العدد مئة."
+    },
+    {
+      "id": "internet",
+      "variants": ["الإنترنت", "الانترنت"],
+      "canonical": "الإنترنت",
+      "message": "كتابة مصطلح الإنترنت غير موحدة داخل المستند."
+    },
+    {
+      "id": "america",
+      "variants": ["أمريكا", "امريكا"],
+      "canonical": "أمريكا",
+      "message": "كتابة الاسم «أمريكا» غير موحدة داخل المستند."
+    }
+  ],
+  "phrase_rules": [
+    {
+      "id": "SEMANTIC_REDUNDANCY_ASCEND_UP",
+      "pattern": "(?:صعد|يصعد|ارتفع|يرتفع)\\s+إلى\\s+(?:أعلى|الأعلى)",
+      "replacement": "صعد",
+      "message": "يحمل الفعل معنى الاتجاه إلى الأعلى أصلًا.",
+      "explanation": "يمكن حذف «إلى الأعلى» ما لم يكن المقصود تحديد موضع بعينه.",
+      "kind": "redundancy"
+    },
+    {
+      "id": "SEMANTIC_REDUNDANCY_RETURN_AGAIN",
+      "pattern": "(?:عاد|يعود)\\s+(?:مرة\\s+)?أخرى",
+      "replacement": "عاد",
+      "message": "يجمع التعبير بين فعل العودة ومعنى التكرار.",
+      "explanation": "الفعل «عاد» يتضمن معنى الرجوع؛ راجع الحاجة إلى «مرة أخرى».",
+      "kind": "redundancy"
+    },
+    {
+      "id": "SEMANTIC_REDUNDANCY_TOGETHER",
+      "pattern": "(?:اجتمع|يجتمع|تعاون|يتعاون)\\s+[^،.؟!؛]{0,24}?\\s+معًا",
+      "replacement": "",
+      "message": "قد تكون كلمة «معًا» زائدة لأن الفعل يفيد المشاركة.",
+      "explanation": "راجع السياق؛ أحيانًا تكون «معًا» توكيدًا مقصودًا ولذلك لا تُحذف تلقائيًا.",
+      "kind": "redundancy"
+    },
+    {
+      "id": "SEMANTIC_REDUNDANCY_FUTURE_COMING",
+      "pattern": "المستقبل\\s+القادم",
+      "replacement": "المستقبل",
+      "message": "صفة «القادم» زائدة غالبًا مع كلمة «المستقبل».",
+      "explanation": "المستقبل يدل بطبيعته على الزمن الآتي.",
+      "kind": "redundancy"
+    }
+  ],
+  "contradiction_verbs": ["وافق", "يوافق", "نجح", "ينجح", "حضر", "يحضر", "بدأ", "يبدأ", "اكتمل", "يكتمل"]
+}

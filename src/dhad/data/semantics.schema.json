@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhad.dev/schema/semantics-v1.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "license", "variant_groups", "phrase_rules", "contradiction_verbs"],
+  "properties": {
+    "version": {"type": "string", "minLength": 1},
+    "license": {"type": "string", "minLength": 1},
+    "variant_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "variants", "canonical", "message"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "variants": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "canonical": {"type": "string", "minLength": 1},
+          "message": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "phrase_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "pattern", "message", "explanation", "kind"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+          "pattern": {"type": "string", "minLength": 1},
+          "replacement": {"type": "string"},
+          "message": {"type": "string", "minLength": 1},
+          "explanation": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["redundancy", "contradiction"]}
+        }
+      }
+    },
+    "contradiction_verbs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 2}
+    }
+  }
+}

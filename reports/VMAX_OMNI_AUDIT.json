@@ -1,0 +1,47 @@
+{
+  "schema": "dhad-vmax-omni-audit-v1",
+  "generated_at_utc": "2026-07-23T03:32:37.140242+00:00",
+  "root": "dhad",
+  "files_audited": 324,
+  "bytes_audited": 176690685,
+  "counts_by_category": {
+    "configuration": 30,
+    "documentation": 77,
+    "binary-asset": 15,
+    "source": 163,
+    "test": 39
+  },
+  "bytes_by_category": {
+    "configuration": 135914,
+    "documentation": 400813,
+    "binary-asset": 164168843,
+    "source": 11771090,
+    "test": 214025
+  },
+  "source_symbols": {
+    "python_classes": 200,
+    "python_functions": 1211,
+    "javascript_functions": 917,
+    "rust_functions": 177
+  },
+  "checks": {
+    "javascript_syntax": {
+      "status": "passed",
+      "detail": "JavaScript syntax verified: 35 first-party files"
+    },
+    "shell_syntax": {
+      "status": "passed",
+      "detail": "1 script(s) checked"
+    },
+    "python_compileall": {
+      "status": "passed",
+      "detail": ""
+    },
+    "rust_workspace": {
+      "status": "skipped",
+      "detail": "cargo is unavailable in this validation environment"
+    }
+  },
+  "findings": [],
+  "status": "passed"
+}

@@ -1,0 +1,27 @@
+schema_version: 1
+datasets:
+  - id: dhad-phase0-seed
+    version: "0.1.0"
+    path: benchmarks/seed_v0.jsonl
+    license: CC0-1.0
+    bundled: true
+    synthetic: false
+    purpose: smoke-regression
+    cases: 22
+    limitations:
+      - Small regression seed; not suitable for publishable accuracy claims.
+
+  - id: dhad-controlled-gold-v1
+    version: "1.0.0"
+    path: src/dhad/data/benchmarks/gold_v1
+    license: CC0-1.0
+    bundled: true
+    synthetic: true
+    purpose: phase2-controlled-benchmark
+    cases: 5000
+    splits: {train: 3500, dev: 750, test: 750}
+    double_review_cases: 1000
+    limitations:
+      - Original template-generated corpus, independent from YAML rule examples.
+      - Double review means two independent technical validation passes, not two human linguists.
+      - Do not present results as real-world human-corpus accuracy.

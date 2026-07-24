@@ -1,0 +1,551 @@
+- schema_version: 2
+  id: HAMZA_ILA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الى
+  exceptions: []
+  suggestion: إلى
+  message: 'الصواب: «إلى» بهمزة تحت الألف'
+  explanation: «إلى» حرف جر يبدأ بهمزة قطع مكسورة، فتُكتب الهمزة تحت الألف.
+  examples:
+    bad: ذهبت الى السوق
+    good: ذهبت إلى السوق
+- schema_version: 2
+  id: HAMZA_IDHA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اذا
+  exceptions: []
+  suggestion: إذا
+  message: 'الصواب: «إذا» بهمزة قطع'
+  explanation: «إذا» الشرطية تبدأ بهمزة قطع مكسورة.
+  examples:
+    bad: اذا جئت فأخبرني
+    good: إذا جئت فأخبرني
+- schema_version: 2
+  id: HAMZA_ANA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: انا
+  exceptions: []
+  suggestion: أنا
+  message: 'الصواب: «أنا» بهمزة فوق الألف'
+  explanation: ضمير المتكلم «أنا» يبدأ بهمزة قطع مفتوحة.
+  examples:
+    bad: انا طالب مجتهد
+    good: أنا طالب مجتهد
+- schema_version: 2
+  id: HAMZA_ANTA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: انت
+  exceptions: []
+  suggestion: أنت
+  message: 'الصواب: «أنت» بهمزة قطع'
+  explanation: ضمائر المخاطب (أنتَ، أنتِ، أنتم) تبدأ بهمزة قطع.
+  examples:
+    bad: انت صديقي
+    good: أنت صديقي
+- schema_version: 2
+  id: HAMZA_ANTUM
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: انتم
+  exceptions: []
+  suggestion: أنتم
+  message: 'الصواب: «أنتم» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: انتم الأفضل
+    good: أنتم الأفضل
+- schema_version: 2
+  id: HAMZA_AKTHAR
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اكثر
+  exceptions: []
+  suggestion: أكثر
+  message: 'الصواب: «أكثر» بهمزة قطع'
+  explanation: أفعل التفضيل (أكثر، أفضل، أكبر...) تبدأ بهمزة قطع مفتوحة.
+  examples:
+    bad: هذا اكثر وضوحًا
+    good: هذا أكثر وضوحًا
+- schema_version: 2
+  id: HAMZA_AFDAL
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: افضل
+  exceptions: []
+  suggestion: أفضل
+  message: 'الصواب: «أفضل» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: هو افضل لاعب
+    good: هو أفضل لاعب
+- schema_version: 2
+  id: HAMZA_AHSAN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: احسن
+  exceptions: []
+  suggestion: أحسن
+  message: 'الصواب: «أحسن» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: هذا احسن حل
+    good: هذا أحسن حل
+- schema_version: 2
+  id: HAMZA_AKBAR
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اكبر
+  exceptions: []
+  suggestion: أكبر
+  message: 'الصواب: «أكبر» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: بيت اكبر من بيتنا
+    good: بيت أكبر من بيتنا
+- schema_version: 2
+  id: HAMZA_AQAL
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اقل
+  exceptions: []
+  suggestion: أقل
+  message: 'الصواب: «أقل» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: سعر اقل بكثير
+    good: سعر أقل بكثير
+- schema_version: 2
+  id: HAMZA_AWWAL
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اول
+  exceptions: []
+  suggestion: أول
+  message: 'الصواب: «أول» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: هذا اول يوم
+    good: هذا أول يوم
+- schema_version: 2
+  id: HAMZA_AHAD
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: احد
+  exceptions: []
+  suggestion: أحد
+  message: 'الصواب: «أحد» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: جاء احد الطلاب
+    good: جاء أحد الطلاب
+- schema_version: 2
+  id: HAMZA_AHAMM
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اهم
+  exceptions: []
+  suggestion: أهم
+  message: 'الصواب: «أهم» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: من اهم الأسباب
+    good: من أهم الأسباب
+- schema_version: 2
+  id: HAMZA_AYDAN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ايضا
+  exceptions: []
+  suggestions:
+  - أيضًا
+  - أيضا
+  message: 'الصواب: «أيضًا» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: وهو ايضا مهندس
+    good: وهو أيضًا مهندس
+- schema_version: 2
+  id: HAMZA_ALAAN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الان
+  exceptions: []
+  suggestion: الآن
+  message: 'الصواب: «الآن» بمدّة على الألف'
+  explanation: 'أصلها «الأَأْن»، فتُدمج الهمزتان في ألف ممدودة: الآن.'
+  examples:
+    bad: تعال الان
+    good: تعال الآن
+- schema_version: 2
+  id: HAMZA_ALAAN2
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الأن
+  exceptions: []
+  suggestion: الآن
+  message: 'الصواب: «الآن» بالمدّة لا بالهمزة'
+  explanation: ''
+  examples:
+    bad: ابدأ الأن
+    good: ابدأ الآن
+- schema_version: 2
+  id: HAMZA_AKHAR
+  type: literal
+  category: spelling
+  severity: warning
+  confidence: 0.99
+  priority: 80
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اخر
+  exceptions: []
+  suggestions:
+  - آخر
+  - أخّر
+  message: هل تقصد «آخر» بالمدّة؟
+  explanation: «آخر» (بمعنى الأخير أو المغاير) تُكتب بمدّة على الألف.
+  examples:
+    bad: في اخر الشهر
+    good: في آخر الشهر
+- schema_version: 2
+  id: HAMZA_ASIF
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اسف
+  exceptions: []
+  suggestion: آسف
+  message: 'الصواب: «آسف» بالمدّة'
+  explanation: ''
+  examples:
+    bad: انا اسف جدًا
+    good: أنا آسف جدًا
+- schema_version: 2
+  id: HAMZA_AMS
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: امس
+  exceptions: []
+  suggestion: أمس
+  message: 'الصواب: «أمس» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: زرته امس
+    good: زرته أمس
+- schema_version: 2
+  id: HAMZA_USTADH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: استاذ
+  prefixes: true
+  exceptions: []
+  suggestion: أستاذ
+  message: 'الصواب: «أستاذ» بهمزة قطع'
+  explanation: ''
+  examples:
+    bad: سألت الاستاذ
+    good: سألت الأستاذ
+- schema_version: 2
+  id: HAMZA_INTERNET
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الانترنت
+  exceptions: []
+  suggestion: الإنترنت
+  message: 'الصواب: «الإنترنت» بهمزة تحت الألف'
+  explanation: ''
+  examples:
+    bad: انقطع الانترنت
+    good: انقطع الإنترنت
+- schema_version: 2
+  id: HAMZA_MASUL
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مسؤل
+  prefixes: true
+  exceptions: []
+  suggestion: مسؤول
+  message: 'الصواب: «مسؤول» بواو بعد الهمزة'
+  explanation: ''
+  examples:
+    bad: هو مسؤل عن المشروع
+    good: هو مسؤول عن المشروع
+- schema_version: 2
+  id: HAMZA_SHAY
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شئ
+  prefixes: true
+  exceptions: []
+  suggestion: شيء
+  message: 'الصواب: «شيء» بياء ثم همزة على السطر'
+  explanation: 'الهمزة المتطرفة بعد ساكن تُكتب على السطر: شيء، بطء، جزء.'
+  examples:
+    bad: كل شئ جاهز
+    good: كل شيء جاهز
+- schema_version: 2
+  id: HAMZA_SHUUN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شئون
+  prefixes: true
+  exceptions: []
+  suggestion: شؤون
+  message: 'الصواب: «شؤون» بهمزة على واو'
+  explanation: ''
+  examples:
+    bad: وزارة الشئون
+    good: وزارة الشؤون
+- schema_version: 2
+  id: HAMZA_QIRAA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: قرائة
+  prefixes: true
+  exceptions: []
+  suggestion: قراءة
+  message: 'الصواب: «قراءة» بهمزة على السطر'
+  explanation: 'الهمزة المتوسطة بعد ألف ساكنة تُكتب على السطر: قراءة، براءة.'
+  examples:
+    bad: احب قرائة الكتب
+    good: أحب قراءة الكتب
+- schema_version: 2
+  id: HAMZA_BARAA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: برائة
+  prefixes: true
+  exceptions: []
+  suggestion: براءة
+  message: 'الصواب: «براءة» بهمزة على السطر'
+  explanation: ''
+  examples:
+    bad: شهادة برائة اختراع
+    good: شهادة براءة اختراع
+- schema_version: 2
+  id: HAMZA_KHATA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: خطاء
+  prefixes: true
+  exceptions: []
+  suggestion: خطأ
+  message: 'الصواب: «خطأ» — الهمزة على الألف'
+  explanation: ''
+  examples:
+    bad: هذا خطاء واضح
+    good: هذا خطأ واضح

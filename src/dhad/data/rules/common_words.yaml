@@ -1,0 +1,445 @@
+- schema_version: 2
+  id: WORD_LAKIN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: لاكن
+  exceptions: []
+  suggestion: لكن
+  message: 'الصواب: «لكن» بلا ألف'
+  explanation: 'تُنطق «لاكن» لكن ألفها محذوفة رسمًا مثل: هذا، ذلك، الرحمن.'
+  examples:
+    bad: أردت الذهاب لاكن تأخرت
+    good: أردت الذهاب لكن تأخرت
+- schema_version: 2
+  id: WORD_HADHA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هاذا
+  exceptions: []
+  suggestion: هذا
+  message: 'الصواب: «هذا» بلا ألف'
+  explanation: ''
+  examples:
+    bad: هاذا كتابي
+    good: هذا كتابي
+- schema_version: 2
+  id: WORD_HADHIHI
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: هاذه
+  exceptions: []
+  suggestion: هذه
+  message: 'الصواب: «هذه» بلا ألف'
+  explanation: ''
+  examples:
+    bad: هاذه مدرستي
+    good: هذه مدرستي
+- schema_version: 2
+  id: WORD_DHALIK
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ذالك
+  exceptions: []
+  suggestion: ذلك
+  message: 'الصواب: «ذلك» بلا ألف'
+  explanation: ''
+  examples:
+    bad: بعد ذالك خرجنا
+    good: بعد ذلك خرجنا
+- schema_version: 2
+  id: WORD_ALLADHI_DOUBLE
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اللذي
+  exceptions: []
+  suggestion: الذي
+  message: 'الصواب: «الذي» بلام واحدة'
+  explanation: '«اللذَينِ» للمثنى فقط؛ المفرد: الذي.'
+  examples:
+    bad: الكتاب اللذي قرأته
+    good: الكتاب الذي قرأته
+- schema_version: 2
+  id: WORD_ALLATI_DOUBLE
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: اللتي
+  exceptions: []
+  suggestion: التي
+  message: 'الصواب: «التي» بلام واحدة'
+  explanation: ''
+  examples:
+    bad: القصة اللتي سمعتها
+    good: القصة التي سمعتها
+- schema_version: 2
+  id: PHRASE_INSHALLAH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: انشاء الله
+  exceptions: []
+  suggestion: إن شاء الله
+  message: 'الصواب: «إن شاء الله» — ثلاث كلمات'
+  explanation: '«إنشاء» من البناء والتأسيس! المقصود: إنْ (شرطية) + شاءَ (فعل) + الله.'
+  examples:
+    bad: سأزورك انشاء الله
+    good: سأزورك إن شاء الله
+- schema_version: 2
+  id: PHRASE_INSHALLAH2
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: إنشاء الله
+  exceptions: []
+  suggestion: إن شاء الله
+  message: 'الصواب: «إن شاء الله» — ثلاث كلمات'
+  explanation: «إنشاء» مصدر أنشأ (بمعنى البناء)، والمقصود هنا فعل المشيئة.
+  examples:
+    bad: غدًا إنشاء الله
+    good: غدًا إن شاء الله
+- schema_version: 2
+  id: PHRASE_INSHALLAH3
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: انشالله
+  exceptions: []
+  suggestion: إن شاء الله
+  message: 'الصواب: «إن شاء الله» — ثلاث كلمات'
+  explanation: ''
+  examples:
+    bad: انشالله نلتقي
+    good: إن شاء الله نلتقي
+- schema_version: 2
+  id: PHRASE_MASHALLAH
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ماشاء الله
+  exceptions: []
+  suggestion: ما شاء الله
+  message: 'الصواب: «ما شاء الله» بفصل «ما»'
+  explanation: ''
+  examples:
+    bad: ماشاء الله عليك
+    good: ما شاء الله عليك
+- schema_version: 2
+  id: WORD_LIAN
+  type: literal
+  category: spelling
+  severity: warning
+  confidence: 0.99
+  priority: 80
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: لان
+  exceptions: []
+  suggestions:
+  - لأن
+  - لئن
+  message: هل تقصد «لأن» التعليلية؟
+  explanation: «لان» فعل (من اللين)؛ أداة التعليل تُكتب «لأن» بالهمزة.
+  examples:
+    bad: تأخرت لان الطريق مزدحم
+    good: تأخرت لأن الطريق مزدحم
+- schema_version: 2
+  id: WORD_ABADAN
+  type: literal
+  category: spelling
+  severity: warning
+  confidence: 0.99
+  priority: 80
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ابدا
+  exceptions: []
+  suggestions:
+  - أبدًا
+  - أبدأ
+  - ابدأ
+  message: 'راجع الهمزة: أبدًا / أبدأ / ابدأ'
+  explanation: «أبدًا» ظرف، «أبدأ» مضارع متكلم، «ابدأ» أمر بهمزة وصل.
+  examples:
+    bad: لن أنساك ابدا
+    good: لن أنساك أبدًا
+- schema_version: 2
+  id: GRAMMAR_SAWFA_LAN
+  type: literal
+  category: grammar
+  severity: error
+  confidence: 0.9
+  priority: 60
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: سوف لن
+  exceptions: []
+  suggestion: لن
+  message: «سوف لن» تركيب خاطئ — الصواب «لن» وحدها
+  explanation: «سوف» للإثبات المستقبلي و«لن» للنفي المستقبلي، ولا يجتمعان.
+  examples:
+    bad: سوف لن أحضر غدًا
+    good: لن أحضر غدًا
+- schema_version: 2
+  id: GRAMMAR_LAZAL
+  type: literal
+  category: grammar
+  severity: warning
+  confidence: 0.9
+  priority: 60
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: لا زال
+  exceptions: []
+  suggestion: ما زال
+  message: 'الأفصح في الاستمرار: «ما زال»'
+  explanation: «لا زال» تُستخدم للدعاء (لا زالت دارك عامرة)؛ وللاستمرار الأفصح «ما زال».
+  examples:
+    bad: لا زال المطر ينزل
+    good: ما زال المطر ينزل
+- schema_version: 2
+  id: GRAMMAR_LAZAL2
+  type: literal
+  category: grammar
+  severity: warning
+  confidence: 0.9
+  priority: 60
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: لازال
+  exceptions: []
+  suggestion: ما زال
+  message: 'الأفصح: «ما زال» مفصولة'
+  explanation: ''
+  examples:
+    bad: لازال الوضع صعبًا
+    good: ما زال الوضع صعبًا
+- schema_version: 2
+  id: WORD_ISM
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإسم
+  exceptions: []
+  suggestion: الاسم
+  message: 'الصواب: «الاسم» — همزة وصل لا قطع'
+  explanation: '«اسم» تبدأ بهمزة وصل، فلا تُرسم همزتها بعد «ال»: الاسم.'
+  examples:
+    bad: ما هو الإسم الكامل؟
+    good: ما هو الاسم الكامل؟
+- schema_version: 2
+  id: WORD_IBN
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإبن
+  exceptions: []
+  suggestion: الابن
+  message: 'الصواب: «الابن» — همزة وصل'
+  explanation: ''
+  examples:
+    bad: جاء الإبن الأكبر
+    good: جاء الابن الأكبر
+- schema_version: 2
+  id: WORD_INTIZAR
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإنتظار
+  exceptions: []
+  suggestion: الانتظار
+  message: 'الصواب: «الانتظار» — همزة وصل'
+  explanation: مصادر الأفعال الخماسية والسداسية (انتظار، استقبال...) تبدأ بهمزة وصل.
+  examples:
+    bad: طال الإنتظار
+    good: طال الانتظار
+- schema_version: 2
+  id: WORD_IJTIMA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإجتماع
+  exceptions: []
+  suggestion: الاجتماع
+  message: 'الصواب: «الاجتماع» — همزة وصل'
+  explanation: ''
+  examples:
+    bad: حضرت الإجتماع
+    good: حضرت الاجتماع
+- schema_version: 2
+  id: WORD_INTIKHABAT
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإنتخابات
+  exceptions: []
+  suggestion: الانتخابات
+  message: 'الصواب: «الانتخابات» — همزة وصل'
+  explanation: ''
+  examples:
+    bad: أُجريت الإنتخابات
+    good: أُجريت الانتخابات
+- schema_version: 2
+  id: WORD_ISTIQBAL
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإستقبال
+  exceptions: []
+  suggestion: الاستقبال
+  message: 'الصواب: «الاستقبال» — همزة وصل'
+  explanation: ''
+  examples:
+    bad: حفل الإستقبال
+    good: حفل الاستقبال
+- schema_version: 2
+  id: WORD_ISTIKHDAM
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الإستخدام
+  exceptions: []
+  suggestion: الاستخدام
+  message: 'الصواب: «الاستخدام» — همزة وصل'
+  explanation: ''
+  examples:
+    bad: سهل الإستخدام
+    good: سهل الاستخدام

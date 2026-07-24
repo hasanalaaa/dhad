@@ -1,0 +1,24 @@
+[package]
+name = "dhad-core"
+version = "1.0.0"
+edition = "2021"
+license = "AGPL-3.0-or-later"
+description = "Portable deterministic core of the Dhad Arabic writing engine (WASM/edge target). Python remains the reference implementation; parity is enforced by a shared golden corpus."
+repository = "https://github.com/dhad-project/dhad"
+
+[lib]
+name = "dhad_core"
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+regex = "1"
+unicode-normalization = "0.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+miniz_oxide = { version = "0.8", default-features = false, features = ["with-alloc"] }
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py310"], optional = true }
+
+
+[features]
+default = []
+python = ["dep:pyo3"]

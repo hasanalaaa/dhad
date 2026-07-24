@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Dhad Sovereign Desktop architecture and interface</title>
+  <desc id="desc">A polished Arabic writing desktop application, floating assistant and local Rust, WASM, ONNX and CRDT engine flow.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070A10"/><stop offset=".52" stop-color="#111729"/><stop offset="1" stop-color="#0B1620"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#84F0C9"/><stop offset="1" stop-color="#8A7CFF"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF" stop-opacity=".12"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".035"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="26" stdDeviation="30" flood-color="#000" flood-opacity=".45"/></filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#FFF" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1600" height="900" rx="34" fill="url(#bg)"/>
+  <rect width="1600" height="900" rx="34" fill="url(#grid)"/>
+  <circle cx="260" cy="130" r="170" fill="#8A7CFF" opacity=".11" filter="url(#glow)"/>
+  <circle cx="1370" cy="710" r="190" fill="#84F0C9" opacity=".09" filter="url(#glow)"/>
+
+  <g transform="translate(108 90)" filter="url(#shadow)">
+    <rect width="1050" height="620" rx="28" fill="#0C111C" stroke="#FFF" stroke-opacity=".13"/>
+    <rect width="1050" height="64" rx="28" fill="url(#glass)"/>
+    <path d="M0 64H1050" stroke="#FFF" stroke-opacity=".09"/>
+    <circle cx="31" cy="32" r="7" fill="#FF6B78"/><circle cx="55" cy="32" r="7" fill="#FFD166"/><circle cx="79" cy="32" r="7" fill="#69D48B"/>
+    <g font-family="Arial, sans-serif" fill="#F5F7FB">
+      <text x="1010" y="39" font-size="21" font-weight="700" text-anchor="end">ضاد</text>
+      <text x="941" y="39" font-size="13" fill="#9DA8BC" text-anchor="end">مساحة الكتابة السيادية</text>
+    </g>
+
+    <rect x="18" y="82" width="204" height="518" rx="20" fill="#FFFFFF" fill-opacity=".038" stroke="#FFF" stroke-opacity=".07"/>
+    <g font-family="Arial, sans-serif" font-size="14" fill="#9DA8BC" text-anchor="end">
+      <text x="194" y="124" fill="#84F0C9" font-weight="700">المحرر</text>
+      <text x="194" y="170">إعادة الصياغة</text><text x="194" y="212">التحليلات</text><text x="194" y="254">القوالب</text><text x="194" y="296">المستندات</text>
+    </g>
+    <rect x="36" y="101" width="168" height="39" rx="11" fill="#84F0C9" fill-opacity=".09"/>
+    <rect x="36" y="530" width="168" height="49" rx="14" fill="#8A7CFF" fill-opacity=".10" stroke="#8A7CFF" stroke-opacity=".24"/>
+    <circle cx="61" cy="554" r="8" fill="#84F0C9"/><text x="187" y="560" font-family="Arial, sans-serif" font-size="13" fill="#E7EAF2" text-anchor="end">المعالجة محلية</text>
+
+    <rect x="242" y="82" width="510" height="518" rx="20" fill="#FFFFFF" fill-opacity=".026" stroke="#FFF" stroke-opacity=".07"/>
+    <g font-family="Arial, sans-serif" text-anchor="end">
+      <text x="714" y="132" font-size="27" font-weight="700" fill="#F7F8FB">اكتب العربية بثقة وخصوصية</text>
+      <text x="714" y="168" font-size="15" fill="#9DA8BC">تدقيق، أسلوب، إعادة صياغة وتحليل — داخل جهازك.</text>
+      <text x="704" y="242" font-size="18" fill="#E9EDF5">تساعدك ضاد على تحسين النص العربي مع الحفاظ على</text>
+      <text x="704" y="278" font-size="18" fill="#E9EDF5">المعنى، وتعرض سبب كل اقتراح قبل تطبيقه.</text>
+      <text x="704" y="346" font-size="18" fill="#E9EDF5">المحرر يستجيب فورياً ويعمل دون اتصال بالشبكة.</text>
+    </g>
+    <path d="M667 291h44" stroke="#FF8A9A" stroke-width="3" stroke-linecap="round"/>
+    <rect x="270" y="401" width="454" height="160" rx="16" fill="#111A28" stroke="#84F0C9" stroke-opacity=".16"/>
+    <circle cx="695" cy="430" r="7" fill="#84F0C9"/>
+    <text x="674" y="436" font-family="Arial, sans-serif" font-size="14" fill="#84F0C9" text-anchor="end">اقتراح أسلوبي</text>
+    <text x="690" y="478" font-family="Arial, sans-serif" font-size="16" fill="#F7F8FB" text-anchor="end">استبدل العبارة بصياغة أكثر مباشرة.</text>
+    <rect x="570" y="511" width="126" height="34" rx="10" fill="url(#accent)"/><text x="633" y="533" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#08110E" text-anchor="middle">تطبيق الاقتراح</text>
+
+    <rect x="772" y="82" width="260" height="518" rx="20" fill="#FFFFFF" fill-opacity=".035" stroke="#FFF" stroke-opacity=".07"/>
+    <text x="1001" y="127" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#F7F8FB" text-anchor="end">ذكاء المستند</text>
+    <g transform="translate(800 158)">
+      <circle cx="102" cy="102" r="75" fill="none" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="18"/>
+      <circle cx="102" cy="102" r="75" fill="none" stroke="url(#accent)" stroke-width="18" stroke-linecap="round" stroke-dasharray="378 471" transform="rotate(-90 102 102)"/>
+      <text x="102" y="99" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#F7F8FB" text-anchor="middle">82</text>
+      <text x="102" y="125" font-family="Arial, sans-serif" font-size="12" fill="#9DA8BC" text-anchor="middle">وضوح النص</text>
+    </g>
+    <g transform="translate(800 388)" font-family="Arial, sans-serif">
+      <rect width="204" height="48" rx="12" fill="#FFFFFF" fill-opacity=".04"/><text x="184" y="29" font-size="13" fill="#DDE3EE" text-anchor="end">نبرة رسمية</text><rect x="18" y="21" width="64" height="6" rx="3" fill="#8A7CFF"/>
+      <rect y="60" width="204" height="48" rx="12" fill="#FFFFFF" fill-opacity=".04"/><text x="184" y="89" font-size="13" fill="#DDE3EE" text-anchor="end">مقروئية جيدة</text><rect x="18" y="81" width="82" height="6" rx="3" fill="#84F0C9"/>
+      <rect y="120" width="204" height="48" rx="12" fill="#FFFFFF" fill-opacity=".04"/><text x="184" y="149" font-size="13" fill="#DDE3EE" text-anchor="end">3 ملاحظات</text><rect x="18" y="141" width="38" height="6" rx="3" fill="#FFD166"/>
+    </g>
+  </g>
+
+  <g transform="translate(1020 265)" filter="url(#shadow)">
+    <rect width="470" height="330" rx="28" fill="#101725" fill-opacity=".92" stroke="#FFF" stroke-opacity=".18"/>
+    <rect width="470" height="56" rx="28" fill="url(#glass)"/>
+    <circle cx="432" cy="28" r="16" fill="url(#accent)"/><text x="432" y="34" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#07100D" text-anchor="middle">ض</text>
+    <text x="402" y="34" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#F7F8FB" text-anchor="end">ضاد السريع</text>
+    <rect x="24" y="78" width="422" height="94" rx="15" fill="#FFFFFF" fill-opacity=".045" stroke="#84F0C9" stroke-opacity=".24"/>
+    <text x="420" y="116" font-family="Arial, sans-serif" font-size="15" fill="#DDE3EE" text-anchor="end">ألصق نصاً للتدقيق الفوري…</text>
+    <rect x="316" y="190" width="130" height="39" rx="11" fill="url(#accent)"/><text x="381" y="215" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#07100D" text-anchor="middle">تدقيق الآن</text>
+    <rect x="24" y="250" width="422" height="54" rx="14" fill="#84F0C9" fill-opacity=".07" stroke="#84F0C9" stroke-opacity=".14"/>
+    <circle cx="416" cy="277" r="6" fill="#84F0C9"/><text x="396" y="282" font-family="Arial, sans-serif" font-size="13" fill="#DDE3EE" text-anchor="end">Rust IPC · معالجة محلية</text>
+  </g>
+
+  <g transform="translate(150 775)" font-family="Arial, sans-serif">
+    <g fill="#121A28" stroke="#FFF" stroke-opacity=".10"><rect width="205" height="66" rx="18"/><rect x="260" width="205" height="66" rx="18"/><rect x="520" width="205" height="66" rx="18"/><rect x="780" width="205" height="66" rx="18"/><rect x="1040" width="205" height="66" rx="18"/></g>
+    <g font-size="14" text-anchor="middle" fill="#E9EDF5"><text x="102" y="31" font-weight="700">واجهة RTL</text><text x="102" y="50" font-size="11" fill="#9DA8BC">Tauri WebView</text><text x="362" y="31" font-weight="700">IPC محلي</text><text x="362" y="50" font-size="11" fill="#9DA8BC">Rust commands</text><text x="622" y="31" font-weight="700">محرك ضاد</text><text x="622" y="50" font-size="11" fill="#9DA8BC">Rules + Syntax</text><text x="882" y="31" font-weight="700">ONNX / WebGPU</text><text x="882" y="50" font-size="11" fill="#9DA8BC">اختياري ومحلي</text><text x="1142" y="31" font-weight="700">CRDT + E2EE</text><text x="1142" y="50" font-size="11" fill="#9DA8BC">مزامنة اختيارية</text></g>
+    <g stroke="url(#accent)" stroke-width="3" stroke-linecap="round"><path d="M210 33h38"/><path d="M470 33h38"/><path d="M730 33h38"/><path d="M990 33h38"/></g>
+  </g>
+</svg>

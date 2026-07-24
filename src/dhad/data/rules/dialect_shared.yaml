@@ -1,0 +1,100 @@
+- schema_version: 2
+  id: SH_MU
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مو
+  exceptions: []
+  suggestion: ليس
+  message: 'عامية (عراقية/خليجية/شامية): «مو» — بالفصحى: ليس'
+  explanation: ''
+  examples:
+    bad: هذا مو معقول
+    good: هذا ليس معقولًا
+- schema_version: 2
+  id: SH_ASHAN
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: عشان
+  exceptions: []
+  suggestion: لأجل
+  message: 'عامية: «عشان» — بالفصحى: لأجل / لكي'
+  explanation: ''
+  examples:
+    bad: جئت عشان اساعدك
+    good: جئت لكي أساعدك
+- schema_version: 2
+  id: SH_SHWAYA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: شوية
+  exceptions: []
+  suggestion: قليل
+  message: 'عامية: «شوية» — بالفصحى: قليل / بعض'
+  explanation: ''
+  examples:
+    bad: أعطني شوية ماء
+    good: أعطني قليلًا من الماء
+- schema_version: 2
+  id: SH_LISSA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: لسه
+  exceptions: []
+  suggestion: ما زال
+  message: 'عامية: «لسه» — بالفصحى: ما زال / بعدُ'
+  explanation: ''
+  examples:
+    bad: لسه ما وصلت
+    good: لم أصل بعدُ
+- schema_version: 2
+  id: SH_BARDO
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: برضه
+  exceptions: []
+  suggestion: أيضًا
+  message: 'عامية: «برضه» — بالفصحى: أيضًا'
+  explanation: ''
+  examples:
+    bad: وأنا برضه أوافق
+    good: وأنا أيضًا أوافق

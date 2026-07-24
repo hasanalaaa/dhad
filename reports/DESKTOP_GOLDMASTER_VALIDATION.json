@@ -1,0 +1,542 @@
+{
+  "generated_at_utc": "2026-07-24T01:30:55.581513+00:00",
+  "file_count": 441,
+  "total_bytes": 180085070,
+  "checks_total": 101,
+  "checks_passed": 101,
+  "errors": [],
+  "warnings": [],
+  "checks": [
+    {
+      "name": "required:src-tauri/tauri.conf.json",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/icons/128x128.png",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/icons/128x128@2x.png",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/icons/icon.icns",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/icons/icon.ico",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/dmg/background.png",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/nsis-hooks.nsh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/desktop-shortcut.wxs",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/nsis-header.bmp",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/nsis-sidebar.bmp",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/wix-banner.bmp",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/windows/wix-dialog.bmp",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/build-desktop.sh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/build-desktop.bat",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:.github/workflows/desktop-release.yml",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:docs/index.html",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/optimize_onnx_assets.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/validate_desktop_release.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/validate_tauri_config.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/package_release.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/desktop-build-requirements.txt",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/generate_release_inventory.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:vercel.json",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:docs/.nojekyll",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "identifier",
+      "ok": true,
+      "detail": "com.dhad.app"
+    },
+    {
+      "name": "tauri-schema-2.11-compatible",
+      "ok": true,
+      "detail": "tauri-cli 2.11.x"
+    },
+    {
+      "name": "tauri-no-security-headers",
+      "ok": true,
+      "detail": "app.security.headers is unsupported by the pinned CLI"
+    },
+    {
+      "name": "tauri-no-no-redirection-bitmap",
+      "ok": true,
+      "detail": "unsupported app.windows key"
+    },
+    {
+      "name": "tauri-no-bundle-vc-runtime",
+      "ok": true,
+      "detail": "unsupported bundle.windows key"
+    },
+    {
+      "name": "dmg-background-configured",
+      "ok": true,
+      "detail": "{'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}"
+    },
+    {
+      "name": "dmg-drag-layout",
+      "ok": true,
+      "detail": "{'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}"
+    },
+    {
+      "name": "nsis-hooks-configured",
+      "ok": true,
+      "detail": "{'compression': 'lzma', 'installMode': 'both', 'installerIcon': 'icons/icon.ico', 'uninstallerIcon': 'icons/icon.ico', 'headerImage': 'windows/nsis-header.bmp', 'sidebarImage': 'windows/nsis-sidebar.bmp', 'uninstallerHeaderImage': 'windows/nsis-header.bmp', 'installerHooks': 'windows/nsis-hooks.nsh', 'startMenuFolder': 'Dhad', 'languages': ['English']}"
+    },
+    {
+      "name": "nsis-installer-icon",
+      "ok": true,
+      "detail": "icons/icon.ico"
+    },
+    {
+      "name": "nsis-uninstaller-icon",
+      "ok": true,
+      "detail": "icons/icon.ico"
+    },
+    {
+      "name": "wix-fragment-configured",
+      "ok": true,
+      "detail": "{'bannerPath': 'windows/wix-banner.bmp', 'dialogImagePath': 'windows/wix-dialog.bmp', 'fragmentPaths': ['windows/desktop-shortcut.wxs'], 'componentRefs': ['DhadDesktopShortcut'], 'language': 'en-US', 'upgradeCode': '279f422c-ff6b-528a-962b-dea62c4bb547'}"
+    },
+    {
+      "name": "wix-upgrade-code-pinned",
+      "ok": true,
+      "detail": "279f422c-ff6b-528a-962b-dea62c4bb547"
+    },
+    {
+      "name": "dimensions:src-tauri/icons/128x128.png",
+      "ok": true,
+      "detail": "expected (128, 128), got (128, 128)"
+    },
+    {
+      "name": "dimensions:src-tauri/icons/128x128@2x.png",
+      "ok": true,
+      "detail": "expected (256, 256), got (256, 256)"
+    },
+    {
+      "name": "dimensions:src-tauri/dmg/background.png",
+      "ok": true,
+      "detail": "expected (660, 400), got (660, 400)"
+    },
+    {
+      "name": "dimensions:src-tauri/windows/nsis-header.bmp",
+      "ok": true,
+      "detail": "expected (150, 57), got (150, 57)"
+    },
+    {
+      "name": "dimensions:src-tauri/windows/nsis-sidebar.bmp",
+      "ok": true,
+      "detail": "expected (164, 314), got (164, 314)"
+    },
+    {
+      "name": "dimensions:src-tauri/windows/wix-banner.bmp",
+      "ok": true,
+      "detail": "expected (493, 58), got (493, 58)"
+    },
+    {
+      "name": "dimensions:src-tauri/windows/wix-dialog.bmp",
+      "ok": true,
+      "detail": "expected (493, 312), got (493, 312)"
+    },
+    {
+      "name": "ico-multi-resolution",
+      "ok": true,
+      "detail": "[(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]"
+    },
+    {
+      "name": "nsis-create-shortcut",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "nsis-delete-shortcut",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "workflow:macos-15",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:macos-15-intel",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:windows-2025",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:aarch64-apple-darwin",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:x86_64-apple-darwin",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:nsis,msi",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:tauri-apps/tauri-action@v1",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow-validation:v*.*.*",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:libwebkit2gtk-4.1-dev",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:libayatana-appindicator3-dev",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:tools/desktop-build-requirements.txt",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:tools/optimize_onnx_assets.py",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:tools/validate_tauri_config.py",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:tools/validate_desktop_release.py",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.4\"",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:cargo test",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "workflow-validation:npm test",
+      "ok": true,
+      "detail": "missing validation stage"
+    },
+    {
+      "name": "landing:id=\"downloads\"",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:الخصوصية",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:data-download",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:data-live-demo",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:dhad-demo-url",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:web_demo",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "landing:privacy-diagram",
+      "ok": true,
+      "detail": "missing landing-page section"
+    },
+    {
+      "name": "build-sh:desktop-release.yml",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:validate_tauri_config.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:desktop-build-requirements.txt",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:optimize_onnx_assets.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:validate_desktop_release.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:2.11.4",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:cargo clippy",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:tauri build",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:desktop-release.yml",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:validate_tauri_config.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:desktop-build-requirements.txt",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:optimize_onnx_assets.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:validate_desktop_release.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:2.11.4",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:cargo clippy",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:tauri build",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "no-broken-symlinks",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no-case-insensitive-path-collisions",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no-packaged-node-modules",
+      "ok": true,
+      "detail": "web_demo/node_modules must not be committed or packaged"
+    },
+    {
+      "name": "no-packaged-target",
+      "ok": true,
+      "detail": "Cargo target directory must not be packaged"
+    },
+    {
+      "name": "no-packaged-build-venv",
+      "ok": true,
+      "detail": ".desktop-build must be excluded by Git, Tauri, and release packaging"
+    },
+    {
+      "name": "shell-build-script-executable",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "all-json-parses",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "all-toml-parses",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "all-xml-svg-wxs-parses",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "npm-lockfile-v3",
+      "ok": true,
+      "detail": "3"
+    },
+    {
+      "name": "critical-npm-dependencies-pinned",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "onnx-build-tool-pinned",
+      "ok": true,
+      "detail": "['onnx==1.22.0']"
+    },
+    {
+      "name": "no-obvious-embedded-private-keys",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "onnx-assets-present",
+      "ok": true,
+      "detail": "no ONNX models found"
+    },
+    {
+      "name": "repository-file-count",
+      "ok": true,
+      "detail": "only 441 files"
+    }
+  ],
+  "key_assets": {
+    "src-tauri/tauri.conf.json": "f5e3e23ae165f6a48ac9381d4c055fdff99708b1dd3a638b6b3ae57c94b192bf",
+    "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
+    "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
+    "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
+    "src-tauri/icons/icon.ico": "d3404797982828099a96afee44c8cef2adf8f41bec29b7cb4e692706a97765f5",
+    "src-tauri/dmg/background.png": "d1d0098bcd8287f43828ace1eb086f5918a57215d2df3507d1d0eb34a7af3a79",
+    "src-tauri/windows/nsis-hooks.nsh": "2100c4f26365a2e6eab76727887c7eedd70f94fe255100d3aeeaa0498b87b521",
+    "src-tauri/windows/desktop-shortcut.wxs": "faf7537511e4d0969b32146a78692c25c28576b10796ad5e928b4a50e78c3b5c",
+    "src-tauri/windows/nsis-header.bmp": "8878a88346361758bb717d6d37052d5e9c6449347ef81212281395209158d078",
+    "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
+    "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
+    "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
+    "scripts/build-desktop.sh": "d797d4bbd064392c6f43ff510dfc67f00a371ee1f5b24bae234b95919255705a",
+    "scripts/build-desktop.bat": "074fbdfd13859a6acd80348f1d3d4c07f69f36b75dddc531e5b87aed3526da5e",
+    ".github/workflows/desktop-release.yml": "b1821c946f9af5aa1641db47f0e35318e7633ac87d42ef7e25ebe6c28b11ca99",
+    "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
+    "tools/optimize_onnx_assets.py": "9bee0bdf86d5175a4615710f567216d9c17831497ef6e4881d52b0e14217b8cb",
+    "tools/validate_desktop_release.py": "7e8d77382b2374ee12efc514de318bccb117bcc6f660fe6b3097e99ce0f29f5f",
+    "tools/validate_tauri_config.py": "20d04b23d556ec22de2a9d038388c212e1a013be22d28821e93eeb451e10e5b2",
+    "tools/package_release.py": "4114f9b1c8c2ebfb6cc9d282e1a126a0fa74fe5b0af4a2001d4d5123ffac1ccb",
+    "tools/desktop-build-requirements.txt": "a85e651aac4f558b261fe59050b089ac7156724549d98996e58b9f27c0cff706",
+    "tools/generate_release_inventory.py": "47908240787c2af386160b4c2b7a6beed37d1aae46c725855f49a48f21a2cce2",
+    "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",
+    "docs/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

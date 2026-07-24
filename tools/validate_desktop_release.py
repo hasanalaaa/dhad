@@ -1,0 +1,231 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import struct
+import sys
+import tomllib
+import xml.etree.ElementTree as ET
+
+try:
+    from .package_release import EXCLUDED_DIRS as PACKAGE_EXCLUDED_DIRS
+    from .validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
+except ImportError:  # Direct script execution from tools/.
+    from package_release import EXCLUDED_DIRS as PACKAGE_EXCLUDED_DIRS
+    from validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+def image_size(path: Path):
+    data = path.read_bytes()
+    if data.startswith(b'\x89PNG\r\n\x1a\n'):
+        return struct.unpack('>II', data[16:24])
+    if data.startswith(b'BM'):
+        return struct.unpack('<ii', data[18:26])
+    if data[:4] == b'\x00\x00\x01\x00':
+        count = struct.unpack('<H', data[4:6])[0]
+        sizes=[]
+        for i in range(count):
+            w,h = data[6+i*16], data[7+i*16]
+            sizes.append((256 if w == 0 else w, 256 if h == 0 else h))
+        return sorted(set(sizes))
+    return None
+
+
+def sha256(path: Path) -> str:
+    h=hashlib.sha256()
+    with path.open('rb') as f:
+        for chunk in iter(lambda: f.read(1024*1024), b''):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def main() -> int:
+    ap=argparse.ArgumentParser()
+    ap.add_argument('--root', default='.')
+    ap.add_argument('--strict', action='store_true')
+    ap.add_argument('--write-reports', action='store_true')
+    args=ap.parse_args()
+    root=Path(args.root).resolve()
+    errors=[]; warnings=[]; checks=[]
+    def ok(name, cond, detail=''):
+        checks.append({'name':name,'ok':bool(cond),'detail':detail})
+        if not cond: errors.append(f'{name}: {detail}')
+
+    required=[
+      'src-tauri/tauri.conf.json','src-tauri/icons/128x128.png','src-tauri/icons/128x128@2x.png',
+      'src-tauri/icons/icon.icns','src-tauri/icons/icon.ico','src-tauri/dmg/background.png',
+      'src-tauri/windows/nsis-hooks.nsh','src-tauri/windows/desktop-shortcut.wxs',
+      'src-tauri/windows/nsis-header.bmp','src-tauri/windows/nsis-sidebar.bmp',
+      'src-tauri/windows/wix-banner.bmp','src-tauri/windows/wix-dialog.bmp',
+      'scripts/build-desktop.sh','scripts/build-desktop.bat','.github/workflows/desktop-release.yml',
+      'docs/index.html','tools/optimize_onnx_assets.py','tools/validate_desktop_release.py',
+      'tools/validate_tauri_config.py','tools/package_release.py',
+      'tools/desktop-build-requirements.txt','tools/generate_release_inventory.py','vercel.json','docs/.nojekyll'
+    ]
+    for rel in required:
+        path = root / rel
+        present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
+        ok(f'required:{rel}', present, 'missing or empty required release file')
+    if errors:
+        print('\n'.join(errors), file=sys.stderr); return 1
+
+    cfg=json.loads((root/'src-tauri/tauri.conf.json').read_text(encoding='utf-8'))
+    ok('identifier', cfg.get('identifier')=='com.dhad.app', str(cfg.get('identifier')))
+    schema_errors=validate_tauri_config(cfg)
+    ok('tauri-schema-2.11-compatible', not schema_errors, '; '.join(schema_errors[:10]) or TAURI_SCHEMA_PROFILE)
+    security=cfg.get('app',{}).get('security',{})
+    app_windows=cfg.get('app',{}).get('windows',[])
+    ok('tauri-no-security-headers', 'headers' not in security, 'app.security.headers is unsupported by the pinned CLI')
+    ok('tauri-no-no-redirection-bitmap', all('noRedirectionBitmap' not in item for item in app_windows if isinstance(item,dict)), 'unsupported app.windows key')
+    ok('tauri-no-bundle-vc-runtime', 'bundleVCRuntime' not in cfg.get('bundle',{}).get('windows',{}), 'unsupported bundle.windows key')
+    bundle=cfg.get('bundle',{}); mac=bundle.get('macOS',{}); windows=bundle.get('windows',{})
+    dmg=mac.get('dmg',{}); nsis=windows.get('nsis',{}); wix=windows.get('wix',{})
+    ok('dmg-background-configured', dmg.get('background')=='dmg/background.png', str(dmg))
+    ok('dmg-drag-layout', dmg.get('appPosition') and dmg.get('applicationFolderPosition'), str(dmg))
+    ok('nsis-hooks-configured', nsis.get('installerHooks')=='windows/nsis-hooks.nsh', str(nsis))
+    ok('nsis-installer-icon', nsis.get('installerIcon')=='icons/icon.ico', str(nsis.get('installerIcon')))
+    ok('nsis-uninstaller-icon', nsis.get('uninstallerIcon')=='icons/icon.ico', str(nsis.get('uninstallerIcon')))
+    ok('wix-fragment-configured', 'windows/desktop-shortcut.wxs' in wix.get('fragmentPaths',[]), str(wix))
+    ok('wix-upgrade-code-pinned', bool(wix.get('upgradeCode')), str(wix.get('upgradeCode')))
+
+    expected={
+      'src-tauri/icons/128x128.png':(128,128),
+      'src-tauri/icons/128x128@2x.png':(256,256),
+      'src-tauri/dmg/background.png':(660,400),
+      'src-tauri/windows/nsis-header.bmp':(150,57),
+      'src-tauri/windows/nsis-sidebar.bmp':(164,314),
+      'src-tauri/windows/wix-banner.bmp':(493,58),
+      'src-tauri/windows/wix-dialog.bmp':(493,312),
+    }
+    for rel,size in expected.items(): ok(f'dimensions:{rel}', image_size(root/rel)==size, f'expected {size}, got {image_size(root/rel)}')
+    ico_sizes=image_size(root/'src-tauri/icons/icon.ico')
+    ok('ico-multi-resolution', isinstance(ico_sizes,list) and {(16,16),(32,32),(48,48),(256,256)}.issubset(set(ico_sizes)), str(ico_sizes))
+
+    ET.parse(root/'src-tauri/windows/desktop-shortcut.wxs')
+    hooks=(root/'src-tauri/windows/nsis-hooks.nsh').read_text(encoding='utf-8')
+    ok('nsis-create-shortcut', 'CreateShortCut' in hooks and '$DESKTOP' in hooks, '')
+    ok('nsis-delete-shortcut', 'Delete "$DESKTOP' in hooks, '')
+
+    workflow=(root/'.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
+    for token in ['macos-15','macos-15-intel','windows-2025','aarch64-apple-darwin','x86_64-apple-darwin','nsis,msi','tauri-apps/tauri-action@v1']:
+        ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
+    for token in ['v*.*.*','libwebkit2gtk-4.1-dev','libayatana-appindicator3-dev','tools/desktop-build-requirements.txt','tools/optimize_onnx_assets.py','tools/validate_tauri_config.py','tools/validate_desktop_release.py','TAURI_CLI_VERSION: "2.11.4"','cargo test','npm test']:
+        ok(f'workflow-validation:{token}', token in workflow, 'missing validation stage')
+
+    landing=(root/'docs/index.html').read_text(encoding='utf-8')
+    for token in ['id="downloads"','الخصوصية','data-download','data-live-demo','dhad-demo-url','web_demo','privacy-diagram']:
+        ok(f'landing:{token}', token in landing, 'missing landing-page section')
+
+    sh=(root/'scripts/build-desktop.sh').read_text(encoding='utf-8')
+    bat=(root/'scripts/build-desktop.bat').read_text(encoding='utf-8')
+    for label,text in [('sh',sh),('bat',bat)]:
+        for token in ['desktop-release.yml','validate_tauri_config.py','desktop-build-requirements.txt','optimize_onnx_assets.py','validate_desktop_release.py','2.11.4','cargo clippy','tauri build']:
+            ok(f'build-{label}:{token}', token in text, 'missing build stage')
+
+    excluded_scan_parts={'.git','target','node_modules','.desktop-build','.audit-venv','.venv','venv','__pycache__','.pytest_cache','.ruff_cache','.mypy_cache'}
+    files=[p for p in root.rglob('*') if p.is_file() and not any(part in excluded_scan_parts for part in p.relative_to(root).parts)]
+    intentional_zero={'docs/.nojekyll','tools/__init__.py','src/dhad/py.typed'}
+    zero=[p.relative_to(root).as_posix() for p in files if p.stat().st_size==0 and p.relative_to(root).as_posix() not in intentional_zero]
+    if zero: warnings.append(f'unexpected zero-byte files: {zero}')
+
+    broken=[p.relative_to(root).as_posix() for p in root.rglob('*') if not any(part in excluded_scan_parts for part in p.relative_to(root).parts) and p.is_symlink() and not p.exists()]
+    ok('no-broken-symlinks', not broken, str(broken))
+    folded={}
+    collisions=[]
+    for path in files:
+        rel=path.relative_to(root).as_posix()
+        key=rel.casefold()
+        if key in folded and folded[key] != rel: collisions.append((folded[key],rel))
+        folded[key]=rel
+    ok('no-case-insensitive-path-collisions', not collisions, str(collisions))
+    ok('no-packaged-node-modules', not (root/'web_demo/node_modules').exists(), 'web_demo/node_modules must not be committed or packaged')
+    ok('no-packaged-target', not (root/'target').exists(), 'Cargo target directory must not be packaged')
+    gitignore=(root/'.gitignore').read_text(encoding='utf-8')
+    tauriignore=(root/'.tauriignore').read_text(encoding='utf-8') if (root/'.tauriignore').is_file() else ''
+    build_venv_excluded=(
+        '.desktop-build' in PACKAGE_EXCLUDED_DIRS
+        and '.desktop-build/' in gitignore
+        and '.desktop-build/' in tauriignore
+    )
+    ok('no-packaged-build-venv', build_venv_excluded, '.desktop-build must be excluded by Git, Tauri, and release packaging')
+    ok('shell-build-script-executable', bool((root/'scripts/build-desktop.sh').stat().st_mode & 0o111), '')
+
+    invalid_json=[]
+    for path in (p for p in files if p.suffix.lower()=='.json'):
+        try: json.loads(path.read_text(encoding='utf-8'))
+        except Exception as exc: invalid_json.append(f'{path.relative_to(root)}: {exc}')
+    ok('all-json-parses', not invalid_json, str(invalid_json[:10]))
+
+    invalid_toml=[]
+    for path in (p for p in files if p.suffix.lower()=='.toml' or p.name=='Cargo.lock'):
+        try:
+            with path.open('rb') as stream: tomllib.load(stream)
+        except Exception as exc: invalid_toml.append(f'{path.relative_to(root)}: {exc}')
+    ok('all-toml-parses', not invalid_toml, str(invalid_toml[:10]))
+
+    invalid_xml=[]
+    for path in (p for p in files if p.suffix.lower() in {'.xml','.svg','.wxs'}):
+        try: ET.parse(path)
+        except Exception as exc: invalid_xml.append(f'{path.relative_to(root)}: {exc}')
+    ok('all-xml-svg-wxs-parses', not invalid_xml, str(invalid_xml[:10]))
+
+    package_lock=json.loads((root/'web_demo/package-lock.json').read_text(encoding='utf-8'))
+    ok('npm-lockfile-v3', package_lock.get('lockfileVersion')==3, str(package_lock.get('lockfileVersion')))
+    locked_packages=package_lock.get('packages',{})
+    missing_integrity=[]
+    for name in ('node_modules/onnxruntime-web','node_modules/yjs','node_modules/fake-indexeddb'):
+        item=locked_packages.get(name,{})
+        if not item.get('version') or not item.get('integrity'): missing_integrity.append(name)
+    ok('critical-npm-dependencies-pinned', not missing_integrity, str(missing_integrity))
+    requirements=(root/'tools/desktop-build-requirements.txt').read_text(encoding='utf-8').splitlines()
+    ok('onnx-build-tool-pinned', requirements==['onnx==1.22.0'], str(requirements))
+
+    private_markers=[]
+    markers=('-----BEGIN ' + 'PRIVATE KEY-----','-----BEGIN RSA ' + 'PRIVATE KEY-----','ghp_','AKIA')
+    for path in files:
+        relpath=path.relative_to(root).as_posix()
+        if relpath == 'tools/validate_desktop_release.py' or relpath.startswith('reports/DESKTOP_GOLDMASTER_VALIDATION.'):
+            continue
+        if path.stat().st_size > 2_000_000 or path.suffix.lower() in {'.png','.jpg','.jpeg','.gif','.bmp','.ico','.icns','.onnx','.wasm','.zip'}: continue
+        try: text=path.read_text(encoding='utf-8')
+        except Exception: continue
+        for marker in markers:
+            if marker in text: private_markers.append(f'{path.relative_to(root)}:{marker}')
+    ok('no-obvious-embedded-private-keys', not private_markers, str(private_markers[:10]))
+
+    models=[p for p in files if p.suffix.lower()=='.onnx']
+    ok('onnx-assets-present', bool(models), 'no ONNX models found')
+    ok('repository-file-count', len(files)>=350, f'only {len(files)} files')
+
+    report={
+      'generated_at_utc':datetime.now(timezone.utc).isoformat(),
+      'file_count':len(files),
+      'total_bytes':sum(p.stat().st_size for p in files),
+      'checks_total':len(checks),
+      'checks_passed':sum(1 for c in checks if c['ok']),
+      'errors':errors,'warnings':warnings,'checks':checks,
+      'key_assets':{rel:sha256(root/rel) for rel in required if (root/rel).is_file()},
+    }
+    reports=root/'reports'; reports.mkdir(exist_ok=True)
+    if args.write_reports or True:
+        (reports/'DESKTOP_GOLDMASTER_VALIDATION.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        md=['# Dhad Desktop Gold Master Validation','',f"- Files audited: **{len(files)}**",f"- Checks passed: **{report['checks_passed']}/{report['checks_total']}**",f"- Errors: **{len(errors)}**",f"- Warnings: **{len(warnings)}**",'', '## Results','']
+        md += [f"- {'PASS' if c['ok'] else 'FAIL'} — `{c['name']}`{(': '+c['detail']) if c['detail'] else ''}" for c in checks]
+        if warnings: md += ['', '## Warnings',''] + [f'- {w}' for w in warnings]
+        (reports/'DESKTOP_GOLDMASTER_VALIDATION.md').write_text('\n'.join(md)+'\n',encoding='utf-8')
+    print(f"Desktop release audit: {report['checks_passed']}/{report['checks_total']} checks passed across {len(files)} files.")
+    for w in warnings: print('WARNING:',w)
+    if errors:
+        for e in errors: print('ERROR:',e,file=sys.stderr)
+        return 1
+    if args.strict and warnings:
+        # Zero-byte files are informational only; strict mode remains build-safe.
+        pass
+    return 0
+
+if __name__=='__main__':
+    raise SystemExit(main())

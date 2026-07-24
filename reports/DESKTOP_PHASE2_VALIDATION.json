@@ -1,0 +1,248 @@
+{
+  "summary": {
+    "passed": 48,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "workspace parses",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tauri identifier",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "frontendDist",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "main window exists",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini window exists",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini window URL",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini always on top",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini frameless",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini hidden initially",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini taskbar hidden",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "capability windows",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "dialog permission",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tray feature",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "dialog dependency",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "global shortcut dependency",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tray label افتح ضاد",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tray label التدقيق السريع",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tray label الإعدادات",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "tray label إنهاء",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "main-thread tray dispatch",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "shortcut uses ALT/Option",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "shortcut nonfatal registration",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "dialog plugin initialized",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "file reads blocking",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "file writes blocking",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "file formats",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "file size guard",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "native dialog open",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "native dialog save",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "browser picker fallback",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "browser download fallback",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini uses desktop adapter",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini auto-hide",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini copy-back",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini drag region",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "settings tray event",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "mini PWA assets cached",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command registered: write_document_file",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command invoked: write_document_file",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command registered: read_document_file",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command invoked: read_document_file",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command registered: hide_mini_assistant",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command invoked: hide_mini_assistant",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command registered: open_main_window",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "command invoked: open_main_window",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "src-tauri/src/lib.rs delimiters balanced",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "src-tauri/src/tray.rs delimiters balanced",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "src-tauri/src/file_commands.rs delimiters balanced",
+      "status": "passed",
+      "detail": ""
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{"text": "", "matches": [], "resolved": []}
+{"text": "ذهبت الى المدرسه قبل ثلاثة سنوات.", "matches": [["HAMZA_ILA", 5, 3, "إلى"], ["TAA_MADRASA", 9, 7, "المدرسة"]], "resolved": [["HAMZA_ILA", 5, 3], ["TAA_MADRASA", 9, 7]]}
+{"text": "انا احب القراءة، لاكن الوقت ضيق.", "matches": [["WORD_LAKIN", 17, 4, "لكن"], ["HAMZA_ANA", 0, 3, "أنا"]], "resolved": [["HAMZA_ANA", 0, 3], ["WORD_LAKIN", 17, 4]]}
+{"text": "سأزورك انشاء الله غدا او بعده.", "matches": [["PHRASE_INSHALLAH", 7, 10, "إن شاء الله"]], "resolved": [["PHRASE_INSHALLAH", 7, 10]]}
+{"text": "هاذا كتابي وهاذه قصتي.", "matches": [["WORD_HADHA", 0, 4, "هذا"]], "resolved": [["WORD_HADHA", 0, 4]]}
+{"text": "قرأت الكتاب ثم ذهبت إلى البيت.", "matches": [], "resolved": []}
+{"text": "الى الى الى — تكرار متعمد.", "matches": [["HAMZA_ILA", 0, 3, "إلى"], ["HAMZA_ILA", 4, 3, "إلى"], ["HAMZA_ILA", 8, 3, "إلى"]], "resolved": [["HAMZA_ILA", 0, 3], ["HAMZA_ILA", 4, 3], ["HAMZA_ILA", 8, 3]]}
+{"text": "نص يخلط English مع الى العربيه.", "matches": [["HAMZA_ILA", 19, 3, "إلى"]], "resolved": [["HAMZA_ILA", 19, 3]]}
+{"text": "«الى» بين علامتي اقتباس, وبعدها فاصلة لاتينية.", "matches": [["HAMZA_ILA", 1, 3, "إلى"]], "resolved": [["HAMZA_ILA", 1, 3]]}
+{"text": "بالمدرسه لاحقة وسابقة مثل والمدرسه لا يلتقطها النمط المجرد.", "matches": [], "resolved": []}

@@ -1,0 +1,110 @@
+# Dhad Desktop Gold Master Validation
+
+- Files audited: **441**
+- Checks passed: **101/101**
+- Errors: **0**
+- Warnings: **0**
+
+## Results
+
+- PASS — `required:src-tauri/tauri.conf.json`: missing or empty required release file
+- PASS — `required:src-tauri/icons/128x128.png`: missing or empty required release file
+- PASS — `required:src-tauri/icons/128x128@2x.png`: missing or empty required release file
+- PASS — `required:src-tauri/icons/icon.icns`: missing or empty required release file
+- PASS — `required:src-tauri/icons/icon.ico`: missing or empty required release file
+- PASS — `required:src-tauri/dmg/background.png`: missing or empty required release file
+- PASS — `required:src-tauri/windows/nsis-hooks.nsh`: missing or empty required release file
+- PASS — `required:src-tauri/windows/desktop-shortcut.wxs`: missing or empty required release file
+- PASS — `required:src-tauri/windows/nsis-header.bmp`: missing or empty required release file
+- PASS — `required:src-tauri/windows/nsis-sidebar.bmp`: missing or empty required release file
+- PASS — `required:src-tauri/windows/wix-banner.bmp`: missing or empty required release file
+- PASS — `required:src-tauri/windows/wix-dialog.bmp`: missing or empty required release file
+- PASS — `required:scripts/build-desktop.sh`: missing or empty required release file
+- PASS — `required:scripts/build-desktop.bat`: missing or empty required release file
+- PASS — `required:.github/workflows/desktop-release.yml`: missing or empty required release file
+- PASS — `required:docs/index.html`: missing or empty required release file
+- PASS — `required:tools/optimize_onnx_assets.py`: missing or empty required release file
+- PASS — `required:tools/validate_desktop_release.py`: missing or empty required release file
+- PASS — `required:tools/validate_tauri_config.py`: missing or empty required release file
+- PASS — `required:tools/package_release.py`: missing or empty required release file
+- PASS — `required:tools/desktop-build-requirements.txt`: missing or empty required release file
+- PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
+- PASS — `required:vercel.json`: missing or empty required release file
+- PASS — `required:docs/.nojekyll`: missing or empty required release file
+- PASS — `identifier`: com.dhad.app
+- PASS — `tauri-schema-2.11-compatible`: tauri-cli 2.11.x
+- PASS — `tauri-no-security-headers`: app.security.headers is unsupported by the pinned CLI
+- PASS — `tauri-no-no-redirection-bitmap`: unsupported app.windows key
+- PASS — `tauri-no-bundle-vc-runtime`: unsupported bundle.windows key
+- PASS — `dmg-background-configured`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
+- PASS — `dmg-drag-layout`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
+- PASS — `nsis-hooks-configured`: {'compression': 'lzma', 'installMode': 'both', 'installerIcon': 'icons/icon.ico', 'uninstallerIcon': 'icons/icon.ico', 'headerImage': 'windows/nsis-header.bmp', 'sidebarImage': 'windows/nsis-sidebar.bmp', 'uninstallerHeaderImage': 'windows/nsis-header.bmp', 'installerHooks': 'windows/nsis-hooks.nsh', 'startMenuFolder': 'Dhad', 'languages': ['English']}
+- PASS — `nsis-installer-icon`: icons/icon.ico
+- PASS — `nsis-uninstaller-icon`: icons/icon.ico
+- PASS — `wix-fragment-configured`: {'bannerPath': 'windows/wix-banner.bmp', 'dialogImagePath': 'windows/wix-dialog.bmp', 'fragmentPaths': ['windows/desktop-shortcut.wxs'], 'componentRefs': ['DhadDesktopShortcut'], 'language': 'en-US', 'upgradeCode': '279f422c-ff6b-528a-962b-dea62c4bb547'}
+- PASS — `wix-upgrade-code-pinned`: 279f422c-ff6b-528a-962b-dea62c4bb547
+- PASS — `dimensions:src-tauri/icons/128x128.png`: expected (128, 128), got (128, 128)
+- PASS — `dimensions:src-tauri/icons/128x128@2x.png`: expected (256, 256), got (256, 256)
+- PASS — `dimensions:src-tauri/dmg/background.png`: expected (660, 400), got (660, 400)
+- PASS — `dimensions:src-tauri/windows/nsis-header.bmp`: expected (150, 57), got (150, 57)
+- PASS — `dimensions:src-tauri/windows/nsis-sidebar.bmp`: expected (164, 314), got (164, 314)
+- PASS — `dimensions:src-tauri/windows/wix-banner.bmp`: expected (493, 58), got (493, 58)
+- PASS — `dimensions:src-tauri/windows/wix-dialog.bmp`: expected (493, 312), got (493, 312)
+- PASS — `ico-multi-resolution`: [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
+- PASS — `nsis-create-shortcut`
+- PASS — `nsis-delete-shortcut`
+- PASS — `workflow:macos-15`: missing workflow contract
+- PASS — `workflow:macos-15-intel`: missing workflow contract
+- PASS — `workflow:windows-2025`: missing workflow contract
+- PASS — `workflow:aarch64-apple-darwin`: missing workflow contract
+- PASS — `workflow:x86_64-apple-darwin`: missing workflow contract
+- PASS — `workflow:nsis,msi`: missing workflow contract
+- PASS — `workflow:tauri-apps/tauri-action@v1`: missing workflow contract
+- PASS — `workflow-validation:v*.*.*`: missing validation stage
+- PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing validation stage
+- PASS — `workflow-validation:libayatana-appindicator3-dev`: missing validation stage
+- PASS — `workflow-validation:tools/desktop-build-requirements.txt`: missing validation stage
+- PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing validation stage
+- PASS — `workflow-validation:tools/validate_tauri_config.py`: missing validation stage
+- PASS — `workflow-validation:tools/validate_desktop_release.py`: missing validation stage
+- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing validation stage
+- PASS — `workflow-validation:cargo test`: missing validation stage
+- PASS — `workflow-validation:npm test`: missing validation stage
+- PASS — `landing:id="downloads"`: missing landing-page section
+- PASS — `landing:الخصوصية`: missing landing-page section
+- PASS — `landing:data-download`: missing landing-page section
+- PASS — `landing:data-live-demo`: missing landing-page section
+- PASS — `landing:dhad-demo-url`: missing landing-page section
+- PASS — `landing:web_demo`: missing landing-page section
+- PASS — `landing:privacy-diagram`: missing landing-page section
+- PASS — `build-sh:desktop-release.yml`: missing build stage
+- PASS — `build-sh:validate_tauri_config.py`: missing build stage
+- PASS — `build-sh:desktop-build-requirements.txt`: missing build stage
+- PASS — `build-sh:optimize_onnx_assets.py`: missing build stage
+- PASS — `build-sh:validate_desktop_release.py`: missing build stage
+- PASS — `build-sh:2.11.4`: missing build stage
+- PASS — `build-sh:cargo clippy`: missing build stage
+- PASS — `build-sh:tauri build`: missing build stage
+- PASS — `build-bat:desktop-release.yml`: missing build stage
+- PASS — `build-bat:validate_tauri_config.py`: missing build stage
+- PASS — `build-bat:desktop-build-requirements.txt`: missing build stage
+- PASS — `build-bat:optimize_onnx_assets.py`: missing build stage
+- PASS — `build-bat:validate_desktop_release.py`: missing build stage
+- PASS — `build-bat:2.11.4`: missing build stage
+- PASS — `build-bat:cargo clippy`: missing build stage
+- PASS — `build-bat:tauri build`: missing build stage
+- PASS — `no-broken-symlinks`: []
+- PASS — `no-case-insensitive-path-collisions`: []
+- PASS — `no-packaged-node-modules`: web_demo/node_modules must not be committed or packaged
+- PASS — `no-packaged-target`: Cargo target directory must not be packaged
+- PASS — `no-packaged-build-venv`: .desktop-build must be excluded by Git, Tauri, and release packaging
+- PASS — `shell-build-script-executable`
+- PASS — `all-json-parses`: []
+- PASS — `all-toml-parses`: []
+- PASS — `all-xml-svg-wxs-parses`: []
+- PASS — `npm-lockfile-v3`: 3
+- PASS — `critical-npm-dependencies-pinned`: []
+- PASS — `onnx-build-tool-pinned`: ['onnx==1.22.0']
+- PASS — `no-obvious-embedded-private-keys`: []
+- PASS — `onnx-assets-present`: no ONNX models found
+- PASS — `repository-file-count`: only 441 files

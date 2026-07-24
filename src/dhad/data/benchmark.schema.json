@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dhad.dev/schemas/benchmark-case-v1.json",
+  "title": "Dhad Benchmark Case v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "text", "domain", "split", "dialect", "annotations", "source"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "id": {"type": "string", "minLength": 1},
+    "text": {"type": "string", "minLength": 1},
+    "domain": {"type": "string", "enum": ["journalism", "academic", "administrative", "educational", "social", "dialect"]},
+    "split": {"type": "string", "enum": ["train", "dev", "test"]},
+    "dialect": {"type": "string", "enum": ["msa", "iraqi", "gulf", "levantine", "egyptian"]},
+    "annotations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/annotation"}
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataset", "license", "synthetic"],
+      "properties": {
+        "dataset": {"type": "string", "minLength": 1},
+        "license": {"type": "string", "minLength": 1},
+        "synthetic": {"type": "boolean"}
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["annotator", "annotations"],
+        "properties": {
+          "annotator": {"type": "string", "minLength": 1},
+          "annotations": {"type": "array", "items": {"$ref": "#/$defs/annotation"}}
+        }
+      }
+    },
+    "metadata": {"type": "object"}
+  },
+  "$defs": {
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "offset", "length", "accepted_replacements", "label", "severity"],
+      "properties": {
+        "category": {"type": "string", "enum": ["spelling", "grammar", "style", "punctuation", "dialect"]},
+        "offset": {"type": "integer", "minimum": 0},
+        "length": {"type": "integer", "minimum": 1},
+        "accepted_replacements": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "label": {"type": "string"},
+        "severity": {"type": "string", "enum": ["error", "warning", "hint"]}
+      }
+    }
+  }
+}

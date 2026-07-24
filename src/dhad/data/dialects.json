@@ -1,0 +1,1430 @@
+{
+  "version": "1.0.0",
+  "dialects": {
+    "egyptian": {
+      "name_ar": "المصرية"
+    },
+    "levantine": {
+      "name_ar": "الشامية"
+    },
+    "gulf": {
+      "name_ar": "الخليجية"
+    },
+    "iraqi": {
+      "name_ar": "العراقية"
+    },
+    "maghrebi": {
+      "name_ar": "المغاربية"
+    }
+  },
+  "entries": [
+    {
+      "id": "EG_IZZAY",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "ازاي",
+        "إزاي"
+      ],
+      "msa": "كيف",
+      "weight": 1.4,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كيف»."
+    },
+    {
+      "id": "EG_DILWAQTI",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "دلوقتي",
+        "دلوقت"
+      ],
+      "msa": "الآن",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "EG_AYIZ",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "عايز"
+      ],
+      "msa": "أريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "EG_AWIZ",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "عاوز"
+      ],
+      "msa": "أريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "EG_AYZA",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "عايزة",
+        "عاوزه"
+      ],
+      "msa": "أريد",
+      "weight": 1.3,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "EG_AYZIN",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "عايزين",
+        "عاوزين"
+      ],
+      "msa": "نريد",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «نريد»."
+    },
+    {
+      "id": "EG_MAFISH",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "مفيش"
+      ],
+      "msa": "لا يوجد",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لا يوجد»."
+    },
+    {
+      "id": "EG_KIDA",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "كده",
+        "كدا"
+      ],
+      "msa": "هكذا",
+      "weight": 1.2,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «هكذا»."
+    },
+    {
+      "id": "EG_NAHARDA",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "النهارده",
+        "النهاردة"
+      ],
+      "msa": "اليوم",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «اليوم»."
+    },
+    {
+      "id": "EG_AWI",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "أوي",
+        "اوي"
+      ],
+      "msa": "جدًا",
+      "weight": 0.9,
+      "confidence": 0.88,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جدًا»."
+    },
+    {
+      "id": "EG_MISH",
+      "dialects": [
+        "egyptian",
+        "levantine"
+      ],
+      "forms": [
+        "مش"
+      ],
+      "msa": "ليس",
+      "weight": 0.55,
+      "confidence": 0.78,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ليس»."
+    },
+    {
+      "id": "EG_BARDO",
+      "dialects": [
+        "egyptian"
+      ],
+      "forms": [
+        "برضه",
+        "برضو"
+      ],
+      "msa": "أيضًا",
+      "weight": 1.15,
+      "confidence": 0.91,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أيضًا»."
+    },
+    {
+      "id": "LV_SHU",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "شو"
+      ],
+      "msa": "ماذا",
+      "weight": 1.15,
+      "confidence": 0.91,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ماذا»."
+    },
+    {
+      "id": "LV_HEK",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "هيك"
+      ],
+      "msa": "هكذا",
+      "weight": 1.2,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «هكذا»."
+    },
+    {
+      "id": "LV_HALLAQ",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "هلق"
+      ],
+      "msa": "الآن",
+      "weight": 1.45,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "LV_HALLA",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "هلأ",
+        "هلا"
+      ],
+      "msa": "الآن",
+      "weight": 1.1,
+      "confidence": 0.88,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "LV_KTIR",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "كتير"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.25,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "LV_MNIH",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "منيح"
+      ],
+      "msa": "جيد",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جيد»."
+    },
+    {
+      "id": "LV_MNIHA",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "منيحة"
+      ],
+      "msa": "جيدة",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جيدة»."
+    },
+    {
+      "id": "LV_BADDI",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدي"
+      ],
+      "msa": "أريد",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "LV_BADNA",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدنا"
+      ],
+      "msa": "نريد",
+      "weight": 1.45,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «نريد»."
+    },
+    {
+      "id": "LV_BADDAK",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدك"
+      ],
+      "msa": "تريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «تريد»."
+    },
+    {
+      "id": "LV_BADKON",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدكم",
+        "بدكن"
+      ],
+      "msa": "تريدون",
+      "weight": 1.35,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «تريدون»."
+    },
+    {
+      "id": "LV_BADDO",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدو"
+      ],
+      "msa": "يريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «يريد»."
+    },
+    {
+      "id": "LV_BADHA",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "بدها"
+      ],
+      "msa": "تريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «تريد»."
+    },
+    {
+      "id": "LV_LESH",
+      "dialects": [
+        "levantine",
+        "gulf",
+        "iraqi"
+      ],
+      "forms": [
+        "ليش"
+      ],
+      "msa": "لماذا",
+      "weight": 0.55,
+      "confidence": 0.81,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لماذا»."
+    },
+    {
+      "id": "LV_MISHAN",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "مشان"
+      ],
+      "msa": "من أجل",
+      "weight": 1.3,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «من أجل»."
+    },
+    {
+      "id": "LV_SHWAY",
+      "dialects": [
+        "levantine",
+        "egyptian",
+        "gulf",
+        "iraqi"
+      ],
+      "forms": [
+        "شوي",
+        "شوية"
+      ],
+      "msa": "قليلًا",
+      "weight": 0.48,
+      "confidence": 0.78,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «قليلًا»."
+    },
+    {
+      "id": "LV_MBARIH",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "مبارح"
+      ],
+      "msa": "أمس",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أمس»."
+    },
+    {
+      "id": "LV_BUKRA",
+      "dialects": [
+        "levantine",
+        "egyptian",
+        "gulf",
+        "iraqi"
+      ],
+      "forms": [
+        "بكرا"
+      ],
+      "msa": "غدًا",
+      "weight": 0.48,
+      "confidence": 0.78,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «غدًا»."
+    },
+    {
+      "id": "LV_RAH",
+      "dialects": [
+        "levantine"
+      ],
+      "forms": [
+        "رح"
+      ],
+      "msa": "سوف",
+      "weight": 1.05,
+      "confidence": 0.88,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «سوف»."
+    },
+    {
+      "id": "GF_WISH",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "وش"
+      ],
+      "msa": "ماذا",
+      "weight": 1.1,
+      "confidence": 0.9,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ماذا»."
+    },
+    {
+      "id": "GF_WISHLON",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "وشلون"
+      ],
+      "msa": "كيف",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كيف»."
+    },
+    {
+      "id": "GF_ABGHA",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "ابغى",
+        "أبغى"
+      ],
+      "msa": "أريد",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "GF_NABGHA",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "نبغى"
+      ],
+      "msa": "نريد",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «نريد»."
+    },
+    {
+      "id": "GF_TABGHA",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "تبغى"
+      ],
+      "msa": "تريد",
+      "weight": 1.3,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «تريد»."
+    },
+    {
+      "id": "GF_YABGHA",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "يبغى"
+      ],
+      "msa": "يريد",
+      "weight": 1.3,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «يريد»."
+    },
+    {
+      "id": "GF_TABI",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "تبي"
+      ],
+      "msa": "تريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «تريد»."
+    },
+    {
+      "id": "GF_ABI",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "أبي",
+        "ابي"
+      ],
+      "msa": "أريد",
+      "weight": 1.0,
+      "confidence": 0.86,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "GF_DAHEEN",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "دحين"
+      ],
+      "msa": "الآن",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "GF_ALHEEN",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "الحين"
+      ],
+      "msa": "الآن",
+      "weight": 1.0,
+      "confidence": 0.87,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "GF_WAYID",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "وايد"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "GF_MUB",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "مب"
+      ],
+      "msa": "ليس",
+      "weight": 1.45,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ليس»."
+    },
+    {
+      "id": "GF_MAFI",
+      "dialects": [
+        "gulf"
+      ],
+      "forms": [
+        "مافي",
+        "ما فيه"
+      ],
+      "msa": "لا يوجد",
+      "weight": 1.05,
+      "confidence": 0.89,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لا يوجد»."
+    },
+    {
+      "id": "IQ_SHLONAK",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "شلونك"
+      ],
+      "msa": "كيف حالك",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كيف حالك»."
+    },
+    {
+      "id": "IQ_SHLON",
+      "dialects": [
+        "iraqi",
+        "gulf"
+      ],
+      "forms": [
+        "شلون"
+      ],
+      "msa": "كيف",
+      "weight": 0.7,
+      "confidence": 0.84,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كيف»."
+    },
+    {
+      "id": "IQ_SHINU",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "شنو"
+      ],
+      "msa": "ماذا",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ماذا»."
+    },
+    {
+      "id": "IQ_MINU",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "منو"
+      ],
+      "msa": "مَن",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «مَن»."
+    },
+    {
+      "id": "IQ_WEN",
+      "dialects": [
+        "iraqi",
+        "gulf",
+        "levantine"
+      ],
+      "forms": [
+        "وين"
+      ],
+      "msa": "أين",
+      "weight": 0.55,
+      "confidence": 0.82,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أين»."
+    },
+    {
+      "id": "IQ_AKU",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "اكو",
+        "أكو"
+      ],
+      "msa": "يوجد",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «يوجد»."
+    },
+    {
+      "id": "IQ_MAKU",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "ماكو"
+      ],
+      "msa": "لا يوجد",
+      "weight": 1.55,
+      "confidence": 0.98,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لا يوجد»."
+    },
+    {
+      "id": "IQ_SHAKU_MAKU",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "شكو ماكو"
+      ],
+      "msa": "ما الجديد؟",
+      "weight": 1.8,
+      "confidence": 0.98,
+      "kind": "phrase",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ما الجديد؟»."
+    },
+    {
+      "id": "IQ_HASSA",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "هسه",
+        "هسة"
+      ],
+      "msa": "الآن",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "IQ_CHAN",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "چان"
+      ],
+      "msa": "كان",
+      "weight": 1.6,
+      "confidence": 0.98,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كان»."
+    },
+    {
+      "id": "IQ_KHOSH",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "خوش"
+      ],
+      "msa": "جيد",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جيد»."
+    },
+    {
+      "id": "IQ_YIMTA",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "يمته"
+      ],
+      "msa": "متى",
+      "weight": 1.45,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «متى»."
+    },
+    {
+      "id": "IQ_BESH",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "بيش"
+      ],
+      "msa": "بكم",
+      "weight": 1.3,
+      "confidence": 0.93,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «بكم»."
+    },
+    {
+      "id": "IQ_SHGAD",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "شقد"
+      ],
+      "msa": "كم",
+      "weight": 1.35,
+      "confidence": 0.94,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كم»."
+    },
+    {
+      "id": "IQ_HICHI",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "هيچي"
+      ],
+      "msa": "هكذا",
+      "weight": 1.55,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «هكذا»."
+    },
+    {
+      "id": "IQ_HWAYI",
+      "dialects": [
+        "iraqi"
+      ],
+      "forms": [
+        "هواي"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "IQ_ZEIN",
+      "dialects": [
+        "iraqi",
+        "gulf"
+      ],
+      "forms": [
+        "زين"
+      ],
+      "msa": "جيد",
+      "weight": 0.6,
+      "confidence": 0.82,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جيد»."
+    },
+    {
+      "id": "MG_WASH",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "واش"
+      ],
+      "msa": "هل",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «هل»."
+    },
+    {
+      "id": "MG_ALASH",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "علاش"
+      ],
+      "msa": "لماذا",
+      "weight": 1.5,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لماذا»."
+    },
+    {
+      "id": "MG_DABA",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "دابا"
+      ],
+      "msa": "الآن",
+      "weight": 1.6,
+      "confidence": 0.98,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "MG_BZZAF",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "بزاف"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.6,
+      "confidence": 0.98,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "MG_BGHIT",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "بغيت"
+      ],
+      "msa": "أريد",
+      "weight": 1.45,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «أريد»."
+    },
+    {
+      "id": "MG_BGHINA",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "بغينا"
+      ],
+      "msa": "نريد",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «نريد»."
+    },
+    {
+      "id": "MG_BGA",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "بغا"
+      ],
+      "msa": "يريد",
+      "weight": 1.25,
+      "confidence": 0.92,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «يريد»."
+    },
+    {
+      "id": "MG_KAYN",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "كاين"
+      ],
+      "msa": "يوجد",
+      "weight": 1.45,
+      "confidence": 0.96,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «يوجد»."
+    },
+    {
+      "id": "MG_MAKAYNSH",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "ماكاينش"
+      ],
+      "msa": "لا يوجد",
+      "weight": 1.7,
+      "confidence": 0.99,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لا يوجد»."
+    },
+    {
+      "id": "MG_SHHAL",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "شحال"
+      ],
+      "msa": "كم",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كم»."
+    },
+    {
+      "id": "MG_BARSHA",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "برشا"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "MG_TAWA",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "توة",
+        "توا"
+      ],
+      "msa": "الآن",
+      "weight": 1.4,
+      "confidence": 0.95,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «الآن»."
+    },
+    {
+      "id": "MG_YASER",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "ياسر"
+      ],
+      "msa": "كثيرًا",
+      "weight": 1.0,
+      "confidence": 0.88,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «كثيرًا»."
+    },
+    {
+      "id": "MG_MZYAN",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "مزيان"
+      ],
+      "msa": "جيد",
+      "weight": 1.5,
+      "confidence": 0.97,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «جيد»."
+    },
+    {
+      "id": "MG_MSHIT",
+      "dialects": [
+        "maghrebi"
+      ],
+      "forms": [
+        "مشيت"
+      ],
+      "msa": "ذهبت",
+      "weight": 0.9,
+      "confidence": 0.87,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ذهبت»."
+    },
+    {
+      "id": "SH_MU",
+      "dialects": [
+        "iraqi",
+        "gulf",
+        "levantine"
+      ],
+      "forms": [
+        "مو"
+      ],
+      "msa": "ليس",
+      "weight": 0.35,
+      "confidence": 0.79,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ليس»."
+    },
+    {
+      "id": "SH_ASHAN",
+      "dialects": [
+        "egyptian",
+        "gulf",
+        "levantine"
+      ],
+      "forms": [
+        "عشان"
+      ],
+      "msa": "لكي",
+      "weight": 0.4,
+      "confidence": 0.8,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «لكي»."
+    },
+    {
+      "id": "SH_LISSA",
+      "dialects": [
+        "egyptian",
+        "levantine"
+      ],
+      "forms": [
+        "لسه"
+      ],
+      "msa": "ما زال",
+      "weight": 0.55,
+      "confidence": 0.82,
+      "kind": "lexical",
+      "explanation": "تعبير لهجي؛ المقابل الفصيح المقترح: «ما زال»."
+    }
+  ],
+  "desire_forms": [
+    {
+      "forms": [
+        "عايز",
+        "عاوز",
+        "عايزة",
+        "عاوزه"
+      ],
+      "dialects": [
+        "egyptian"
+      ],
+      "person": "1s"
+    },
+    {
+      "forms": [
+        "عايزين",
+        "عاوزين"
+      ],
+      "dialects": [
+        "egyptian"
+      ],
+      "person": "1p"
+    },
+    {
+      "forms": [
+        "بدي"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "1s"
+    },
+    {
+      "forms": [
+        "بدنا"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "1p"
+    },
+    {
+      "forms": [
+        "بدك"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "2s"
+    },
+    {
+      "forms": [
+        "بدكم",
+        "بدكن"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "2p"
+    },
+    {
+      "forms": [
+        "بدو"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "3m"
+    },
+    {
+      "forms": [
+        "بدها"
+      ],
+      "dialects": [
+        "levantine"
+      ],
+      "person": "3f"
+    },
+    {
+      "forms": [
+        "ابغى",
+        "أبغى",
+        "أبي",
+        "ابي"
+      ],
+      "dialects": [
+        "gulf"
+      ],
+      "person": "1s"
+    },
+    {
+      "forms": [
+        "نبغى"
+      ],
+      "dialects": [
+        "gulf"
+      ],
+      "person": "1p"
+    },
+    {
+      "forms": [
+        "تبغى",
+        "تبي"
+      ],
+      "dialects": [
+        "gulf"
+      ],
+      "person": "2_or_3f"
+    },
+    {
+      "forms": [
+        "يبغى"
+      ],
+      "dialects": [
+        "gulf"
+      ],
+      "person": "3m"
+    },
+    {
+      "forms": [
+        "بغيت"
+      ],
+      "dialects": [
+        "maghrebi"
+      ],
+      "person": "1s"
+    },
+    {
+      "forms": [
+        "بغينا"
+      ],
+      "dialects": [
+        "maghrebi"
+      ],
+      "person": "1p"
+    },
+    {
+      "forms": [
+        "بغا"
+      ],
+      "dialects": [
+        "maghrebi"
+      ],
+      "person": "3m"
+    }
+  ],
+  "verb_forms": {
+    "اروح": {
+      "msa": "أذهب",
+      "person": "1s"
+    },
+    "أروح": {
+      "msa": "أذهب",
+      "person": "1s"
+    },
+    "نروح": {
+      "msa": "نذهب",
+      "person": "1p"
+    },
+    "تروح": {
+      "msa": "تذهب",
+      "person": "2_or_3f"
+    },
+    "يروح": {
+      "msa": "يذهب",
+      "person": "3m"
+    },
+    "يروحوا": {
+      "msa": "يذهبون",
+      "person": "3p"
+    },
+    "اروحو": {
+      "msa": "أذهب",
+      "person": "1s"
+    },
+    "نمشيو": {
+      "msa": "نذهب",
+      "person": "1p"
+    },
+    "نمشي": {
+      "msa": "نذهب",
+      "person": "1p"
+    },
+    "تمشي": {
+      "msa": "تذهب",
+      "person": "2_or_3f"
+    },
+    "يمشي": {
+      "msa": "يذهب",
+      "person": "3m"
+    },
+    "نام": {
+      "msa_by_person": {
+        "1s": "أنام",
+        "1p": "ننام",
+        "2s": "تنام",
+        "2_or_3f": "تنام",
+        "3m": "ينام",
+        "3f": "تنام",
+        "3p": "ينامون"
+      }
+    },
+    "نلعبو": {
+      "msa": "نلعب",
+      "person": "1p"
+    },
+    "يلعبوا": {
+      "msa": "يلعبون",
+      "person": "3p"
+    },
+    "تلعبوا": {
+      "msa": "تلعبون",
+      "person": "2p"
+    },
+    "اشرب": {
+      "msa": "أشرب",
+      "person": "1s"
+    },
+    "نشرب": {
+      "msa": "نشرب",
+      "person": "1p"
+    },
+    "تشرب": {
+      "msa": "تشرب",
+      "person": "2_or_3f"
+    },
+    "يشرب": {
+      "msa": "يشرب",
+      "person": "3m"
+    },
+    "اجي": {
+      "msa": "آتي",
+      "person": "1s"
+    },
+    "أجي": {
+      "msa": "آتي",
+      "person": "1s"
+    },
+    "نجي": {
+      "msa": "نأتي",
+      "person": "1p"
+    },
+    "تيجي": {
+      "msa": "تأتي",
+      "person": "2_or_3f"
+    },
+    "يجي": {
+      "msa": "يأتي",
+      "person": "3m"
+    },
+    "اشوف": {
+      "msa": "أرى",
+      "person": "1s"
+    },
+    "نشوف": {
+      "msa": "نرى",
+      "person": "1p"
+    },
+    "تشوف": {
+      "msa": "ترى",
+      "person": "2_or_3f"
+    },
+    "يشوف": {
+      "msa": "يرى",
+      "person": "3m"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+- schema_version: 2
+  id: MAQSURA_FI
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: فى
+  exceptions: []
+  suggestion: في
+  message: 'الصواب: «في» بالياء المنقوطة'
+  explanation: حرف الجر «في» يُكتب بياء منقوطة، لا بألف مقصورة.
+  examples:
+    bad: الكتاب فى الحقيبة
+    good: الكتاب في الحقيبة
+- schema_version: 2
+  id: MAQSURA_ALLADHI
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: الذى
+  exceptions: []
+  suggestion: الذي
+  message: 'الصواب: «الذي» بالياء المنقوطة'
+  explanation: ''
+  examples:
+    bad: الرجل الذى جاء
+    good: الرجل الذي جاء
+- schema_version: 2
+  id: MAQSURA_ALLATI
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: التى
+  exceptions: []
+  suggestion: التي
+  message: 'الصواب: «التي» بالياء المنقوطة'
+  explanation: ''
+  examples:
+    bad: المدينة التى أحبها
+    good: المدينة التي أحبها
+- schema_version: 2
+  id: MAQSURA_HATTA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: حتي
+  exceptions: []
+  suggestion: حتى
+  message: 'الصواب: «حتى» بالألف المقصورة'
+  explanation: ''
+  examples:
+    bad: انتظر حتي الغد
+    good: انتظر حتى الغد
+- schema_version: 2
+  id: MAQSURA_MATA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: متي
+  exceptions: []
+  suggestion: متى
+  message: 'الصواب: «متى» بالألف المقصورة'
+  explanation: ''
+  examples:
+    bad: متي تعود؟
+    good: متى تعود؟
+- schema_version: 2
+  id: MAQSURA_MUSTASHFA
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مستشفي
+  prefixes: true
+  exceptions: []
+  suggestion: مستشفى
+  message: 'الصواب: «مستشفى» بالألف المقصورة'
+  explanation: ''
+  examples:
+    bad: نُقل إلى المستشفي
+    good: نُقل إلى المستشفى
+- schema_version: 2
+  id: MAQSURA_ILA_YA
+  type: literal
+  category: spelling
+  severity: warning
+  confidence: 0.99
+  priority: 80
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: إلي
+  exceptions: []
+  suggestion: إلى
+  message: غالبًا تقصد «إلى» بالألف المقصورة
+  explanation: «إلي» صحيحة فقط بمعنى (إليّ = لي أنا)؛ حرف الجر يُكتب «إلى».
+  examples:
+    bad: سافرت إلي بغداد
+    good: سافرت إلى بغداد
+- schema_version: 2
+  id: MAQSURA_BILTALI
+  type: literal
+  category: spelling
+  severity: error
+  confidence: 0.99
+  priority: 80
+  autofix: true
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: بالتالى
+  prefixes:
+  - و
+  - ف
+  exceptions: []
+  suggestion: بالتالي
+  message: 'الصواب: «بالتالي» بالياء المنقوطة'
+  explanation: ''
+  examples:
+    bad: وبالتالى نجحنا
+    good: وبالتالي نجحنا
+- schema_version: 2
+  id: MAQSURA_ALA
+  type: literal
+  category: spelling
+  severity: hint
+  confidence: 0.99
+  priority: 80
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: علي
+  exceptions: []
+  suggestions:
+  - على
+  message: إن كنت تقصد حرف الجر فهو «على» بالألف المقصورة
+  explanation: «علي» اسم عَلَم صحيح، أما حرف الجر فيُكتب «على». راجع السياق.
+  examples:
+    bad: الكتاب علي الطاولة
+    good: الكتاب على الطاولة

@@ -1,0 +1,79 @@
+services:
+  redis:
+    image: redis:8.0-alpine
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --appendfsync
+      - everysec
+      - --maxmemory-policy
+      - noeviction
+    volumes:
+      - dhad-redis-data:/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  dhad:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dhad:local
+    restart: unless-stopped
+    init: true
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "${DHAD_BIND_ADDRESS:-127.0.0.1}:${DHAD_PORT:-8010}:8010"
+    environment:
+      DHAD_HOST: "0.0.0.0"
+      DHAD_PORT: "8010"
+      DHAD_WORKERS: "${DHAD_WORKERS:-2}"
+      DHAD_THREADS: "${DHAD_THREADS:-1}"
+      DHAD_API_KEYS: "${DHAD_API_KEYS:-}"
+      DHAD_CORS_ORIGINS: "${DHAD_CORS_ORIGINS:-http://127.0.0.1:8010,http://localhost:8010}"
+      DHAD_RATE_LIMIT_ENABLED: "${DHAD_RATE_LIMIT_ENABLED:-true}"
+      DHAD_RATE_LIMIT_REQUESTS: "${DHAD_RATE_LIMIT_REQUESTS:-120}"
+      DHAD_RATE_LIMIT_WINDOW_SECONDS: "${DHAD_RATE_LIMIT_WINDOW_SECONDS:-60}"
+      DHAD_MAX_TEXT_CHARACTERS: "${DHAD_MAX_TEXT_CHARACTERS:-50000}"
+      DHAD_MAX_REQUEST_BYTES: "${DHAD_MAX_REQUEST_BYTES:-262144}"
+      DHAD_ACCESS_LOG: "${DHAD_ACCESS_LOG:-false}"
+      DHAD_REDIS_URL: "${DHAD_REDIS_URL:-redis://redis:6379/0}"
+      DHAD_SYNC_MAX_PAYLOAD_BYTES: "${DHAD_SYNC_MAX_PAYLOAD_BYTES:-262144}"
+      DHAD_SYNC_MAX_PEERS: "${DHAD_SYNC_MAX_PEERS:-128}"
+      DHAD_SYNC_OUTGOING_QUEUE: "${DHAD_SYNC_OUTGOING_QUEUE:-256}"
+      DHAD_SYNC_SEND_TIMEOUT_SECONDS: "${DHAD_SYNC_SEND_TIMEOUT_SECONDS:-5}"
+      DHAD_SYNC_MESSAGES_PER_WINDOW: "${DHAD_SYNC_MESSAGES_PER_WINDOW:-240}"
+      DHAD_SYNC_RATE_WINDOW_SECONDS: "${DHAD_SYNC_RATE_WINDOW_SECONDS:-60}"
+      DHAD_SYNC_RECOVERY_LIMIT: "${DHAD_SYNC_RECOVERY_LIMIT:-1000}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
+    stop_grace_period: 30s
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "from urllib.request import urlopen; r=urlopen('http://127.0.0.1:8010/api/health', timeout=3); raise SystemExit(0 if r.status == 200 else 1)"
+      interval: 30s
+      timeout: 5s
+      start_period: 25s
+      retries: 3
+
+volumes:
+  dhad-redis-data:

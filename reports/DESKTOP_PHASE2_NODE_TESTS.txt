@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: desktop adapter keeps the browser fallback active outside Tauri
+ok 1 - desktop adapter keeps the browser fallback active outside Tauri
+  ---
+  duration_ms: 10.643123
+  type: 'test'
+  ...
+# Subtest: desktop adapter reports a browser backend outside Tauri
+ok 2 - desktop adapter reports a browser backend outside Tauri
+  ---
+  duration_ms: 0.324453
+  type: 'test'
+  ...
+# Subtest: desktop adapter constructs the existing worker client as browser fallback
+ok 3 - desktop adapter constructs the existing worker client as browser fallback
+  ---
+  duration_ms: 0.253077
+  type: 'test'
+  ...
+# Subtest: markdown conversion preserves headings, emphasis and lists
+ok 4 - markdown conversion preserves headings, emphasis and lists
+  ---
+  duration_ms: 3.418725
+  type: 'test'
+  ...
+# Subtest: stored ZIP writer and reader round-trip entries safely
+ok 5 - stored ZIP writer and reader round-trip entries safely
+  ---
+  duration_ms: 1.016162
+  type: 'test'
+  ...
+# Subtest: DOCX export/import preserves semantic Arabic blocks offline
+ok 6 - DOCX export/import preserves semantic Arabic blocks offline
+  ---
+  duration_ms: 2.390375
+  type: 'test'
+  ...
+# Subtest: document names are safe and DOCX XML fallback escapes content
+ok 7 - document names are safe and DOCX XML fallback escapes content
+  ---
+  duration_ms: 0.374778
+  type: 'test'
+  ...
+# Subtest: cache policy separates immutable NLP assets from the revalidated app shell
+ok 8 - cache policy separates immutable NLP assets from the revalidated app shell
+  ---
+  duration_ms: 18.926626
+  type: 'test'
+  ...
+# Subtest: the atomic precache is complete, unique, and entirely local
+ok 9 - the atomic precache is complete, unique, and entirely local
+  ---
+  duration_ms: 10.67125
+  type: 'test'
+  ...
+# Subtest: manifest is installable and points at local maskable icons
+ok 10 - manifest is installable and points at local maskable icons
+  ---
+  duration_ms: 3.362983
+  type: 'test'
+  ...
+# Subtest: the HTML shell registers the module service worker and provides offline metadata
+ok 11 - the HTML shell registers the module service worker and provides offline metadata
+  ---
+  duration_ms: 2.245461
+  type: 'test'
+  ...
+# Subtest: service-worker background refreshes are attached to the fetch lifecycle
+ok 12 - service-worker background refreshes are attached to the fetch lifecycle
+  ---
+  duration_ms: 0.869614
+  type: 'test'
+  ...
+# Subtest: the production neural worker keeps benign ONNX provider diagnostics out of the error console
+ok 13 - the production neural worker keeps benign ONNX provider diagnostics out of the error console
+  ---
+  duration_ms: 1.162259
+  type: 'test'
+  ...
+# Subtest: Phase 2 config defines a hidden frameless always-on-top mini assistant
+ok 14 - Phase 2 config defines a hidden frameless always-on-top mini assistant
+  ---
+  duration_ms: 5.628203
+  type: 'test'
+  ...
+# Subtest: tray and hotkey sources use main-thread dispatch and requested Arabic actions
+ok 15 - tray and hotkey sources use main-thread dispatch and requested Arabic actions
+  ---
+  duration_ms: 2.107015
+  type: 'test'
+  ...
+# Subtest: mini assistant exposes check, rewrite, copy-back and auto-hide controls
+ok 16 - mini assistant exposes check, rewrite, copy-back and auto-hide controls
+  ---
+  duration_ms: 2.262185
+  type: 'test'
+  ...
+# Subtest: native document adapter preserves browser fallback
+ok 17 - native document adapter preserves browser fallback
+  ---
+  duration_ms: 0.302691
+  type: 'test'
+  ...
+# Subtest: native document adapter opens and reads a selected file
+ok 18 - native document adapter opens and reads a selected file
+  ---
+  duration_ms: 0.847651
+  type: 'test'
+  ...
+# Subtest: native document adapter saves Blob bytes through Rust IPC
+ok 19 - native document adapter saves Blob bytes through Rust IPC
+  ---
+  duration_ms: 0.471952
+  type: 'test'
+  ...
+# Subtest: Gold Master shell exposes rewriting, documents, analytics, templates and themes accessibly
+ok 20 - Gold Master shell exposes rewriting, documents, analytics, templates and themes accessibly
+  ---
+  duration_ms: 4.970774
+  type: 'test'
+  ...
+# Subtest: all Gold modules are part of the atomic offline shell
+ok 21 - all Gold modules are part of the atomic offline shell
+  ---
+  duration_ms: 1.135409
+  type: 'test'
+  ...
+# Subtest: browser extension exposes the same Gold service capabilities
+ok 22 - browser extension exposes the same Gold service capabilities
+  ---
+  duration_ms: 2.582742
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 119.134868

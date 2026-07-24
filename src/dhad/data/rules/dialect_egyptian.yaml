@@ -1,0 +1,140 @@
+- schema_version: 2
+  id: EG_IZZAY
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: ازاي
+  exceptions: []
+  suggestion: كيف
+  message: 'عامية مصرية: «إزاي» — بالفصحى: كيف'
+  explanation: ''
+  examples:
+    bad: ازاي عملت كده؟
+    good: كيف فعلت هذا؟
+- schema_version: 2
+  id: EG_DILWAQTI
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: دلوقتي
+  exceptions: []
+  suggestion: الآن
+  message: 'عامية مصرية: «دلوقتي» — بالفصحى: الآن'
+  explanation: ''
+  examples:
+    bad: دلوقتي الجو حر
+    good: الآن الجو حار
+- schema_version: 2
+  id: EG_AYIZ
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: عايز
+  exceptions: []
+  suggestion: أريد
+  message: 'عامية مصرية: «عايز» — بالفصحى: أريد'
+  explanation: ''
+  examples:
+    bad: عايز اشرب شاي
+    good: أريد شرب الشاي
+- schema_version: 2
+  id: EG_AWIZ
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: عاوز
+  exceptions: []
+  suggestion: أريد
+  message: 'عامية مصرية: «عاوز» — بالفصحى: أريد'
+  explanation: ''
+  examples:
+    bad: عاوز اروح دلوقت
+    good: أريد الذهاب الآن
+- schema_version: 2
+  id: EG_MAFISH
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: مفيش
+  exceptions: []
+  suggestion: لا يوجد
+  message: 'عامية مصرية: «مفيش» — بالفصحى: لا يوجد'
+  explanation: ''
+  examples:
+    bad: مفيش وقت النهارده
+    good: لا يوجد وقت اليوم
+- schema_version: 2
+  id: EG_KIDA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: كده
+  exceptions: []
+  suggestion: هكذا
+  message: 'عامية مصرية: «كده» — بالفصحى: هكذا'
+  explanation: ''
+  examples:
+    bad: الموضوع كده تمام
+    good: الموضوع هكذا تمام
+- schema_version: 2
+  id: EG_NAHARDA
+  type: literal
+  category: dialect
+  severity: hint
+  confidence: 0.72
+  priority: 30
+  autofix: false
+  profiles:
+  - default
+  tags: []
+  references: []
+  pattern: النهارده
+  exceptions: []
+  suggestion: اليوم
+  message: 'عامية مصرية: «النهارده» — بالفصحى: اليوم'
+  explanation: ''
+  examples:
+    bad: النهارده الجو جميل
+    good: اليوم الجو جميل
