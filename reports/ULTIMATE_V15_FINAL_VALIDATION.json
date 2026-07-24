@@ -1,0 +1,88 @@
+{
+  "release": "Dhad Desktop Ultimate v1.0.15",
+  "generated_at_utc": "2026-07-24T11:14:05+00:00",
+  "archive_name": "dhad-v1.0-Desktop-Ultimate-v15.zip",
+  "environment": {
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "cargo": "unavailable"
+  },
+  "verified": {
+    "release_version_contract": "PASS: version 1.0.15 / tag v1.0.15",
+    "tauri_config": "PASS: npm CLI 2.11.4 / Rust crate 2.11.5",
+    "frontend_staging": {
+      "status": "PASS",
+      "allowlisted_files": 44,
+      "bytes": 165592508,
+      "dependency_directories": 0,
+      "test_files": 0,
+      "checks": [
+        "exact allowlist",
+        "module closure",
+        "HTML/CSS closure",
+        "PWA closure",
+        "ONNX/tokenizer/vendor SHA-256"
+      ]
+    },
+    "frontend_adversarial_tests": {
+      "status": "PASS",
+      "scenarios": [
+        "unexpected host/development files ignored",
+        "missing required source rejected",
+        "bare unresolved import rejected",
+        "tampered ONNX rejected"
+      ]
+    },
+    "javascript_syntax": {
+      "status": "PASS",
+      "first_party_files": 58
+    },
+    "python_available_suite": {
+      "status": "PASS",
+      "unique_tests": 1807,
+      "test_files": 38
+    },
+    "focused_release_regressions": {
+      "status": "PASS",
+      "tests": 47
+    },
+    "desktop_release_audit": {
+      "status": "PASS",
+      "passed": 196,
+      "total": 196
+    },
+    "sovereign_release_audit_without_cleanliness": {
+      "status": "PASS",
+      "passed": 70,
+      "total": 70
+    },
+    "repository_audit": {
+      "status": "PASS",
+      "findings": 0
+    },
+    "structured_file_parsing": "PASS: JSON/TOML/YAML/plist",
+    "shell_syntax": "PASS: build/install/verify shell scripts",
+    "cargo_lock": "PASS: one complete workspace Cargo.lock; local packages and Tauri pins verified",
+    "release_publication": "PASS by source contract: draft-first matrix and atomic publish only after 2 DMG + MSI + NSIS",
+    "validation_matrix": {
+      "passed": 42,
+      "failed": 0,
+      "blocked": 10,
+      "timed_out": 0,
+      "total": 52
+    }
+  },
+  "environment_blocked_not_passed": [
+    "npm test: node_modules cannot be installed in this offline container",
+    "pycrdt-dependent CRDT/Yjs tests: pycrdt unavailable",
+    "fakeredis-dependent sync backend tests: fakeredis unavailable",
+    "ONNX Runtime backend test: onnx/onnxruntime unavailable",
+    "Rust fmt/check/test and native Tauri bundles: cargo/Rust and Linux development headers unavailable"
+  ],
+  "release_gate": {
+    "source_archive_ready": true,
+    "required_external_confirmation": "Push main and require green CI; create v1.0.15 tag only after CI; Desktop Release must finish all three platform jobs and atomic publish job."
+  }
+}

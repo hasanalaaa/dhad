@@ -6,7 +6,7 @@
 ### Arabic writing intelligence that belongs on your device.
 ### ذكاء كتابي عربي، محلي أولاً، مصمم للخصوصية والسرعة.
 
-[![Version](https://img.shields.io/badge/release-v1.0.0%20Sovereign-8A7CFF)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/release-v1.0.15%20Sovereign-8A7CFF)](CHANGELOG.md)
 [![Rust](https://img.shields.io/badge/core-Rust-000000?logo=rust&logoColor=white)](rust/dhad-core-rs)
 [![Tauri](https://img.shields.io/badge/desktop-Tauri%202-24C8DB?logo=tauri&logoColor=white)](src-tauri)
 [![WebAssembly](https://img.shields.io/badge/runtime-WASM-654FF0?logo=webassembly&logoColor=white)](web_demo)
@@ -126,7 +126,7 @@ Open `http://localhost:8080`.
 ### Rust tests
 
 ```bash
-cargo test --workspace --locked
+cargo test --workspace --all-targets --locked
 ```
 
 ## Desktop builds
@@ -191,7 +191,7 @@ npm test --prefix web_demo
 python -m pytest -q
 cargo fmt --all -- --check
 cargo clippy --workspace --all-targets --locked -- -D warnings
-cargo test --workspace --locked
+cargo test --workspace --all-targets --locked
 ```
 
 The repository intentionally distinguishes three evidence levels:

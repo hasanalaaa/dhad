@@ -39,7 +39,7 @@
       "detail": ""
     },
     {
-      "name": "frontendDist resolves to web_demo",
+      "name": "frontendDist resolves to generated web_dist",
       "status": "passed",
       "detail": ""
     },

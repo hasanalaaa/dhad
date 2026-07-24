@@ -81,12 +81,15 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         "aarch64-apple-darwin", "x86_64-apple-darwin", "nsis,msi",
         "tools/desktop-build-requirements.txt", "tools/optimize_onnx_assets.py",
         "tools/validate_tauri_config.py", "tools/validate_desktop_release.py",
+        "tools/validate_release_version.py",
         "cargo test", "npm test", "tauri-apps/tauri-action@v1",
         'TAURI_CLI_VERSION: "2.11.4"',
         '@tauri-apps/cli@2.11.4', 'tauriScript: tauri',
         'tauri --version | grep -F "2.11.4"',
         'node tools/build_web_dist.mjs',
         'Stage dependency-free Tauri frontend',
+        'releaseDraft: true', 'actions/github-script@v9',
+        'uploadUpdaterJson: false', 'uploadUpdaterSignatures: false',
     ):
         assert contract in text
 
@@ -110,6 +113,9 @@ def test_tauri_frontend_dist_is_isolated_from_node_dependencies():
     assert '"node_modules"' in staging_tool
     assert '".test.mjs"' in staging_tool
     assert 'models/model_int8.onnx' in staging_tool
+    assert 'const runtimeAssets = Object.freeze([' in staging_tool
+    assert 'verifyModuleClosure' in staging_tool
+    assert 'verifyIntegrityContracts' in staging_tool
 
 
 def test_desktop_build_environment_is_ignored_and_never_packaged():

@@ -56,6 +56,7 @@ test("Yjs updates converge only after authenticated group-key establishment", as
   const bobDoc = new Y.Doc();
   const alice = new SecureYjsProvider({
     doc: aliceDoc,
+    yjs: Y,
     session: aliceSession,
     transport: aliceTransport,
     leaderId: "alice",
@@ -63,6 +64,7 @@ test("Yjs updates converge only after authenticated group-key establishment", as
   });
   const bob = new SecureYjsProvider({
     doc: bobDoc,
+    yjs: Y,
     session: bobSession,
     transport: bobTransport,
     leaderId: "alice",
@@ -136,6 +138,7 @@ test("encrypted full-state snapshot recovers a newly created Y.Doc", async () =>
   const targetTransport = new FakeTransport();
   const sourceProvider = new SecureYjsProvider({
     doc: source,
+    yjs: Y,
     session: leaderSession,
     transport: sourceTransport,
     leaderId: "leader",
@@ -143,6 +146,7 @@ test("encrypted full-state snapshot recovers a newly created Y.Doc", async () =>
   });
   const targetProvider = new SecureYjsProvider({
     doc: target,
+    yjs: Y,
     session: peerSession,
     transport: targetTransport,
     leaderId: "leader",
@@ -170,6 +174,7 @@ test("room leader emits periodic encrypted checkpoints before journal trimming",
   };
   const provider = new SecureYjsProvider({
     doc,
+    yjs: Y,
     session,
     transport,
     leaderId: "leader",
@@ -207,6 +212,7 @@ test("a failed outbound send is reported without permanently poisoning later upd
   };
   const provider = new SecureYjsProvider({
     doc,
+    yjs: Y,
     session,
     transport,
     leaderId: "leader",

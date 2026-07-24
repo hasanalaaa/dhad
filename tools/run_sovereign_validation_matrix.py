@@ -13,6 +13,7 @@ import ast
 import json
 import os
 import shutil
+import signal
 import subprocess
 import sys
 import time
@@ -40,27 +41,50 @@ def run_command(
     timeout: int,
     env: dict[str, str] | None = None,
 ) -> MatrixResult:
-    started = time.perf_counter()
-    try:
-        completed = subprocess.run(
-            list(command),
-            cwd=cwd,
-            env=env,
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            timeout=timeout,
-            check=False,
-        )
-    except subprocess.TimeoutExpired as error:
-        def _text(value: str | bytes | None) -> str:
-            if value is None:
-                return ""
-            if isinstance(value, bytes):
-                return value.decode("utf-8", errors="replace")
-            return value
+    """Run one matrix command and terminate its full process tree on timeout."""
 
-        output = _text(error.stdout) + _text(error.stderr)
+    started = time.perf_counter()
+    popen_options: dict[str, object] = {}
+    if os.name == "posix":
+        popen_options["start_new_session"] = True
+    elif os.name == "nt":
+        popen_options["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
+
+    process = subprocess.Popen(
+        list(command),
+        cwd=cwd,
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        **popen_options,
+    )
+    try:
+        output, _ = process.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired as error:
+        partial = error.output or ""
+        if isinstance(partial, bytes):
+            partial = partial.decode("utf-8", errors="replace")
+        if os.name == "posix":
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        elif os.name == "nt":
+            subprocess.run(
+                ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                check=False,
+            )
+        else:
+            process.kill()
+        try:
+            remainder, _ = process.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            remainder, _ = process.communicate()
+        output = partial + (remainder or "")
         return MatrixResult(
             name,
             layer,
@@ -70,8 +94,8 @@ def run_command(
             output[-4000:].strip() or f"exceeded {timeout}s",
         )
 
-    output = completed.stdout.strip()
-    if completed.returncode == 0:
+    output = (output or "").strip()
+    if process.returncode == 0:
         status = "passed"
     elif "ModuleNotFoundError" in output or "ERR_MODULE_NOT_FOUND" in output:
         status = "blocked"
@@ -85,7 +109,7 @@ def run_command(
         status,
         time.perf_counter() - started,
         list(command),
-        output[-4000:] or f"exit code {completed.returncode}",
+        output[-4000:] or f"exit code {process.returncode}",
     )
 
 
@@ -123,7 +147,7 @@ def write_reports(root: Path, results: list[MatrixResult]) -> None:
     report_dir.mkdir(exist_ok=True)
     counts = {status: sum(item.status == status for item in results) for status in ("passed", "failed", "blocked", "timed_out")}
     payload = {
-        "release": "Dhad v1.0.0 Sovereign Edition",
+        "release": "Dhad v1.0.15 Sovereign Edition",
         "summary": counts | {"total": len(results)},
         "results": [asdict(item) for item in results],
     }
@@ -299,8 +323,8 @@ def main() -> int:
     cargo = shutil.which("cargo")
     rust_checks = (
         ("cargo-fmt", [cargo or "cargo", "fmt", "--all", "--", "--check"], 180),
-        ("cargo-check", [cargo or "cargo", "check", "--workspace", "--all-targets"], 300),
-        ("cargo-test", [cargo or "cargo", "test", "--workspace"], 300),
+        ("cargo-check", [cargo or "cargo", "check", "--workspace", "--all-targets", "--locked"], 300),
+        ("cargo-test", [cargo or "cargo", "test", "--workspace", "--all-targets", "--locked"], 300),
     )
     for name, command, timeout in rust_checks:
         if not pending(name):

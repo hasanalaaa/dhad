@@ -1,5 +1,3 @@
-import * as Y from "yjs";
-
 const FRAME_UPDATE = 1;
 const FRAME_SNAPSHOT = 2;
 const FRAME_KEY_ANNOUNCEMENT = 3;
@@ -66,6 +64,7 @@ function unpackServerFrame(value) {
 export class SecureYjsProvider {
   constructor({
     doc,
+    yjs,
     session,
     transport,
     leaderId,
@@ -74,7 +73,16 @@ export class SecureYjsProvider {
     maxPendingKeyPackages = 64,
     snapshotEveryUpdates = 500,
   }) {
-    if (!(doc instanceof Y.Doc)) throw new TypeError("SecureYjsProvider requires a Y.Doc");
+    if (
+      !yjs ||
+      typeof yjs.Doc !== "function" ||
+      typeof yjs.mergeUpdates !== "function" ||
+      typeof yjs.encodeStateAsUpdate !== "function" ||
+      typeof yjs.applyUpdate !== "function"
+    ) {
+      throw new TypeError("SecureYjsProvider requires an explicit Yjs runtime");
+    }
+    if (!(doc instanceof yjs.Doc)) throw new TypeError("SecureYjsProvider requires a Y.Doc");
     if (!session || !transport) throw new TypeError("An E2EE session and transport are required");
     if (typeof leaderId !== "string" || !leaderId) throw new TypeError("leaderId is required");
     if (!(maxPendingBytes > 0)) throw new TypeError("maxPendingBytes must be positive");
@@ -85,6 +93,7 @@ export class SecureYjsProvider {
       throw new TypeError("snapshotEveryUpdates must be a positive integer");
     }
     this.doc = doc;
+    this.yjs = yjs;
     this.session = session;
     this.transport = transport;
     this.leaderId = leaderId;
@@ -274,7 +283,7 @@ export class SecureYjsProvider {
 
   async #flushPending() {
     if (!this.session.hasGroupKey || this.pendingUpdates.length === 0) return;
-    const merged = Y.mergeUpdates(this.pendingUpdates);
+    const merged = this.yjs.mergeUpdates(this.pendingUpdates);
     this.pendingUpdates = [];
     this.pendingBytes = 0;
     await this.#queueOrSend(merged);
@@ -296,7 +305,7 @@ export class SecureYjsProvider {
 
   async publishSnapshot() {
     if (!this.session.hasGroupKey) throw new Error("Cannot publish a snapshot before epoch setup");
-    const encrypted = await this.session.encryptBroadcast(Y.encodeStateAsUpdate(this.doc));
+    const encrypted = await this.session.encryptBroadcast(this.yjs.encodeStateAsUpdate(this.doc));
     this.transport.send(packClientFrame(FRAME_SNAPSHOT, encrypted));
     this.updatesSinceSnapshot = 0;
   }
@@ -339,7 +348,7 @@ export class SecureYjsProvider {
       }
       throw error;
     }
-    Y.applyUpdate(this.doc, update, this.origin);
+    this.yjs.applyUpdate(this.doc, update, this.origin);
     if (kind === FRAME_UPDATE) await this.#maybePublishSnapshot();
   }
 

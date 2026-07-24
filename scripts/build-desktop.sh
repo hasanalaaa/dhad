@@ -17,6 +17,7 @@ TAURI_CLI_VERSION="${DHAD_TAURI_CLI_VERSION:-2.11.4}"
 [[ -f ".github/workflows/desktop-release.yml" ]] || fail "Missing .github/workflows/desktop-release.yml. Preserve hidden directories when copying or extracting the release archive."
 [[ -f "src-tauri/tauri.conf.json" ]] || fail "Missing src-tauri/tauri.conf.json."
 python3 tools/validate_tauri_config.py --config src-tauri/tauri.conf.json || fail "Tauri configuration is incompatible with CLI 2.11.x."
+python3 tools/validate_release_version.py --root . || fail "Release versions are inconsistent."
 
 case "$(uname -s)" in
   Darwin) DEFAULT_BUNDLES="dmg" ;;
@@ -63,8 +64,8 @@ fi
 if [[ "${DHAD_SKIP_RUST_TESTS:-0}" != "1" ]]; then
   log "Checking Rust formatting and workspace tests"
   cargo fmt --all -- --check
-  cargo clippy --workspace --all-targets -- -D warnings
-  cargo test --workspace
+  cargo clippy --workspace --all-targets --locked -- -D warnings
+  cargo test --workspace --all-targets --locked
 fi
 
 log "Staging dependency-free Tauri frontend"

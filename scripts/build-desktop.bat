@@ -18,6 +18,7 @@ if not defined DHAD_TAURI_CLI_VERSION set "DHAD_TAURI_CLI_VERSION=2.11.4"
 if not exist ".github\workflows\desktop-release.yml" (echo [Dhad Desktop] ERROR: Missing .github\workflows\desktop-release.yml. Preserve hidden directories when extracting the archive.& exit /b 1)
 if not exist "src-tauri\tauri.conf.json" (echo [Dhad Desktop] ERROR: Missing src-tauri\tauri.conf.json.& exit /b 1)
 %PY% tools\validate_tauri_config.py --config src-tauri\tauri.conf.json || exit /b 1
+%PY% tools\validate_release_version.py --root . || exit /b 1
 
 if not defined DHAD_BUNDLES set "DHAD_BUNDLES=nsis,msi"
 
@@ -58,8 +59,8 @@ if not "%DHAD_SKIP_RUST_TESTS%"=="1" (
   echo.
   echo [Dhad Desktop] Checking Rust formatting and workspace tests
   cargo fmt --all -- --check || exit /b 1
-  cargo clippy --workspace --all-targets -- -D warnings || exit /b 1
-  cargo test --workspace || exit /b 1
+  cargo clippy --workspace --all-targets --locked -- -D warnings || exit /b 1
+  cargo test --workspace --all-targets --locked || exit /b 1
 )
 
 echo.

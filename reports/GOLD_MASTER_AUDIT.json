@@ -1,33 +1,33 @@
 {
   "schema": "dhad-gold-master-audit-v1",
-  "generated_at_utc": "2026-07-24T07:31:31.354336+00:00",
-  "root": "v11work",
-  "files_audited": 445,
-  "bytes_audited": 180030878,
+  "generated_at_utc": "2026-07-24T11:15:16.921712+00:00",
+  "root": "dhad",
+  "files_audited": 450,
+  "bytes_audited": 180381703,
   "counts_by_category": {
     "configuration": 59,
-    "documentation": 115,
+    "documentation": 119,
     "binary-asset": 26,
-    "source": 201,
+    "source": 202,
     "test": 44
   },
   "bytes_by_category": {
-    "configuration": 1939408,
-    "documentation": 818117,
+    "configuration": 2055328,
+    "documentation": 1029855,
     "binary-asset": 164916733,
-    "source": 12115908,
-    "test": 240712
+    "source": 12132540,
+    "test": 247247
   },
   "source_symbols": {
     "python_classes": 237,
-    "python_functions": 1349,
-    "javascript_functions": 1167,
+    "python_functions": 1361,
+    "javascript_functions": 1197,
     "rust_functions": 241
   },
   "checks": {
     "javascript_syntax": {
       "status": "passed",
-      "detail": "JavaScript syntax verified: 57 first-party files"
+      "detail": "JavaScript syntax verified: 58 first-party files"
     },
     "shell_syntax": {
       "status": "passed",

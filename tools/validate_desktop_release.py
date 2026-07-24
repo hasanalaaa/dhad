@@ -80,7 +80,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -152,6 +152,7 @@ def main() -> int:
         ("tools/optimize_onnx_assets.py", r"tools/optimize_onnx_assets\.py"),
         ("tools/validate_tauri_config.py", r"tools/validate_tauri_config\.py"),
         ("tools/validate_desktop_release.py", r"tools/validate_desktop_release\.py"),
+        ("tools/validate_release_version.py", r"tools/validate_release_version\.py"),
         ("tools/build_web_dist.mjs", r"tools/build_web_dist\.mjs"),
         ("Stage dependency-free Tauri frontend", r"Stage dependency-free Tauri frontend"),
         (
@@ -165,6 +166,15 @@ def main() -> int:
         ("npm test", r"\bnpm\s+test\b"),
         ("verify-macos-app.sh", r"(?:^|[\s./])verify-macos-app\.sh\b"),
         ("APPLE_SIGNING_IDENTITY", r"\bAPPLE_SIGNING_IDENTITY\b"),
+        ("actions/setup-node@v6", r"actions/setup-node@v6\b"),
+        ("actions/github-script@v9", r"actions/github-script@v9\b"),
+        ("releaseDraft: true", r"^\s*releaseDraft\s*:\s*true\s*$"),
+        ("uploadUpdaterJson: false", r"^\s*uploadUpdaterJson\s*:\s*false\s*$"),
+        ("uploadUpdaterSignatures: false", r"^\s*uploadUpdaterSignatures\s*:\s*false\s*$"),
+        ("uploadWorkflowArtifacts: true", r"^\s*uploadWorkflowArtifacts\s*:\s*true\s*$"),
+        ("atomic publish job", r"Verify assets and publish release atomically"),
+        ("updateRelease", r"github\.rest\.repos\.updateRelease"),
+        ("locked Rust release checks", r"cargo\s+(?:clippy|test|build)[^\n]*--locked"),
     ]
     for label, pattern in workflow_contracts:
         ok(f'workflow-validation:{label}', _workflow_contract(workflow, pattern), f'missing workflow contract matching {pattern}')
@@ -177,6 +187,11 @@ def main() -> int:
         'pytest': 'pytest -q',
         'npm-test': 'npm test',
         'repository-audit-pyyaml': 'PyYAML==6.0.3',
+        'rust-frontend-staging': 'Stage dependency-free Tauri frontend for Rust build scripts',
+        'web-staging-root': 'working-directory: .',
+        'setup-node-v6': 'actions/setup-node@v6',
+        'release-version-validator': 'python tools/validate_release_version.py --root .',
+        'locked-rust-checks': '--all-targets --locked',
     }
     for label, token in ci_contracts.items():
         ok(f'ci:{label}', token in ci_workflow, f'missing CI contract: {token}')
@@ -187,7 +202,7 @@ def main() -> int:
     sh = (root / 'scripts/build-desktop.sh').read_text(encoding='utf-8')
     bat = (root / 'scripts/build-desktop.bat').read_text(encoding='utf-8')
     for label, text in [('sh', sh), ('bat', bat)]:
-        for token in ['desktop-release.yml', 'validate_tauri_config.py', 'desktop-build-requirements.txt', 'optimize_onnx_assets.py', 'validate_desktop_release.py', 'build_web_dist.mjs', '2.11.4', 'cargo clippy', 'tauri build']:
+        for token in ['desktop-release.yml', 'validate_tauri_config.py', 'desktop-build-requirements.txt', 'optimize_onnx_assets.py', 'validate_desktop_release.py', 'validate_release_version.py', 'build_web_dist.mjs', '2.11.4', 'cargo clippy', '--locked', 'tauri build']:
             ok(f'build-{label}:{token}', token in text, 'missing build stage')
     ok('build-sh:macos-bundle-verification', 'verify-macos-app.sh' in sh, 'macOS build must verify and launch-smoke the generated app')
     excluded_scan_parts = {'.git', 'target', 'node_modules', '.desktop-build', '.audit-venv', '.ci-venv', '.venv', 'venv', '__pycache__', '.pytest_cache', '.ruff_cache', '.mypy_cache', 'web_dist'}
@@ -299,6 +314,31 @@ def main() -> int:
     ok('critical-npm-dependencies-pinned', not missing_integrity, str(missing_integrity))
     requirements = (root / 'tools/desktop-build-requirements.txt').read_text(encoding='utf-8').splitlines()
     ok('desktop-build-tools-pinned', requirements == ['onnx==1.22.0', 'PyYAML==6.0.3'], str(requirements))
+    version_validator = (root / 'tools/validate_release_version.py').read_text(encoding='utf-8')
+    ok('release-version-validator-semver', 'SEMVER = re.compile' in version_validator and 'release tag' in version_validator, '')
+    ok('single-workspace-cargo-lock', not (root / 'rust/dhad-core-rs/Cargo.lock').exists(), 'member lockfile must not exist')
+    cargo_lock = tomllib.loads((root / 'Cargo.lock').read_text(encoding='utf-8'))
+    cargo_packages = cargo_lock.get('package', [])
+    cargo_versions = {str(item.get('name')): str(item.get('version')) for item in cargo_packages}
+    ok('cargo-lock-desktop-member', cargo_versions.get('dhad-desktop') == cfg.get('version'), str(cargo_versions.get('dhad-desktop')))
+    ok('cargo-lock-core-member', cargo_versions.get('dhad-core') == cfg.get('version'), str(cargo_versions.get('dhad-core')))
+    ok('cargo-lock-tauri-pinned', cargo_versions.get('tauri') == '2.11.5', str(cargo_versions.get('tauri')))
+    ok('cargo-lock-tauri-build-pinned', cargo_versions.get('tauri-build') == '2.6.3', str(cargo_versions.get('tauri-build')))
+    staging_tool = (root / 'tools/build_web_dist.mjs').read_text(encoding='utf-8')
+    for token in ['const runtimeAssets = Object.freeze([', 'verifyModuleClosure', 'verifyDocumentClosure', 'verifyPwaClosure', 'verifyIntegrityContracts', 'staged frontend differs from its exact allowlist']:
+        ok(f'frontend-staging:{token}', token in staging_tool, 'missing exact-closure staging contract')
+    collaboration_provider = (root / 'web_demo/collaboration/secure-yjs-provider.js').read_text(encoding='utf-8')
+    bare_yjs_pattern = re.compile(r"(?:from\s+|import\s*\()\s*['\"]yjs['\"]")
+    ok('frontend-no-bare-yjs-import', not bare_yjs_pattern.search(collaboration_provider), 'packaged provider must not import node_modules')
+    ok('frontend-explicit-yjs-runtime', 'yjs,' in collaboration_provider and 'this.yjs = yjs' in collaboration_provider and 'requires an explicit Yjs runtime' in collaboration_provider, '')
+    for label, build_text in [('sh', sh), ('bat', bat)]:
+        ok(f'build-{label}:locked-clippy', 'cargo clippy --workspace --all-targets --locked -- -D warnings' in build_text, '')
+        ok(f'build-{label}:locked-tests', 'cargo test --workspace --all-targets --locked' in build_text, '')
+        ok(f'build-{label}:version-contract', 'validate_release_version.py --root .' in build_text, '')
+    ok('release-draft-before-matrix-complete', 'releaseDraft: true' in workflow and 'needs: build' in workflow, '')
+    ok('release-requires-two-dmgs', 'dmgCount < 2' in workflow, '')
+    ok('release-requires-msi-and-nsis', '!hasMsi || !hasNsis' in workflow, '')
+    ok('release-publishes-after-asset-verification', 'github.rest.repos.updateRelease' in workflow and 'draft: false' in workflow, '')
     private_markers = []
     markers = ('-----BEGIN ' + 'PRIVATE KEY-----', '-----BEGIN RSA ' + 'PRIVATE KEY-----', 'ghp_', 'AKIA')
     for path in files:

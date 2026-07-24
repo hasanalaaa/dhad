@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import tomllib
 from pathlib import Path
 
 
@@ -241,7 +242,7 @@ def test_ci_installs_cross_runtime_and_linux_system_dependencies() -> None:
     assert "libssl-dev" in workflow
     assert "libayatana-appindicator3-dev" in workflow
     assert "actions/checkout@v5" in workflow
-    assert "actions/setup-node@v5" in workflow
+    assert "actions/setup-node@v6" in workflow
     assert "actions/setup-python@v7" in workflow
     assert "PyYAML==6.0.3" in workflow
 
@@ -253,3 +254,110 @@ def test_general_ci_does_not_run_again_for_release_tags() -> None:
     assert "push:\n    branches:\n      - main" in workflow
     assert "pull_request:\n    branches:\n      - main" in workflow
     assert "tags:" not in workflow
+
+
+def test_ci_stages_frontend_from_repository_root_before_rust_builds() -> None:
+    root = Path(__file__).resolve().parents[1]
+    workflow = (root / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+
+    assert "Stage dependency-free Tauri frontend for Rust build scripts" in workflow
+    assert "Materialize Git LFS assets" in workflow
+    assert "git lfs checkout" in workflow
+    assert "working-directory: .\n        run: node tools/build_web_dist.mjs" in workflow
+
+
+
+def test_release_version_and_workspace_lock_are_single_source() -> None:
+    root = Path(__file__).resolve().parents[1]
+    from tools.validate_release_version import collect_versions, validate
+
+    versions = collect_versions(root)
+    assert set(versions.values()) == {"1.0.15"}
+    assert validate(root, "v1.0.15") == []
+    assert not (root / "rust" / "dhad-core-rs" / "Cargo.lock").exists()
+
+    lock = tomllib.loads((root / "Cargo.lock").read_text(encoding="utf-8"))
+    packages = {item["name"]: item["version"] for item in lock["package"]}
+    assert packages["dhad-core"] == "1.0.15"
+    assert packages["dhad-desktop"] == "1.0.15"
+    assert packages["tauri"] == "2.11.5"
+    assert packages["tauri-build"] == "2.6.3"
+
+
+def test_packaged_frontend_has_an_exact_dependency_free_closure() -> None:
+    root = Path(__file__).resolve().parents[1]
+    staging = (root / "tools" / "build_web_dist.mjs").read_text(encoding="utf-8")
+    provider = (
+        root / "web_demo" / "collaboration" / "secure-yjs-provider.js"
+    ).read_text(encoding="utf-8")
+
+    for contract in (
+        "const runtimeAssets = Object.freeze([",
+        "verifyModuleClosure",
+        "verifyDocumentClosure",
+        "verifyPwaClosure",
+        "verifyIntegrityContracts",
+        "staged frontend differs from its exact allowlist",
+    ):
+        assert contract in staging
+    assert 'from "yjs"' not in provider
+    assert "from 'yjs'" not in provider
+    assert 'import("yjs")' not in provider
+    assert "import('yjs')" not in provider
+    assert "requires an explicit Yjs runtime" in provider
+    assert "this.yjs = yjs" in provider
+
+
+def test_local_and_hosted_rust_checks_honor_workspace_lockfile() -> None:
+    root = Path(__file__).resolve().parents[1]
+    sources = {
+        "shell": (root / "scripts" / "build-desktop.sh").read_text(encoding="utf-8"),
+        "batch": (root / "scripts" / "build-desktop.bat").read_text(encoding="utf-8"),
+        "ci": (root / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8"),
+        "release": (
+            root / ".github" / "workflows" / "desktop-release.yml"
+        ).read_text(encoding="utf-8"),
+    }
+    for name, source in sources.items():
+        assert "cargo clippy --workspace --all-targets --locked -- -D warnings" in source, name
+        assert "cargo test --workspace --all-targets --locked" in source, name
+    assert "validate_release_version.py --root ." in sources["shell"]
+    assert "validate_release_version.py --root ." in sources["batch"]
+
+
+def test_desktop_release_is_draft_first_and_published_atomically() -> None:
+    root = Path(__file__).resolve().parents[1]
+    workflow = (
+        root / ".github" / "workflows" / "desktop-release.yml"
+    ).read_text(encoding="utf-8")
+
+    for contract in (
+        "releaseDraft: true",
+        "uploadUpdaterJson: false",
+        "uploadUpdaterSignatures: false",
+        "uploadWorkflowArtifacts: true",
+        "Verify assets and publish release atomically",
+        "actions/github-script@v9",
+        "dmgCount < 2",
+        "!hasMsi || !hasNsis",
+        "github.rest.repos.updateRelease",
+        "draft: false",
+    ):
+        assert contract in workflow
+
+
+def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() -> None:
+    root = Path(__file__).resolve().parents[1]
+    source = (root / "tools" / "run_sovereign_validation_matrix.py").read_text(
+        encoding="utf-8"
+    )
+
+    for contract in (
+        '"release": "Dhad v1.0.15 Sovereign Edition"',
+        'popen_options["start_new_session"] = True',
+        "os.killpg(process.pid, signal.SIGKILL)",
+        '["taskkill", "/PID", str(process.pid), "/T", "/F"]',
+        '"cargo", "check", "--workspace", "--all-targets", "--locked"',
+        '"cargo", "test", "--workspace", "--all-targets", "--locked"',
+    ):
+        assert contract in source

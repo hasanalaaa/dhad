@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **449**
-- Checks passed: **152/152**
+- Files audited: **453**
+- Checks passed: **196/196**
 - Errors: **0**
 - Warnings: **0**
 
@@ -28,6 +28,7 @@
 - PASS — `required:tools/optimize_onnx_assets.py`: missing or empty required release file
 - PASS — `required:tools/validate_desktop_release.py`: missing or empty required release file
 - PASS — `required:tools/validate_tauri_config.py`: missing or empty required release file
+- PASS — `required:tools/validate_release_version.py`: missing or empty required release file
 - PASS — `required:tools/package_release.py`: missing or empty required release file
 - PASS — `required:tools/desktop-build-requirements.txt`: missing or empty required release file
 - PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
@@ -92,6 +93,7 @@
 - PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
 - PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
 - PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
+- PASS — `workflow-validation:tools/validate_release_version.py`: missing workflow contract matching tools/validate_release_version\.py
 - PASS — `workflow-validation:tools/build_web_dist.mjs`: missing workflow contract matching tools/build_web_dist\.mjs
 - PASS — `workflow-validation:Stage dependency-free Tauri frontend`: missing workflow contract matching Stage dependency-free Tauri frontend
 - PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$
@@ -102,6 +104,15 @@
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
 - PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
 - PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
+- PASS — `workflow-validation:actions/setup-node@v6`: missing workflow contract matching actions/setup-node@v6\b
+- PASS — `workflow-validation:actions/github-script@v9`: missing workflow contract matching actions/github-script@v9\b
+- PASS — `workflow-validation:releaseDraft: true`: missing workflow contract matching ^\s*releaseDraft\s*:\s*true\s*$
+- PASS — `workflow-validation:uploadUpdaterJson: false`: missing workflow contract matching ^\s*uploadUpdaterJson\s*:\s*false\s*$
+- PASS — `workflow-validation:uploadUpdaterSignatures: false`: missing workflow contract matching ^\s*uploadUpdaterSignatures\s*:\s*false\s*$
+- PASS — `workflow-validation:uploadWorkflowArtifacts: true`: missing workflow contract matching ^\s*uploadWorkflowArtifacts\s*:\s*true\s*$
+- PASS — `workflow-validation:atomic publish job`: missing workflow contract matching Verify assets and publish release atomically
+- PASS — `workflow-validation:updateRelease`: missing workflow contract matching github\.rest\.repos\.updateRelease
+- PASS — `workflow-validation:locked Rust release checks`: missing workflow contract matching cargo\s+(?:clippy|test|build)[^\n]*--locked
 - PASS — `ci:rust-toolchain-pinned`: missing CI contract: dtolnay/rust-toolchain@1.97.1
 - PASS — `ci:pythonpath-root-and-src`: missing CI contract: PYTHONPATH: ".:src"
 - PASS — `ci:node-22`: missing CI contract: node-version: "22"
@@ -109,6 +120,11 @@
 - PASS — `ci:pytest`: missing CI contract: pytest -q
 - PASS — `ci:npm-test`: missing CI contract: npm test
 - PASS — `ci:repository-audit-pyyaml`: missing CI contract: PyYAML==6.0.3
+- PASS — `ci:rust-frontend-staging`: missing CI contract: Stage dependency-free Tauri frontend for Rust build scripts
+- PASS — `ci:web-staging-root`: missing CI contract: working-directory: .
+- PASS — `ci:setup-node-v6`: missing CI contract: actions/setup-node@v6
+- PASS — `ci:release-version-validator`: missing CI contract: python tools/validate_release_version.py --root .
+- PASS — `ci:locked-rust-checks`: missing CI contract: --all-targets --locked
 - PASS — `node-version-file`: local Node must match CI Node 22
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
@@ -122,18 +138,22 @@
 - PASS — `build-sh:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-sh:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-sh:validate_desktop_release.py`: missing build stage
+- PASS — `build-sh:validate_release_version.py`: missing build stage
 - PASS — `build-sh:build_web_dist.mjs`: missing build stage
 - PASS — `build-sh:2.11.4`: missing build stage
 - PASS — `build-sh:cargo clippy`: missing build stage
+- PASS — `build-sh:--locked`: missing build stage
 - PASS — `build-sh:tauri build`: missing build stage
 - PASS — `build-bat:desktop-release.yml`: missing build stage
 - PASS — `build-bat:validate_tauri_config.py`: missing build stage
 - PASS — `build-bat:desktop-build-requirements.txt`: missing build stage
 - PASS — `build-bat:optimize_onnx_assets.py`: missing build stage
 - PASS — `build-bat:validate_desktop_release.py`: missing build stage
+- PASS — `build-bat:validate_release_version.py`: missing build stage
 - PASS — `build-bat:build_web_dist.mjs`: missing build stage
 - PASS — `build-bat:2.11.4`: missing build stage
 - PASS — `build-bat:cargo clippy`: missing build stage
+- PASS — `build-bat:--locked`: missing build stage
 - PASS — `build-bat:tauri build`: missing build stage
 - PASS — `build-sh:macos-bundle-verification`: macOS build must verify and launch-smoke the generated app
 - PASS — `no-broken-symlinks`: []
@@ -156,6 +176,30 @@
 - PASS — `npm-lockfile-v3`: 3
 - PASS — `critical-npm-dependencies-pinned`: []
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
+- PASS — `release-version-validator-semver`
+- PASS — `single-workspace-cargo-lock`: member lockfile must not exist
+- PASS — `cargo-lock-desktop-member`: 1.0.15
+- PASS — `cargo-lock-core-member`: 1.0.15
+- PASS — `cargo-lock-tauri-pinned`: 2.11.5
+- PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
+- PASS — `frontend-staging:const runtimeAssets = Object.freeze([`: missing exact-closure staging contract
+- PASS — `frontend-staging:verifyModuleClosure`: missing exact-closure staging contract
+- PASS — `frontend-staging:verifyDocumentClosure`: missing exact-closure staging contract
+- PASS — `frontend-staging:verifyPwaClosure`: missing exact-closure staging contract
+- PASS — `frontend-staging:verifyIntegrityContracts`: missing exact-closure staging contract
+- PASS — `frontend-staging:staged frontend differs from its exact allowlist`: missing exact-closure staging contract
+- PASS — `frontend-no-bare-yjs-import`: packaged provider must not import node_modules
+- PASS — `frontend-explicit-yjs-runtime`
+- PASS — `build-sh:locked-clippy`
+- PASS — `build-sh:locked-tests`
+- PASS — `build-sh:version-contract`
+- PASS — `build-bat:locked-clippy`
+- PASS — `build-bat:locked-tests`
+- PASS — `build-bat:version-contract`
+- PASS — `release-draft-before-matrix-complete`
+- PASS — `release-requires-two-dmgs`
+- PASS — `release-requires-msi-and-nsis`
+- PASS — `release-publishes-after-asset-verification`
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 449 files
+- PASS — `repository-file-count`: only 453 files

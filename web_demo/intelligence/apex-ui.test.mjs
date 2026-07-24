@@ -33,6 +33,6 @@ test("Apex app persists local lexicon and rule overrides and renders ARIA toolti
 
 test("Apex intelligence module is part of the atomic offline shell", async () => {
   const policy = await source("pwa/cache-policy.js");
-  assert.match(policy, /CACHE_VERSION = "gold-1\.0\.0-desktop-goldmaster"/u);
+  assert.match(policy, /CACHE_VERSION = "gold-1\.0\.15-desktop-goldmaster"/u);
   assert.match(policy, /\.\/intelligence\/writing-intelligence\.js/u);
 });

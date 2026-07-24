@@ -1,6 +1,6 @@
 [package]
 name = "dhad-desktop"
-version = "1.0.0"
+version = "1.0.15"
 description = "Native Tauri 2 desktop shell for the Dhad Arabic writing platform"
 authors = ["Dhad Project"]
 edition.workspace = true

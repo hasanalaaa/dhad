@@ -1,8 +1,13 @@
 {
-  "generated_at_utc": "2026-07-24T03:38:15.037759+00:00",
-  "model_count": 2,
-  "total_bytes": 135081019,
-  "duplicates": [],
+  "generated_at_utc": "2026-07-24T11:12:41.373536+00:00",
+  "model_count": 3,
+  "total_bytes": 270161489,
+  "duplicates": [
+    [
+      "web_demo/models/model_int8.onnx",
+      "web_dist/models/model_int8.onnx"
+    ]
+  ],
   "models": [
     {
       "path": "web_demo/models/model_int8.onnx",
@@ -19,6 +24,15 @@
       "before_sha256": "78a24c2c966a6013db875a7261b1ec49f4807d6a20da438759b3147d441aea55",
       "after_bytes": 549,
       "after_sha256": "78a24c2c966a6013db875a7261b1ec49f4807d6a20da438759b3147d441aea55",
+      "changed": false,
+      "status": "verified; optional onnx package not installed"
+    },
+    {
+      "path": "web_dist/models/model_int8.onnx",
+      "before_bytes": 135080470,
+      "before_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
+      "after_bytes": 135080470,
+      "after_sha256": "d21142a1421d3cda61b7d016d1170e5d7ab682c62ce4f0609c1ce3d579676186",
       "changed": false,
       "status": "verified; optional onnx package not installed"
     }

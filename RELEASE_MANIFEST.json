@@ -1,13 +1,13 @@
 {
   "project": "Dhad",
-  "version": "1.0.0",
-  "python_version": "1.0.0",
-  "completed_phase": "Ultimate Dream Release v1.0.0 Sovereign Edition",
-  "phase_name": "Hardened native Tauri desktop, least-privilege windows, resilient file I/O, refined floating assistant, showcase documentation, and reproducible release validation",
-  "tests_passed": 1777,
+  "version": "1.0.15",
+  "python_version": "1.0.15",
+  "completed_phase": "Ultimate Desktop Release v1.0.15",
+  "phase_name": "Reproducible Tauri desktop release with exact frontend closure and atomic multi-platform publication",
+  "tests_passed": 72,
   "quality": {
-    "ruff": "clean",
-    "format": "verified",
+    "ruff": "validated by locked CI; source-level regressions covered locally",
+    "format": "Python/JavaScript syntax and shell syntax verified locally; Rust format enforced in CI",
     "compileall": "verified",
     "placeholder_code": false,
     "wheel_contents": "verified",
@@ -17,24 +17,25 @@
     "dockerfile_static_validation": "verified",
     "compose_yaml": "verified",
     "container_runtime_build": "not-run-docker-unavailable-in-build-environment",
-    "rust_tests_passed": 16,
-    "rust_clippy_warnings_as_errors": "clean",
-    "javascript_syntax": "57 first-party files verified",
-    "javascript_tests_passed": 101,
+    "rust_tests_passed": "not-run-on-packaging-host",
+    "rust_clippy_warnings_as_errors": "mandatory locked CI gate",
+    "javascript_syntax": "58 first-party files verified",
+    "javascript_tests_passed": "dependency-backed suite mandatory in CI; npm registry unavailable on packaging host",
     "offline_browser_proof": "WASM + WebGPU neural model + IndexedDB restore verified",
     "main_thread_long_tasks_over_50ms": 0,
     "ci_workflow": ".github/workflows/ci.yml",
     "development_lock": "requirements-dev.lock",
-    "repository_audit": "438 clean release files; generated caches and temporary build artifacts removed",
+    "repository_audit": "446 release files audited; 0 findings",
     "local_python_validation": {
-      "available_suites": "1777 passed, 0 failed",
-      "redis_sync_backend": "not-run: redis/fakeredis unavailable",
-      "native_crdt": "not-run: pycrdt unavailable",
-      "onnx_python_backend": "not-run: native onnxruntime unavailable"
+      "available_suites": "72 unique release, API, configuration, and bundle-verifier tests passed",
+      "full_dependency_complete_suite": "mandatory in CI; local host lacks pycrdt, fakeredis, ONNX Python packages, and npm dependencies",
+      "redis_sync_backend": "not-run locally: fakeredis unavailable",
+      "native_crdt": "not-run locally: pycrdt unavailable",
+      "onnx_python_backend": "not-run locally: onnx/onnxruntime unavailable"
     },
-    "rust_local_revalidation": "blocked: Cargo/rustc unavailable on packaging host; strict CI retained",
-    "sovereign_desktop_audit": "87/87 passed across 438 clean release files",
-    "sovereign_contracts": "59/59 passed including final cleanliness gate",
+    "rust_local_revalidation": "not-run: Cargo/rustc unavailable on packaging host; complete workspace lock and --locked CI gates retained",
+    "sovereign_desktop_audit": "196/196 passed across the clean release source tree",
+    "sovereign_contracts": "71/71 passed including final cleanliness gate",
     "sovereign_test_matrix": {
       "passed_checks": 41,
       "failed_checks": 0,
@@ -42,10 +43,25 @@
       "timed_out_checks": 0,
       "note": "Blocked entries are missing external dependencies/toolchains and are not counted as passes."
     },
-    "javascript_tests_available": "101 passed, 0 failed; secure Yjs and IndexedDB tests blocked by unavailable npm registry dependencies",
+    "javascript_tests_available": "58-file syntax pass; exact 44-file packaged closure verified; dependency-backed tests remain mandatory in CI",
     "mini_assistant_runtime_boot": "passed",
-    "native_installer_builds": "not-run: macOS and Windows runners unavailable on Linux packaging host",
-    "rust_tests_scope": "16 tests belong to the prior Gold Master baseline; Sovereign Rust revalidation is blocked on this host and remains mandatory in CI"
+    "native_installer_builds": "not-run locally: macOS and Windows hosted runners unavailable; draft-first atomic matrix retained",
+    "rust_tests_scope": "full workspace fmt, Clippy, tests, and WASM build are mandatory with --locked in CI and release CI",
+    "frontend_staging": {
+      "allowlisted_files": 44,
+      "closure_checks": [
+        "ES module/import/fetch/service-worker references",
+        "HTML/CSS local assets",
+        "PWA cache and manifest",
+        "model/tokenizer/vendor SHA-256"
+      ],
+      "adversarial_tests": [
+        "unexpected host/development files excluded",
+        "missing source rejected",
+        "bare import rejected",
+        "tampered model rejected"
+      ]
+    }
   },
   "governance": {
     "license": "full verbatim GNU AGPL-3.0 text",
@@ -426,7 +442,7 @@
   "desktop_phase_1": {
     "framework": "Tauri 2",
     "app_identifier": "com.dhad.desktop",
-    "frontend_dist": "web_demo",
+    "frontend_dist": "web_dist (generated exact runtime closure)",
     "window": {
       "width": 1280,
       "height": 800,

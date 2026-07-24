@@ -16,8 +16,8 @@ EXTENSION = PROJECT_ROOT / "extension"
 def test_manifest_v3_is_complete_and_minimizes_permanent_host_access():
     manifest = json.loads((EXTENSION / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["manifest_version"] == 3
-    assert manifest["version"] == "1.0.0"
-    assert manifest["version_name"] == "1.0.0 Gold Master"
+    assert manifest["version"] == "1.0.15"
+    assert manifest["version_name"] == "1.0.15 Gold Master"
     assert manifest["background"]["service_worker"] == "background.js"
     assert manifest["host_permissions"] == ["http://127.0.0.1/*", "http://localhost/*"]
     assert "https://*/*" in manifest["optional_host_permissions"]

@@ -1,6 +1,6 @@
 # Dhad Sovereign Release Validation
 
-- Passed: **71/71**
+- Passed: **70/70**
 - Errors: **0**
 
 ## Checks
@@ -31,7 +31,7 @@
 - PASS — `security:frame-ancestors`: frame embedding denied
 - PASS — `security:object-src`: plugin/object loading denied
 - PASS — `security:wasm`: WASM allowed explicitly
-- PASS — `tauri:schema-2.11-compatible`: tauri-cli 2.11.5 / tauri 2.11.5
+- PASS — `tauri:schema-2.11-compatible`: tauri-cli 2.11.4 / tauri 2.11.5
 - PASS — `tauri:no-custom-headers`: unsupported app.security.headers removed
 - PASS — `tauri:no-no-redirection-bitmap`: unsupported window key removed
 - PASS — `tauri:no-bundle-vc-runtime`: unsupported Windows bundle key removed
@@ -75,4 +75,3 @@
 - PASS — `readme:privacy-boundary`: requires '## Privacy boundary'
 - PASS — `readme:desktop-builds`: requires '## Desktop builds'
 - PASS — `readme:verification`: requires '## Verification'
-- PASS — `clean:generated-artifacts`: clean

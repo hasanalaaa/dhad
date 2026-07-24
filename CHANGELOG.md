@@ -1,3 +1,13 @@
+## 1.0.15 — 2026-07-24 — Atomic, dependency-closed desktop release
+
+- Promoted Python, Tauri, both Rust crates, the web package/lockfile, extension metadata, PWA cache namespace, and release manifest to one validated `1.0.15` version.
+- Replaced the incomplete member lockfiles with one complete workspace `Cargo.lock` and made CI, release CI, and local build scripts enforce `--locked` Rust checks.
+- Rebuilt `tools/build_web_dist.mjs` around an exact 44-file allowlist with module/document/PWA closure checks and cryptographic validation of ONNX, tokenizer, WASM, and ONNX Runtime assets.
+- Removed the packaged collaboration module's unresolved bare `yjs` import; callers now inject an explicitly validated Yjs runtime.
+- Added `tools/validate_release_version.py` so a release tag cannot diverge from any distributable version surface.
+- Changed native publishing to draft-first atomic release publication: the release remains private until both macOS DMGs, the Windows MSI, and the Windows NSIS EXE have all been uploaded and verified.
+- Upgraded Node setup actions to the current Node-24-based major while retaining Node 22 as the application runtime.
+
 ## 1.0.13 — Isolated Tauri frontend distribution
 
 - Replaced `build.frontendDist = "../web_demo"` with a generated `../web_dist` directory so installed npm dependencies can never be embedded or rejected by Tauri.
@@ -5,6 +15,12 @@
 - Added Tauri `beforeBuildCommand` and `beforeDevCommand` hooks plus explicit CI staging on macOS and Windows.
 - Excluded `web_dist` from Git, Tauri source packaging, repository audits, Docker context, and deterministic source ZIP archives while validating required runtime assets before every native build.
 - Updated local macOS and Windows build scripts to use the published npm Tauri CLI `2.11.4` consistently with release CI.
+
+## 1.0.14 - 2026-07-24
+
+- Fixed the web CI staging step to run from the repository root instead of `web_demo`.
+- Materialized Git LFS assets and staged `web_dist` before Rust Clippy so Tauri build scripts always see a valid frontend distribution.
+- Added regression contracts for both CI working-directory and Rust frontend staging behavior.
 
 ## 1.0.10 — CI portability and release bootstrap repair
 

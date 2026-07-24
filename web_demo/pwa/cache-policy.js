@@ -1,4 +1,4 @@
-export const CACHE_VERSION = "gold-1.0.0-desktop-goldmaster";
+export const CACHE_VERSION = "gold-1.0.15-desktop-goldmaster";
 export const PRECACHE_NAME = `dhad-precache-${CACHE_VERSION}`;
 export const SHELL_CACHE_NAME = `dhad-shell-${CACHE_VERSION}`;
 

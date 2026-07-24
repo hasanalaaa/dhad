@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T08:48:05.781524+00:00",
-  "file_count": 449,
-  "total_bytes": 180132410,
-  "checks_total": 152,
-  "checks_passed": 152,
+  "generated_at_utc": "2026-07-24T11:15:00.737149+00:00",
+  "file_count": 453,
+  "total_bytes": 180471470,
+  "checks_total": 196,
+  "checks_passed": 196,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -109,6 +109,11 @@
     },
     {
       "name": "required:tools/validate_tauri_config.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/validate_release_version.py",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -433,6 +438,11 @@
       "detail": "missing workflow contract matching tools/validate_desktop_release\\.py"
     },
     {
+      "name": "workflow-validation:tools/validate_release_version.py",
+      "ok": true,
+      "detail": "missing workflow contract matching tools/validate_release_version\\.py"
+    },
+    {
       "name": "workflow-validation:tools/build_web_dist.mjs",
       "ok": true,
       "detail": "missing workflow contract matching tools/build_web_dist\\.mjs"
@@ -483,6 +493,51 @@
       "detail": "missing workflow contract matching \\bAPPLE_SIGNING_IDENTITY\\b"
     },
     {
+      "name": "workflow-validation:actions/setup-node@v6",
+      "ok": true,
+      "detail": "missing workflow contract matching actions/setup-node@v6\\b"
+    },
+    {
+      "name": "workflow-validation:actions/github-script@v9",
+      "ok": true,
+      "detail": "missing workflow contract matching actions/github-script@v9\\b"
+    },
+    {
+      "name": "workflow-validation:releaseDraft: true",
+      "ok": true,
+      "detail": "missing workflow contract matching ^\\s*releaseDraft\\s*:\\s*true\\s*$"
+    },
+    {
+      "name": "workflow-validation:uploadUpdaterJson: false",
+      "ok": true,
+      "detail": "missing workflow contract matching ^\\s*uploadUpdaterJson\\s*:\\s*false\\s*$"
+    },
+    {
+      "name": "workflow-validation:uploadUpdaterSignatures: false",
+      "ok": true,
+      "detail": "missing workflow contract matching ^\\s*uploadUpdaterSignatures\\s*:\\s*false\\s*$"
+    },
+    {
+      "name": "workflow-validation:uploadWorkflowArtifacts: true",
+      "ok": true,
+      "detail": "missing workflow contract matching ^\\s*uploadWorkflowArtifacts\\s*:\\s*true\\s*$"
+    },
+    {
+      "name": "workflow-validation:atomic publish job",
+      "ok": true,
+      "detail": "missing workflow contract matching Verify assets and publish release atomically"
+    },
+    {
+      "name": "workflow-validation:updateRelease",
+      "ok": true,
+      "detail": "missing workflow contract matching github\\.rest\\.repos\\.updateRelease"
+    },
+    {
+      "name": "workflow-validation:locked Rust release checks",
+      "ok": true,
+      "detail": "missing workflow contract matching cargo\\s+(?:clippy|test|build)[^\\n]*--locked"
+    },
+    {
       "name": "ci:rust-toolchain-pinned",
       "ok": true,
       "detail": "missing CI contract: dtolnay/rust-toolchain@1.97.1"
@@ -516,6 +571,31 @@
       "name": "ci:repository-audit-pyyaml",
       "ok": true,
       "detail": "missing CI contract: PyYAML==6.0.3"
+    },
+    {
+      "name": "ci:rust-frontend-staging",
+      "ok": true,
+      "detail": "missing CI contract: Stage dependency-free Tauri frontend for Rust build scripts"
+    },
+    {
+      "name": "ci:web-staging-root",
+      "ok": true,
+      "detail": "missing CI contract: working-directory: ."
+    },
+    {
+      "name": "ci:setup-node-v6",
+      "ok": true,
+      "detail": "missing CI contract: actions/setup-node@v6"
+    },
+    {
+      "name": "ci:release-version-validator",
+      "ok": true,
+      "detail": "missing CI contract: python tools/validate_release_version.py --root ."
+    },
+    {
+      "name": "ci:locked-rust-checks",
+      "ok": true,
+      "detail": "missing CI contract: --all-targets --locked"
     },
     {
       "name": "node-version-file",
@@ -583,6 +663,11 @@
       "detail": "missing build stage"
     },
     {
+      "name": "build-sh:validate_release_version.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
       "name": "build-sh:build_web_dist.mjs",
       "ok": true,
       "detail": "missing build stage"
@@ -594,6 +679,11 @@
     },
     {
       "name": "build-sh:cargo clippy",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-sh:--locked",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -628,6 +718,11 @@
       "detail": "missing build stage"
     },
     {
+      "name": "build-bat:validate_release_version.py",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
       "name": "build-bat:build_web_dist.mjs",
       "ok": true,
       "detail": "missing build stage"
@@ -639,6 +734,11 @@
     },
     {
       "name": "build-bat:cargo clippy",
+      "ok": true,
+      "detail": "missing build stage"
+    },
+    {
+      "name": "build-bat:--locked",
       "ok": true,
       "detail": "missing build stage"
     },
@@ -753,6 +853,126 @@
       "detail": "['onnx==1.22.0', 'PyYAML==6.0.3']"
     },
     {
+      "name": "release-version-validator-semver",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "single-workspace-cargo-lock",
+      "ok": true,
+      "detail": "member lockfile must not exist"
+    },
+    {
+      "name": "cargo-lock-desktop-member",
+      "ok": true,
+      "detail": "1.0.15"
+    },
+    {
+      "name": "cargo-lock-core-member",
+      "ok": true,
+      "detail": "1.0.15"
+    },
+    {
+      "name": "cargo-lock-tauri-pinned",
+      "ok": true,
+      "detail": "2.11.5"
+    },
+    {
+      "name": "cargo-lock-tauri-build-pinned",
+      "ok": true,
+      "detail": "2.6.3"
+    },
+    {
+      "name": "frontend-staging:const runtimeAssets = Object.freeze([",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-staging:verifyModuleClosure",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-staging:verifyDocumentClosure",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-staging:verifyPwaClosure",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-staging:verifyIntegrityContracts",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-staging:staged frontend differs from its exact allowlist",
+      "ok": true,
+      "detail": "missing exact-closure staging contract"
+    },
+    {
+      "name": "frontend-no-bare-yjs-import",
+      "ok": true,
+      "detail": "packaged provider must not import node_modules"
+    },
+    {
+      "name": "frontend-explicit-yjs-runtime",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-sh:locked-clippy",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-sh:locked-tests",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-sh:version-contract",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-bat:locked-clippy",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-bat:locked-tests",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "build-bat:version-contract",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-draft-before-matrix-complete",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-requires-two-dmgs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-requires-msi-and-nsis",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-publishes-after-asset-verification",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "name": "no-obvious-embedded-private-keys",
       "ok": true,
       "detail": "[]"
@@ -765,11 +985,11 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 449 files"
+      "detail": "only 453 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "53e394232ce6c42d81e546934a689789aa0229d2c3354143b0d182a8848e6d9e",
+    "src-tauri/tauri.conf.json": "a67f14f1cce9787641d5855a7fbb610eb68b80afd7473538bdfa514e3f0ecd23",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
     "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
@@ -781,23 +1001,24 @@
     "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
-    "scripts/build-desktop.sh": "0e36c5e042764ddf91cf73c845c7103a32b345f64e34693d448414f9ffc302c2",
-    "scripts/build-desktop.bat": "b8f96af8d717b86cb4c99662e728412af47347867c4abbecec8f245fcef1f332",
-    ".github/workflows/desktop-release.yml": "cdad9da470ed54bd0322737425a94fadcbd848fead58a2e8aedebbb51344b142",
-    ".github/workflows/ci.yml": "c127ad76fbb0061bf2ed6f7f551cb72b691702671c6fbec1560e4c2d3793fd37",
+    "scripts/build-desktop.sh": "56ea6d3e66e5943c7b9f124b5bf321ac49937a5d28e7db3c2dd346530f0af025",
+    "scripts/build-desktop.bat": "da268949e2d2df9eee645fbaee46c120fc6f6e6c6909207cdec0de189996c75c",
+    ".github/workflows/desktop-release.yml": "05bd8d6481f964817fb101de736637c69693cc7102643ba51aae43c0afa43d6b",
+    ".github/workflows/ci.yml": "60da28f835506c68109e5d8453f587ed89bbfc60d7fc2b94b584d484ef6dc95a",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "69bdfae32913e242f40c4525349c86e533193dd5edf0f88bee352875adac00e3",
+    "tools/validate_desktop_release.py": "cf335a67d16f9f19474cd898424a878a945f7f126a248f8300169f3db0d722e7",
     "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
-    "tools/package_release.py": "0f41067320f6aa4d503c90a4e60040dfdac6711ae70841f1835aed12ac0d7363",
+    "tools/validate_release_version.py": "95d1232a464e834015a272fc286c917ce4104d60a2fb232384b89cc72d36f00f",
+    "tools/package_release.py": "d84a7bad5502ba4932cb243d8f236b3d116ac0daceaaf55501d858657c2e154a",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
-    "tools/generate_release_inventory.py": "d71294945e76a7c864cd3265673120fdc9da6b7380a7231908fa77f8ea7b497d",
+    "tools/generate_release_inventory.py": "c2f8b311bbac5f4bd6d3f8b15046a9aa7f99144598a7610c5c7649d73be0dbd5",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
     "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
     "tools/clean_repository.py": "f44148f00a3b25b1c69a1db3e09d5d3f1abaaad578592c80a36b57a76b087ccc",
-    "tools/build_web_dist.mjs": "52cc1875ea5e42b1ba4dbca888816a1e836ccd93b2ea9b20f286c6afc3dcefdd",
+    "tools/build_web_dist.mjs": "3900dc4f02688a148e9864f8c67d89bf7e2c3396f00aa5f093acf568922473e2",
     "src-tauri/Info.plist": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
     "src-tauri/Entitlements.plist": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
     "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",

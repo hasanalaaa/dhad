@@ -110,4 +110,4 @@ def test_pwa_manifest_files_exist_on_disk():
     for item in manifest["icons"]:
         path = WEB_ASSETS_DIR / item["src"].removeprefix("/static/")
         assert path.is_file() and path.stat().st_size > 100
-    assert __version__ == "1.0.0"
+    assert __version__ == "1.0.15"

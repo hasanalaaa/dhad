@@ -3,8 +3,8 @@
   "name": "ضاد — مساعد الكتابة العربية",
   "short_name": "ضاد",
   "description": "مساعد كتابة عربي متكامل: تدقيق، إعادة صياغة، نبرة، تحليلات وقوالب عبر خادم ضاد الخاص.",
-  "version": "1.0.0",
-  "version_name": "1.0.0 Gold Master",
+  "version": "1.0.15",
+  "version_name": "1.0.15 Gold Master",
   "minimum_chrome_version": "109",
   "permissions": [
     "storage"

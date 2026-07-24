@@ -1,6 +1,6 @@
 [package]
 name = "dhad-core"
-version = "1.0.0"
+version = "1.0.15"
 edition = "2021"
 license = "AGPL-3.0-or-later"
 description = "Portable deterministic core of the Dhad Arabic writing engine (WASM/edge target). Python remains the reference implementation; parity is enforced by a shared golden corpus."
