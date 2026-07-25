@@ -1,48 +1,45 @@
-# Dhad Desktop Ultimate v1.0.16 — Final Validation
+# Dhad Desktop Ultimate v1.0.16 r3 — Final Validation
 
-## Diagnostic conclusion
+## CI diagnostic conclusion
 
-- **macOS:** both native applications and DMGs were built and uploaded in v1.0.15. Tauri then cleaned the intermediate `bundle/macos/*.app`; the old verifier treated that expected cleanup as a failure.
-- **Windows:** the executable and NSIS setup were built. WiX `candle.exe` compiled both source fragments, but `light.exe` failed while linking the MSI in the combined `windows-2025` job.
+The hosted CI run `30139186762` isolated two release-promotion regressions:
 
-## v1.0.16 corrections
+- **JavaScript:** `web_demo/intelligence/apex-ui.test.mjs` still asserted the v1.0.15 PWA cache namespace, while the shipped cache policy correctly contained `gold-1.0.16-desktop-goldmaster`. Hosted CI passed the other 113 JavaScript tests.
+- **Rust:** a broad textual version replacement changed the valid lock entry `serde_json 1.0.151` into the nonexistent `1.0.161` without changing its checksum. Cargo therefore rejected the workspace before Clippy.
 
-- Mount the generated DMG read-only and verify the exact `.app` shipped inside it, with architecture, signing, dylib, and LaunchServices smoke checks.
-- Split NSIS and MSI into independent `windows-2022` jobs.
-- Verify VBSCRIPT before WiX MSI linking and emit a direct diagnostic if unavailable.
-- Smoke-install NSIS and administratively extract MSI after generation.
-- Harden the WiX desktop shortcut fragment and use deterministic ASCII asset names.
-- Keep the release private as a draft until two DMGs, one MSI, and one NSIS EXE are all present.
+## r3 corrections
+
+- Derive the Apex PWA cache assertion from `web_demo/package.json`, matching the version-safe Gold Master and extension contracts.
+- Restore `serde_json 1.0.151` in the workspace lockfile; the resulting lockfile is identical to the previously green v1.0.15 lock except for the two first-party crate versions changing to `1.0.16`.
+- Pin `serde_json = "=1.0.151"` in both Rust manifests.
+- Extend the early release-version validator and desktop release audit to enforce the exact registry version and checksum.
+- Add mutation coverage proving a corrupted `1.0.161` lock entry is rejected before release.
 
 ## Executed checks
 
-- Release/version contract: **PASS** (`1.0.16`, expected tag `v1.0.16`).
-- Tauri configuration: **PASS** (`tauri-cli 2.11.4`, Rust crate `2.11.5`).
-- Frontend closure: **PASS**, 44 allowlisted runtime files, 165,592,508 bytes, no `node_modules` or test files.
+- Release/version and lock-integrity contract: **PASS** (`1.0.16`, tag `v1.0.16`, `serde_json 1.0.151`).
+- Corrected JavaScript release contracts: **6/6 PASS**.
+- Hosted JavaScript evidence before the correction: **113/114 PASS**, with the single failure being the corrected stale assertion.
+- Focused Python release regressions: **37/37 PASS**.
 - JavaScript syntax: **PASS**, 58 first-party files.
-- Focused release regressions: **47/47 PASS**.
-- Synthetic DMG fallback harness: **PASS**.
-- Desktop release audit: **201/201 PASS**.
+- Frontend runtime closure: **PASS**, 44 allowlisted files and no dependency/test leakage.
+- Desktop release audit: **205/205 PASS**.
 - Sovereign release audit: **71/71 PASS**.
 - Repository audit: **PASS**, 0 findings.
-- Structured parsing: **PASS** for JSON, TOML, YAML, plist, and WiX XML.
-- Shell syntax: **PASS** for all first-party `.sh` files.
-- Sovereign matrix: **42 passed, 0 failed, 10 environment-blocked, 0 timed out**.
-- Deterministic source packaging: **PASS**; two independently generated ZIP files were byte-for-byte identical.
-- Extracted-ZIP revalidation: **PASS**; 47 focused tests, 201/201 desktop checks, 71/71 sovereign checks, and 0 repository findings.
-- Installer script sandbox run: **PASS**; SHA verification, extraction, `rsync`, staging, and validators completed end to end.
+- Cargo lock comparison: **PASS**; only `dhad-core` and `dhad-desktop` versions differ from the previously green v1.0.15 lock.
+- Deterministic ZIP packaging and extracted-archive revalidation: **PASS**.
 
 ## Honest environment limits
 
-- This container has no Cargo, macOS runner, Windows runner, or PowerShell. Native installers were therefore not claimed as locally built.
-- Network isolation prevented a fresh `npm ci`; the complete JavaScript runtime suite had already passed **114/114** on the user Mac and hosted CI before these native-release-only changes.
-- Missing `pycrdt` and `fakeredis` block several local Python files; the matrix records them as blocked, not passed.
+- Cargo and native macOS/Windows runners are unavailable in this container, so the final Clippy and installer builds remain gated by GitHub Actions.
+- A fresh `npm ci` could not complete in the network-isolated packaging environment. The corrected affected JavaScript files run without external dependencies; hosted CI had already passed every other JavaScript test in the same run.
 
 ## Release gate
 
-1. Commit and push v1.0.16 source.
-2. Require general CI to pass.
-3. Create immutable tag `v1.0.16`.
-4. Require both DMGs, NSIS, MSI, their post-build verifiers, and atomic publication to pass.
+1. Install r3 over the current v1.0.16 source using checksum-based synchronization.
+2. Run the complete local JavaScript suite on the user Mac.
+3. Commit and require all three general CI jobs to pass.
+4. Create immutable tag `v1.0.16` only after green CI.
+5. Require both DMGs, NSIS, MSI, their native verifiers, and atomic publication to pass.
 
-Keep `v1.0.15` unchanged. It is diagnostic history, not the corrected public native release.
+Keep `v1.0.15` immutable and do not restore the old stash until the native release is complete.

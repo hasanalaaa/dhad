@@ -1,5 +1,7 @@
 ## 1.0.16 — 2026-07-25 — Native bundle verification and Windows MSI hardening
 
+- Repaired the workspace lockfile after a broad textual version promotion accidentally transformed `serde_json 1.0.151` into the nonexistent `1.0.161`; both Rust manifests now pin `serde_json = "=1.0.151"` and release validation enforces the lock/manifests together.
+- Made the Apex offline-shell contract derive its PWA cache namespace from `web_demo/package.json`, removing the last stale `1.0.15` assertion during release promotion.
 - Fixed macOS verification after Tauri's DMG bundler removes the intermediate `.app` by mounting the generated DMG, copying the app to a temporary verification directory, and running signature, architecture, dependency, and launch checks against that copy.
 - Split Windows NSIS and MSI into independent release jobs, pinned them to the stable `windows-2022` image, and added an explicit VBSCRIPT capability smoke test required by WiX MSI linking.
 - Hardened the custom WiX desktop shortcut fragment so the component is rooted at `TARGETDIR` while the shortcut is emitted into `DesktopFolder`, avoiding per-user directory component validation conflicts.

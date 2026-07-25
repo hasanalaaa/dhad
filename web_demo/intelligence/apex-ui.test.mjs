@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const webPackage = JSON.parse(await readFile(resolve(root, "package.json"), "utf8"));
+const escapedReleaseVersion = webPackage.version.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 
 async function source(name) {
   return readFile(resolve(root, name), "utf8");
@@ -33,6 +35,6 @@ test("Apex app persists local lexicon and rule overrides and renders ARIA toolti
 
 test("Apex intelligence module is part of the atomic offline shell", async () => {
   const policy = await source("pwa/cache-policy.js");
-  assert.match(policy, /CACHE_VERSION = "gold-1\.0\.15-desktop-goldmaster"/u);
+  assert.match(policy, new RegExp(`CACHE_VERSION = "gold-${escapedReleaseVersion}-desktop-goldmaster"`, "u"));
   assert.match(policy, /\.\/intelligence\/writing-intelligence\.js/u);
 });

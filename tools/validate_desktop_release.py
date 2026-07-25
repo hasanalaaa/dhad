@@ -327,6 +327,12 @@ def main() -> int:
     ok('cargo-lock-core-member', cargo_versions.get('dhad-core') == cfg.get('version'), str(cargo_versions.get('dhad-core')))
     ok('cargo-lock-tauri-pinned', cargo_versions.get('tauri') == '2.11.5', str(cargo_versions.get('tauri')))
     ok('cargo-lock-tauri-build-pinned', cargo_versions.get('tauri-build') == '2.6.3', str(cargo_versions.get('tauri-build')))
+    ok('cargo-lock-serde-json-pinned', cargo_versions.get('serde_json') == '1.0.151', str(cargo_versions.get('serde_json')))
+    serde_json_records = [item for item in cargo_packages if item.get('name') == 'serde_json']
+    ok('cargo-lock-serde-json-checksum', len(serde_json_records) == 1 and serde_json_records[0].get('checksum') == 'c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14', str(serde_json_records))
+    core_cargo = tomllib.loads((root / 'rust/dhad-core-rs/Cargo.toml').read_text(encoding='utf-8'))
+    ok('core-serde-json-exact', core_cargo.get('dependencies', {}).get('serde_json') == '=1.0.151', str(core_cargo.get('dependencies', {}).get('serde_json')))
+    ok('desktop-serde-json-exact', deps.get('serde_json') == '=1.0.151', str(deps.get('serde_json')))
     staging_tool = (root / 'tools/build_web_dist.mjs').read_text(encoding='utf-8')
     for token in ['const runtimeAssets = Object.freeze([', 'verifyModuleClosure', 'verifyDocumentClosure', 'verifyPwaClosure', 'verifyIntegrityContracts', 'staged frontend differs from its exact allowlist']:
         ok(f'frontend-staging:{token}', token in staging_tool, 'missing exact-closure staging contract')

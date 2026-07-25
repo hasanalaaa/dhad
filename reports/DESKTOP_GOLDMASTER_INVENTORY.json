@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-07-24T22:24:01.755579+00:00",
-  "source_base": "dhad-v1.0-Desktop-Ultimate-v16.zip",
+  "generated_at_utc": "2026-07-25T02:11:51.662336+00:00",
+  "source_base": "dhad-v1.0-Desktop-Ultimate-v16-r3.zip",
   "excluded_parts": [
     ".desktop-build",
     ".git",
@@ -15,7 +15,7 @@
     "reports/DESKTOP_GOLDMASTER_INVENTORY.json"
   ],
   "file_count": 451,
-  "total_bytes": 180216049,
+  "total_bytes": 180220440,
   "top_level": {
     ".dockerignore": {
       "files": 1,
@@ -43,7 +43,7 @@
     },
     "CHANGELOG.md": {
       "files": 1,
-      "bytes": 32345
+      "bytes": 32781
     },
     "CODE_OF_CONDUCT.md": {
       "files": 1,
@@ -123,7 +123,7 @@
     },
     "reports": {
       "files": 84,
-      "bytes": 654026
+      "bytes": 653085
     },
     "requirements-dev.lock": {
       "files": 1,
@@ -131,7 +131,7 @@
     },
     "rust": {
       "files": 18,
-      "bytes": 4138186
+      "bytes": 4138193
     },
     "rust-toolchain.toml": {
       "files": 1,
@@ -147,15 +147,15 @@
     },
     "src-tauri": {
       "files": 32,
-      "bytes": 2521104
+      "bytes": 2521111
     },
     "tests": {
       "files": 44,
-      "bytes": 251343
+      "bytes": 253294
     },
     "tools": {
       "files": 24,
-      "bytes": 178901
+      "bytes": 181624
     },
     "vercel.json": {
       "files": 1,
@@ -163,7 +163,7 @@
     },
     "web_demo": {
       "files": 79,
-      "bytes": 165717117
+      "bytes": 165717325
     }
   },
   "extension_counts": {
@@ -244,8 +244,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 32345,
-      "sha256": "59ab6d847b4162c0e4a53911e8173f054f51a4c351c5dba76b3d76a4b6a95d1c"
+      "bytes": 32781,
+      "sha256": "a972e4ec9f13e22ac2989cdc2e1d4eebc9265e46d3483d305c7b3a0c159b06a4"
     },
     {
       "path": "CODE_OF_CONDUCT.md",
@@ -260,7 +260,7 @@
     {
       "path": "Cargo.lock",
       "bytes": 116049,
-      "sha256": "aeb012db5f107c6b51d5f5bfd63c3cee618c9e8a74d3f58b7b1f5d27e9dd9e25"
+      "sha256": "6a9178f8b3eda296deff939a9c74ac53a8580241d76a1124ba893627830d4295"
     },
     {
       "path": "Cargo.toml",
@@ -624,13 +624,13 @@
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.json",
-      "bytes": 31285,
-      "sha256": "8a28df622843c307a3680c5821988e3afde626194ec22b4e4fa981d66f3ff494"
+      "bytes": 31943,
+      "sha256": "96bf98f364290e575e4692c514e7958fdac62c2ffd34daa562a5587b73ec88e0"
     },
     {
       "path": "reports/DESKTOP_GOLDMASTER_VALIDATION.md",
-      "bytes": 16995,
-      "sha256": "f7eac8b5955d25a54e4ee079caf41d103adb17bf231f22b6e93b075e2cbbee10"
+      "bytes": 17445,
+      "sha256": "0b51197f0deabc278eff70d7b7bfaf1cecfbd4dad8392a55ab922b760b0d7367"
     },
     {
       "path": "reports/DESKTOP_ONNX_ASSET_MANIFEST.json",
@@ -669,13 +669,13 @@
     },
     {
       "path": "reports/GOLD_MASTER_AUDIT.json",
-      "bytes": 1107,
-      "sha256": "83cce00dd4bb8840cc58b0882b31f8c474cedf22f4d39adfd0fc6027ecec2563"
+      "bytes": 1111,
+      "sha256": "32cdc30d76c8a904382269f7771ae958d39dbfd3cda3ea89e99de212b00c825f"
     },
     {
       "path": "reports/GOLD_MASTER_AUDIT.md",
       "bytes": 980,
-      "sha256": "e68ca5774388de145a1aa9b7cd2a1503109256a17495fa22046b31aee588bf12"
+      "sha256": "aea796c7a3e40737125ae439769014d2096fc73b22be5ba27bf7dcd2c104d18f"
     },
     {
       "path": "reports/GOLD_MASTER_EVOLUTION_REPORT.md",
@@ -689,8 +689,8 @@
     },
     {
       "path": "reports/GOLD_MASTER_INVENTORY.json",
-      "bytes": 88105,
-      "sha256": "e84809b6ce9d00bad67db030f3b41c86edf2bca1641f00502a4efa8230d47ce6"
+      "bytes": 88310,
+      "sha256": "242061285ee5d92309780e51f42676629bd75bc18979e90d8d9c80bafd2932d6"
     },
     {
       "path": "reports/REPOSITORY_CLEANUP_AUDIT.md",
@@ -734,13 +734,13 @@
     },
     {
       "path": "reports/ULTIMATE_V16_FINAL_VALIDATION.json",
-      "bytes": 4272,
-      "sha256": "e29594264cce007292dd21b8981f7cfbcb8a51c068fb977f9f55ca7992ea2ed2"
+      "bytes": 2021,
+      "sha256": "a47bb00508f8963275ca3a1b4c8b21c6c1bec878b2966adf66293aeb47a9eda7"
     },
     {
       "path": "reports/ULTIMATE_V16_FINAL_VALIDATION.md",
-      "bytes": 2963,
-      "sha256": "c6a21addd72ac3297ea59662db05949da44f8b7041334762d5f04ae590456e21"
+      "bytes": 2956,
+      "sha256": "b0698e2ee0ecdbdd56d47cc388d976d4574fd2925336ff6ca83592752a225301"
     },
     {
       "path": "reports/VMAX_APEX_AUDIT.json",
@@ -1034,8 +1034,8 @@
     },
     {
       "path": "rust/dhad-core-rs/Cargo.toml",
-      "bytes": 745,
-      "sha256": "403972407f46236b3948073498d757bb7da5fffc23083b39114c488e2485370d"
+      "bytes": 752,
+      "sha256": "0dd5624610724c1778dcf88e4724bd27c5628f0682cbbf08dae81430a005f0b9"
     },
     {
       "path": "rust/dhad-core-rs/data/morphology.json",
@@ -1149,8 +1149,8 @@
     },
     {
       "path": "src-tauri/Cargo.toml",
-      "bytes": 805,
-      "sha256": "83562a8e4e1228c7f55d3af50f7e55498ab2339fab97e0e96274a0fbc04a541f"
+      "bytes": 812,
+      "sha256": "4c7aa639b2944fe81f7896ce7a76e11e8cb85c6279364105ab410f6552ecff52"
     },
     {
       "path": "src-tauri/Entitlements.plist",
@@ -1739,8 +1739,8 @@
     },
     {
       "path": "tests/test_build_pipeline_hygiene.py",
-      "bytes": 16023,
-      "sha256": "278cc2f60bcaf2702f80e47fe33792d6972cc70e85337d8d8bd663d4dcb82daf"
+      "bytes": 17974,
+      "sha256": "28fddc51c456f14108ce798b0fe7e4516eb1c4a7494a6a347fe61023c92a7957"
     },
     {
       "path": "tests/test_checks.py",
@@ -2004,8 +2004,8 @@
     },
     {
       "path": "tools/generate_release_inventory.py",
-      "bytes": 3791,
-      "sha256": "7c81fc979df101222441dc1e1b9666f81ccf4d8fc5718a32a28809eb32c95913"
+      "bytes": 3794,
+      "sha256": "bfb99d93bd2ee79b16890ab2376363f8e6d667932cf8dd1c80dbab0836f52a79"
     },
     {
       "path": "tools/generate_rust_golden.py",
@@ -2029,13 +2029,13 @@
     },
     {
       "path": "tools/validate_desktop_release.py",
-      "bytes": 26792,
-      "sha256": "24f31a3efba01522f2a62e3106d954ef8d2e57c405e28c958e9d000caea1b8fa"
+      "bytes": 27581,
+      "sha256": "c13a2aaa9c39e934b5451b01d1c8ae7c00f4f394f1d2c632fffb234bf8107044"
     },
     {
       "path": "tools/validate_release_version.py",
-      "bytes": 4755,
-      "sha256": "95d1232a464e834015a272fc286c917ce4104d60a2fb232384b89cc72d36f00f"
+      "bytes": 6686,
+      "sha256": "172566dfd207cf22e019850504b284685283d44859ceb132a00dde5def340feb"
     },
     {
       "path": "tools/validate_sovereign_release.py",
@@ -2204,8 +2204,8 @@
     },
     {
       "path": "web_demo/intelligence/apex-ui.test.mjs",
-      "bytes": 1688,
-      "sha256": "acb9d6ac5c7bfd869948a8cfe45079f3b5b21dfaa40216c9e0218eed1afcd67f"
+      "bytes": 1896,
+      "sha256": "2f9735cc488ab96e142e2aad1346b4e8d2bf28f75d6edf2ea20ff9a1561b4b89"
     },
     {
       "path": "web_demo/intelligence/writing-intelligence.js",

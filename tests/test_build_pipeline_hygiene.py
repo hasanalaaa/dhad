@@ -285,6 +285,44 @@ def test_release_version_and_workspace_lock_are_single_source() -> None:
     assert packages["dhad-desktop"] == "1.0.16"
     assert packages["tauri"] == "2.11.5"
     assert packages["tauri-build"] == "2.6.3"
+    assert packages["serde_json"] == "1.0.151"
+
+    core_manifest = tomllib.loads((root / "rust" / "dhad-core-rs" / "Cargo.toml").read_text(encoding="utf-8"))
+    desktop_manifest = tomllib.loads((root / "src-tauri" / "Cargo.toml").read_text(encoding="utf-8"))
+    assert core_manifest["dependencies"]["serde_json"] == "=1.0.151"
+    assert desktop_manifest["dependencies"]["serde_json"] == "=1.0.151"
+
+
+def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) -> None:
+    root = Path(__file__).resolve().parents[1]
+    from tools.validate_release_version import validate
+
+    for relative in (
+        "src/dhad/__init__.py",
+        "src-tauri/tauri.conf.json",
+        "src-tauri/Cargo.toml",
+        "rust/dhad-core-rs/Cargo.toml",
+        "web_demo/package.json",
+        "web_demo/package-lock.json",
+        "extension/manifest.json",
+        "RELEASE_MANIFEST.json",
+        "Cargo.lock",
+    ):
+        source = root / relative
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+
+    lock_path = tmp_path / "Cargo.lock"
+    lock_path.write_text(
+        lock_path.read_text(encoding="utf-8").replace(
+            'name = "serde_json"\nversion = "1.0.151"',
+            'name = "serde_json"\nversion = "1.0.161"',
+        ),
+        encoding="utf-8",
+    )
+    errors = validate(tmp_path, "v1.0.16")
+    assert any("serde_json must be 1.0.151" in error for error in errors)
 
 
 def test_packaged_frontend_has_an_exact_dependency_free_closure() -> None:
@@ -364,6 +402,16 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
         '"cargo", "test", "--workspace", "--all-targets", "--locked"',
     ):
         assert contract in source
+
+
+def test_apex_javascript_contract_follows_release_version() -> None:
+    root = Path(__file__).resolve().parents[1]
+    source = (root / "web_demo" / "intelligence" / "apex-ui.test.mjs").read_text(encoding="utf-8")
+
+    assert 'const webPackage = JSON.parse' in source
+    assert 'webPackage.version.replace' in source
+    assert 'gold-${escapedReleaseVersion}-desktop-goldmaster' in source
+    assert r"gold-1\.0\.15-desktop-goldmaster" not in source
 
 
 def test_gold_master_javascript_contracts_follow_release_version() -> None:

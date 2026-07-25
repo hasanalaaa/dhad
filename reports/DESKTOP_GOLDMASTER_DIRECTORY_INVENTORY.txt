@@ -1,8 +1,8 @@
 Dhad Desktop Gold Master — Directory Inventory
 ================================================
-Source base: dhad-v1.0-Desktop-Ultimate-v16.zip
+Source base: dhad-v1.0-Desktop-Ultimate-v16-r3.zip
 Files inventoried: 451
-Total bytes: 180216049
+Total bytes: 180220440
 
 Top-level inventory:
 - .dockerignore: 1 files, 377 bytes
@@ -11,7 +11,7 @@ Top-level inventory:
 - .gitignore: 1 files, 1071 bytes
 - .nvmrc: 1 files, 3 bytes
 - .tauriignore: 1 files, 405 bytes
-- CHANGELOG.md: 1 files, 32345 bytes
+- CHANGELOG.md: 1 files, 32781 bytes
 - CODE_OF_CONDUCT.md: 1 files, 5754 bytes
 - CONTRIBUTING.md: 1 files, 3564 bytes
 - Cargo.lock: 1 files, 116049 bytes
@@ -31,17 +31,17 @@ Top-level inventory:
 - gunicorn_conf.py: 1 files, 2468 bytes
 - mobile: 1 files, 1075 bytes
 - pyproject.toml: 1 files, 2311 bytes
-- reports: 84 files, 654026 bytes
+- reports: 84 files, 653085 bytes
 - requirements-dev.lock: 1 files, 992 bytes
-- rust: 18 files, 4138186 bytes
+- rust: 18 files, 4138193 bytes
 - rust-toolchain.toml: 1 files, 123 bytes
 - scripts: 5 files, 17220 bytes
 - src: 82 files, 6142541 bytes
-- src-tauri: 32 files, 2521104 bytes
-- tests: 44 files, 251343 bytes
-- tools: 24 files, 178901 bytes
+- src-tauri: 32 files, 2521111 bytes
+- tests: 44 files, 253294 bytes
+- tools: 24 files, 181624 bytes
 - vercel.json: 1 files, 431 bytes
-- web_demo: 79 files, 165717117 bytes
+- web_demo: 79 files, 165717325 bytes
 
 Extension counts:
 - .py: 113

@@ -1,26 +1,26 @@
 {
   "schema": "dhad-gold-master-audit-v1",
-  "generated_at_utc": "2026-07-24T11:15:16.921712+00:00",
-  "root": "dhad",
-  "files_audited": 450,
-  "bytes_audited": 180381703,
+  "generated_at_utc": "2026-07-25T02:11:50.996467+00:00",
+  "root": "v16r3work",
+  "files_audited": 451,
+  "bytes_audited": 180253296,
   "counts_by_category": {
-    "configuration": 59,
+    "configuration": 60,
     "documentation": 119,
     "binary-asset": 26,
     "source": 202,
     "test": 44
   },
   "bytes_by_category": {
-    "configuration": 2055328,
-    "documentation": 1029855,
+    "configuration": 2065786,
+    "documentation": 881193,
     "binary-asset": 164916733,
-    "source": 12132540,
-    "test": 247247
+    "source": 12136290,
+    "test": 253294
   },
   "source_symbols": {
     "python_classes": 237,
-    "python_functions": 1361,
+    "python_functions": 1368,
     "javascript_functions": 1197,
     "rust_functions": 241
   },

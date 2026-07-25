@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
 - Files audited: **454**
-- Checks passed: **201/201**
+- Checks passed: **205/205**
 - Errors: **0**
 - Warnings: **0**
 
@@ -187,6 +187,10 @@
 - PASS — `cargo-lock-core-member`: 1.0.16
 - PASS — `cargo-lock-tauri-pinned`: 2.11.5
 - PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
+- PASS — `cargo-lock-serde-json-pinned`: 1.0.151
+- PASS — `cargo-lock-serde-json-checksum`: [{'name': 'serde_json', 'version': '1.0.151', 'source': 'registry+https://github.com/rust-lang/crates.io-index', 'checksum': 'c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14', 'dependencies': ['itoa', 'memchr', 'serde', 'serde_core', 'zmij']}]
+- PASS — `core-serde-json-exact`: =1.0.151
+- PASS — `desktop-serde-json-exact`: =1.0.151
 - PASS — `frontend-staging:const runtimeAssets = Object.freeze([`: missing exact-closure staging contract
 - PASS — `frontend-staging:verifyModuleClosure`: missing exact-closure staging contract
 - PASS — `frontend-staging:verifyDocumentClosure`: missing exact-closure staging contract

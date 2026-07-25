@@ -11,6 +11,8 @@ import tomllib
 from pathlib import Path
 
 SEMVER = re.compile(r"^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)$")
+PINNED_SERDE_JSON_VERSION = "1.0.151"
+PINNED_SERDE_JSON_CHECKSUM = "c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14"
 
 
 def load_json(path: Path) -> dict[str, object]:
@@ -33,6 +35,20 @@ def cargo_lock_versions(path: Path) -> dict[str, str]:
         for package in packages
         if package.get("name") in {"dhad-core", "dhad-desktop"}
     }
+
+
+def cargo_lock_package(path: Path, name: str) -> list[dict[str, object]]:
+    data = tomllib.loads(path.read_text(encoding="utf-8"))
+    return [dict(package) for package in data.get("package", []) if package.get("name") == name]
+
+
+def cargo_dependency_version(path: Path, name: str) -> str:
+    dependency = tomllib.loads(path.read_text(encoding="utf-8"))["dependencies"][name]
+    if isinstance(dependency, str):
+        return dependency
+    if isinstance(dependency, dict) and "version" in dependency:
+        return str(dependency["version"])
+    raise ValueError(f"missing version for dependency {name}: {path}")
 
 
 def collect_versions(root: Path) -> dict[str, str]:
@@ -83,6 +99,28 @@ def validate(root: Path, tag: str | None = None) -> list[str]:
     member_lock = root / "rust" / "dhad-core-rs" / "Cargo.lock"
     if member_lock.exists():
         errors.append("remove rust/dhad-core-rs/Cargo.lock; the workspace must have one lockfile")
+
+    serde_records = cargo_lock_package(root / "Cargo.lock", "serde_json")
+    if len(serde_records) != 1:
+        errors.append(f"workspace Cargo.lock must contain exactly one serde_json package: {len(serde_records)}")
+    else:
+        serde_record = serde_records[0]
+        if str(serde_record.get("version")) != PINNED_SERDE_JSON_VERSION:
+            errors.append(
+                f"workspace Cargo.lock serde_json must be {PINNED_SERDE_JSON_VERSION}: "
+                f"{serde_record.get('version')}"
+            )
+        if str(serde_record.get("checksum")) != PINNED_SERDE_JSON_CHECKSUM:
+            errors.append("workspace Cargo.lock serde_json checksum does not match the pinned crate")
+
+    for manifest in (root / "rust" / "dhad-core-rs" / "Cargo.toml", root / "src-tauri" / "Cargo.toml"):
+        serde_requirement = cargo_dependency_version(manifest, "serde_json")
+        expected_requirement = f"={PINNED_SERDE_JSON_VERSION}"
+        if serde_requirement != expected_requirement:
+            errors.append(
+                f"{manifest.relative_to(root)} must pin serde_json to {expected_requirement}: "
+                f"{serde_requirement}"
+            )
 
     if tag is not None:
         normalized_tag = tag[1:] if tag.startswith("v") else tag

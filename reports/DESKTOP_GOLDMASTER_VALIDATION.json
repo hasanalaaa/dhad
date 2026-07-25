@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T22:23:55.974066+00:00",
+  "generated_at_utc": "2026-07-25T02:11:46.098942+00:00",
   "file_count": 454,
-  "total_bytes": 180339300,
-  "checks_total": 201,
-  "checks_passed": 201,
+  "total_bytes": 180343033,
+  "checks_total": 205,
+  "checks_passed": 205,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -908,6 +908,26 @@
       "detail": "2.6.3"
     },
     {
+      "name": "cargo-lock-serde-json-pinned",
+      "ok": true,
+      "detail": "1.0.151"
+    },
+    {
+      "name": "cargo-lock-serde-json-checksum",
+      "ok": true,
+      "detail": "[{'name': 'serde_json', 'version': '1.0.151', 'source': 'registry+https://github.com/rust-lang/crates.io-index', 'checksum': 'c841b55ecdae098c80dcae9cf767f6f8a0c2cdb3416bbef72181df4d0fe73f14', 'dependencies': ['itoa', 'memchr', 'serde', 'serde_core', 'zmij']}]"
+    },
+    {
+      "name": "core-serde-json-exact",
+      "ok": true,
+      "detail": "=1.0.151"
+    },
+    {
+      "name": "desktop-serde-json-exact",
+      "ok": true,
+      "detail": "=1.0.151"
+    },
+    {
       "name": "frontend-staging:const runtimeAssets = Object.freeze([",
       "ok": true,
       "detail": "missing exact-closure staging contract"
@@ -1033,12 +1053,12 @@
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "24f31a3efba01522f2a62e3106d954ef8d2e57c405e28c958e9d000caea1b8fa",
+    "tools/validate_desktop_release.py": "c13a2aaa9c39e934b5451b01d1c8ae7c00f4f394f1d2c632fffb234bf8107044",
     "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
-    "tools/validate_release_version.py": "95d1232a464e834015a272fc286c917ce4104d60a2fb232384b89cc72d36f00f",
+    "tools/validate_release_version.py": "172566dfd207cf22e019850504b284685283d44859ceb132a00dde5def340feb",
     "tools/package_release.py": "f49cee5d3761d4c640676da4c6cb34512e76d70d8ede025a4a78ec3b3c72b68e",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
-    "tools/generate_release_inventory.py": "7c81fc979df101222441dc1e1b9666f81ccf4d8fc5718a32a28809eb32c95913",
+    "tools/generate_release_inventory.py": "bfb99d93bd2ee79b16890ab2376363f8e6d667932cf8dd1c80dbab0836f52a79",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "567b69db2194d6633bef5339bfd2e682eb5c9a7fff29da1833dd7b422ab555d0",
     "scripts/verify-windows-installer.ps1": "60d017bb32923f1968eb340f6e8ee0ca031f284a7b5c9ff2e119ed17e7a1c6ec",
