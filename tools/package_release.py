@@ -13,7 +13,7 @@ from pathlib import Path
 
 EXCLUDED_DIRS = {
     ".git", ".desktop-build", ".audit-venv", ".ci-venv", ".pytest_cache", ".ruff_cache",
-    ".mypy_cache", "__pycache__", "node_modules", "target", "venv", ".venv", "web_dist",
+    ".mypy_cache", "__pycache__", "node_modules", "target", "venv", ".venv", "web_dist", "gen",
 }
 EXCLUDED_NAMES = {".DS_Store", "Thumbs.db", "Desktop.ini"}
 EXCLUDED_SUFFIXES = {".pyc", ".pyo", ".log", ".tmp", ".temp", ".bak", ".swp"}

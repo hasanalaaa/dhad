@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
+
 from fastapi.testclient import TestClient
 
 from dhad import Dhad, __version__
@@ -110,4 +112,11 @@ def test_pwa_manifest_files_exist_on_disk():
     for item in manifest["icons"]:
         path = WEB_ASSETS_DIR / item["src"].removeprefix("/static/")
         assert path.is_file() and path.stat().st_size > 100
-    assert __version__ == "1.0.18"
+    # Compared with the desktop configuration instead of a literal: the point of the
+    # contract is that the surfaces agree, not that they hold one specific number.
+    desktop_config = json.loads(
+        (Path(__file__).resolve().parents[1] / "src-tauri" / "tauri.conf.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert __version__ == desktop_config["version"]

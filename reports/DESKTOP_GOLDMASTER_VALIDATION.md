@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **454**
-- Checks passed: **221/221**
+- Files audited: **457**
+- Checks passed: **186/186**
 - Errors: **0**
 - Warnings: **0**
 
@@ -28,6 +28,8 @@
 - PASS — `required:tools/validate_desktop_release.py`: missing or empty required release file
 - PASS — `required:tools/validate_tauri_config.py`: missing or empty required release file
 - PASS — `required:tools/validate_release_version.py`: missing or empty required release file
+- PASS — `required:tools/validate_workflows.py`: missing or empty required release file
+- PASS — `required:tools/set_release_version.py`: missing or empty required release file
 - PASS — `required:tools/package_release.py`: missing or empty required release file
 - PASS — `required:tools/desktop-build-requirements.txt`: missing or empty required release file
 - PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
@@ -79,7 +81,10 @@
 - PASS — `ico-multi-resolution`: [(16, 16), (24, 24), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
 - PASS — `info-plist-display-name`: ضاد
 - PASS — `info-plist-does-not-override-generated-identity`: []
-- PASS — `entitlements-minimal-dictionary`: {}
+- PASS — `info-plist-NSMicrophoneUsageDescription`: dictation requires a non-empty NSMicrophoneUsageDescription
+- PASS — `info-plist-NSSpeechRecognitionUsageDescription`: dictation requires a non-empty NSSpeechRecognitionUsageDescription
+- PASS — `entitlements-least-privilege`: []
+- PASS — `entitlements-audio-input-for-dictation`: {'com.apple.security.device.audio-input': True}
 - PASS — `legacy-wix-shortcut-fragment-removed`: redundant fragment must remain absent
 - PASS — `legacy-nsis-shortcut-hooks-removed`: redundant hooks must remain absent
 - PASS — `windows-verifier-registry-discovery`: NSIS verifier must discover the actual install root through uninstall metadata
@@ -88,64 +93,18 @@
 - PASS — `windows-verifier-strict-safe-properties`: registry properties must be optional under Set-StrictMode
 - PASS — `windows-verifier-platform-config`: verifier must use the effective Windows product identity
 - PASS — `windows-verifier-native-contract-test`: missing-property regression must run on Windows CI
-- PASS — `workflow:macos-15`: missing workflow contract
-- PASS — `workflow:macos-15-intel`: missing workflow contract
-- PASS — `workflow:windows-2022`: missing workflow contract
-- PASS — `workflow:aarch64-apple-darwin`: missing workflow contract
-- PASS — `workflow:x86_64-apple-darwin`: missing workflow contract
-- PASS — `workflow:--bundles nsis`: missing workflow contract
-- PASS — `workflow:--bundles msi`: missing workflow contract
-- PASS — `workflow:--verbose --target x86_64-pc-windows-msvc --bundles msi`: missing workflow contract
-- PASS — `workflow:tauri-apps/tauri-action@v1`: missing workflow contract
-- PASS — `workflow-validation:v*.*.*`: missing workflow contract matching ["\']v\*\.\*\.\*["\']
+- PASS — `workflow-structure`
 - PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing workflow contract matching \blibwebkit2gtk-4\.1-dev\b
 - PASS — `workflow-validation:libayatana-appindicator3-dev`: missing workflow contract matching \blibayatana-appindicator3-dev\b
 - PASS — `workflow-validation:build-essential`: missing workflow contract matching \bbuild-essential\b
 - PASS — `workflow-validation:libxdo-dev`: missing workflow contract matching \blibxdo-dev\b
 - PASS — `workflow-validation:libssl-dev`: missing workflow contract matching \blibssl-dev\b
-- PASS — `workflow-validation:tools/desktop-build-requirements.txt`: missing workflow contract matching tools/desktop-build-requirements\.txt
-- PASS — `workflow-validation:tools/optimize_onnx_assets.py`: missing workflow contract matching tools/optimize_onnx_assets\.py
-- PASS — `workflow-validation:tools/validate_tauri_config.py`: missing workflow contract matching tools/validate_tauri_config\.py
-- PASS — `workflow-validation:tools/validate_desktop_release.py`: missing workflow contract matching tools/validate_desktop_release\.py
-- PASS — `workflow-validation:tools/validate_release_version.py`: missing workflow contract matching tools/validate_release_version\.py
-- PASS — `workflow-validation:tools/build_web_dist.mjs`: missing workflow contract matching tools/build_web_dist\.mjs
-- PASS — `workflow-validation:Stage dependency-free Tauri frontend`: missing workflow contract matching Stage dependency-free Tauri frontend
-- PASS — `workflow-validation:TAURI_CLI_VERSION: "2.11.4"`: missing workflow contract matching ^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$
-- PASS — `workflow-validation:@tauri-apps/cli@2.11.4`: missing workflow contract matching @tauri-apps/cli@2\.11\.4
-- PASS — `workflow-validation:tauriScript: tauri`: missing workflow contract matching ^\s*tauriScript\s*:\s*tauri\s*$
-- PASS — `workflow-validation:dtolnay/rust-toolchain@1.97.1`: missing workflow contract matching uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b
-- PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
-- PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
-- PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
-- PASS — `workflow-validation:verify-windows-installer.ps1`: missing workflow contract matching verify-windows-installer\.ps1
-- PASS — `workflow-validation:WiX failure diagnostics`: missing workflow contract matching Upload WiX diagnostics after MSI failure
-- PASS — `workflow-validation:Windows platform identity`: missing workflow contract matching tauri\.windows\.conf\.json
-- PASS — `workflow-validation:VBSCRIPT MSI prerequisite`: missing workflow contract matching VBSCRIPT smoke test: PASS
 - PASS — `workflow-validation:stable ASCII release names`: missing workflow contract matching releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]
 - PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
-- PASS — `workflow-validation:actions/setup-node@v6`: missing workflow contract matching actions/setup-node@v6\b
-- PASS — `workflow-validation:actions/github-script@v9`: missing workflow contract matching actions/github-script@v9\b
-- PASS — `workflow-validation:releaseDraft: true`: missing workflow contract matching ^\s*releaseDraft\s*:\s*true\s*$
-- PASS — `workflow-validation:uploadUpdaterJson: false`: missing workflow contract matching ^\s*uploadUpdaterJson\s*:\s*false\s*$
-- PASS — `workflow-validation:uploadUpdaterSignatures: false`: missing workflow contract matching ^\s*uploadUpdaterSignatures\s*:\s*false\s*$
-- PASS — `workflow-validation:uploadWorkflowArtifacts: true`: missing workflow contract matching ^\s*uploadWorkflowArtifacts\s*:\s*true\s*$
-- PASS — `workflow-validation:atomic publish job`: missing workflow contract matching Verify assets and publish release atomically
-- PASS — `workflow-validation:updateRelease`: missing workflow contract matching github\.rest\.repos\.updateRelease
-- PASS — `workflow-validation:locked Rust release checks`: missing workflow contract matching cargo\s+(?:clippy|test|build)[^\n]*--locked
-- PASS — `ci:rust-toolchain-pinned`: missing CI contract: dtolnay/rust-toolchain@1.97.1
+- PASS — `workflow-validation:Windows platform identity`: missing workflow contract matching tauri\.windows\.conf\.json
 - PASS — `ci:pythonpath-root-and-src`: missing CI contract: PYTHONPATH: ".:src"
-- PASS — `ci:node-22`: missing CI contract: node-version: "22"
-- PASS — `ci:windows-verifier-contract-job`: missing CI contract: Windows installer verifier contracts
-- PASS — `ci:windows-verifier-test-script`: missing CI contract: test-windows-installer-verifier.ps1
-- PASS — `ci:ruff-check`: missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py
-- PASS — `ci:pytest`: missing CI contract: pytest -q
-- PASS — `ci:npm-test`: missing CI contract: npm test
 - PASS — `ci:repository-audit-pyyaml`: missing CI contract: PyYAML==6.0.3
-- PASS — `ci:rust-frontend-staging`: missing CI contract: Stage dependency-free Tauri frontend for Rust build scripts
-- PASS — `ci:web-staging-root`: missing CI contract: working-directory: .
-- PASS — `ci:setup-node-v6`: missing CI contract: actions/setup-node@v6
-- PASS — `ci:release-version-validator`: missing CI contract: python tools/validate_release_version.py --root .
-- PASS — `ci:locked-rust-checks`: missing CI contract: --all-targets --locked
+- PASS — `ci:ruff-check`: missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py
 - PASS — `node-version-file`: local Node must match CI Node 22
 - PASS — `landing:id="downloads"`: missing landing-page section
 - PASS — `landing:الخصوصية`: missing landing-page section
@@ -193,14 +152,18 @@
 - PASS — `windows-mica-effect-target-guarded`
 - PASS — `window-effects-nonfatal`
 - PASS — `rust-toolchain-1.97.1`: {'toolchain': {'channel': '1.97.1', 'profile': 'minimal', 'components': ['clippy', 'rustfmt'], 'targets': ['wasm32-unknown-unknown']}}
-- PASS — `tauri-crate-pinned-2.11.5`: {'version': '=2.11.5', 'features': ['tray-icon']}
+- PASS — `tauri-crate-pinned-2.11.5`: {'version': '=2.11.5', 'features': ['macos-private-api', 'tray-icon']}
+- PASS — `macos-private-api-config-matches-cargo-feature`: app.macOSPrivateApi=True, cargo features=['macos-private-api', 'tray-icon']
+- PASS — `transparent-windows-require-macos-private-api`: transparent windows ['mini-assistant'] need app.macOSPrivateApi and the macos-private-api feature
+- PASS — `onnx-optimizer-is-verify-only-by-default`: a release validator must never mutate versioned ONNX assets unless asked explicitly
+- PASS — `onnx-optimizer-skips-generated-frontend`: the generated web_dist copy must not be scanned or rewritten: ['.audit-venv', '.ci-venv', '.desktop-build', '.git', '.mypy_cache', '.pytest_cache', '.ruff_cache', '.venv', '__pycache__', 'node_modules', 'target', 'venv', 'web_dist']
 - PASS — `npm-lockfile-v3`: 3
 - PASS — `critical-npm-dependencies-pinned`: []
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `release-version-validator-semver`
 - PASS — `single-workspace-cargo-lock`: member lockfile must not exist
-- PASS — `cargo-lock-desktop-member`: 1.0.18
-- PASS — `cargo-lock-core-member`: 1.0.18
+- PASS — `cargo-lock-desktop-member`: 1.0.19
+- PASS — `cargo-lock-core-member`: 1.0.19
 - PASS — `cargo-lock-tauri-pinned`: 2.11.5
 - PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
 - PASS — `cargo-lock-serde-json-pinned`: 1.0.151
@@ -221,10 +184,12 @@
 - PASS — `build-bat:locked-clippy`
 - PASS — `build-bat:locked-tests`
 - PASS — `build-bat:version-contract`
-- PASS — `release-draft-before-matrix-complete`
+- PASS — `release-draft-created-once-before-matrix`
+- PASS — `release-uploads-by-id-never-by-tag`
+- PASS — `release-never-looks-up-a-draft-by-tag`
 - PASS — `release-requires-two-dmgs`
 - PASS — `release-requires-msi-and-nsis`
 - PASS — `release-publishes-after-asset-verification`
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 454 files
+- PASS — `repository-file-count`: only 457 files

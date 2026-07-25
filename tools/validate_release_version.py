@@ -51,6 +51,14 @@ def cargo_dependency_version(path: Path, name: str) -> str:
     raise ValueError(f"missing version for dependency {name}: {path}")
 
 
+def cache_policy_version(path: Path) -> str:
+    pattern = re.compile(r'^export const CACHE_VERSION = "gold-(.+?)-desktop-goldmaster";$', re.MULTILINE)
+    match = pattern.search(path.read_text(encoding="utf-8"))
+    if not match:
+        raise ValueError(f"missing CACHE_VERSION assignment: {path}")
+    return match.group(1)
+
+
 def collect_versions(root: Path) -> dict[str, str]:
     package_lock = load_json(root / "web_demo" / "package-lock.json")
     lock_root = package_lock.get("packages", {}).get("", {})
@@ -72,6 +80,9 @@ def collect_versions(root: Path) -> dict[str, str]:
         "web-package": str(load_json(root / "web_demo" / "package.json")["version"]),
         "web-lock": str(package_lock["version"]),
         "web-lock-root": str(lock_root["version"]),
+        # The service-worker cache key is a distributable surface too: if it does not
+        # move with the release, returning users keep the previous build's assets.
+        "pwa-cache-policy": cache_policy_version(root / "web_demo" / "pwa" / "cache-policy.js"),
         "extension": str(extension["version"]),
         "release-manifest": str(release_manifest["version"]),
         "release-manifest-python": str(release_manifest["python_version"]),
@@ -83,12 +94,10 @@ def validate(root: Path, tag: str | None = None) -> list[str]:
     errors: list[str] = []
     versions = collect_versions(root)
     distinct = sorted(set(versions.values()))
-    if len(distinct) != 1:
+    expected = distinct[0] if len(distinct) == 1 else None
+    if expected is None:
         detail = ", ".join(f"{surface}={version}" for surface, version in sorted(versions.items()))
         errors.append(f"release versions diverge: {detail}")
-        expected = distinct[0] if len(distinct) == 1 else None
-    else:
-        expected = distinct[0]
 
     for surface, version in versions.items():
         if not SEMVER.fullmatch(version):

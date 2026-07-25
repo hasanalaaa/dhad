@@ -9,6 +9,9 @@ import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE_VERSION = json.loads(
+    (ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8")
+)["version"]
 
 
 def test_container_install_does_not_pin_a_stale_package_version():
@@ -91,7 +94,8 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         'tauri --version | grep -F "2.11.4"',
         'node tools/build_web_dist.mjs',
         'Stage dependency-free Tauri frontend',
-        'releaseDraft: true', 'actions/github-script@v9',
+        'prepare-release', 'draft: true', 'actions/github-script@v9',
+        'releaseId: ${{ needs.prepare-release.outputs.release_id }}',
         'uploadUpdaterJson: false', 'uploadUpdaterSignatures: false',
         'releaseAssetNamePattern: "Dhad_[version]_[platform]_[arch][setup][ext]"',
         'Verify VBSCRIPT support required by WiX MSI',
@@ -239,7 +243,7 @@ def test_macos_release_wrapper_verifies_the_app_shipped_inside_a_dmg(tmp_path):
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir()
     arguments_log = tmp_path / "python-arguments.txt"
-    dmg = tmp_path / "Dhad_1.0.18_aarch64.dmg"
+    dmg = tmp_path / f"Dhad_{RELEASE_VERSION}_aarch64.dmg"
     dmg.write_bytes(b"synthetic-dmg")
 
     scripts = {

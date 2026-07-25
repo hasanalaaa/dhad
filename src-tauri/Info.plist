@@ -19,5 +19,9 @@
   <true/>
   <key>NSSupportsAutomaticGraphicsSwitching</key>
   <true/>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>يستخدم ضاد الميكروفون للإملاء الصوتي داخل المحرر فقط، ولا يُرسل الصوت إلى أي خادم.</string>
+  <key>NSSpeechRecognitionUsageDescription</key>
+  <string>يستخدم ضاد التعرّف على الكلام لتحويل إملائك الصوتي إلى نص عربي داخل المحرر.</string>
 </dict>
 </plist>

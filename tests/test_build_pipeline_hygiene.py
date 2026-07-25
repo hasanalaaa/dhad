@@ -1,8 +1,25 @@
 from __future__ import annotations
 
 import importlib.util
+import json
+import sys
 import tomllib
 from pathlib import Path
+
+
+def _release_version(root: Path) -> str:
+    """The one place a release version may be read from in these contracts."""
+    return json.loads((root / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8"))["version"]
+
+
+def _load_module(path: Path):
+    """Import a tool by path, registered in sys.modules so dataclasses can resolve."""
+    spec = importlib.util.spec_from_file_location(f"dhad_tool_{path.stem}", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 def _load_optimizer(root: Path):
@@ -207,21 +224,23 @@ def test_outbox_recovery_fault_injection_targets_due_scan() -> None:
 def test_release_audits_ignore_local_ci_and_compiler_outputs(tmp_path: Path) -> None:
     root = Path(__file__).resolve().parents[1]
     desktop_validator = (root / "tools" / "validate_desktop_release.py").read_text(encoding="utf-8")
-    sovereign_validator = (root / "tools" / "validate_sovereign_release.py").read_text(encoding="utf-8")
     auditor = (root / "tools" / "audit_repository.py").read_text(encoding="utf-8")
     packager = (root / "tools" / "package_release.py").read_text(encoding="utf-8")
 
     assert "'.ci-venv'" in desktop_validator
-    assert '".ci-venv"' in sovereign_validator
     assert '".ci-venv"' in auditor
     assert '".ci-venv"' in packager
     assert "'node_modules' in package_excluded_dirs" in desktop_validator
     assert "'target' in package_excluded_dirs" in desktop_validator
-    assert '"node_modules",' in sovereign_validator
-    assert '"target",' in sovereign_validator
-    assert '"web_dist",' in sovereign_validator
     assert '"web_dist"' in auditor
     assert '"web_dist"' in packager
+
+    # The sovereign validator's exclusions are asserted through the constant rather
+    # than through its source formatting: a contract that depends on where the commas
+    # land breaks on every harmless reformat while catching no real regression.
+    sovereign = _load_module(root / "tools" / "validate_sovereign_release.py")
+    transient = set(sovereign.IGNORED_TRANSIENT_NAMES)
+    assert {".ci-venv", ".desktop-build", "node_modules", "target", "web_dist", ".venv"} <= transient
 
 
 def test_python_and_rust_ci_lint_regressions_are_fixed() -> None:
@@ -278,15 +297,16 @@ def test_release_version_and_workspace_lock_are_single_source() -> None:
     root = Path(__file__).resolve().parents[1]
     from tools.validate_release_version import collect_versions, validate
 
+    release_version = _release_version(root)
     versions = collect_versions(root)
-    assert set(versions.values()) == {"1.0.18"}
-    assert validate(root, "v1.0.18") == []
+    assert set(versions.values()) == {release_version}
+    assert validate(root, f"v{release_version}") == []
     assert not (root / "rust" / "dhad-core-rs" / "Cargo.lock").exists()
 
     lock = tomllib.loads((root / "Cargo.lock").read_text(encoding="utf-8"))
     packages = {item["name"]: item["version"] for item in lock["package"]}
-    assert packages["dhad-core"] == "1.0.18"
-    assert packages["dhad-desktop"] == "1.0.18"
+    assert packages["dhad-core"] == release_version
+    assert packages["dhad-desktop"] == release_version
     assert packages["tauri"] == "2.11.5"
     assert packages["tauri-build"] == "2.6.3"
     assert packages["serde_json"] == "1.0.151"
@@ -308,6 +328,7 @@ def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) 
         "rust/dhad-core-rs/Cargo.toml",
         "web_demo/package.json",
         "web_demo/package-lock.json",
+        "web_demo/pwa/cache-policy.js",
         "extension/manifest.json",
         "RELEASE_MANIFEST.json",
         "Cargo.lock",
@@ -325,7 +346,7 @@ def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) 
         ),
         encoding="utf-8",
     )
-    errors = validate(tmp_path, "v1.0.18")
+    errors = validate(tmp_path, f"v{_release_version(root)}")
     assert any("serde_json must be 1.0.151" in error for error in errors)
 
 
@@ -377,7 +398,9 @@ def test_desktop_release_is_draft_first_and_published_atomically() -> None:
     ).read_text(encoding="utf-8")
 
     for contract in (
-        "releaseDraft: true",
+        "prepare-release",
+        "draft: true",
+        "releaseId: ${{ needs.prepare-release.outputs.release_id }}",
         "uploadUpdaterJson: false",
         "uploadUpdaterSignatures: false",
         "uploadWorkflowArtifacts: true",
@@ -390,6 +413,39 @@ def test_desktop_release_is_draft_first_and_published_atomically() -> None:
     ):
         assert contract in workflow
 
+    # A draft release is invisible to the "get a release by tag" endpoint, so any use
+    # of it guarantees a 404 after a fully successful build matrix. The draft is
+    # created once by prepare-release and addressed by id from then on, which also
+    # stops four parallel matrix jobs from each creating their own draft.
+    assert "getReleaseByTag" not in workflow
+    assert "listReleases" in workflow
+    assert "tagName:" not in workflow
+
+
+def test_workflow_structure_validator_gates_the_release_wiring() -> None:
+    root = Path(__file__).resolve().parents[1]
+    from tools.validate_workflows import validate_workflows
+
+    assert validate_workflows(root) == []
+
+
+def test_onnx_verification_never_mutates_versioned_assets(tmp_path: Path) -> None:
+    root = Path(__file__).resolve().parents[1]
+    optimizer = _load_optimizer(root)
+
+    model = tmp_path / "model.onnx"
+    payload = b"not-a-real-onnx-graph"
+    model.write_bytes(payload)
+
+    record = optimizer.optimize(model)
+    assert model.read_bytes() == payload
+    assert record["changed"] is False
+    assert record["rewrite_requested"] is False
+    # No candidate serialization may be left behind next to a versioned asset: the
+    # hygiene validators treat a stray .tmp file as a release blocker.
+    assert sorted(item.name for item in tmp_path.iterdir()) == ["model.onnx"]
+    assert "web_dist" in optimizer.EXCLUDED_SCAN_DIRS
+
 
 def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() -> None:
     root = Path(__file__).resolve().parents[1]
@@ -398,7 +454,7 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
     )
 
     for contract in (
-        '"release": "Dhad v1.0.18 Sovereign Edition"',
+        '"release": release_label(root)',
         'popen_options["start_new_session"] = True',
         'tempfile.TemporaryFile(mode="w+t", encoding="utf-8")',
         "process.wait(timeout=timeout)",
@@ -408,6 +464,11 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
         '"cargo", "test", "--workspace", "--all-targets", "--locked"',
     ):
         assert contract in source
+
+    # The label is derived, so the evidence a release ships with always names the
+    # release that produced it.
+    module = _load_module(root / "tools" / "run_sovereign_validation_matrix.py")
+    assert module.release_label(root) == f"Dhad v{_release_version(root)} Sovereign Edition"
 
 
 def test_apex_javascript_contract_follows_release_version() -> None:

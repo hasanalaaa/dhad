@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-25T08:17:57.164638+00:00",
-  "file_count": 454,
-  "total_bytes": 180365843,
-  "checks_total": 221,
-  "checks_passed": 221,
+  "generated_at_utc": "2026-07-25T11:53:36.397796+00:00",
+  "file_count": 457,
+  "total_bytes": 180436617,
+  "checks_total": 186,
+  "checks_passed": 186,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -109,6 +109,16 @@
     },
     {
       "name": "required:tools/validate_release_version.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/validate_workflows.py",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:tools/set_release_version.py",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -368,9 +378,24 @@
       "detail": "[]"
     },
     {
-      "name": "entitlements-minimal-dictionary",
+      "name": "info-plist-NSMicrophoneUsageDescription",
       "ok": true,
-      "detail": "{}"
+      "detail": "dictation requires a non-empty NSMicrophoneUsageDescription"
+    },
+    {
+      "name": "info-plist-NSSpeechRecognitionUsageDescription",
+      "ok": true,
+      "detail": "dictation requires a non-empty NSSpeechRecognitionUsageDescription"
+    },
+    {
+      "name": "entitlements-least-privilege",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "entitlements-audio-input-for-dictation",
+      "ok": true,
+      "detail": "{'com.apple.security.device.audio-input': True}"
     },
     {
       "name": "legacy-wix-shortcut-fragment-removed",
@@ -413,54 +438,9 @@
       "detail": "missing-property regression must run on Windows CI"
     },
     {
-      "name": "workflow:macos-15",
+      "name": "workflow-structure",
       "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:macos-15-intel",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:windows-2022",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:aarch64-apple-darwin",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:x86_64-apple-darwin",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:--bundles nsis",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:--bundles msi",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:--verbose --target x86_64-pc-windows-msvc --bundles msi",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow:tauri-apps/tauri-action@v1",
-      "ok": true,
-      "detail": "missing workflow contract"
-    },
-    {
-      "name": "workflow-validation:v*.*.*",
-      "ok": true,
-      "detail": "missing workflow contract matching [\"\\']v\\*\\.\\*\\.\\*[\"\\']"
+      "detail": ""
     },
     {
       "name": "workflow-validation:libwebkit2gtk-4.1-dev",
@@ -488,96 +468,6 @@
       "detail": "missing workflow contract matching \\blibssl-dev\\b"
     },
     {
-      "name": "workflow-validation:tools/desktop-build-requirements.txt",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/desktop-build-requirements\\.txt"
-    },
-    {
-      "name": "workflow-validation:tools/optimize_onnx_assets.py",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/optimize_onnx_assets\\.py"
-    },
-    {
-      "name": "workflow-validation:tools/validate_tauri_config.py",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/validate_tauri_config\\.py"
-    },
-    {
-      "name": "workflow-validation:tools/validate_desktop_release.py",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/validate_desktop_release\\.py"
-    },
-    {
-      "name": "workflow-validation:tools/validate_release_version.py",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/validate_release_version\\.py"
-    },
-    {
-      "name": "workflow-validation:tools/build_web_dist.mjs",
-      "ok": true,
-      "detail": "missing workflow contract matching tools/build_web_dist\\.mjs"
-    },
-    {
-      "name": "workflow-validation:Stage dependency-free Tauri frontend",
-      "ok": true,
-      "detail": "missing workflow contract matching Stage dependency-free Tauri frontend"
-    },
-    {
-      "name": "workflow-validation:TAURI_CLI_VERSION: \"2.11.4\"",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*TAURI_CLI_VERSION\\s*:\\s*[\"\\']?2\\.11\\.4[\"\\']?\\s*$"
-    },
-    {
-      "name": "workflow-validation:@tauri-apps/cli@2.11.4",
-      "ok": true,
-      "detail": "missing workflow contract matching @tauri-apps/cli@2\\.11\\.4"
-    },
-    {
-      "name": "workflow-validation:tauriScript: tauri",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*tauriScript\\s*:\\s*tauri\\s*$"
-    },
-    {
-      "name": "workflow-validation:dtolnay/rust-toolchain@1.97.1",
-      "ok": true,
-      "detail": "missing workflow contract matching uses\\s*:\\s*dtolnay/rust-toolchain@1\\.97\\.1\\b"
-    },
-    {
-      "name": "workflow-validation:cargo test",
-      "ok": true,
-      "detail": "missing workflow contract matching \\bcargo\\s+test\\b"
-    },
-    {
-      "name": "workflow-validation:npm test",
-      "ok": true,
-      "detail": "missing workflow contract matching \\bnpm\\s+test\\b"
-    },
-    {
-      "name": "workflow-validation:verify-macos-app.sh",
-      "ok": true,
-      "detail": "missing workflow contract matching (?:^|[\\s./])verify-macos-app\\.sh\\b"
-    },
-    {
-      "name": "workflow-validation:verify-windows-installer.ps1",
-      "ok": true,
-      "detail": "missing workflow contract matching verify-windows-installer\\.ps1"
-    },
-    {
-      "name": "workflow-validation:WiX failure diagnostics",
-      "ok": true,
-      "detail": "missing workflow contract matching Upload WiX diagnostics after MSI failure"
-    },
-    {
-      "name": "workflow-validation:Windows platform identity",
-      "ok": true,
-      "detail": "missing workflow contract matching tauri\\.windows\\.conf\\.json"
-    },
-    {
-      "name": "workflow-validation:VBSCRIPT MSI prerequisite",
-      "ok": true,
-      "detail": "missing workflow contract matching VBSCRIPT smoke test: PASS"
-    },
-    {
       "name": "workflow-validation:stable ASCII release names",
       "ok": true,
       "detail": "missing workflow contract matching releaseAssetNamePattern\\s*:\\s*[\\\"\\']Dhad_\\[version\\]"
@@ -588,54 +478,9 @@
       "detail": "missing workflow contract matching \\bAPPLE_SIGNING_IDENTITY\\b"
     },
     {
-      "name": "workflow-validation:actions/setup-node@v6",
+      "name": "workflow-validation:Windows platform identity",
       "ok": true,
-      "detail": "missing workflow contract matching actions/setup-node@v6\\b"
-    },
-    {
-      "name": "workflow-validation:actions/github-script@v9",
-      "ok": true,
-      "detail": "missing workflow contract matching actions/github-script@v9\\b"
-    },
-    {
-      "name": "workflow-validation:releaseDraft: true",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*releaseDraft\\s*:\\s*true\\s*$"
-    },
-    {
-      "name": "workflow-validation:uploadUpdaterJson: false",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*uploadUpdaterJson\\s*:\\s*false\\s*$"
-    },
-    {
-      "name": "workflow-validation:uploadUpdaterSignatures: false",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*uploadUpdaterSignatures\\s*:\\s*false\\s*$"
-    },
-    {
-      "name": "workflow-validation:uploadWorkflowArtifacts: true",
-      "ok": true,
-      "detail": "missing workflow contract matching ^\\s*uploadWorkflowArtifacts\\s*:\\s*true\\s*$"
-    },
-    {
-      "name": "workflow-validation:atomic publish job",
-      "ok": true,
-      "detail": "missing workflow contract matching Verify assets and publish release atomically"
-    },
-    {
-      "name": "workflow-validation:updateRelease",
-      "ok": true,
-      "detail": "missing workflow contract matching github\\.rest\\.repos\\.updateRelease"
-    },
-    {
-      "name": "workflow-validation:locked Rust release checks",
-      "ok": true,
-      "detail": "missing workflow contract matching cargo\\s+(?:clippy|test|build)[^\\n]*--locked"
-    },
-    {
-      "name": "ci:rust-toolchain-pinned",
-      "ok": true,
-      "detail": "missing CI contract: dtolnay/rust-toolchain@1.97.1"
+      "detail": "missing workflow contract matching tauri\\.windows\\.conf\\.json"
     },
     {
       "name": "ci:pythonpath-root-and-src",
@@ -643,64 +488,14 @@
       "detail": "missing CI contract: PYTHONPATH: \".:src\""
     },
     {
-      "name": "ci:node-22",
-      "ok": true,
-      "detail": "missing CI contract: node-version: \"22\""
-    },
-    {
-      "name": "ci:windows-verifier-contract-job",
-      "ok": true,
-      "detail": "missing CI contract: Windows installer verifier contracts"
-    },
-    {
-      "name": "ci:windows-verifier-test-script",
-      "ok": true,
-      "detail": "missing CI contract: test-windows-installer-verifier.ps1"
-    },
-    {
-      "name": "ci:ruff-check",
-      "ok": true,
-      "detail": "missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py"
-    },
-    {
-      "name": "ci:pytest",
-      "ok": true,
-      "detail": "missing CI contract: pytest -q"
-    },
-    {
-      "name": "ci:npm-test",
-      "ok": true,
-      "detail": "missing CI contract: npm test"
-    },
-    {
       "name": "ci:repository-audit-pyyaml",
       "ok": true,
       "detail": "missing CI contract: PyYAML==6.0.3"
     },
     {
-      "name": "ci:rust-frontend-staging",
+      "name": "ci:ruff-check",
       "ok": true,
-      "detail": "missing CI contract: Stage dependency-free Tauri frontend for Rust build scripts"
-    },
-    {
-      "name": "ci:web-staging-root",
-      "ok": true,
-      "detail": "missing CI contract: working-directory: ."
-    },
-    {
-      "name": "ci:setup-node-v6",
-      "ok": true,
-      "detail": "missing CI contract: actions/setup-node@v6"
-    },
-    {
-      "name": "ci:release-version-validator",
-      "ok": true,
-      "detail": "missing CI contract: python tools/validate_release_version.py --root ."
-    },
-    {
-      "name": "ci:locked-rust-checks",
-      "ok": true,
-      "detail": "missing CI contract: --all-targets --locked"
+      "detail": "missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py"
     },
     {
       "name": "node-version-file",
@@ -940,7 +735,27 @@
     {
       "name": "tauri-crate-pinned-2.11.5",
       "ok": true,
-      "detail": "{'version': '=2.11.5', 'features': ['tray-icon']}"
+      "detail": "{'version': '=2.11.5', 'features': ['macos-private-api', 'tray-icon']}"
+    },
+    {
+      "name": "macos-private-api-config-matches-cargo-feature",
+      "ok": true,
+      "detail": "app.macOSPrivateApi=True, cargo features=['macos-private-api', 'tray-icon']"
+    },
+    {
+      "name": "transparent-windows-require-macos-private-api",
+      "ok": true,
+      "detail": "transparent windows ['mini-assistant'] need app.macOSPrivateApi and the macos-private-api feature"
+    },
+    {
+      "name": "onnx-optimizer-is-verify-only-by-default",
+      "ok": true,
+      "detail": "a release validator must never mutate versioned ONNX assets unless asked explicitly"
+    },
+    {
+      "name": "onnx-optimizer-skips-generated-frontend",
+      "ok": true,
+      "detail": "the generated web_dist copy must not be scanned or rewritten: ['.audit-venv', '.ci-venv', '.desktop-build', '.git', '.mypy_cache', '.pytest_cache', '.ruff_cache', '.venv', '__pycache__', 'node_modules', 'target', 'venv', 'web_dist']"
     },
     {
       "name": "npm-lockfile-v3",
@@ -970,12 +785,12 @@
     {
       "name": "cargo-lock-desktop-member",
       "ok": true,
-      "detail": "1.0.18"
+      "detail": "1.0.19"
     },
     {
       "name": "cargo-lock-core-member",
       "ok": true,
-      "detail": "1.0.18"
+      "detail": "1.0.19"
     },
     {
       "name": "cargo-lock-tauri-pinned",
@@ -1078,7 +893,17 @@
       "detail": ""
     },
     {
-      "name": "release-draft-before-matrix-complete",
+      "name": "release-draft-created-once-before-matrix",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-uploads-by-id-never-by-tag",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "release-never-looks-up-a-draft-by-tag",
       "ok": true,
       "detail": ""
     },
@@ -1110,11 +935,11 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 454 files"
+      "detail": "only 457 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "303002f2529133eaa1164e04359a15703b62a85e2b184f17be975708ee94d1b1",
+    "src-tauri/tauri.conf.json": "a20a039dde3f59cbb36c8c3f0ecea88dd8b34130c802c42f7e794ef5abf1c690",
     "src-tauri/tauri.windows.conf.json": "de32f41f6a2cbdaa14fd5dd2a92ba42ae1170fb1c8800a691ed255863ad78f64",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
@@ -1126,27 +951,29 @@
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
     "scripts/build-desktop.sh": "56ea6d3e66e5943c7b9f124b5bf321ac49937a5d28e7db3c2dd346530f0af025",
-    "scripts/build-desktop.bat": "8ed28a3c1298511d95ecf72f97c74f9f9efa557a50726909c330986348f21ac5",
-    ".github/workflows/desktop-release.yml": "8f72aa7773d500b1368e4b607b1b9d0bb8e35bf182373db52b2499b8044a8efe",
-    ".github/workflows/ci.yml": "cc3de7b0391b8197d6c88263280016c353632e82bdf61cebff689b5d84e698de",
+    "scripts/build-desktop.bat": "84d85219c516abeab25a92292324d53373313cbe85662c78bdc567767c6b2408",
+    ".github/workflows/desktop-release.yml": "5d3839073cf47b8b058369f617d739a7ce01c41da36a765bfdd28247de134ef5",
+    ".github/workflows/ci.yml": "e9f648283426f089008b1e327f120ed72afb802f146b72047f3066d752880303",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
-    "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "ada58381fb70bc274cb22e1c4edb616ff576502f86f7925fdfc27321189e8a57",
+    "tools/optimize_onnx_assets.py": "881c30a33a0a84c79dd09f3a5dd6992e53f88b25158f34f06993dfc0297f5c47",
+    "tools/validate_desktop_release.py": "c99c5254b980cfd209c4fc444ef1978a2daca47221374ff7e19982a223c6cd9f",
     "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
-    "tools/validate_release_version.py": "172566dfd207cf22e019850504b284685283d44859ceb132a00dde5def340feb",
-    "tools/package_release.py": "3dbf199fae7ae3e691c6b717d70ec0fa3c821ad82e38a219718e69d87cedfd55",
+    "tools/validate_release_version.py": "dd5112bb9c66dee43194e26db6b87fc3d3ac15395f9cd43648abb98d83be68e9",
+    "tools/validate_workflows.py": "28e152125e44ef4c9e0815849bd303c53a7240d9a1e1cf51898617739d101b06",
+    "tools/set_release_version.py": "9856352940f24d22d461ab63a1025c6e1d3a1e7dde972c8bf053a431875c5bf6",
+    "tools/package_release.py": "d1690b8976742878fb5ac06fd5509ec3e6f00e4c75daf5116af5c60a8b35d5f1",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
     "tools/generate_release_inventory.py": "18dcacbacf905d5a98d071a0125f410acb28dd9be3bc938c22adeaf695dbb2d3",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "567b69db2194d6633bef5339bfd2e682eb5c9a7fff29da1833dd7b422ab555d0",
     "scripts/verify-windows-installer.ps1": "cc0c51cd01984191e517fdddd1fbd91a7f9accd3b0e59df320e8ac34dc218566",
-    "scripts/test-windows-installer-verifier.ps1": "3e3ac1e70c9d2537c1a159e396a2246593c4b99378664d460b843f873ed264ad",
+    "scripts/test-windows-installer-verifier.ps1": "3f9a2bdccf6e0d103bcc0ba880772ae07cc7a5980ecd3244ee246df5ad8d2c12",
     "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
     "tools/clean_repository.py": "f44148f00a3b25b1c69a1db3e09d5d3f1abaaad578592c80a36b57a76b087ccc",
     "tools/build_web_dist.mjs": "3900dc4f02688a148e9864f8c67d89bf7e2c3396f00aa5f093acf568922473e2",
-    "src-tauri/Info.plist": "ba5ca5038dfa567539ad1f02ca92d8a1aab696850a58ccf3d8725ce76171ee65",
-    "src-tauri/Entitlements.plist": "8dbc2ce9bca7bb3db32a1006c72ea859d9838ff71a28c3c28a35d2c7f292b23c",
+    "src-tauri/Info.plist": "9b3f1c63bac3745739fba88587a0d07a2884ade43151c26e5dd84e6065989769",
+    "src-tauri/Entitlements.plist": "1a58c95ed1b090372b32e4520ec2e8f42115492c9d5d870ad3b25ecc38015f0a",
     "vercel.json": "15e1fa1d8863b858988b413bd22b667a378dcb7c07e6b195adc8f3012ee805b4",
     "docs/.nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
   }

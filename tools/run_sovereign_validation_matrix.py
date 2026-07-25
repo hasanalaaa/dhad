@@ -23,6 +23,12 @@ from pathlib import Path
 from typing import Sequence
 
 
+def release_label(root: Path) -> str:
+    """Read the release label from tauri.conf.json rather than hard-coding it."""
+    version = json.loads((root / "src-tauri/tauri.conf.json").read_text(encoding="utf-8"))["version"]
+    return f"Dhad v{version} Sovereign Edition"
+
+
 @dataclass(frozen=True)
 class MatrixResult:
     name: str
@@ -156,7 +162,9 @@ def write_reports(root: Path, results: list[MatrixResult]) -> None:
     report_dir.mkdir(exist_ok=True)
     counts = {status: sum(item.status == status for item in results) for status in ("passed", "failed", "blocked", "timed_out")}
     payload = {
-        "release": "Dhad v1.0.18 Sovereign Edition",
+        # Derived from the single source of truth so a release bump can never leave a
+        # stale version stamped into the evidence this matrix produces.
+        "release": release_label(root),
         "summary": counts | {"total": len(results)},
         "results": [asdict(item) for item in results],
     }

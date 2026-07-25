@@ -1,10 +1,10 @@
 {
   "project": "Dhad",
-  "version": "1.0.18",
-  "python_version": "1.0.18",
-  "completed_phase": "Ultimate Desktop Release v1.0.18",
-  "phase_name": "Reproducible Tauri desktop release with exact frontend closure and atomic multi-platform publication",
-  "tests_passed": 52,
+  "version": "1.0.19",
+  "python_version": "1.0.19",
+  "completed_phase": "Ultimate Desktop Release v1.0.19",
+  "phase_name": "Reproducible Tauri desktop release with a draft created once and published by release id, structurally validated workflows, and non-mutating asset verification",
+  "tests_passed": 1988,
   "quality": {
     "ruff": "validated by locked CI; source-level regressions covered locally",
     "format": "Python/JavaScript syntax and shell syntax verified locally; Rust format enforced in CI",
@@ -181,7 +181,10 @@
     "A real multi-node Redis chaos/load test with TLS and ACL remains required before an Internet-facing production deployment.",
     "The 0.09ms response target is not an SLA; latency is measured at runtime and depends on text length, hardware, and backend.",
     "Native macOS DMG and Windows NSIS/MSI installers were not built on the Linux packaging host; platform CI must produce and smoke-test them.",
-    "Cargo/rustc and selected npm/Python dependency packages were unavailable in the packaging environment, so those entries remain explicitly blocked in the validation matrix."
+    "Cargo/rustc and selected npm/Python dependency packages were unavailable in the packaging environment, so those entries remain explicitly blocked in the validation matrix.",
+    "macOS DMG and Windows NSIS/MSI bundles can only be produced and smoke-tested on GitHub's macos-15 and windows-2022 runners; no Linux host verifies them.",
+    "The wasm32-unknown-unknown build is verified in CI only: static.rust-lang.org is unreachable from the offline audit environment, so the target cannot be installed there.",
+    "The desktop frontend closure embeds a 135 MB INT8 ONNX model and a 24 MB onnxruntime-web binary into the executable at compile time; installers are correspondingly large and each platform build takes roughly half an hour."
   ],
   "artifacts": [
     "README.md",
@@ -250,7 +253,10 @@
     "tools/run_sovereign_validation_matrix.py",
     "tests/test_sovereign_release.py",
     "web_demo/ui/mini-assistant-runtime.test.mjs",
-    "reports/SOVEREIGN_TEST_MATRIX.md"
+    "reports/SOVEREIGN_TEST_MATRIX.md",
+    "tools/validate_workflows.py",
+    "tools/set_release_version.py",
+    "docs/RELEASE_PIPELINE_FORENSIC_AUDIT.md"
   ],
   "repository_release": {
     "archive_name": "dhad-v1.0-Desktop-Ultimate.zip",
@@ -485,5 +491,19 @@
       ],
       "performance_policy": "native CPU work uses spawn_blocking; UI reports measured latency without claiming a fixed SLA"
     }
+  },
+  "test_totals": {
+    "python_pytest": 1851,
+    "python_skipped": 1,
+    "javascript_node_test": 114,
+    "rust_cargo_test": 23,
+    "note": "Skipped test is the Rust/Python parity check, which needs a locally built pyo3 module."
+  },
+  "release_publication": {
+    "draft_created_by": "prepare-release job (once per tag)",
+    "draft_lookup": "repos.listReleases pagination; repos.getReleaseByTag cannot see drafts",
+    "asset_upload": "tauri-action receives releaseId, never tagName",
+    "publish_gate": "two DMGs, one MSI, one NSIS setup EXE, every asset fully uploaded",
+    "published_by": "repos.updateRelease on the same release id"
   }
 }

@@ -11,13 +11,18 @@ import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 EXTENSION = PROJECT_ROOT / "extension"
+# Asserted against the single source of truth rather than a literal, so bumping the
+# release version cannot silently leave this contract pinned to an older release.
+RELEASE_VERSION = json.loads(
+    (PROJECT_ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8")
+)["version"]
 
 
 def test_manifest_v3_is_complete_and_minimizes_permanent_host_access():
     manifest = json.loads((EXTENSION / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["manifest_version"] == 3
-    assert manifest["version"] == "1.0.18"
-    assert manifest["version_name"] == "1.0.18 Gold Master"
+    assert manifest["version"] == RELEASE_VERSION
+    assert manifest["version_name"] == f"{RELEASE_VERSION} Gold Master"
     assert manifest["background"]["service_worker"] == "background.js"
     assert manifest["host_permissions"] == ["http://127.0.0.1/*", "http://localhost/*"]
     assert "https://*/*" in manifest["optional_host_permissions"]

@@ -38,6 +38,9 @@ EXCLUDED_DIRS = {
     "node_modules",
     "target",
     "web_dist",
+    # Tauri build-time codegen: present only after a local cargo build, so
+    # including it would make the audit depend on build state.
+    "gen",
     "venv",
     ".venv",
 }

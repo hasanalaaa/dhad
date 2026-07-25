@@ -1,6 +1,6 @@
 # Dhad Sovereign Release Validation
 
-- Passed: **70/70**
+- Passed: **71/71**
 - Errors: **0**
 
 ## Checks
@@ -75,3 +75,4 @@
 - PASS — `readme:privacy-boundary`: requires '## Privacy boundary'
 - PASS — `readme:desktop-builds`: requires '## Desktop builds'
 - PASS — `readme:verification`: requires '## Verification'
+- PASS — `clean:generated-artifacts`: clean (git-tracked and untracked-unignored paths)

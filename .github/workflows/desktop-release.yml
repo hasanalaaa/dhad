@@ -101,13 +101,16 @@ jobs:
       - name: Validate release version matches tag
         run: python tools/validate_release_version.py --root . --tag "$RELEASE_TAG"
 
+      - name: Validate workflow structure and release wiring
+        run: python tools/validate_workflows.py --root .
+
       - name: Stage dependency-free Tauri frontend and verify exact closure
         run: node tools/build_web_dist.mjs
 
       - name: Validate Tauri 2.11 configuration
         run: python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
 
-      - name: Optimize and inventory ONNX assets
+      - name: Verify and inventory ONNX assets without mutating them
         run: python tools/optimize_onnx_assets.py --root . --write-manifest
 
       - name: Run release audits
@@ -134,9 +137,83 @@ jobs:
           cargo test --workspace --all-targets --locked
           cargo build -p dhad-core --profile wasm-small --target wasm32-unknown-unknown --locked
 
+  prepare-release:
+    name: Create the draft release once
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      release_id: ${{ steps.draft.outputs.release_id }}
+    steps:
+      - name: Create or reuse the draft release for this tag
+        id: draft
+        uses: actions/github-script@v9
+        env:
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const tag = process.env.RELEASE_TAG;
+
+            // GitHub's "get a release by tag" endpoint only returns *published*
+            // releases, so a draft can never be found that way. The draft has to
+            // be located through the paginated release list, which does include
+            // drafts for callers with push access. Creating the draft exactly
+            // once here also removes the race in which several matrix jobs each
+            // create their own draft for the same tag.
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner,
+              repo,
+              per_page: 100,
+            });
+            const existing = releases.find((release) => release.tag_name === tag);
+
+            if (existing && !existing.draft) {
+              core.setFailed(
+                `Release ${tag} is already published (id=${existing.id}); refusing to rebuild over a published release.`,
+              );
+              return;
+            }
+
+            let release = existing;
+            if (release) {
+              core.info(`Reusing draft release ${release.id} for ${tag}.`);
+              const staleAssets = await github.paginate(github.rest.repos.listReleaseAssets, {
+                owner,
+                repo,
+                release_id: release.id,
+                per_page: 100,
+              });
+              for (const asset of staleAssets) {
+                core.info(`Deleting stale asset ${asset.name} from the reused draft.`);
+                await github.rest.repos.deleteReleaseAsset({ owner, repo, asset_id: asset.id });
+              }
+            } else {
+              const created = await github.rest.repos.createRelease({
+                owner,
+                repo,
+                tag_name: tag,
+                name: `ضاد ${tag}`,
+                body: [
+                  'إصدار ضاد المكتبي لنظامي macOS وWindows.',
+                  '',
+                  '- macOS: Apple Silicon وIntel بصيغة DMG',
+                  '- Windows: NSIS setup EXE وMSI',
+                  '- المعالجة اللغوية محلية افتراضيًا',
+                ].join('\n'),
+                draft: true,
+                prerelease: false,
+                generate_release_notes: true,
+              });
+              release = created.data;
+              core.info(`Created draft release ${release.id} for ${tag}.`);
+            }
+
+            core.setOutput('release_id', String(release.id));
+
   build:
     name: Build ${{ matrix.label }}
-    needs: validate
+    needs: prepare-release
     strategy:
       fail-fast: false
       matrix:
@@ -306,17 +383,10 @@ jobs:
         with:
           tauriScript: tauri
           projectPath: src-tauri
-          tagName: ${{ env.RELEASE_TAG }}
-          releaseName: "ضاد ${{ env.RELEASE_TAG }}"
-          releaseBody: |
-            إصدار ضاد المكتبي لنظامي macOS وWindows.
-
-            - macOS: Apple Silicon وIntel بصيغة DMG
-            - Windows: NSIS setup EXE وMSI
-            - المعالجة اللغوية محلية افتراضيًا
-          releaseDraft: true
-          prerelease: false
-          generateReleaseNotes: true
+          # Uploading by release id — never by tag — is what makes the matrix
+          # deterministic: the draft already exists, so no build job creates a
+          # second one and no build job depends on the draft being findable by tag.
+          releaseId: ${{ needs.prepare-release.outputs.release_id }}
           uploadUpdaterJson: false
           uploadUpdaterSignatures: false
           uploadWorkflowArtifacts: true
@@ -376,7 +446,7 @@ jobs:
 
   publish:
     name: Verify assets and publish release atomically
-    needs: build
+    needs: [prepare-release, build]
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -384,28 +454,56 @@ jobs:
         uses: actions/github-script@v9
         env:
           RELEASE_TAG: ${{ env.RELEASE_TAG }}
+          RELEASE_ID: ${{ needs.prepare-release.outputs.release_id }}
         with:
           script: |
             const { owner, repo } = context.repo;
             const tag = process.env.RELEASE_TAG;
-            const { data: release } = await github.rest.repos.getReleaseByTag({ owner, repo, tag });
-            const names = release.assets.map((asset) => asset.name);
-            const lower = names.map((name) => name.toLowerCase());
-            const dmgCount = lower.filter((name) => name.endsWith('.dmg')).length;
-            const hasMsi = lower.some((name) => name.endsWith('.msi'));
-            const hasNsis = lower.some((name) => name.endsWith('.exe'));
-            if (dmgCount < 2 || !hasMsi || !hasNsis) {
-              core.setFailed(`Incomplete release assets for ${tag}: ${JSON.stringify(names)}`);
+            const release_id = Number(process.env.RELEASE_ID);
+            if (!Number.isInteger(release_id) || release_id <= 0) {
+              core.setFailed(`prepare-release did not produce a usable release id: ${process.env.RELEASE_ID}`);
+              return;
+            }
+
+            // Addressing the release by id keeps the draft reachable; the by-tag
+            // endpoint only ever returns published releases.
+            const { data: release } = await github.rest.repos.getRelease({ owner, repo, release_id });
+            if (release.tag_name !== tag) {
+              core.setFailed(`Release ${release_id} points at ${release.tag_name}, expected ${tag}.`);
               return;
             }
             if (!release.draft) {
               core.setFailed(`Release ${tag} was published before the full matrix completed.`);
               return;
             }
+
+            const assets = await github.paginate(github.rest.repos.listReleaseAssets, {
+              owner,
+              repo,
+              release_id,
+              per_page: 100,
+            });
+            const names = assets.map((asset) => asset.name);
+            const lower = names.map((name) => name.toLowerCase());
+            const dmgCount = lower.filter((name) => name.endsWith('.dmg')).length;
+            const hasMsi = lower.some((name) => name.endsWith('.msi'));
+            const hasNsis = lower.some((name) => name.endsWith('.exe'));
+            const incomplete = assets.filter((asset) => asset.state !== 'uploaded');
+            if (dmgCount < 2 || !hasMsi || !hasNsis) {
+              core.setFailed(`Incomplete release assets for ${tag}: ${JSON.stringify(names)}`);
+              return;
+            }
+            if (incomplete.length > 0) {
+              core.setFailed(
+                `Release assets for ${tag} are not fully uploaded: ${JSON.stringify(incomplete.map((asset) => asset.name))}`,
+              );
+              return;
+            }
+
             await github.rest.repos.updateRelease({
               owner,
               repo,
-              release_id: release.id,
+              release_id,
               draft: false,
               prerelease: false,
             });

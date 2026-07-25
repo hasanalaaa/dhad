@@ -137,9 +137,26 @@ jobs:
       - name: Audit complete repository
         working-directory: .
         run: python tools/audit_repository.py --write-reports
-      - name: Validate retained release assets
+
+      - name: Validate workflow structure and release wiring
         working-directory: .
-        run: python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict
+        run: python tools/validate_workflows.py --root .
+
+      - name: Validate Tauri 2.11 configuration
+        working-directory: .
+        run: python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
+
+      - name: Verify ONNX assets without mutating them
+        working-directory: .
+        run: python tools/optimize_onnx_assets.py --root .
+
+      - name: Audit desktop release contracts
+        working-directory: .
+        run: python tools/validate_desktop_release.py --root . --strict
+
+      - name: Validate retained release assets and repository cleanliness
+        working-directory: .
+        run: python tools/validate_sovereign_release.py --root . --strict
 
   windows-installer-contracts:
     name: Windows installer verifier contracts

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -23,8 +24,65 @@ class Check:
     detail: str
 
 
+IGNORED_TRANSIENT_NAMES = frozenset(
+    {".git", ".desktop-build", ".audit-venv", ".ci-venv", ".venv", "venv", "node_modules", "target", "web_dist"}
+)
+FORBIDDEN_DIRECTORY_NAMES = frozenset({".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"})
+FORBIDDEN_FILE_NAMES = frozenset({".DS_Store", "Thumbs.db", "Desktop.ini"})
+FORBIDDEN_SUFFIXES = frozenset({".log", ".tmp", ".temp", ".bak", ".pyc", ".pyo"})
+
+
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _is_forbidden(relative: Path) -> bool:
+    if any(part in FORBIDDEN_DIRECTORY_NAMES for part in relative.parts):
+        return True
+    name = relative.name
+    return name in FORBIDDEN_FILE_NAMES or name.startswith("._") or relative.suffix.lower() in FORBIDDEN_SUFFIXES
+
+
+def _git_candidates(root: Path) -> list[str] | None:
+    """Every path Git would consider part of the repository.
+
+    ``-c`` is tracked content and ``-o --exclude-standard`` is content that is
+    neither tracked nor ignored — together, exactly the set that a commit could
+    capture. Asking Git rather than walking the filesystem is what lets this check
+    run unconditionally in CI: pytest caches, virtualenvs, ``target/`` and
+    ``web_dist/`` are ignored by definition, so they no longer force the pipeline
+    to pass ``--skip-cleanliness`` and lose the guard entirely.
+    """
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "ls-files", "-c", "-o", "--exclude-standard", "-z"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except (OSError, ValueError):
+        return None
+    if completed.returncode != 0:
+        return None
+    return [entry for entry in completed.stdout.split("\0") if entry]
+
+
+def repository_artifacts(root: Path) -> tuple[list[str], str]:
+    """Return forbidden generated artifacts plus the scope the answer came from."""
+    candidates = _git_candidates(root)
+    if candidates is not None:
+        violations = sorted({path for path in candidates if _is_forbidden(Path(path))})
+        return violations, "git-tracked and untracked-unignored paths"
+    violations = set()
+    for path in root.rglob("*"):
+        relative = path.relative_to(root)
+        if any(part in IGNORED_TRANSIENT_NAMES for part in relative.parts):
+            continue
+        if any(part in FORBIDDEN_DIRECTORY_NAMES for part in relative.parts) or (
+            path.is_file() and _is_forbidden(relative)
+        ):
+            violations.add(relative.as_posix())
+    return sorted(violations), "filesystem walk (git unavailable)"
 
 
 def check_contains(name: str, text: str, needle: str) -> Check:
@@ -149,31 +207,21 @@ def validate(root: Path, *, include_cleanliness: bool = True) -> list[Check]:
         checks.append(check_contains(f"readme:{marker.lower().replace(' ', '-')}", readme, f"## {marker}"))
 
     if include_cleanliness:
-        ignored_transient_names = {
-            ".git",
-            ".desktop-build",
-            ".audit-venv",
-            ".ci-venv",
-            ".venv",
-            "venv",
-            "node_modules",
-            "target",
-            "web_dist",
-        }
-        forbidden_names = {".pytest_cache", "__pycache__", ".ruff_cache", ".mypy_cache"}
-        forbidden_suffixes = {".log", ".tmp", ".temp", ".bak", ".pyc", ".pyo"}
-        violations: list[str] = []
-        for path in root.rglob("*"):
-            relative = path.relative_to(root)
-            if any(part in ignored_transient_names for part in relative.parts):
-                continue
-            if any(part in forbidden_names for part in relative.parts):
-                violations.append(relative.as_posix())
-                continue
-            if path.is_file() and (path.name in {".DS_Store", "Thumbs.db", "Desktop.ini"} or path.name.startswith("._") or path.suffix.lower() in forbidden_suffixes):
-                violations.append(relative.as_posix())
-        checks.append(Check("clean:generated-artifacts", not violations, ", ".join(violations[:10]) or "clean"))
+        violations, scope = repository_artifacts(root)
+        checks.append(
+            Check(
+                "clean:generated-artifacts",
+                not violations,
+                ", ".join(violations[:10]) or f"clean ({scope})",
+            )
+        )
     return checks
+
+
+def release_label(root: Path) -> str:
+    """Derive the release label from the single source of truth, never a literal."""
+    version = read_json(root / "src-tauri/tauri.conf.json")["version"]
+    return f"Dhad v{version} Sovereign Edition"
 
 
 def write_report(root: Path, checks: list[Check]) -> None:
@@ -181,7 +229,7 @@ def write_report(root: Path, checks: list[Check]) -> None:
     report_dir.mkdir(exist_ok=True)
     passed = sum(item.passed for item in checks)
     payload = {
-        "release": "Dhad v1.0.0 Sovereign Edition",
+        "release": release_label(root),
         "summary": {"passed": passed, "total": len(checks), "errors": len(checks) - passed},
         "checks": [asdict(item) for item in checks],
     }

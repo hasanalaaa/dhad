@@ -26,3 +26,6 @@ Thumbs.db
 
 # Generated Tauri frontend staging directory
 web_dist/
+
+# Tauri build-time codegen; watching it would retrigger the build it produces
+src-tauri/gen/

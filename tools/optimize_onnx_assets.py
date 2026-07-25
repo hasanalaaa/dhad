@@ -19,9 +19,13 @@ from typing import Any, Iterable
 
 
 EXCLUDED_SCAN_DIRS = {
-    ".git", ".desktop-build", ".audit-venv", ".venv", "venv",
+    ".git", ".desktop-build", ".audit-venv", ".ci-venv", ".venv", "venv",
     "node_modules", "target", "__pycache__", ".pytest_cache",
     ".ruff_cache", ".mypy_cache",
+    # web_dist is a generated copy of web_demo. Auditing it doubles the work on a
+    # 135 MB model and, worse, would let --optimize rewrite the staged copy so it
+    # no longer matches the integrity contract that produced it.
+    "web_dist",
 }
 
 
@@ -71,7 +75,18 @@ def strip_docs(model: Any) -> None:
             node.doc_string = ''
 
 
-def optimize(path: Path) -> dict[str, Any]:
+def optimize(path: Path, *, rewrite: bool = False) -> dict[str, Any]:
+    """Validate an ONNX asset, and rewrite it only when explicitly asked to.
+
+    Rewriting is opt-in because these models are versioned release inputs whose
+    SHA-256 is pinned in ``web_demo/models/student-manifest.json`` and
+    ``SHA256SUMS.txt``. A validation step that silently mutates them turns a green
+    checkout into a build that fails several steps later — and only on machines
+    where the optional ``onnx`` package happens to be installed, which is exactly
+    the local/CI divergence this pipeline must not have. Candidate serializations
+    are written to a temporary directory outside the repository so an interrupted
+    run cannot leave a ``.tmp`` file inside the tracked tree either.
+    """
     before_size = path.stat().st_size
     before_hash = sha256(path)
     record: dict[str, Any] = {
@@ -81,6 +96,7 @@ def optimize(path: Path) -> dict[str, Any]:
         'after_bytes': before_size,
         'after_sha256': before_hash,
         'changed': False,
+        'rewrite_requested': rewrite,
         'status': 'verified',
     }
     try:
@@ -96,28 +112,30 @@ def optimize(path: Path) -> dict[str, Any]:
         onnx.checker.check_model(model)
         strip_docs(model)
         serialized = model.SerializeToString(deterministic=True)
-        with tempfile.NamedTemporaryFile(dir=path.parent, prefix=path.name + '.', suffix='.tmp', delete=False) as tmp:
-            tmp_path = Path(tmp.name)
-            tmp.write(serialized)
-        candidate = onnx.load(str(tmp_path), load_external_data=True)
-        onnx.checker.check_model(candidate)
-        if [v.name for v in candidate.graph.input] != input_names or [v.name for v in candidate.graph.output] != output_names:
-            raise RuntimeError('model interface changed during optimization')
-        if tmp_path.stat().st_size < before_size:
-            os.replace(tmp_path, path)
-            record['changed'] = True
-            record['status'] = 'metadata stripped and deterministic serialization retained'
-        else:
-            tmp_path.unlink(missing_ok=True)
-            record['status'] = 'already size-optimal; original retained'
+        with tempfile.TemporaryDirectory(prefix='dhad-onnx-') as scratch:
+            tmp_path = Path(scratch) / (path.name + '.candidate')
+            tmp_path.write_bytes(serialized)
+            candidate = onnx.load(str(tmp_path), load_external_data=True)
+            onnx.checker.check_model(candidate)
+            if [v.name for v in candidate.graph.input] != input_names or [v.name for v in candidate.graph.output] != output_names:
+                raise RuntimeError('model interface changed during optimization')
+            candidate_size = tmp_path.stat().st_size
+            record['candidate_bytes'] = candidate_size
+            if candidate_size >= before_size:
+                record['status'] = 'graph validated; already size-optimal'
+            elif not rewrite:
+                record['status'] = (
+                    f'graph validated; {before_size - candidate_size} redundant metadata byte(s) '
+                    'available, rerun with --optimize to rewrite the versioned asset'
+                )
+            else:
+                os.replace(tmp_path, path)
+                record['changed'] = True
+                record['status'] = 'metadata stripped and deterministic serialization retained'
         record['after_bytes'] = path.stat().st_size
         record['after_sha256'] = sha256(path)
     except Exception as exc:
         record['status'] = f'validation failed; original retained: {exc}'
-        try:
-            tmp_path.unlink(missing_ok=True)  # type: ignore[name-defined]
-        except Exception:
-            pass
     return record
 
 
@@ -125,6 +143,13 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--root', default='.')
     ap.add_argument('--write-manifest', action='store_true')
+    ap.add_argument(
+        '--optimize',
+        action='store_true',
+        help='Rewrite versioned ONNX assets in place when metadata stripping shrinks them. '
+        'Off by default: release pipelines must verify, never mutate, pinned assets. '
+        'After using it, refresh SHA256SUMS.txt and web_demo/models/student-manifest.json.',
+    )
     ap.add_argument('--model-root', action='append', default=[], help='Optional first-party model directory, relative to --root; may be repeated.')
     args = ap.parse_args()
     root = Path(args.root).resolve()
@@ -132,7 +157,7 @@ def main() -> int:
     models = discover_models(root, requested_roots or None)
     if not models:
         raise SystemExit('No ONNX assets found.')
-    records = [optimize(p) for p in models]
+    records = [optimize(p, rewrite=args.optimize) for p in models]
     hashes: dict[str, list[str]] = {}
     for rec in records:
         rel = Path(rec['path']).resolve().relative_to(root).as_posix()

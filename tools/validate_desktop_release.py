@@ -15,8 +15,10 @@ from pathlib import Path
 
 try:
     from .validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
+    from .validate_workflows import validate_workflows
 except ImportError:
     from validate_tauri_config import PROFILE as TAURI_SCHEMA_PROFILE, validate_tauri_config
+    from validate_workflows import validate_workflows
 
 
 def _has_ignore_rule(text: str, directory: str) -> bool:
@@ -80,7 +82,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/tauri.windows.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/test-windows-installer-verifier.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/tauri.windows.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/validate_workflows.py', 'tools/set_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/test-windows-installer-verifier.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -144,7 +146,25 @@ def main() -> int:
     ok('info-plist-display-name', info_plist.get('CFBundleDisplayName') == 'ضاد', str(info_plist.get('CFBundleDisplayName')))
     generated_keys = {'CFBundleExecutable', 'CFBundleIdentifier', 'CFBundleShortVersionString', 'CFBundleVersion', 'LSMinimumSystemVersion'}
     ok('info-plist-does-not-override-generated-identity', not generated_keys.intersection(info_plist), str(sorted(generated_keys.intersection(info_plist))))
-    ok('entitlements-minimal-dictionary', isinstance(entitlements, dict) and (not entitlements), str(entitlements))
+    # The editor offers voice dictation through window.SpeechRecognition. Under the
+    # hardened runtime, touching the microphone without a usage description
+    # terminates the process, and without the entitlement the request is denied
+    # outright — so both are release contracts, not optional polish.
+    speech_used = 'SpeechRecognition' in (root / 'web_demo/app.js').read_text(encoding='utf-8')
+    for key in ('NSMicrophoneUsageDescription', 'NSSpeechRecognitionUsageDescription'):
+        ok(
+            f'info-plist-{key}',
+            (not speech_used) or bool(str(info_plist.get(key, '')).strip()),
+            f'dictation requires a non-empty {key}',
+        )
+    allowed_entitlements = {'com.apple.security.device.audio-input'}
+    surplus = sorted(set(entitlements) - allowed_entitlements)
+    ok('entitlements-least-privilege', isinstance(entitlements, dict) and not surplus, str(surplus))
+    ok(
+        'entitlements-audio-input-for-dictation',
+        (not speech_used) or entitlements.get('com.apple.security.device.audio-input') is True,
+        str(entitlements),
+    )
     ok('legacy-wix-shortcut-fragment-removed', not (root / 'src-tauri/windows/desktop-shortcut.wxs').exists(), 'redundant fragment must remain absent')
     ok('legacy-nsis-shortcut-hooks-removed', not (root / 'src-tauri/windows/nsis-hooks.nsh').exists(), 'redundant hooks must remain absent')
     verifier = (root / 'scripts/verify-windows-installer.ps1').read_text(encoding='utf-8')
@@ -155,69 +175,34 @@ def main() -> int:
     ok('windows-verifier-platform-config', 'tauri.windows.conf.json' in verifier, 'verifier must use the effective Windows product identity')
     verifier_test = (root / 'scripts/test-windows-installer-verifier.ps1').read_text(encoding='utf-8')
     ok('windows-verifier-native-contract-test', 'missing DisplayName' in verifier_test and 'strict-mode contracts: PASS' in verifier_test, 'missing-property regression must run on Windows CI')
+    # The workflows are validated structurally — job graph, dependency edges,
+    # build matrix, action pinning, referenced-file existence, version pins and
+    # release wiring — instead of by grepping them for literal strings. Substring
+    # contracts only proved the workflow's spelling, which is why every one of them
+    # passed locally while the release pipeline was broken on GitHub.
+    workflow_errors = validate_workflows(root)
+    ok('workflow-structure', not workflow_errors, '; '.join(workflow_errors[:8]))
     workflow = (root / '.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
-    for token in ['macos-15', 'macos-15-intel', 'windows-2022', 'aarch64-apple-darwin', 'x86_64-apple-darwin', '--bundles nsis', '--bundles msi', '--verbose --target x86_64-pc-windows-msvc --bundles msi', 'tauri-apps/tauri-action@v1']:
-        ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
-    workflow_contracts = [
-        ("v*.*.*", r'["\']v\*\.\*\.\*["\']'),
+    ci_workflow = (root / '.github/workflows/ci.yml').read_text(encoding='utf-8')
+    # A small number of textual contracts remain because they are about content the
+    # structural validator deliberately does not interpret: Linux system packages,
+    # asset naming, and the Apple signing hand-off.
+    for label, pattern in [
         ("libwebkit2gtk-4.1-dev", r"\blibwebkit2gtk-4\.1-dev\b"),
         ("libayatana-appindicator3-dev", r"\blibayatana-appindicator3-dev\b"),
         ("build-essential", r"\bbuild-essential\b"),
         ("libxdo-dev", r"\blibxdo-dev\b"),
         ("libssl-dev", r"\blibssl-dev\b"),
-        ("tools/desktop-build-requirements.txt", r"tools/desktop-build-requirements\.txt"),
-        ("tools/optimize_onnx_assets.py", r"tools/optimize_onnx_assets\.py"),
-        ("tools/validate_tauri_config.py", r"tools/validate_tauri_config\.py"),
-        ("tools/validate_desktop_release.py", r"tools/validate_desktop_release\.py"),
-        ("tools/validate_release_version.py", r"tools/validate_release_version\.py"),
-        ("tools/build_web_dist.mjs", r"tools/build_web_dist\.mjs"),
-        ("Stage dependency-free Tauri frontend", r"Stage dependency-free Tauri frontend"),
-        (
-            'TAURI_CLI_VERSION: "2.11.4"',
-            r'^\s*TAURI_CLI_VERSION\s*:\s*["\']?2\.11\.4["\']?\s*$',
-        ),
-        ("@tauri-apps/cli@2.11.4", r"@tauri-apps/cli@2\.11\.4"),
-        ("tauriScript: tauri", r"^\s*tauriScript\s*:\s*tauri\s*$"),
-        ("dtolnay/rust-toolchain@1.97.1", r"uses\s*:\s*dtolnay/rust-toolchain@1\.97\.1\b"),
-        ("cargo test", r"\bcargo\s+test\b"),
-        ("npm test", r"\bnpm\s+test\b"),
-        ("verify-macos-app.sh", r"(?:^|[\s./])verify-macos-app\.sh\b"),
-        ("verify-windows-installer.ps1", r"verify-windows-installer\.ps1"),
-        ("WiX failure diagnostics", r"Upload WiX diagnostics after MSI failure"),
-        ("Windows platform identity", r"tauri\.windows\.conf\.json"),
-        ("VBSCRIPT MSI prerequisite", r"VBSCRIPT smoke test: PASS"),
         ("stable ASCII release names", r"releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]"),
         ("APPLE_SIGNING_IDENTITY", r"\bAPPLE_SIGNING_IDENTITY\b"),
-        ("actions/setup-node@v6", r"actions/setup-node@v6\b"),
-        ("actions/github-script@v9", r"actions/github-script@v9\b"),
-        ("releaseDraft: true", r"^\s*releaseDraft\s*:\s*true\s*$"),
-        ("uploadUpdaterJson: false", r"^\s*uploadUpdaterJson\s*:\s*false\s*$"),
-        ("uploadUpdaterSignatures: false", r"^\s*uploadUpdaterSignatures\s*:\s*false\s*$"),
-        ("uploadWorkflowArtifacts: true", r"^\s*uploadWorkflowArtifacts\s*:\s*true\s*$"),
-        ("atomic publish job", r"Verify assets and publish release atomically"),
-        ("updateRelease", r"github\.rest\.repos\.updateRelease"),
-        ("locked Rust release checks", r"cargo\s+(?:clippy|test|build)[^\n]*--locked"),
-    ]
-    for label, pattern in workflow_contracts:
+        ("Windows platform identity", r"tauri\.windows\.conf\.json"),
+    ]:
         ok(f'workflow-validation:{label}', _workflow_contract(workflow, pattern), f'missing workflow contract matching {pattern}')
-    ci_workflow = (root / '.github/workflows/ci.yml').read_text(encoding='utf-8')
-    ci_contracts = {
-        'rust-toolchain-pinned': 'dtolnay/rust-toolchain@1.97.1',
+    for label, token in {
         'pythonpath-root-and-src': 'PYTHONPATH: ".:src"',
-        'node-22': 'node-version: "22"',
-        'windows-verifier-contract-job': 'Windows installer verifier contracts',
-        'windows-verifier-test-script': 'test-windows-installer-verifier.ps1',
-        'ruff-check': 'ruff check src tests tools benchmarks gunicorn_conf.py',
-        'pytest': 'pytest -q',
-        'npm-test': 'npm test',
         'repository-audit-pyyaml': 'PyYAML==6.0.3',
-        'rust-frontend-staging': 'Stage dependency-free Tauri frontend for Rust build scripts',
-        'web-staging-root': 'working-directory: .',
-        'setup-node-v6': 'actions/setup-node@v6',
-        'release-version-validator': 'python tools/validate_release_version.py --root .',
-        'locked-rust-checks': '--all-targets --locked',
-    }
-    for label, token in ci_contracts.items():
+        'ruff-check': 'ruff check src tests tools benchmarks gunicorn_conf.py',
+    }.items():
         ok(f'ci:{label}', token in ci_workflow, f'missing CI contract: {token}')
     ok('node-version-file', (root / '.nvmrc').read_text(encoding='utf-8').strip() == '22', 'local Node must match CI Node 22')
     landing = (root / 'docs/index.html').read_text(encoding='utf-8')
@@ -229,7 +214,7 @@ def main() -> int:
         for token in ['desktop-release.yml', 'validate_tauri_config.py', 'desktop-build-requirements.txt', 'optimize_onnx_assets.py', 'validate_desktop_release.py', 'validate_release_version.py', 'build_web_dist.mjs', '2.11.4', 'cargo clippy', '--locked', 'tauri build']:
             ok(f'build-{label}:{token}', token in text, 'missing build stage')
     ok('build-sh:macos-bundle-verification', 'verify-macos-app.sh' in sh, 'macOS build must verify and launch-smoke the generated app')
-    excluded_scan_parts = {'.git', 'target', 'node_modules', '.desktop-build', '.audit-venv', '.ci-venv', '.venv', 'venv', '__pycache__', '.pytest_cache', '.ruff_cache', '.mypy_cache', 'web_dist'}
+    excluded_scan_parts = {'.git', 'target', 'node_modules', '.desktop-build', '.audit-venv', '.ci-venv', '.venv', 'venv', '__pycache__', '.pytest_cache', '.ruff_cache', '.mypy_cache', 'web_dist', 'gen'}
     files = [p for p in root.rglob('*') if p.is_file() and (not any((part in excluded_scan_parts for part in p.relative_to(root).parts)))]
     intentional_zero = {'docs/.nojekyll', 'tools/__init__.py', 'src/dhad/py.typed'}
     zero = [p.relative_to(root).as_posix() for p in files if p.stat().st_size == 0 and p.relative_to(root).as_posix() not in intentional_zero]
@@ -327,6 +312,38 @@ def main() -> int:
     tauri_cargo = tomllib.loads((root / 'src-tauri/Cargo.toml').read_text(encoding='utf-8'))
     deps = tauri_cargo.get('dependencies', {})
     ok('tauri-crate-pinned-2.11.5', deps.get('tauri', {}).get('version') == '=2.11.5', str(deps.get('tauri')))
+    # app.macOSPrivateApi alone is inert: tauri-runtime-wry compiles the transparency
+    # call out on macOS unless the Cargo feature is enabled too, so the transparent
+    # overlay silently ships opaque. Both halves must be present together.
+    tauri_features = set(deps.get('tauri', {}).get('features', []))
+    transparent_windows = [
+        item.get('label')
+        for item in app_windows
+        if isinstance(item, dict) and item.get('transparent') is True
+    ]
+    private_api_enabled = cfg.get('app', {}).get('macOSPrivateApi') is True
+    ok(
+        'macos-private-api-config-matches-cargo-feature',
+        private_api_enabled == ('macos-private-api' in tauri_features),
+        f'app.macOSPrivateApi={private_api_enabled}, cargo features={sorted(tauri_features)}',
+    )
+    ok(
+        'transparent-windows-require-macos-private-api',
+        (not transparent_windows) or (private_api_enabled and 'macos-private-api' in tauri_features),
+        f'transparent windows {transparent_windows} need app.macOSPrivateApi and the macos-private-api feature',
+    )
+    optimizer = (root / 'tools/optimize_onnx_assets.py').read_text(encoding='utf-8')
+    ok(
+        'onnx-optimizer-is-verify-only-by-default',
+        "'--optimize'" in optimizer and 'rewrite: bool = False' in optimizer,
+        'a release validator must never mutate versioned ONNX assets unless asked explicitly',
+    )
+    onnx_excluded = _read_literal_string_set(root / 'tools/optimize_onnx_assets.py', 'EXCLUDED_SCAN_DIRS')
+    ok(
+        'onnx-optimizer-skips-generated-frontend',
+        {'web_dist', 'target', 'node_modules'}.issubset(onnx_excluded),
+        f'the generated web_dist copy must not be scanned or rewritten: {sorted(onnx_excluded)}',
+    )
     package_lock = json.loads((root / 'web_demo/package-lock.json').read_text(encoding='utf-8'))
     ok('npm-lockfile-v3', package_lock.get('lockfileVersion') == 3, str(package_lock.get('lockfileVersion')))
     locked_packages = package_lock.get('packages', {})
@@ -365,7 +382,9 @@ def main() -> int:
         ok(f'build-{label}:locked-clippy', 'cargo clippy --workspace --all-targets --locked -- -D warnings' in build_text, '')
         ok(f'build-{label}:locked-tests', 'cargo test --workspace --all-targets --locked' in build_text, '')
         ok(f'build-{label}:version-contract', 'validate_release_version.py --root .' in build_text, '')
-    ok('release-draft-before-matrix-complete', 'releaseDraft: true' in workflow and 'needs: build' in workflow, '')
+    ok('release-draft-created-once-before-matrix', 'prepare-release' in workflow and 'draft: true' in workflow, '')
+    ok('release-uploads-by-id-never-by-tag', 'releaseId:' in workflow and 'tagName:' not in workflow, '')
+    ok('release-never-looks-up-a-draft-by-tag', 'getReleaseByTag' not in workflow, '')
     ok('release-requires-two-dmgs', 'dmgCount < 2' in workflow, '')
     ok('release-requires-msi-and-nsis', '!hasMsi || !hasNsis' in workflow, '')
     ok('release-publishes-after-asset-verification', 'github.rest.repos.updateRelease' in workflow and 'draft: false' in workflow, '')
@@ -405,8 +424,11 @@ def main() -> int:
         for e in errors:
             print('ERROR:', e, file=sys.stderr)
         return 1
+    # --strict used to be a no-op (`if args.strict and warnings: pass`), so warnings
+    # could never fail a release even though every pipeline passed the flag.
     if args.strict and warnings:
-        pass
+        print('ERROR: --strict was requested and the audit produced warnings.', file=sys.stderr)
+        return 1
     return 0
 if __name__ == '__main__':
     raise SystemExit(main())

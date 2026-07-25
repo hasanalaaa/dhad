@@ -1,8 +1,8 @@
 {
-  "release": "Dhad v1.0.0 Sovereign Edition",
+  "release": "Dhad v1.0.19 Sovereign Edition",
   "summary": {
-    "passed": 70,
-    "total": 70,
+    "passed": 71,
+    "total": 71,
     "errors": 0
   },
   "checks": [
@@ -355,6 +355,11 @@
       "name": "readme:verification",
       "passed": true,
       "detail": "requires '## Verification'"
+    },
+    {
+      "name": "clean:generated-artifacts",
+      "passed": true,
+      "detail": "clean (git-tracked and untracked-unignored paths)"
     }
   ]
 }
