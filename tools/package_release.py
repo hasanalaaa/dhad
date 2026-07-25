@@ -29,6 +29,8 @@ REQUIRED_ARCHIVE_PATHS = {
     "dhad/scripts/build-desktop.sh",
     "dhad/scripts/verify-macos-app.sh",
     "dhad/scripts/build-desktop.bat",
+    "dhad/scripts/verify-windows-installer.ps1",
+    "dhad/src-tauri/windows/desktop-shortcut.wxs",
     "dhad/scripts/install-macos-app.sh",
     "dhad/tools/clean_repository.py",
     "dhad/tools/build_web_dist.mjs",
@@ -99,6 +101,8 @@ def package(root: Path, output: Path) -> tuple[int, str]:
             "dhad/Cargo.lock",
             "dhad/tools/clean_repository.py",
             "dhad/scripts/verify-macos-app.sh",
+            "dhad/scripts/verify-windows-installer.ps1",
+            "dhad/src-tauri/windows/desktop-shortcut.wxs",
             "dhad/scripts/install-macos-app.sh",
         )
         for required_name in nonempty_required:

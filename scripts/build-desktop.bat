@@ -22,6 +22,19 @@ if not exist "src-tauri\tauri.conf.json" (echo [Dhad Desktop] ERROR: Missing src
 
 if not defined DHAD_BUNDLES set "DHAD_BUNDLES=nsis,msi"
 
+echo %DHAD_BUNDLES% | findstr /i "msi" >nul
+if not errorlevel 1 (
+  set "VBSCRIPT_SMOKE=%TEMP%\dhad-vbscript-smoke.vbs"
+  >"!VBSCRIPT_SMOKE!" echo WScript.Quit 0
+  cscript.exe //NoLogo "!VBSCRIPT_SMOKE!" >nul 2>nul
+  if errorlevel 1 (
+    echo [Dhad Desktop] ERROR: MSI builds require the Windows VBSCRIPT optional feature. Enable it in Windows Features, then retry.
+    del /q "!VBSCRIPT_SMOKE!" >nul 2>nul
+    exit /b 1
+  )
+  del /q "!VBSCRIPT_SMOKE!" >nul 2>nul
+)
+
 set "BUILD_VENV=.desktop-build\venv"
 set "BUILD_PY=%BUILD_VENV%\Scripts\python.exe"
 if not exist "%BUILD_PY%" (
@@ -84,6 +97,17 @@ where tauri >nul 2>nul || (echo [Dhad Desktop] ERROR: Pinned Tauri CLI is not av
 echo.
 echo [Dhad Desktop] Building native bundle(s): %DHAD_BUNDLES%
 tauri build --bundles "%DHAD_BUNDLES%" %* || exit /b 1
+
+echo %DHAD_BUNDLES% | findstr /i "nsis" >nul
+if not errorlevel 1 (
+  set "DHAD_WINDOWS_BUNDLE=nsis"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\verify-windows-installer.ps1 || exit /b 1
+)
+echo %DHAD_BUNDLES% | findstr /i "msi" >nul
+if not errorlevel 1 (
+  set "DHAD_WINDOWS_BUNDLE=msi"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\verify-windows-installer.ps1 || exit /b 1
+)
 
 echo.
 echo [Dhad Desktop] Build complete. Bundles are under target\release\bundle.

@@ -1,0 +1,72 @@
+{
+  "release": "Dhad Desktop Ultimate v1.0.16",
+  "date": "2026-07-25",
+  "basis": {
+    "source": "Dhad Desktop Ultimate v1.0.15 r2",
+    "failed_native_run": "30102623355",
+    "diagnostics_sha256": "0aad0753f9fbc22ea864777249f3c828b4b95957d30ebbb7075aae424df7dac6",
+    "previous_green_ci_commit": "2307da484e9c91a93274dfc3f2cbeb17c8648afa"
+  },
+  "root_causes": {
+    "macos": "Tauri completed and uploaded each DMG, then removed bundle/macos/*.app. The old post-build verifier searched only for the removed intermediate app and failed before inspecting the shipped DMG.",
+    "windows": "The Windows application and NSIS installer built successfully. The combined job then failed while WiX light.exe linked the MSI on windows-2025; Tauri documents VBSCRIPT as an MSI/WiX prerequisite and the runner did not expose a diagnostic beyond failed to run light.exe."
+  },
+  "changes": [
+    "Verify the exact app inside the generated DMG by mounting read-only, copying with ditto, then running plist, architecture, code-signature, dynamic-library, and native launch checks.",
+    "Split Windows NSIS and MSI into independent matrix jobs so one installer can never hide the result of the other.",
+    "Pin Windows installer jobs to windows-2022 and smoke-test VBSCRIPT before invoking the WiX MSI linker.",
+    "Add post-build NSIS silent install/uninstall and MSI administrative-image verification.",
+    "Harden the WiX desktop shortcut component with a registry key path rooted under TARGETDIR.",
+    "Use deterministic ASCII release asset names and keep draft-first atomic publication until two DMGs, one MSI, and one NSIS EXE exist.",
+    "Add a Linux-executable regression harness proving the macOS wrapper falls back from a removed intermediate app to the app contained in a DMG."
+  ],
+  "environment": {
+    "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "cargo": "unavailable",
+    "powershell": "unavailable"
+  },
+  "verified": {
+    "release_version_contract": "PASS: version 1.0.16 / tag v1.0.16",
+    "tauri_config": "PASS: npm CLI 2.11.4 / Rust crate 2.11.5",
+    "frontend_staging": {
+      "status": "PASS",
+      "allowlisted_files": 44,
+      "bytes": 165592508,
+      "dependency_directories": 0,
+      "test_files": 0
+    },
+    "javascript_syntax": "PASS: 58 first-party files",
+    "focused_release_regressions": "PASS: 47 tests",
+    "macos_dmg_fallback_harness": "PASS",
+    "desktop_release_audit": "PASS: 201/201",
+    "sovereign_release_audit": "PASS: 71/71",
+    "repository_audit": "PASS: 0 findings",
+    "structured_files": "PASS: JSON, TOML, YAML, plist, WiX XML",
+    "shell_syntax": "PASS: all first-party .sh scripts",
+    "release_matrix": "PASS: four independent jobs (2 DMG, NSIS, MSI)",
+    "validation_matrix": {
+      "passed": 42,
+      "failed": 0,
+      "blocked": 10,
+      "timed_out": 0,
+      "total": 52
+    },
+    "deterministic_source_packaging": "PASS: two independent archives were byte-for-byte identical",
+    "extracted_archive_revalidation": "PASS: 47 focused tests, 201/201 desktop, 71/71 sovereign, 0 repository findings",
+    "installer_script_sandbox": "PASS: SHA check, extraction, rsync installation, staging, and validators"
+  },
+  "environment_blocked_not_passed": [
+    "Fresh npm ci and the complete 114-test JavaScript suite could not be repeated in this network-isolated packaging container. The same runtime suite passed 114/114 on the user Mac and in the preceding hosted CI before the native-release-only edits.",
+    "Full Python collection is blocked locally by missing pycrdt and fakeredis. The per-file matrix records these as blocked, never as passed.",
+    "Rust fmt/clippy/test and native Tauri DMG/MSI/NSIS builds require Cargo and hosted macOS/Windows runners, which are unavailable in this container.",
+    "PowerShell execution of the Windows installer verifier requires a Windows runner."
+  ],
+  "release_gate": {
+    "source_archive_ready": true,
+    "required_external_confirmation": "Push main, require green general CI, create v1.0.16, then require all four native build jobs and the atomic publish job to succeed.",
+    "do_not_retag": "Keep v1.0.15 immutable; v1.0.16 is the corrected native release."
+  }
+}

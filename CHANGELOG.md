@@ -1,3 +1,11 @@
+## 1.0.16 — 2026-07-25 — Native bundle verification and Windows MSI hardening
+
+- Fixed macOS verification after Tauri's DMG bundler removes the intermediate `.app` by mounting the generated DMG, copying the app to a temporary verification directory, and running signature, architecture, dependency, and launch checks against that copy.
+- Split Windows NSIS and MSI into independent release jobs, pinned them to the stable `windows-2022` image, and added an explicit VBSCRIPT capability smoke test required by WiX MSI linking.
+- Hardened the custom WiX desktop shortcut fragment so the component is rooted at `TARGETDIR` while the shortcut is emitted into `DesktopFolder`, avoiding per-user directory component validation conflicts.
+- Added deterministic ASCII release asset names and native installer verification steps before the draft release can be published.
+- Promoted all distributable surfaces to the single validated `1.0.16` release version.
+
 ## 1.0.15 — 2026-07-24 — Atomic, dependency-closed desktop release
 
 - Made Gold Master JavaScript contracts derive the PWA cache namespace and extension version from `web_demo/package.json`, eliminating stale hard-coded `1.0.0` assertions during release version promotion.

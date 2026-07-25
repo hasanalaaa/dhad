@@ -1,5 +1,5 @@
 {
-  "release": "Dhad v1.0.15 Sovereign Edition",
+  "release": "Dhad v1.0.16 Sovereign Edition",
   "summary": {
     "passed": 42,
     "failed": 0,
@@ -12,7 +12,7 @@
       "name": "python-syntax",
       "layer": "python",
       "status": "passed",
-      "seconds": 0.2866327669999009,
+      "seconds": 0.1367647259999103,
       "command": [],
       "detail": "parsed 110 Python files without generating bytecode"
     },
@@ -20,7 +20,7 @@
       "name": "desktop-release-validator",
       "layer": "release",
       "status": "passed",
-      "seconds": 2.0105837999999494,
+      "seconds": 0.6844859580000957,
       "command": [
         "/opt/pyvenv/bin/python3",
         "tools/validate_desktop_release.py",
@@ -28,13 +28,13 @@
         ".",
         "--strict"
       ],
-      "detail": "Desktop release audit: 196/196 checks passed across 451 files."
+      "detail": "Desktop release audit: 201/201 checks passed across 454 files."
     },
     {
       "name": "sovereign-release-validator",
       "layer": "release",
       "status": "passed",
-      "seconds": 1.4452590800001417,
+      "seconds": 0.5253326679999191,
       "command": [
         "/opt/pyvenv/bin/python3",
         "tools/validate_sovereign_release.py",
@@ -49,7 +49,7 @@
       "name": "javascript-syntax",
       "layer": "javascript",
       "status": "passed",
-      "seconds": 5.839764493000075,
+      "seconds": 0.9719105780000064,
       "command": [
         "/opt/nvm/versions/node/v22.16.0/bin/node",
         "../tools/check_javascript.mjs"
@@ -71,7 +71,7 @@
       "name": "pytest:test_analysis_context.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.444264157000362,
+      "seconds": 4.177438017999975,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -81,13 +81,13 @@
         "no:cacheprovider",
         "tests/test_analysis_context.py"
       ],
-      "detail": "..                                                                       [100%]\n2 passed in 2.96s"
+      "detail": "..                                                                       [100%]\n2 passed in 1.48s"
     },
     {
       "name": "pytest:test_api.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.22853962299996,
+      "seconds": 5.305851331999975,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -97,13 +97,13 @@
         "no:cacheprovider",
         "tests/test_api.py"
       ],
-      "detail": "...........                                                              [100%]\n11 passed in 4.58s"
+      "detail": "...........                                                              [100%]\n11 passed in 2.25s"
     },
     {
       "name": "pytest:test_api_cli.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 45.1,
+      "seconds": 19.298289577999867,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -113,13 +113,13 @@
         "no:cacheprovider",
         "tests/test_api_cli.py"
       ],
-      "detail": "13 passed in isolated groups; full-file capture can retain CLI child pipes in this container"
+      "detail": ".............                                                            [100%]\n13 passed in 16.48s"
     },
     {
       "name": "pytest:test_benchmark_seed.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.111624605000543,
+      "seconds": 3.9746511830001054,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -129,13 +129,13 @@
         "no:cacheprovider",
         "tests/test_benchmark_seed.py"
       ],
-      "detail": ".                                                                        [100%]\n1 passed in 2.48s"
+      "detail": ".                                                                        [100%]\n1 passed in 1.34s"
     },
     {
       "name": "pytest:test_build_pipeline_hygiene.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 0.2,
+      "seconds": 1.9955790399999387,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -145,13 +145,13 @@
         "no:cacheprovider",
         "tests/test_build_pipeline_hygiene.py"
       ],
-      "detail": "20 passed in 0.20s"
+      "detail": ".....................                                                    [100%]\n21 passed in 0.14s"
     },
     {
       "name": "pytest:test_checks.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.784490602000005,
+      "seconds": 3.203403074999869,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -161,13 +161,13 @@
         "no:cacheprovider",
         "tests/test_checks.py"
       ],
-      "detail": "..............                                                           [100%]\n14 passed in 1.79s"
+      "detail": "..............                                                           [100%]\n14 passed in 0.89s"
     },
     {
       "name": "pytest:test_crdt.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 6.036275817999922,
+      "seconds": 3.2219906889999947,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -177,13 +177,13 @@
         "no:cacheprovider",
         "tests/test_crdt.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n_____________________ ERROR collecting tests/test_crdt.py ______________________\nImportError while importing test module '/mnt/data/v15work/dhad/tests/test_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_crdt.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 2.11s"
+      "detail": "==================================== ERRORS ====================================\n_____________________ ERROR collecting tests/test_crdt.py ______________________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_crdt.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.95s"
     },
     {
       "name": "pytest:test_desktop.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.471790960999897,
+      "seconds": 3.556619314000045,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -193,13 +193,13 @@
         "no:cacheprovider",
         "tests/test_desktop.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 1.65s"
+      "detail": ".....                                                                    [100%]\n5 passed in 0.91s"
     },
     {
       "name": "pytest:test_diacritics.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.624224870999569,
+      "seconds": 4.220490498000117,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -209,13 +209,13 @@
         "no:cacheprovider",
         "tests/test_diacritics.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 3.25s"
+      "detail": ".............                                                            [100%]\n13 passed in 1.54s"
     },
     {
       "name": "pytest:test_dialects.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 10.202602762000424,
+      "seconds": 5.573179014999823,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -225,13 +225,13 @@
         "no:cacheprovider",
         "tests/test_dialects.py"
       ],
-      "detail": ".......................................                                  [100%]\n39 passed in 5.63s"
+      "detail": ".......................................                                  [100%]\n39 passed in 2.81s"
     },
     {
       "name": "pytest:test_distillation.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.538821563000056,
+      "seconds": 3.159712200000058,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -241,13 +241,13 @@
         "no:cacheprovider",
         "tests/test_distillation.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 1.62s"
+      "detail": ".............                                                            [100%]\n13 passed in 0.89s"
     },
     {
       "name": "pytest:test_extension.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.6355250630003866,
+      "seconds": 1.9467409240000961,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -257,13 +257,13 @@
         "no:cacheprovider",
         "tests/test_extension.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 0.49s"
+      "detail": ".....                                                                    [100%]\n5 passed in 0.12s"
     },
     {
       "name": "pytest:test_gold_master.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 6.67,
+      "seconds": 6.574770856999976,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -273,13 +273,13 @@
         "no:cacheprovider",
         "tests/test_gold_master.py"
       ],
-      "detail": "10 passed in 6.67s"
+      "detail": "..........                                                               [100%]\n10 passed in 3.50s"
     },
     {
       "name": "pytest:test_incremental.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.974514091999481,
+      "seconds": 4.579395558999977,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -289,13 +289,13 @@
         "no:cacheprovider",
         "tests/test_incremental.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 3.52s"
+      "detail": ".............                                                            [100%]\n13 passed in 1.72s"
     },
     {
       "name": "pytest:test_intelligence.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.851773180000237,
+      "seconds": 5.160221999999976,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -305,13 +305,13 @@
         "no:cacheprovider",
         "tests/test_intelligence.py"
       ],
-      "detail": "......                                                                   [100%]\n6 passed in 5.09s"
+      "detail": "......                                                                   [100%]\n6 passed in 2.40s"
     },
     {
       "name": "pytest:test_lsp.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 8.6,
+      "seconds": 6.987073018000046,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -321,13 +321,13 @@
         "no:cacheprovider",
         "tests/test_lsp.py"
       ],
-      "detail": "10 passed in 8.60s"
+      "detail": "..........                                                               [100%]\n10 passed in 4.22s"
     },
     {
       "name": "pytest:test_macos_bundle_verifier.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.4484887129992785,
+      "seconds": 2.0544870039998386,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -337,13 +337,13 @@
         "no:cacheprovider",
         "tests/test_macos_bundle_verifier.py"
       ],
-      "detail": "...                                                                      [100%]\n3 passed in 0.07s"
+      "detail": "...                                                                      [100%]\n3 passed in 0.06s"
     },
     {
       "name": "pytest:test_morphology.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.949716968000757,
+      "seconds": 4.697208124999861,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -353,13 +353,13 @@
         "no:cacheprovider",
         "tests/test_morphology.py"
       ],
-      "detail": ".....................                                                    [100%]\n21 passed in 3.53s"
+      "detail": ".....................                                                    [100%]\n21 passed in 1.90s"
     },
     {
       "name": "pytest:test_neural.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.192707956999584,
+      "seconds": 4.936672021000049,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -369,13 +369,13 @@
         "no:cacheprovider",
         "tests/test_neural.py"
       ],
-      "detail": "...........                                                              [100%]\n11 passed in 4.74s"
+      "detail": "...........                                                              [100%]\n11 passed in 2.23s"
     },
     {
       "name": "pytest:test_onnx_backend.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.312972231000458,
+      "seconds": 1.9277912140000808,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -391,7 +391,7 @@
       "name": "pytest:test_phase1_rules_v2.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.940383839999413,
+      "seconds": 4.544447066999965,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -401,13 +401,13 @@
         "no:cacheprovider",
         "tests/test_phase1_rules_v2.py"
       ],
-      "detail": "............                                                             [100%]\n12 passed in 3.49s"
+      "detail": "............                                                             [100%]\n12 passed in 1.81s"
     },
     {
       "name": "pytest:test_phase1_text.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.146008701000028,
+      "seconds": 3.8692659429998457,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -417,13 +417,13 @@
         "no:cacheprovider",
         "tests/test_phase1_text.py"
       ],
-      "detail": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n........................................................................ [ 48%]\n........................................................................ [ 55%]\n........................................................................ [ 62%]\n........................................................................ [ 69%]\n........................................................................ [ 76%]\n........................................................................ [ 83%]\n........................................................................ [ 90%]\n........................................................................ [ 97%]\n.........................                                                [100%]\n1033 passed in 2.95s"
+      "detail": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n........................................................................ [ 48%]\n........................................................................ [ 55%]\n........................................................................ [ 62%]\n........................................................................ [ 69%]\n........................................................................ [ 76%]\n........................................................................ [ 83%]\n........................................................................ [ 90%]\n........................................................................ [ 97%]\n.........................                                                [100%]\n1033 passed in 1.40s"
     },
     {
       "name": "pytest:test_phase2_evaluation.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 39.17,
+      "seconds": 22.789266134999934,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -433,13 +433,13 @@
         "no:cacheprovider",
         "tests/test_phase2_evaluation.py"
       ],
-      "detail": "16 passed in two groups (15 passed in 28.74s; final case passed in 10.43s)"
+      "detail": "................                                                         [100%]\n16 passed in 19.97s"
     },
     {
       "name": "pytest:test_privacy.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 8.461450081000294,
+      "seconds": 4.867264265999893,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -449,29 +449,13 @@
         "no:cacheprovider",
         "tests/test_privacy.py"
       ],
-      "detail": "..........                                                               [100%]\n10 passed in 4.09s"
-    },
-    {
-      "name": "pytest:test_release_config.py",
-      "layer": "python",
-      "status": "passed",
-      "seconds": 3.3361320409994732,
-      "command": [
-        "/opt/pyvenv/bin/python3",
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "tests/test_release_config.py"
-      ],
-      "detail": "...........                                                              [100%]\n11 passed in 0.07s"
+      "detail": "..........                                                               [100%]\n10 passed in 2.06s"
     },
     {
       "name": "pytest:test_rules.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 6.1484336610001264,
+      "seconds": 3.5272907480000413,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -481,13 +465,13 @@
         "no:cacheprovider",
         "tests/test_rules.py"
       ],
-      "detail": "........................................................................ [ 25%]\n........................................................................ [ 50%]\n........................................................................ [ 75%]\n........................................................................ [100%]\n288 passed in 2.34s"
+      "detail": "........................................................................ [ 25%]\n........................................................................ [ 50%]\n........................................................................ [ 75%]\n........................................................................ [100%]\n288 passed in 1.16s"
     },
     {
       "name": "pytest:test_rust_parity.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.155901705999895,
+      "seconds": 2.033179834000066,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -497,13 +481,13 @@
         "no:cacheprovider",
         "tests/test_rust_parity.py"
       ],
-      "detail": "1 skipped in 0.02s"
+      "detail": "1 skipped in 0.01s"
     },
     {
       "name": "pytest:test_security.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.94724082599987,
+      "seconds": 5.42638098700013,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -513,13 +497,13 @@
         "no:cacheprovider",
         "tests/test_security.py"
       ],
-      "detail": "............                                                             [100%]\n12 passed in 5.21s"
+      "detail": "............                                                             [100%]\n12 passed in 2.44s"
     },
     {
       "name": "pytest:test_semantics.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.814067084999806,
+      "seconds": 4.5611100539999825,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -529,13 +513,13 @@
         "no:cacheprovider",
         "tests/test_semantics.py"
       ],
-      "detail": "................                                                         [100%]\n16 passed in 3.45s"
+      "detail": "................                                                         [100%]\n16 passed in 1.70s"
     },
     {
       "name": "pytest:test_server.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 8.206873686000108,
+      "seconds": 4.849988197999892,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -545,13 +529,13 @@
         "no:cacheprovider",
         "tests/test_server.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 3.42s"
+      "detail": ".....                                                                    [100%]\n5 passed in 1.74s"
     },
     {
       "name": "pytest:test_sovereign_release.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.4573710159993425,
+      "seconds": 2.076251998000089,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -561,13 +545,13 @@
         "no:cacheprovider",
         "tests/test_sovereign_release.py"
       ],
-      "detail": ".                                                                        [100%]\n1 passed in 0.06s"
+      "detail": ".                                                                        [100%]\n1 passed in 0.05s"
     },
     {
       "name": "pytest:test_spans.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.802701785998579,
+      "seconds": 3.651412993000122,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -577,13 +561,13 @@
         "no:cacheprovider",
         "tests/test_spans.py"
       ],
-      "detail": ".........                                                                [100%]\n9 passed in 1.95s"
+      "detail": ".........                                                                [100%]\n9 passed in 1.05s"
     },
     {
       "name": "pytest:test_spellcheck.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.92,
+      "seconds": 6.737255620000042,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -593,13 +577,13 @@
         "no:cacheprovider",
         "tests/test_spellcheck.py"
       ],
-      "detail": "20 passed in 7.92s"
+      "detail": "....................                                                     [100%]\n20 passed in 3.91s"
     },
     {
       "name": "pytest:test_student_distillation.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.696337997998853,
+      "seconds": 3.43666310399999,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -609,13 +593,13 @@
         "no:cacheprovider",
         "tests/test_student_distillation.py"
       ],
-      "detail": "....                                                                     [100%]\n4 passed in 1.69s"
+      "detail": "....                                                                     [100%]\n4 passed in 0.91s"
     },
     {
       "name": "pytest:test_style.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 8.89,
+      "seconds": 7.492828270000018,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -625,13 +609,13 @@
         "no:cacheprovider",
         "tests/test_style.py"
       ],
-      "detail": "50 passed in 8.89s"
+      "detail": "..................................................                       [100%]\n50 passed in 4.63s"
     },
     {
       "name": "pytest:test_stylometry.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 7.72754308399999,
+      "seconds": 4.44519124899989,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -641,13 +625,13 @@
         "no:cacheprovider",
         "tests/test_stylometry.py"
       ],
-      "detail": "...............................                                          [100%]\n31 passed in 3.48s"
+      "detail": "...............................                                          [100%]\n31 passed in 1.64s"
     },
     {
       "name": "pytest:test_sync.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.127600010000606,
+      "seconds": 5.055549321000171,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -657,13 +641,13 @@
         "no:cacheprovider",
         "tests/test_sync.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 4.41s"
+      "detail": ".......                                                                  [100%]\n7 passed in 2.08s"
     },
     {
       "name": "pytest:test_syntax.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.54765116300041,
+      "seconds": 5.206170876999977,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -673,13 +657,13 @@
         "no:cacheprovider",
         "tests/test_syntax.py"
       ],
-      "detail": "................................................                         [100%]\n48 passed in 5.12s"
+      "detail": "................................................                         [100%]\n48 passed in 2.62s"
     },
     {
       "name": "pytest:test_text.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.545869751000282,
+      "seconds": 3.0211598139999296,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -689,13 +673,13 @@
         "no:cacheprovider",
         "tests/test_text.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 1.64s"
+      "detail": ".......                                                                  [100%]\n7 passed in 0.87s"
     },
     {
       "name": "pytest:test_vmax_phase4_crdt.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 5.706493904999661,
+      "seconds": 3.0488554679998288,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -705,13 +689,13 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_crdt.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n_______________ ERROR collecting tests/test_vmax_phase4_crdt.py ________________\nImportError while importing test module '/mnt/data/v15work/dhad/tests/test_vmax_phase4_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_crdt.py:9: in <module>\n    import dhad.crdt as crdt\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 1.82s"
+      "detail": "==================================== ERRORS ====================================\n_______________ ERROR collecting tests/test_vmax_phase4_crdt.py ________________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_crdt.py:9: in <module>\n    import dhad.crdt as crdt\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.91s"
     },
     {
       "name": "pytest:test_vmax_phase4_sync_backend.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.5179224129988143,
+      "seconds": 1.8516822930000671,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -721,13 +705,13 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_sync_backend.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n___________ ERROR collecting tests/test_vmax_phase4_sync_backend.py ____________\nImportError while importing test module '/mnt/data/v15work/dhad/tests/test_vmax_phase4_sync_backend.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_sync_backend.py:7: in <module>\n    import fakeredis.aioredis\nE   ModuleNotFoundError: No module named 'fakeredis'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_sync_backend.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.20s"
+      "detail": "==================================== ERRORS ====================================\n___________ ERROR collecting tests/test_vmax_phase4_sync_backend.py ____________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_sync_backend.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_sync_backend.py:7: in <module>\n    import fakeredis.aioredis\nE   ModuleNotFoundError: No module named 'fakeredis'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_sync_backend.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.08s"
     },
     {
       "name": "pytest:test_vmax_phase4_websocket.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.91,
+      "seconds": 5.92712776999997,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -737,13 +721,13 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_websocket.py"
       ],
-      "detail": "10 passed in 5.91s"
+      "detail": "..........                                                               [100%]\n10 passed in 2.84s"
     },
     {
       "name": "pytest:test_vmax_phase4_yjs_compat.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 5.884684000000561,
+      "seconds": 3.6482989670000734,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -753,13 +737,13 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_yjs_compat.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n____________ ERROR collecting tests/test_vmax_phase4_yjs_compat.py _____________\nImportError while importing test module '/mnt/data/v15work/dhad/tests/test_vmax_phase4_yjs_compat.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_yjs_compat.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_yjs_compat.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 1.80s"
+      "detail": "==================================== ERRORS ====================================\n____________ ERROR collecting tests/test_vmax_phase4_yjs_compat.py _____________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_yjs_compat.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_yjs_compat.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_yjs_compat.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 1.02s"
     },
     {
       "name": "pytest:test_web_interfaces.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 9.694679715999882,
+      "seconds": 5.555283367999891,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -769,7 +753,7 @@
         "no:cacheprovider",
         "tests/test_web_interfaces.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 5.07s"
+      "detail": ".......                                                                  [100%]\n7 passed in 2.45s"
     },
     {
       "name": "cargo-fmt",
@@ -812,6 +796,22 @@
         "--locked"
       ],
       "detail": "Rust/Cargo is not installed in this execution environment"
+    },
+    {
+      "name": "pytest:test_release_config.py",
+      "layer": "python",
+      "status": "passed",
+      "seconds": 2.163512906000051,
+      "command": [
+        "/opt/pyvenv/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_release_config.py"
+      ],
+      "detail": ".............                                                            [100%]\n13 passed in 0.10s"
     }
   ]
 }

@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-07-24T11:15:00.737149+00:00",
-  "file_count": 453,
-  "total_bytes": 180471470,
-  "checks_total": 196,
-  "checks_passed": 196,
+  "generated_at_utc": "2026-07-24T22:23:55.974066+00:00",
+  "file_count": 454,
+  "total_bytes": 180339300,
+  "checks_total": 201,
+  "checks_passed": 201,
   "errors": [],
   "warnings": [],
   "checks": [
@@ -139,6 +139,11 @@
     },
     {
       "name": "required:scripts/verify-macos-app.sh",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/verify-windows-installer.ps1",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -363,7 +368,7 @@
       "detail": "missing workflow contract"
     },
     {
-      "name": "workflow:windows-2025",
+      "name": "workflow:windows-2022",
       "ok": true,
       "detail": "missing workflow contract"
     },
@@ -378,7 +383,12 @@
       "detail": "missing workflow contract"
     },
     {
-      "name": "workflow:nsis,msi",
+      "name": "workflow:--bundles nsis",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:--bundles msi",
       "ok": true,
       "detail": "missing workflow contract"
     },
@@ -486,6 +496,21 @@
       "name": "workflow-validation:verify-macos-app.sh",
       "ok": true,
       "detail": "missing workflow contract matching (?:^|[\\s./])verify-macos-app\\.sh\\b"
+    },
+    {
+      "name": "workflow-validation:verify-windows-installer.ps1",
+      "ok": true,
+      "detail": "missing workflow contract matching verify-windows-installer\\.ps1"
+    },
+    {
+      "name": "workflow-validation:VBSCRIPT MSI prerequisite",
+      "ok": true,
+      "detail": "missing workflow contract matching VBSCRIPT smoke test: PASS"
+    },
+    {
+      "name": "workflow-validation:stable ASCII release names",
+      "ok": true,
+      "detail": "missing workflow contract matching releaseAssetNamePattern\\s*:\\s*[\\\"\\']Dhad_\\[version\\]"
     },
     {
       "name": "workflow-validation:APPLE_SIGNING_IDENTITY",
@@ -865,12 +890,12 @@
     {
       "name": "cargo-lock-desktop-member",
       "ok": true,
-      "detail": "1.0.15"
+      "detail": "1.0.16"
     },
     {
       "name": "cargo-lock-core-member",
       "ok": true,
-      "detail": "1.0.15"
+      "detail": "1.0.16"
     },
     {
       "name": "cargo-lock-tauri-pinned",
@@ -985,37 +1010,38 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 453 files"
+      "detail": "only 454 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "a67f14f1cce9787641d5855a7fbb610eb68b80afd7473538bdfa514e3f0ecd23",
+    "src-tauri/tauri.conf.json": "22349a62b197be05d6f1b0e38247dc1ed8f16b47b2068ad4867610220e3fd0f2",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
     "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
     "src-tauri/icons/icon.ico": "d3404797982828099a96afee44c8cef2adf8f41bec29b7cb4e692706a97765f5",
     "src-tauri/dmg/background.png": "d1d0098bcd8287f43828ace1eb086f5918a57215d2df3507d1d0eb34a7af3a79",
     "src-tauri/windows/nsis-hooks.nsh": "2100c4f26365a2e6eab76727887c7eedd70f94fe255100d3aeeaa0498b87b521",
-    "src-tauri/windows/desktop-shortcut.wxs": "faf7537511e4d0969b32146a78692c25c28576b10796ad5e928b4a50e78c3b5c",
+    "src-tauri/windows/desktop-shortcut.wxs": "4d6be1688b3b27e2c30b4e170a9c81ee5888b9744e1a162d749d499fab79cec6",
     "src-tauri/windows/nsis-header.bmp": "8878a88346361758bb717d6d37052d5e9c6449347ef81212281395209158d078",
     "src-tauri/windows/nsis-sidebar.bmp": "281274221f87a4fbd55163899e4065bc4ea0518b851ba0f63bc058447293efe8",
     "src-tauri/windows/wix-banner.bmp": "2bd2bf1588e8ee85252d924db25743a9adc6e2feaf0000b9a01b7b7647fcf93b",
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
     "scripts/build-desktop.sh": "56ea6d3e66e5943c7b9f124b5bf321ac49937a5d28e7db3c2dd346530f0af025",
-    "scripts/build-desktop.bat": "da268949e2d2df9eee645fbaee46c120fc6f6e6c6909207cdec0de189996c75c",
-    ".github/workflows/desktop-release.yml": "05bd8d6481f964817fb101de736637c69693cc7102643ba51aae43c0afa43d6b",
+    "scripts/build-desktop.bat": "8ed28a3c1298511d95ecf72f97c74f9f9efa557a50726909c330986348f21ac5",
+    ".github/workflows/desktop-release.yml": "d57c0d7920da80c082a7b844306e7ba01ebfd18706de781748877e010df0a914",
     ".github/workflows/ci.yml": "60da28f835506c68109e5d8453f587ed89bbfc60d7fc2b94b584d484ef6dc95a",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "cf335a67d16f9f19474cd898424a878a945f7f126a248f8300169f3db0d722e7",
+    "tools/validate_desktop_release.py": "24f31a3efba01522f2a62e3106d954ef8d2e57c405e28c958e9d000caea1b8fa",
     "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
     "tools/validate_release_version.py": "95d1232a464e834015a272fc286c917ce4104d60a2fb232384b89cc72d36f00f",
-    "tools/package_release.py": "d84a7bad5502ba4932cb243d8f236b3d116ac0daceaaf55501d858657c2e154a",
+    "tools/package_release.py": "f49cee5d3761d4c640676da4c6cb34512e76d70d8ede025a4a78ec3b3c72b68e",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
-    "tools/generate_release_inventory.py": "c2f8b311bbac5f4bd6d3f8b15046a9aa7f99144598a7610c5c7649d73be0dbd5",
+    "tools/generate_release_inventory.py": "7c81fc979df101222441dc1e1b9666f81ccf4d8fc5718a32a28809eb32c95913",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
-    "scripts/verify-macos-app.sh": "e92e26b0e98e4f100e838eb002602b38c65e22636df778f822d71881f12b17f8",
+    "scripts/verify-macos-app.sh": "567b69db2194d6633bef5339bfd2e682eb5c9a7fff29da1833dd7b422ab555d0",
+    "scripts/verify-windows-installer.ps1": "60d017bb32923f1968eb340f6e8ee0ca031f284a7b5c9ff2e119ed17e7a1c6ec",
     "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
     "tools/clean_repository.py": "f44148f00a3b25b1c69a1db3e09d5d3f1abaaad578592c80a36b57a76b087ccc",
     "tools/build_web_dist.mjs": "3900dc4f02688a148e9864f8c67d89bf7e2c3396f00aa5f093acf568922473e2",

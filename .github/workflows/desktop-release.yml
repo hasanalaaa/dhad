@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing semantic version tag to build, for example v1.0.15
+        description: Existing semantic version tag to build, for example v1.0.16
         required: true
         type: string
 
@@ -146,15 +146,23 @@ jobs:
             target: aarch64-apple-darwin
             args: --target aarch64-apple-darwin --bundles dmg
             verify_arch: aarch64
+            bundle: dmg
           - label: macOS Intel DMG
             platform: macos-15-intel
             target: x86_64-apple-darwin
             args: --target x86_64-apple-darwin --bundles dmg
             verify_arch: x86_64
-          - label: Windows x64 NSIS and MSI
-            platform: windows-2025
+            bundle: dmg
+          - label: Windows x64 NSIS
+            platform: windows-2022
             target: x86_64-pc-windows-msvc
-            args: --target x86_64-pc-windows-msvc --bundles nsis,msi
+            args: --target x86_64-pc-windows-msvc --bundles nsis
+            bundle: nsis
+          - label: Windows x64 MSI
+            platform: windows-2022
+            target: x86_64-pc-windows-msvc
+            args: --target x86_64-pc-windows-msvc --bundles msi
+            bundle: msi
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 100
     steps:
@@ -207,6 +215,25 @@ jobs:
 
       - name: Install locked web dependencies
         run: npm ci --prefix web_demo --ignore-scripts
+
+      - name: Verify VBSCRIPT support required by WiX MSI
+        if: runner.os == 'Windows' && matrix.bundle == 'msi'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $feature = Get-WindowsOptionalFeature -Online -FeatureName VBSCRIPT -ErrorAction SilentlyContinue
+          if ($null -ne $feature -and $feature.State -ne 'Enabled') {
+            Write-Host "Enabling Windows VBSCRIPT optional feature for WiX light.exe"
+            $result = Enable-WindowsOptionalFeature -Online -FeatureName VBSCRIPT -All -NoRestart
+            Write-Host "VBSCRIPT state after enable request: $($result.RestartNeeded)"
+          }
+          $smoke = Join-Path $env:RUNNER_TEMP 'dhad-vbscript-smoke.vbs'
+          Set-Content -LiteralPath $smoke -Encoding ASCII -Value 'WScript.Quit 0'
+          & "$env:SystemRoot\System32\cscript.exe" //NoLogo $smoke
+          if ($LASTEXITCODE -ne 0) {
+            throw "VBSCRIPT smoke test failed with exit code $LASTEXITCODE"
+          }
+          Write-Host 'VBSCRIPT smoke test: PASS'
 
       - name: Validate and prepare release assets
         run: |
@@ -287,6 +314,8 @@ jobs:
           uploadUpdaterJson: false
           uploadUpdaterSignatures: false
           uploadWorkflowArtifacts: true
+          releaseAssetNamePattern: "Dhad_[version]_[platform]_[arch][setup][ext]"
+          workflowArtifactNamePattern: "Dhad-[version]-[platform]-[arch]-[bundle]"
           retryAttempts: 2
           args: ${{ matrix.args }}
 
@@ -296,6 +325,13 @@ jobs:
           DHAD_EXPECTED_MACOS_ARCH: ${{ matrix.verify_arch }}
           DHAD_SKIP_MACOS_LAUNCH_SMOKE: "0"
         run: ./scripts/verify-macos-app.sh
+
+      - name: Verify generated Windows installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          DHAD_WINDOWS_BUNDLE: ${{ matrix.bundle }}
+        run: ./scripts/verify-windows-installer.ps1
 
   publish:
     name: Verify assets and publish release atomically

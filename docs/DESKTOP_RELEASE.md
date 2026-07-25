@@ -32,11 +32,11 @@ Environment switches:
 
 ## Automated releases
 
-Pushing a semantic version tag such as `v1.0.15` triggers `.github/workflows/desktop-release.yml`. The workflow first verifies that the tag matches every Python, Rust, Tauri, web, extension, lockfile, and release-manifest version surface. It then validates the complete codebase and builds:
+Pushing a semantic version tag such as `v1.0.16` triggers `.github/workflows/desktop-release.yml`. The workflow first verifies that the tag matches every Python, Rust, Tauri, web, extension, lockfile, and release-manifest version surface. It then validates the complete codebase and builds:
 
 - macOS Apple Silicon DMG on `macos-15`.
 - macOS Intel DMG on `macos-15-intel`.
-- Windows x64 NSIS EXE and MSI on `windows-2025`.
+- Windows x64 NSIS EXE and MSI in independent jobs on the stable `windows-2022` image. The MSI job verifies VBSCRIPT before invoking WiX `light.exe`.
 
 Each matrix build uploads into a draft GitHub Release through `tauri-apps/tauri-action@v1`. A final atomic publication job verifies that two DMGs, one MSI, and one NSIS EXE are present before making the release public. Updater metadata is intentionally disabled until an updater signing key and endpoint are configured.
 

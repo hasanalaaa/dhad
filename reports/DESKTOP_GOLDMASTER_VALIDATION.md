@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **453**
-- Checks passed: **196/196**
+- Files audited: **454**
+- Checks passed: **201/201**
 - Errors: **0**
 - Warnings: **0**
 
@@ -34,6 +34,7 @@
 - PASS — `required:tools/generate_release_inventory.py`: missing or empty required release file
 - PASS — `required:tools/verify_macos_bundle.py`: missing or empty required release file
 - PASS — `required:scripts/verify-macos-app.sh`: missing or empty required release file
+- PASS — `required:scripts/verify-windows-installer.ps1`: missing or empty required release file
 - PASS — `required:scripts/install-macos-app.sh`: missing or empty required release file
 - PASS — `required:tools/clean_repository.py`: missing or empty required release file
 - PASS — `required:tools/build_web_dist.mjs`: missing or empty required release file
@@ -78,10 +79,11 @@
 - PASS — `nsis-delete-shortcut`
 - PASS — `workflow:macos-15`: missing workflow contract
 - PASS — `workflow:macos-15-intel`: missing workflow contract
-- PASS — `workflow:windows-2025`: missing workflow contract
+- PASS — `workflow:windows-2022`: missing workflow contract
 - PASS — `workflow:aarch64-apple-darwin`: missing workflow contract
 - PASS — `workflow:x86_64-apple-darwin`: missing workflow contract
-- PASS — `workflow:nsis,msi`: missing workflow contract
+- PASS — `workflow:--bundles nsis`: missing workflow contract
+- PASS — `workflow:--bundles msi`: missing workflow contract
 - PASS — `workflow:tauri-apps/tauri-action@v1`: missing workflow contract
 - PASS — `workflow-validation:v*.*.*`: missing workflow contract matching ["\']v\*\.\*\.\*["\']
 - PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing workflow contract matching \blibwebkit2gtk-4\.1-dev\b
@@ -103,6 +105,9 @@
 - PASS — `workflow-validation:cargo test`: missing workflow contract matching \bcargo\s+test\b
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
 - PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
+- PASS — `workflow-validation:verify-windows-installer.ps1`: missing workflow contract matching verify-windows-installer\.ps1
+- PASS — `workflow-validation:VBSCRIPT MSI prerequisite`: missing workflow contract matching VBSCRIPT smoke test: PASS
+- PASS — `workflow-validation:stable ASCII release names`: missing workflow contract matching releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]
 - PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
 - PASS — `workflow-validation:actions/setup-node@v6`: missing workflow contract matching actions/setup-node@v6\b
 - PASS — `workflow-validation:actions/github-script@v9`: missing workflow contract matching actions/github-script@v9\b
@@ -178,8 +183,8 @@
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `release-version-validator-semver`
 - PASS — `single-workspace-cargo-lock`: member lockfile must not exist
-- PASS — `cargo-lock-desktop-member`: 1.0.15
-- PASS — `cargo-lock-core-member`: 1.0.15
+- PASS — `cargo-lock-desktop-member`: 1.0.16
+- PASS — `cargo-lock-core-member`: 1.0.16
 - PASS — `cargo-lock-tauri-pinned`: 2.11.5
 - PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
 - PASS — `frontend-staging:const runtimeAssets = Object.freeze([`: missing exact-closure staging contract
@@ -202,4 +207,4 @@
 - PASS — `release-publishes-after-asset-verification`
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 453 files
+- PASS — `repository-file-count`: only 454 files

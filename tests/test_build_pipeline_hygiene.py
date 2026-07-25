@@ -46,6 +46,9 @@ def test_workflow_contains_pinned_release_contracts() -> None:
         'TAURI_CLI_VERSION: "2.11.4"',
         "dtolnay/rust-toolchain@1.97.1",
         "verify-macos-app.sh",
+        "verify-windows-installer.ps1",
+        "windows-2022",
+        "VBSCRIPT smoke test: PASS",
         "APPLE_SIGNING_IDENTITY",
         "@tauri-apps/cli@2.11.4",
         "tauriScript: tauri",
@@ -272,14 +275,14 @@ def test_release_version_and_workspace_lock_are_single_source() -> None:
     from tools.validate_release_version import collect_versions, validate
 
     versions = collect_versions(root)
-    assert set(versions.values()) == {"1.0.15"}
-    assert validate(root, "v1.0.15") == []
+    assert set(versions.values()) == {"1.0.16"}
+    assert validate(root, "v1.0.16") == []
     assert not (root / "rust" / "dhad-core-rs" / "Cargo.lock").exists()
 
     lock = tomllib.loads((root / "Cargo.lock").read_text(encoding="utf-8"))
     packages = {item["name"]: item["version"] for item in lock["package"]}
-    assert packages["dhad-core"] == "1.0.15"
-    assert packages["dhad-desktop"] == "1.0.15"
+    assert packages["dhad-core"] == "1.0.16"
+    assert packages["dhad-desktop"] == "1.0.16"
     assert packages["tauri"] == "2.11.5"
     assert packages["tauri-build"] == "2.6.3"
 
@@ -353,7 +356,7 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
     )
 
     for contract in (
-        '"release": "Dhad v1.0.15 Sovereign Edition"',
+        '"release": "Dhad v1.0.16 Sovereign Edition"',
         'popen_options["start_new_session"] = True',
         "os.killpg(process.pid, signal.SIGKILL)",
         '["taskkill", "/PID", str(process.pid), "/T", "/F"]',

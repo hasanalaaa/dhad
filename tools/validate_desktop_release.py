@@ -80,7 +80,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -139,7 +139,7 @@ def main() -> int:
     ok('nsis-create-shortcut', 'CreateShortCut' in hooks and '$DESKTOP' in hooks, '')
     ok('nsis-delete-shortcut', 'Delete "$DESKTOP' in hooks, '')
     workflow = (root / '.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
-    for token in ['macos-15', 'macos-15-intel', 'windows-2025', 'aarch64-apple-darwin', 'x86_64-apple-darwin', 'nsis,msi', 'tauri-apps/tauri-action@v1']:
+    for token in ['macos-15', 'macos-15-intel', 'windows-2022', 'aarch64-apple-darwin', 'x86_64-apple-darwin', '--bundles nsis', '--bundles msi', 'tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
     workflow_contracts = [
         ("v*.*.*", r'["\']v\*\.\*\.\*["\']'),
@@ -165,6 +165,9 @@ def main() -> int:
         ("cargo test", r"\bcargo\s+test\b"),
         ("npm test", r"\bnpm\s+test\b"),
         ("verify-macos-app.sh", r"(?:^|[\s./])verify-macos-app\.sh\b"),
+        ("verify-windows-installer.ps1", r"verify-windows-installer\.ps1"),
+        ("VBSCRIPT MSI prerequisite", r"VBSCRIPT smoke test: PASS"),
+        ("stable ASCII release names", r"releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]"),
         ("APPLE_SIGNING_IDENTITY", r"\bAPPLE_SIGNING_IDENTITY\b"),
         ("actions/setup-node@v6", r"actions/setup-node@v6\b"),
         ("actions/github-script@v9", r"actions/github-script@v9\b"),

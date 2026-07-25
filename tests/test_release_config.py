@@ -1,7 +1,10 @@
 """Release configuration must derive the package version from one source."""
 
 import json
+import os
 from pathlib import Path
+import shutil
+import subprocess
 import tomllib
 
 
@@ -77,8 +80,8 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
     assert workflow.stat().st_size > 0
     text = workflow.read_text(encoding="utf-8")
     for contract in (
-        "macos-15", "macos-15-intel", "windows-2025",
-        "aarch64-apple-darwin", "x86_64-apple-darwin", "nsis,msi",
+        "macos-15", "macos-15-intel", "windows-2022",
+        "aarch64-apple-darwin", "x86_64-apple-darwin", "--bundles nsis", "--bundles msi",
         "tools/desktop-build-requirements.txt", "tools/optimize_onnx_assets.py",
         "tools/validate_tauri_config.py", "tools/validate_desktop_release.py",
         "tools/validate_release_version.py",
@@ -90,6 +93,9 @@ def test_desktop_release_workflow_is_preserved_as_a_hidden_path():
         'Stage dependency-free Tauri frontend',
         'releaseDraft: true', 'actions/github-script@v9',
         'uploadUpdaterJson: false', 'uploadUpdaterSignatures: false',
+        'releaseAssetNamePattern: "Dhad_[version]_[platform]_[arch][setup][ext]"',
+        'Verify VBSCRIPT support required by WiX MSI',
+        'scripts/verify-windows-installer.ps1',
     ):
         assert contract in text
 
@@ -180,3 +186,97 @@ def test_macos_bundle_verifier_and_ci_smoke_test_are_mandatory():
     assert "Verify signed macOS app bundle and native launch" in workflow
     assert "DHAD_SKIP_MACOS_LAUNCH_SMOKE" in workflow
     assert "verify-macos-app.sh" in build_script
+    shell_source = shell.read_text(encoding="utf-8")
+    assert "hdiutil attach -readonly -nobrowse" in shell_source
+    assert "generated DMG contains no macOS .app bundle" in shell_source
+    assert "ditto" in shell_source
+
+
+def test_windows_installers_are_split_verified_and_wix_shortcut_is_validation_safe():
+    workflow = (ROOT / ".github" / "workflows" / "desktop-release.yml").read_text(encoding="utf-8")
+    verifier = (ROOT / "scripts" / "verify-windows-installer.ps1").read_text(encoding="utf-8")
+    fragment = (ROOT / "src-tauri" / "windows" / "desktop-shortcut.wxs").read_text(encoding="utf-8")
+
+    assert "Windows x64 NSIS" in workflow
+    assert "Windows x64 MSI" in workflow
+    assert "windows-2022" in workflow
+    assert "--bundles nsis" in workflow
+    assert "--bundles msi" in workflow
+    assert "VBSCRIPT smoke test: PASS" in workflow
+    assert "verify-windows-installer.ps1" in workflow
+    assert "MSI administrative extraction failed" in verifier
+    assert "NSIS silent installation failed" in verifier
+    assert '<DirectoryRef Id="TARGETDIR">' in fragment
+    assert 'Directory="DesktopFolder"' in fragment
+    assert 'Action="createAndRemoveOnUninstall"' in fragment
+
+
+
+def test_macos_release_wrapper_verifies_the_app_shipped_inside_a_dmg(tmp_path):
+    """Regression: Tauri removes bundle/macos/*.app after creating a DMG."""
+
+    bash = shutil.which("bash")
+    if not bash:
+        return
+
+    fake_bin = tmp_path / "bin"
+    fake_bin.mkdir()
+    arguments_log = tmp_path / "python-arguments.txt"
+    dmg = tmp_path / "Dhad_1.0.16_aarch64.dmg"
+    dmg.write_bytes(b"synthetic-dmg")
+
+    scripts = {
+        "uname": """#!/usr/bin/env bash
+case "${1:-}" in
+  -s) printf 'Darwin\\n' ;;
+  -m) printf 'arm64\\n' ;;
+  *) printf 'Darwin\\n' ;;
+esac
+""",
+        "hdiutil": """#!/usr/bin/env bash
+set -e
+if [[ "${1:-}" == "attach" ]]; then
+  mount=''
+  while (($#)); do
+    if [[ "$1" == "-mountpoint" ]]; then mount="$2"; shift 2; continue; fi
+    shift
+  done
+  mkdir -p "$mount/ضاد.app/Contents/MacOS"
+fi
+""",
+        "ditto": """#!/usr/bin/env bash
+set -e
+cp -R "$1" "$2"
+""",
+        "python3": f"""#!/usr/bin/env bash
+printf '%s\\n' "$*" > {arguments_log!s}
+""",
+    }
+    for name, source in scripts.items():
+        path = fake_bin / name
+        path.write_text(source, encoding="utf-8")
+        path.chmod(0o755)
+
+    env = os.environ.copy()
+    env.update(
+        {
+            "PATH": f"{fake_bin}{os.pathsep}{env['PATH']}",
+            "DHAD_MACOS_DMG_PATH": str(dmg),
+            "DHAD_EXPECTED_MACOS_ARCH": "aarch64",
+            "DHAD_SKIP_MACOS_LAUNCH_SMOKE": "1",
+        }
+    )
+    result = subprocess.run(
+        [bash, "scripts/verify-macos-app.sh"],
+        cwd=ROOT,
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr or result.stdout
+    assert "Mounting generated DMG for verification" in result.stdout
+    arguments = arguments_log.read_text(encoding="utf-8")
+    assert "tools/verify_macos_bundle.py" in arguments
+    assert "--expected-arch aarch64" in arguments
