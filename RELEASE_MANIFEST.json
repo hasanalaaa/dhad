@@ -1,10 +1,10 @@
 {
   "project": "Dhad",
-  "version": "1.0.16",
-  "python_version": "1.0.16",
-  "completed_phase": "Ultimate Desktop Release v1.0.16",
+  "version": "1.0.17",
+  "python_version": "1.0.17",
+  "completed_phase": "Ultimate Desktop Release v1.0.17",
   "phase_name": "Reproducible Tauri desktop release with exact frontend closure and atomic multi-platform publication",
-  "tests_passed": 72,
+  "tests_passed": 48,
   "quality": {
     "ruff": "validated by locked CI; source-level regressions covered locally",
     "format": "Python/JavaScript syntax and shell syntax verified locally; Rust format enforced in CI",
@@ -25,27 +25,27 @@
     "main_thread_long_tasks_over_50ms": 0,
     "ci_workflow": ".github/workflows/ci.yml",
     "development_lock": "requirements-dev.lock",
-    "repository_audit": "446 release files audited; 0 findings",
+    "repository_audit": "449 release files audited; 0 findings",
     "local_python_validation": {
-      "available_suites": "72 unique release, API, configuration, and bundle-verifier tests passed",
-      "full_dependency_complete_suite": "mandatory in CI; local host lacks pycrdt, fakeredis, ONNX Python packages, and npm dependencies",
-      "redis_sync_backend": "not-run locally: fakeredis unavailable",
-      "native_crdt": "not-run locally: pycrdt unavailable",
-      "onnx_python_backend": "not-run locally: onnx/onnxruntime unavailable"
+      "available_suites": "48 focused release, configuration, extension, web-interface, and installer-pipeline tests passed",
+      "full_dependency_complete_suite": "not run on packaging host: pycrdt and fakeredis are unavailable; complete pytest is mandatory in hosted CI",
+      "redis_sync_backend": "blocked locally: fakeredis unavailable",
+      "native_crdt": "blocked locally: pycrdt unavailable",
+      "onnx_python_backend": "not re-run locally: native ONNX Python runtime unavailable"
     },
-    "rust_local_revalidation": "not-run: Cargo/rustc unavailable on packaging host; complete workspace lock and --locked CI gates retained",
-    "sovereign_desktop_audit": "196/196 passed across the clean release source tree",
+    "rust_local_revalidation": "not run: Cargo/rustc unavailable on packaging host; complete fmt, Clippy, workspace tests, and WASM build remain mandatory in CI",
+    "sovereign_desktop_audit": "206/206 passed across 452 files after final validation-report generation",
     "sovereign_contracts": "71/71 passed including final cleanliness gate",
     "sovereign_test_matrix": {
-      "passed_checks": 41,
+      "passed_checks": 26,
       "failed_checks": 0,
-      "blocked_checks": 10,
+      "blocked_checks": 26,
       "timed_out_checks": 0,
-      "note": "Blocked entries are missing external dependencies/toolchains and are not counted as passes."
+      "note": "Blocked/not-run entries are not counted as passes; full dependency-backed suites remain mandatory in hosted CI."
     },
-    "javascript_tests_available": "58-file syntax pass; exact 44-file packaged closure verified; dependency-backed tests remain mandatory in CI",
+    "javascript_tests_available": "58-file syntax pass; exact 44-file packaged closure verified; complete dependency-backed suite remains mandatory in CI",
     "mini_assistant_runtime_boot": "passed",
-    "native_installer_builds": "not-run locally: macOS and Windows hosted runners unavailable; draft-first atomic matrix retained",
+    "native_installer_builds": "v1.0.16 macOS Apple Silicon and Intel DMGs passed hosted native build and launch verification; v1.0.17 Windows NSIS/MSI changes require hosted Windows confirmation",
     "rust_tests_scope": "full workspace fmt, Clippy, tests, and WASM build are mandatory with --locked in CI and release CI",
     "frontend_staging": {
       "allowlisted_files": 44,

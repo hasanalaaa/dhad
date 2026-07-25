@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing semantic version tag to build, for example v1.0.16
+        description: Existing semantic version tag to build, for example v1.0.17
         required: true
         type: string
 

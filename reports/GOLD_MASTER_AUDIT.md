@@ -1,9 +1,9 @@
 # Dhad 1.0 Gold Master Repository Audit
 
 - Status: **PASSED**
-- Files audited: **451**
-- Bytes audited: **180253296**
-- Generated: `2026-07-25T02:11:50.996467+00:00`
+- Files audited: **449**
+- Bytes audited: **180260582**
+- Generated: `2026-07-25T05:54:20.240468+00:00`
 
 ## Source symbols inventoried
 

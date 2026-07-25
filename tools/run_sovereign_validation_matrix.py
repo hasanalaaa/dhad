@@ -16,6 +16,7 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -41,7 +42,14 @@ def run_command(
     timeout: int,
     env: dict[str, str] | None = None,
 ) -> MatrixResult:
-    """Run one matrix command and terminate its full process tree on timeout."""
+    """Run one matrix command and terminate its full process tree on timeout.
+
+    Output is captured through a temporary file instead of a pipe. A test may
+    spawn a descendant that inherits stdout after its immediate parent exits;
+    using a pipe can leave ``communicate()`` waiting forever for EOF. A regular
+    file has no inherited-reader EOF dependency, so the wall-clock timeout
+    remains authoritative for the whole process group.
+    """
 
     started = time.perf_counter()
     popen_options: dict[str, object] = {}
@@ -50,66 +58,67 @@ def run_command(
     elif os.name == "nt":
         popen_options["creationflags"] = subprocess.CREATE_NEW_PROCESS_GROUP
 
-    process = subprocess.Popen(
-        list(command),
-        cwd=cwd,
-        env=env,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        **popen_options,
-    )
-    try:
-        output, _ = process.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired as error:
-        partial = error.output or ""
-        if isinstance(partial, bytes):
-            partial = partial.decode("utf-8", errors="replace")
-        if os.name == "posix":
-            try:
-                os.killpg(process.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-        elif os.name == "nt":
-            subprocess.run(
-                ["taskkill", "/PID", str(process.pid), "/T", "/F"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-            )
-        else:
-            process.kill()
-        try:
-            remainder, _ = process.communicate(timeout=5)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            remainder, _ = process.communicate()
-        output = partial + (remainder or "")
-        return MatrixResult(
-            name,
-            layer,
-            "timed_out",
-            time.perf_counter() - started,
+    status = "failed"
+    detail = ""
+    with tempfile.TemporaryFile(mode="w+t", encoding="utf-8") as output_stream:
+        process = subprocess.Popen(
             list(command),
-            output[-4000:].strip() or f"exceeded {timeout}s",
+            cwd=cwd,
+            env=env,
+            text=True,
+            stdout=output_stream,
+            stderr=subprocess.STDOUT,
+            **popen_options,
         )
+        try:
+            process.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            if os.name == "posix":
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+            elif os.name == "nt":
+                subprocess.run(
+                    ["taskkill", "/PID", str(process.pid), "/T", "/F"],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    check=False,
+                )
+            else:
+                process.kill()
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
+            status = "timed_out"
+        output_stream.flush()
+        output_stream.seek(0)
+        output = output_stream.read().strip()
 
-    output = (output or "").strip()
-    if process.returncode == 0:
+    if status == "timed_out":
+        detail = output[-4000:] or f"exceeded {timeout}s"
+    elif process.returncode == 0:
         status = "passed"
+        detail = output[-4000:]
     elif "ModuleNotFoundError" in output or "ERR_MODULE_NOT_FOUND" in output:
         status = "blocked"
+        detail = output[-4000:] or f"exit code {process.returncode}"
     elif " skipped" in output and " failed" not in output and "ERROR" not in output:
         status = "blocked"
+        detail = output[-4000:] or f"exit code {process.returncode}"
     else:
         status = "failed"
+        detail = output[-4000:] or f"exit code {process.returncode}"
+
     return MatrixResult(
         name,
         layer,
         status,
         time.perf_counter() - started,
         list(command),
-        output[-4000:] or f"exit code {process.returncode}",
+        detail,
     )
 
 
@@ -147,7 +156,7 @@ def write_reports(root: Path, results: list[MatrixResult]) -> None:
     report_dir.mkdir(exist_ok=True)
     counts = {status: sum(item.status == status for item in results) for status in ("passed", "failed", "blocked", "timed_out")}
     payload = {
-        "release": "Dhad v1.0.16 Sovereign Edition",
+        "release": "Dhad v1.0.17 Sovereign Edition",
         "summary": counts | {"total": len(results)},
         "results": [asdict(item) for item in results],
     }

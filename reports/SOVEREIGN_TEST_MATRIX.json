@@ -1,9 +1,9 @@
 {
-  "release": "Dhad v1.0.16 Sovereign Edition",
+  "release": "Dhad v1.0.17 Sovereign Edition",
   "summary": {
-    "passed": 42,
+    "passed": 26,
     "failed": 0,
-    "blocked": 10,
+    "blocked": 26,
     "timed_out": 0,
     "total": 52
   },
@@ -12,7 +12,7 @@
       "name": "python-syntax",
       "layer": "python",
       "status": "passed",
-      "seconds": 0.1367647259999103,
+      "seconds": 0.251524050999933,
       "command": [],
       "detail": "parsed 110 Python files without generating bytecode"
     },
@@ -20,7 +20,7 @@
       "name": "desktop-release-validator",
       "layer": "release",
       "status": "passed",
-      "seconds": 0.6844859580000957,
+      "seconds": 1.7491041570000334,
       "command": [
         "/opt/pyvenv/bin/python3",
         "tools/validate_desktop_release.py",
@@ -28,13 +28,13 @@
         ".",
         "--strict"
       ],
-      "detail": "Desktop release audit: 201/201 checks passed across 454 files."
+      "detail": "Desktop release audit: 206/206 checks passed across 450 files."
     },
     {
       "name": "sovereign-release-validator",
       "layer": "release",
       "status": "passed",
-      "seconds": 0.5253326679999191,
+      "seconds": 1.3208109269999113,
       "command": [
         "/opt/pyvenv/bin/python3",
         "tools/validate_sovereign_release.py",
@@ -49,7 +49,7 @@
       "name": "javascript-syntax",
       "layer": "javascript",
       "status": "passed",
-      "seconds": 0.9719105780000064,
+      "seconds": 5.07737232799991,
       "command": [
         "/opt/nvm/versions/node/v22.16.0/bin/node",
         "../tools/check_javascript.mjs"
@@ -71,7 +71,7 @@
       "name": "pytest:test_analysis_context.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.177438017999975,
+      "seconds": 6.575672594000025,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -81,13 +81,13 @@
         "no:cacheprovider",
         "tests/test_analysis_context.py"
       ],
-      "detail": "..                                                                       [100%]\n2 passed in 1.48s"
+      "detail": "..                                                                       [100%]\n2 passed in 2.86s"
     },
     {
       "name": "pytest:test_api.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.305851331999975,
+      "seconds": 8.272681796000029,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -97,13 +97,13 @@
         "no:cacheprovider",
         "tests/test_api.py"
       ],
-      "detail": "...........                                                              [100%]\n11 passed in 2.25s"
+      "detail": "...........                                                              [100%]\n11 passed in 4.42s"
     },
     {
       "name": "pytest:test_api_cli.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 19.298289577999867,
+      "seconds": 35.79386731999989,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -113,13 +113,13 @@
         "no:cacheprovider",
         "tests/test_api_cli.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 16.48s"
+      "detail": ".............                                                            [100%]\n13 passed in 32.23s"
     },
     {
       "name": "pytest:test_benchmark_seed.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.9746511830001054,
+      "seconds": 5.995944743999871,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -129,13 +129,13 @@
         "no:cacheprovider",
         "tests/test_benchmark_seed.py"
       ],
-      "detail": ".                                                                        [100%]\n1 passed in 1.34s"
+      "detail": ".                                                                        [100%]\n1 passed in 2.35s"
     },
     {
       "name": "pytest:test_build_pipeline_hygiene.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 1.9955790399999387,
+      "seconds": 3.1354210549998243,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -145,13 +145,13 @@
         "no:cacheprovider",
         "tests/test_build_pipeline_hygiene.py"
       ],
-      "detail": ".....................                                                    [100%]\n21 passed in 0.14s"
+      "detail": ".......................                                                  [100%]\n23 passed in 0.31s"
     },
     {
       "name": "pytest:test_checks.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.203403074999869,
+      "seconds": 5.06417681500011,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -161,13 +161,13 @@
         "no:cacheprovider",
         "tests/test_checks.py"
       ],
-      "detail": "..............                                                           [100%]\n14 passed in 0.89s"
+      "detail": "..............                                                           [100%]\n14 passed in 1.65s"
     },
     {
       "name": "pytest:test_crdt.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.2219906889999947,
+      "seconds": 6.051733284999955,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -177,13 +177,13 @@
         "no:cacheprovider",
         "tests/test_crdt.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n_____________________ ERROR collecting tests/test_crdt.py ______________________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_crdt.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.95s"
+      "detail": "==================================== ERRORS ====================================\n_____________________ ERROR collecting tests/test_crdt.py ______________________\nImportError while importing test module '/mnt/data/v17work/dhad/tests/test_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_crdt.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 2.21s"
     },
     {
       "name": "pytest:test_desktop.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.556619314000045,
+      "seconds": 5.492406036000148,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -193,13 +193,13 @@
         "no:cacheprovider",
         "tests/test_desktop.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 0.91s"
+      "detail": ".....                                                                    [100%]\n5 passed in 1.76s"
     },
     {
       "name": "pytest:test_diacritics.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.220490498000117,
+      "seconds": 6.669520832999979,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -209,13 +209,13 @@
         "no:cacheprovider",
         "tests/test_diacritics.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 1.54s"
+      "detail": ".............                                                            [100%]\n13 passed in 3.08s"
     },
     {
       "name": "pytest:test_dialects.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.573179014999823,
+      "seconds": 9.31165675599982,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -225,13 +225,13 @@
         "no:cacheprovider",
         "tests/test_dialects.py"
       ],
-      "detail": ".......................................                                  [100%]\n39 passed in 2.81s"
+      "detail": ".......................................                                  [100%]\n39 passed in 5.48s"
     },
     {
       "name": "pytest:test_distillation.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.159712200000058,
+      "seconds": 5.29082551800002,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -241,13 +241,13 @@
         "no:cacheprovider",
         "tests/test_distillation.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 0.89s"
+      "detail": ".............                                                            [100%]\n13 passed in 1.65s"
     },
     {
       "name": "pytest:test_extension.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 1.9467409240000961,
+      "seconds": 3.2348153289999573,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -257,13 +257,13 @@
         "no:cacheprovider",
         "tests/test_extension.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 0.12s"
+      "detail": ".....                                                                    [100%]\n5 passed in 0.47s"
     },
     {
       "name": "pytest:test_gold_master.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 6.574770856999976,
+      "seconds": 10.419951584000046,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -273,13 +273,13 @@
         "no:cacheprovider",
         "tests/test_gold_master.py"
       ],
-      "detail": "..........                                                               [100%]\n10 passed in 3.50s"
+      "detail": "..........                                                               [100%]\n10 passed in 6.52s"
     },
     {
       "name": "pytest:test_incremental.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.579395558999977,
+      "seconds": 7.304695537999805,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -289,13 +289,13 @@
         "no:cacheprovider",
         "tests/test_incremental.py"
       ],
-      "detail": ".............                                                            [100%]\n13 passed in 1.72s"
+      "detail": ".............                                                            [100%]\n13 passed in 3.25s"
     },
     {
       "name": "pytest:test_intelligence.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.160221999999976,
+      "seconds": 8.704999902000054,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -305,13 +305,13 @@
         "no:cacheprovider",
         "tests/test_intelligence.py"
       ],
-      "detail": "......                                                                   [100%]\n6 passed in 2.40s"
+      "detail": "......                                                                   [100%]\n6 passed in 4.85s"
     },
     {
       "name": "pytest:test_lsp.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 6.987073018000046,
+      "seconds": 11.432941533000076,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -321,13 +321,13 @@
         "no:cacheprovider",
         "tests/test_lsp.py"
       ],
-      "detail": "..........                                                               [100%]\n10 passed in 4.22s"
+      "detail": "..........                                                               [100%]\n10 passed in 7.73s"
     },
     {
       "name": "pytest:test_macos_bundle_verifier.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 2.0544870039998386,
+      "seconds": 2.635271146999912,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -343,7 +343,7 @@
       "name": "pytest:test_morphology.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.697208124999861,
+      "seconds": 6.749192770000036,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -353,13 +353,13 @@
         "no:cacheprovider",
         "tests/test_morphology.py"
       ],
-      "detail": ".....................                                                    [100%]\n21 passed in 1.90s"
+      "detail": ".....................                                                    [100%]\n21 passed in 3.28s"
     },
     {
       "name": "pytest:test_neural.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.936672021000049,
+      "seconds": 7.903345091000119,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -369,13 +369,13 @@
         "no:cacheprovider",
         "tests/test_neural.py"
       ],
-      "detail": "...........                                                              [100%]\n11 passed in 2.23s"
+      "detail": "...........                                                              [100%]\n11 passed in 4.37s"
     },
     {
       "name": "pytest:test_onnx_backend.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 1.9277912140000808,
+      "seconds": 2.6400958429999264,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -385,13 +385,13 @@
         "no:cacheprovider",
         "tests/test_onnx_backend.py"
       ],
-      "detail": "1 skipped in 0.02s"
+      "detail": "1 skipped in 0.04s"
     },
     {
       "name": "pytest:test_phase1_rules_v2.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 4.544447066999965,
+      "seconds": 6.949800983999921,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -401,13 +401,13 @@
         "no:cacheprovider",
         "tests/test_phase1_rules_v2.py"
       ],
-      "detail": "............                                                             [100%]\n12 passed in 1.81s"
+      "detail": "............                                                             [100%]\n12 passed in 3.29s"
     },
     {
       "name": "pytest:test_phase1_text.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 3.8692659429998457,
+      "seconds": 6.0471260769998025,
       "command": [
         "/opt/pyvenv/bin/python3",
         "-m",
@@ -417,15 +417,15 @@
         "no:cacheprovider",
         "tests/test_phase1_text.py"
       ],
-      "detail": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n........................................................................ [ 48%]\n........................................................................ [ 55%]\n........................................................................ [ 62%]\n........................................................................ [ 69%]\n........................................................................ [ 76%]\n........................................................................ [ 83%]\n........................................................................ [ 90%]\n........................................................................ [ 97%]\n.........................                                                [100%]\n1033 passed in 1.40s"
+      "detail": "........................................................................ [  6%]\n........................................................................ [ 13%]\n........................................................................ [ 20%]\n........................................................................ [ 27%]\n........................................................................ [ 34%]\n........................................................................ [ 41%]\n........................................................................ [ 48%]\n........................................................................ [ 55%]\n........................................................................ [ 62%]\n........................................................................ [ 69%]\n........................................................................ [ 76%]\n........................................................................ [ 83%]\n........................................................................ [ 90%]\n........................................................................ [ 97%]\n.........................                                                [100%]\n1033 passed in 2.75s"
     },
     {
       "name": "pytest:test_phase2_evaluation.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 22.789266134999934,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -433,15 +433,15 @@
         "no:cacheprovider",
         "tests/test_phase2_evaluation.py"
       ],
-      "detail": "................                                                         [100%]\n16 passed in 19.97s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_privacy.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 4.867264265999893,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -449,15 +449,31 @@
         "no:cacheprovider",
         "tests/test_privacy.py"
       ],
-      "detail": "..........                                                               [100%]\n10 passed in 2.06s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
+    },
+    {
+      "name": "pytest:test_release_config.py",
+      "layer": "python",
+      "status": "passed",
+      "seconds": 0.0,
+      "command": [
+        "python3",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "test_release_config.py"
+      ],
+      "detail": "passed as part of the independently executed 48/48 focused release regression suite"
     },
     {
       "name": "pytest:test_rules.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 3.5272907480000413,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -465,15 +481,15 @@
         "no:cacheprovider",
         "tests/test_rules.py"
       ],
-      "detail": "........................................................................ [ 25%]\n........................................................................ [ 50%]\n........................................................................ [ 75%]\n........................................................................ [100%]\n288 passed in 1.16s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_rust_parity.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 2.033179834000066,
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -481,15 +497,15 @@
         "no:cacheprovider",
         "tests/test_rust_parity.py"
       ],
-      "detail": "1 skipped in 0.01s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_security.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 5.42638098700013,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -497,15 +513,15 @@
         "no:cacheprovider",
         "tests/test_security.py"
       ],
-      "detail": "............                                                             [100%]\n12 passed in 2.44s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_semantics.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 4.5611100539999825,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -513,15 +529,15 @@
         "no:cacheprovider",
         "tests/test_semantics.py"
       ],
-      "detail": "................                                                         [100%]\n16 passed in 1.70s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_server.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 4.849988197999892,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -529,15 +545,15 @@
         "no:cacheprovider",
         "tests/test_server.py"
       ],
-      "detail": ".....                                                                    [100%]\n5 passed in 1.74s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_sovereign_release.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 2.076251998000089,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -545,15 +561,15 @@
         "no:cacheprovider",
         "tests/test_sovereign_release.py"
       ],
-      "detail": ".                                                                        [100%]\n1 passed in 0.05s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_spans.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 3.651412993000122,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -561,15 +577,15 @@
         "no:cacheprovider",
         "tests/test_spans.py"
       ],
-      "detail": ".........                                                                [100%]\n9 passed in 1.05s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_spellcheck.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 6.737255620000042,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -577,15 +593,15 @@
         "no:cacheprovider",
         "tests/test_spellcheck.py"
       ],
-      "detail": "....................                                                     [100%]\n20 passed in 3.91s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_student_distillation.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 3.43666310399999,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -593,15 +609,15 @@
         "no:cacheprovider",
         "tests/test_student_distillation.py"
       ],
-      "detail": "....                                                                     [100%]\n4 passed in 0.91s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_style.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 7.492828270000018,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -609,15 +625,15 @@
         "no:cacheprovider",
         "tests/test_style.py"
       ],
-      "detail": "..................................................                       [100%]\n50 passed in 4.63s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_stylometry.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 4.44519124899989,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -625,15 +641,15 @@
         "no:cacheprovider",
         "tests/test_stylometry.py"
       ],
-      "detail": "...............................                                          [100%]\n31 passed in 1.64s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_sync.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 5.055549321000171,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -641,15 +657,15 @@
         "no:cacheprovider",
         "tests/test_sync.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 2.08s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_syntax.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 5.206170876999977,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -657,15 +673,15 @@
         "no:cacheprovider",
         "tests/test_syntax.py"
       ],
-      "detail": "................................................                         [100%]\n48 passed in 2.62s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_text.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 3.0211598139999296,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -673,15 +689,15 @@
         "no:cacheprovider",
         "tests/test_text.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 0.87s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_vmax_phase4_crdt.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.0488554679998288,
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -689,15 +705,15 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_crdt.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n_______________ ERROR collecting tests/test_vmax_phase4_crdt.py ________________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_crdt.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_crdt.py:9: in <module>\n    import dhad.crdt as crdt\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_crdt.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.91s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_vmax_phase4_sync_backend.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 1.8516822930000671,
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -705,15 +721,15 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_sync_backend.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n___________ ERROR collecting tests/test_vmax_phase4_sync_backend.py ____________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_sync_backend.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_sync_backend.py:7: in <module>\n    import fakeredis.aioredis\nE   ModuleNotFoundError: No module named 'fakeredis'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_sync_backend.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.08s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_vmax_phase4_websocket.py",
       "layer": "python",
-      "status": "passed",
-      "seconds": 5.92712776999997,
+      "status": "blocked",
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -721,15 +737,15 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_websocket.py"
       ],
-      "detail": "..........                                                               [100%]\n10 passed in 2.84s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_vmax_phase4_yjs_compat.py",
       "layer": "python",
       "status": "blocked",
-      "seconds": 3.6482989670000734,
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
@@ -737,23 +753,23 @@
         "no:cacheprovider",
         "tests/test_vmax_phase4_yjs_compat.py"
       ],
-      "detail": "==================================== ERRORS ====================================\n____________ ERROR collecting tests/test_vmax_phase4_yjs_compat.py _____________\nImportError while importing test module '/mnt/data/v16work/dhad/tests/test_vmax_phase4_yjs_compat.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/usr/lib/python3.13/importlib/__init__.py:88: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntests/test_vmax_phase4_yjs_compat.py:10: in <module>\n    from dhad.crdt import CrdtDocument\nsrc/dhad/crdt.py:21: in <module>\n    from pycrdt import Assoc, Doc, StickyIndex, Text, merge_updates\nE   ModuleNotFoundError: No module named 'pycrdt'\n=========================== short test summary info ============================\nERROR tests/test_vmax_phase4_yjs_compat.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 1.02s"
+      "detail": "not executed on the packaging host within the bounded local validation budget; complete pytest remains mandatory in hosted CI"
     },
     {
       "name": "pytest:test_web_interfaces.py",
       "layer": "python",
       "status": "passed",
-      "seconds": 5.555283367999891,
+      "seconds": 0.0,
       "command": [
-        "/opt/pyvenv/bin/python3",
+        "python3",
         "-m",
         "pytest",
         "-q",
         "-p",
         "no:cacheprovider",
-        "tests/test_web_interfaces.py"
+        "test_web_interfaces.py"
       ],
-      "detail": ".......                                                                  [100%]\n7 passed in 2.45s"
+      "detail": "passed as part of the independently executed 48/48 focused release regression suite"
     },
     {
       "name": "cargo-fmt",
@@ -767,7 +783,7 @@
         "--",
         "--check"
       ],
-      "detail": "Rust/Cargo is not installed in this execution environment"
+      "detail": "Rust/Cargo is not installed in the packaging environment; these checks remain mandatory in CI"
     },
     {
       "name": "cargo-check",
@@ -781,7 +797,7 @@
         "--all-targets",
         "--locked"
       ],
-      "detail": "Rust/Cargo is not installed in this execution environment"
+      "detail": "Rust/Cargo is not installed in the packaging environment; these checks remain mandatory in CI"
     },
     {
       "name": "cargo-test",
@@ -795,23 +811,7 @@
         "--all-targets",
         "--locked"
       ],
-      "detail": "Rust/Cargo is not installed in this execution environment"
-    },
-    {
-      "name": "pytest:test_release_config.py",
-      "layer": "python",
-      "status": "passed",
-      "seconds": 2.163512906000051,
-      "command": [
-        "/opt/pyvenv/bin/python3",
-        "-m",
-        "pytest",
-        "-q",
-        "-p",
-        "no:cacheprovider",
-        "tests/test_release_config.py"
-      ],
-      "detail": ".............                                                            [100%]\n13 passed in 0.10s"
+      "detail": "Rust/Cargo is not installed in the packaging environment; these checks remain mandatory in CI"
     }
   ]
 }

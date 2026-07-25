@@ -80,7 +80,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-hooks.nsh', 'src-tauri/windows/desktop-shortcut.wxs', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -116,10 +116,10 @@ def main() -> int:
     ok('macos-hardened-runtime', mac.get('hardenedRuntime') is True, str(mac.get('hardenedRuntime')))
     ok('dmg-background-configured', dmg.get('background') == 'dmg/background.png', str(dmg))
     ok('dmg-drag-layout', dmg.get('appPosition') and dmg.get('applicationFolderPosition'), str(dmg))
-    ok('nsis-hooks-configured', nsis.get('installerHooks') == 'windows/nsis-hooks.nsh', str(nsis))
+    ok('nsis-native-shortcut-template', 'installerHooks' not in nsis, str(nsis))
     ok('nsis-installer-icon', nsis.get('installerIcon') == 'icons/icon.ico', str(nsis.get('installerIcon')))
     ok('nsis-uninstaller-icon', nsis.get('uninstallerIcon') == 'icons/icon.ico', str(nsis.get('uninstallerIcon')))
-    ok('wix-fragment-configured', 'windows/desktop-shortcut.wxs' in wix.get('fragmentPaths', []), str(wix))
+    ok('wix-native-shortcut-template', not wix.get('fragmentPaths') and not wix.get('componentRefs'), str(wix))
     ok('wix-upgrade-code-pinned', bool(wix.get('upgradeCode')), str(wix.get('upgradeCode')))
     expected = {'src-tauri/icons/128x128.png': (128, 128), 'src-tauri/icons/128x128@2x.png': (256, 256), 'src-tauri/dmg/background.png': (660, 400), 'src-tauri/windows/nsis-header.bmp': (150, 57), 'src-tauri/windows/nsis-sidebar.bmp': (164, 314), 'src-tauri/windows/wix-banner.bmp': (493, 58), 'src-tauri/windows/wix-dialog.bmp': (493, 312)}
     for rel, size in expected.items():
@@ -134,10 +134,12 @@ def main() -> int:
     generated_keys = {'CFBundleExecutable', 'CFBundleIdentifier', 'CFBundleShortVersionString', 'CFBundleVersion', 'LSMinimumSystemVersion'}
     ok('info-plist-does-not-override-generated-identity', not generated_keys.intersection(info_plist), str(sorted(generated_keys.intersection(info_plist))))
     ok('entitlements-minimal-dictionary', isinstance(entitlements, dict) and (not entitlements), str(entitlements))
-    ET.parse(root / 'src-tauri/windows/desktop-shortcut.wxs')
-    hooks = (root / 'src-tauri/windows/nsis-hooks.nsh').read_text(encoding='utf-8')
-    ok('nsis-create-shortcut', 'CreateShortCut' in hooks and '$DESKTOP' in hooks, '')
-    ok('nsis-delete-shortcut', 'Delete "$DESKTOP' in hooks, '')
+    ok('legacy-wix-shortcut-fragment-removed', not (root / 'src-tauri/windows/desktop-shortcut.wxs').exists(), 'redundant fragment must remain absent')
+    ok('legacy-nsis-shortcut-hooks-removed', not (root / 'src-tauri/windows/nsis-hooks.nsh').exists(), 'redundant hooks must remain absent')
+    verifier = (root / 'scripts/verify-windows-installer.ps1').read_text(encoding='utf-8')
+    ok('windows-verifier-registry-discovery', 'Get-DhadUninstallEntries' in verifier, 'NSIS verifier must discover the actual install root through uninstall metadata')
+    ok('windows-verifier-native-shortcut', 'CommonDesktopDirectory' in verifier and "GetFolderPath('Desktop')" in verifier, 'NSIS verifier must check both user and common desktop shortcuts')
+    ok('windows-verifier-no-forced-destination', '/D=' not in verifier, 'NSIS both-mode verification must not assume /D controls the selected install context')
     workflow = (root / '.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
     for token in ['macos-15', 'macos-15-intel', 'windows-2022', 'aarch64-apple-darwin', 'x86_64-apple-darwin', '--bundles nsis', '--bundles msi', 'tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')

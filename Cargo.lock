@@ -540,7 +540,7 @@ dependencies = [
 
 [[package]]
 name = "dhad-core"
-version = "1.0.16"
+version = "1.0.17"
 dependencies = [
  "miniz_oxide",
  "pyo3",
@@ -552,7 +552,7 @@ dependencies = [
 
 [[package]]
 name = "dhad-desktop"
-version = "1.0.16"
+version = "1.0.17"
 dependencies = [
  "dhad-core",
  "regex",

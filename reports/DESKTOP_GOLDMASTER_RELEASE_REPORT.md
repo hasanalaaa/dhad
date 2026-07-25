@@ -1,72 +1,54 @@
-# Dhad Desktop Gold Master — Release Report
+# Dhad Desktop Gold Master — v1.0.17 Release Report
 
-## Source baseline
+## Scope
 
-The requested `dhad-v1.0-Desktop-Phase3.zip` was not present in the execution environment. The latest available desktop source, `dhad-v1.0-Desktop-Phase2.zip`, was used as the baseline and advanced directly to this Gold Master release package.
+This source package finalizes the native Windows installer path after the tagged v1.0.16 release run proved both macOS targets and exposed two Windows-only defects. The release remains draft-first and is published only after both DMGs, NSIS, and MSI are present and verified.
 
-## Release engineering delivered
+## Diagnosed Windows failures
 
-- Tauri 2 bundle configuration for macOS DMG and Windows NSIS/MSI.
-- Custom DMG background and drag-to-Applications layout.
-- Native icon set including PNG, ICNS, and multi-resolution ICO assets.
-- NSIS desktop shortcut lifecycle hooks and WiX desktop-shortcut fragment.
-- One-command macOS and Windows build scripts.
-- Isolated, pinned ONNX build tooling (`onnx==1.22.0`).
-- GitHub Actions tagged-release pipeline for:
-  - macOS Apple Silicon DMG.
-  - macOS Intel DMG.
-  - Windows x64 NSIS EXE and MSI.
-- Premium Arabic release landing page with configurable demo and release links.
-- GitHub Pages and Vercel deployment metadata.
-- Repeatable release validator and full file/SHA256 inventory generator.
+- **NSIS verification:** the installer exited successfully, but the old verifier assumed `/D=<temporary path>` controlled the destination while Tauri was configured with `installMode = "both"`. The verifier now discovers the authoritative installation through Add/Remove Programs registry metadata and standard installation roots.
+- **MSI linking:** application compilation and WiX `candle.exe` succeeded; `light.exe` failed only after the redundant project-specific desktop-shortcut fragment was added. Tauri already authors the desktop shortcut in its native WiX template, so the duplicate fragment and component reference were removed.
 
-## Local validation results
+## Release engineering changes
 
-- Desktop release structural audit: **87/87 passed**.
-- Repository files covered by the structural audit before final inventory generation: **417**.
-- JavaScript syntax validation: **56 first-party files passed**.
-- Dependency-independent Node test suite: **99/99 passed**.
-- Python files parsed: **103**.
-- HTML files parsed: **6**.
-- YAML files parsed: **15**.
-- Raster images decoded and verified: **26**.
-- JSON, TOML, XML, SVG, and WiX source parsing: passed.
-- Broken symlink and case-insensitive path-collision checks: passed.
-- Obvious embedded private-key/token marker scan: passed.
+- Removed `src-tauri/windows/desktop-shortcut.wxs` and all WiX fragment/component references.
+- Removed `src-tauri/windows/nsis-hooks.nsh` and the duplicate NSIS hook configuration.
+- Kept the native Tauri Windows configuration for install mode, branding, Start Menu folder, desktop shortcut lifecycle, and stable WiX upgrade code.
+- Rebuilt `scripts/verify-windows-installer.ps1` to verify the actual installer lifecycle:
+  - NSIS PE header, silent installation, registry-discovered executable, native desktop shortcut, and silent uninstall cleanup.
+  - MSI compound-file header, administrative extraction, executable payload size, and PE header.
+  - Optional Authenticode enforcement through `DHAD_REQUIRE_WINDOWS_SIGNED=1`.
+- Retained separate Windows NSIS and MSI jobs so one bundle does not hide the result of the other.
+- Retained draft-first atomic publication requiring two DMGs, one MSI, and one NSIS EXE.
 
-## Environment-limited checks
+## Local validation
 
-The execution container did not provide Rust/Cargo or native macOS/Windows toolchains, so a local `cargo build`, DMG build, NSIS build, or MSI build was not performed here. The workflow and one-command scripts are configured to run Rust formatting, Clippy, workspace tests, full npm tests, ONNX validation/optimization, and native Tauri bundling on their target operating systems.
+- Release/version contract: **PASS — 1.0.17 / v1.0.17**.
+- JavaScript syntax: **58 first-party files passed**.
+- Dependency-free Tauri frontend: **44 allowlisted runtime files verified**.
+- Focused release regressions: **48/48 passed**.
+- Desktop release structural audit: **206/206 passed** across 452 files after final report generation.
+- Sovereign release audit: **71/71 passed**.
+- Repository audit: **449 files audited; 0 findings**.
+- Shell, JSON, TOML, YAML, plist, and XML structure checks: **passed through the release validators/auditor**.
 
-The local npm registry could not be resolved during dependency installation. Therefore two dependency-backed test files were deferred locally:
+## Native evidence and remaining gate
 
-- `web_demo/collaboration/secure-yjs-provider.test.mjs` — 4 declared test cases.
-- `web_demo/storage/db.test.mjs` — 9 declared test cases.
+The v1.0.16 hosted release run successfully built, mounted, inspected, and launched both Apple Silicon and Intel DMGs. The packaging host used for v1.0.17 does not provide Cargo, PowerShell, WiX, NSIS, or native Windows runners, so the revised Windows installer build and smoke tests cannot be represented as locally executed. GitHub Actions remains the final native gate.
 
-Their locked dependencies and integrity hashes are present in `web_demo/package-lock.json`; the GitHub Actions validation job runs `npm ci` followed by the complete `npm test` command before any release bundle is published.
+The release must not be published unless all four artifacts exist and pass their native checks:
 
-## Release commands
+1. macOS Apple Silicon DMG.
+2. macOS Intel DMG.
+3. Windows x64 NSIS EXE.
+4. Windows x64 MSI.
 
-### macOS
+## Commands
 
 ```bash
 ./scripts/build-desktop.sh
 ```
 
-### Windows
-
 ```bat
 scripts\build-desktop.bat
 ```
-
-## Included audit artifacts
-
-- `reports/DESKTOP_GOLDMASTER_VALIDATION.md`
-- `reports/DESKTOP_GOLDMASTER_VALIDATION.json`
-- `reports/DESKTOP_GOLDMASTER_DEEP_AUDIT.json`
-- `reports/DESKTOP_GOLDMASTER_NODE_TESTS.txt`
-- `reports/DESKTOP_GOLDMASTER_JS_CHECK.txt`
-- `reports/DESKTOP_ONNX_ASSET_MANIFEST.json`
-- `reports/DESKTOP_GOLDMASTER_DIRECTORY_INVENTORY.txt`
-- `reports/DESKTOP_GOLDMASTER_INVENTORY.json`
-- `reports/DESKTOP_GOLDMASTER_FILE_SHA256SUMS.txt`

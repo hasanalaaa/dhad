@@ -275,14 +275,14 @@ def test_release_version_and_workspace_lock_are_single_source() -> None:
     from tools.validate_release_version import collect_versions, validate
 
     versions = collect_versions(root)
-    assert set(versions.values()) == {"1.0.16"}
-    assert validate(root, "v1.0.16") == []
+    assert set(versions.values()) == {"1.0.17"}
+    assert validate(root, "v1.0.17") == []
     assert not (root / "rust" / "dhad-core-rs" / "Cargo.lock").exists()
 
     lock = tomllib.loads((root / "Cargo.lock").read_text(encoding="utf-8"))
     packages = {item["name"]: item["version"] for item in lock["package"]}
-    assert packages["dhad-core"] == "1.0.16"
-    assert packages["dhad-desktop"] == "1.0.16"
+    assert packages["dhad-core"] == "1.0.17"
+    assert packages["dhad-desktop"] == "1.0.17"
     assert packages["tauri"] == "2.11.5"
     assert packages["tauri-build"] == "2.6.3"
     assert packages["serde_json"] == "1.0.151"
@@ -321,7 +321,7 @@ def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) 
         ),
         encoding="utf-8",
     )
-    errors = validate(tmp_path, "v1.0.16")
+    errors = validate(tmp_path, "v1.0.17")
     assert any("serde_json must be 1.0.151" in error for error in errors)
 
 
@@ -394,8 +394,10 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
     )
 
     for contract in (
-        '"release": "Dhad v1.0.16 Sovereign Edition"',
+        '"release": "Dhad v1.0.17 Sovereign Edition"',
         'popen_options["start_new_session"] = True',
+        'tempfile.TemporaryFile(mode="w+t", encoding="utf-8")',
+        "process.wait(timeout=timeout)",
         "os.killpg(process.pid, signal.SIGKILL)",
         '["taskkill", "/PID", str(process.pid), "/T", "/F"]',
         '"cargo", "check", "--workspace", "--all-targets", "--locked"',

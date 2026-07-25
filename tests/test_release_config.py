@@ -192,10 +192,11 @@ def test_macos_bundle_verifier_and_ci_smoke_test_are_mandatory():
     assert "ditto" in shell_source
 
 
-def test_windows_installers_are_split_verified_and_wix_shortcut_is_validation_safe():
+def test_windows_installers_are_split_and_use_native_tauri_shortcuts():
     workflow = (ROOT / ".github" / "workflows" / "desktop-release.yml").read_text(encoding="utf-8")
     verifier = (ROOT / "scripts" / "verify-windows-installer.ps1").read_text(encoding="utf-8")
-    fragment = (ROOT / "src-tauri" / "windows" / "desktop-shortcut.wxs").read_text(encoding="utf-8")
+    config = json.loads((ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8"))
+    windows = config["bundle"]["windows"]
 
     assert "Windows x64 NSIS" in workflow
     assert "Windows x64 MSI" in workflow
@@ -206,9 +207,14 @@ def test_windows_installers_are_split_verified_and_wix_shortcut_is_validation_sa
     assert "verify-windows-installer.ps1" in workflow
     assert "MSI administrative extraction failed" in verifier
     assert "NSIS silent installation failed" in verifier
-    assert '<DirectoryRef Id="TARGETDIR">' in fragment
-    assert 'Directory="DesktopFolder"' in fragment
-    assert 'Action="createAndRemoveOnUninstall"' in fragment
+    assert "Get-DhadUninstallEntries" in verifier
+    assert "CommonDesktopDirectory" in verifier
+    assert "NSIS install, desktop shortcut, and uninstall lifecycle: PASS" in verifier
+    assert "installerHooks" not in windows["nsis"]
+    assert "fragmentPaths" not in windows["wix"]
+    assert "componentRefs" not in windows["wix"]
+    assert not (ROOT / "src-tauri" / "windows" / "nsis-hooks.nsh").exists()
+    assert not (ROOT / "src-tauri" / "windows" / "desktop-shortcut.wxs").exists()
 
 
 
@@ -222,7 +228,7 @@ def test_macos_release_wrapper_verifies_the_app_shipped_inside_a_dmg(tmp_path):
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir()
     arguments_log = tmp_path / "python-arguments.txt"
-    dmg = tmp_path / "Dhad_1.0.16_aarch64.dmg"
+    dmg = tmp_path / "Dhad_1.0.17_aarch64.dmg"
     dmg.write_bytes(b"synthetic-dmg")
 
     scripts = {

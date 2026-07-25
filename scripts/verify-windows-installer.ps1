@@ -8,6 +8,127 @@ if ($bundle -notin @('nsis', 'msi')) {
     throw "DHAD_WINDOWS_BUNDLE must be 'nsis' or 'msi', got '$bundle'."
 }
 
+$config = Get-Content -LiteralPath (Join-Path $root 'src-tauri/tauri.conf.json') -Raw | ConvertFrom-Json
+$productName = [string]$config.productName
+$productVersion = [string]$config.version
+$mainBinary = [string]$config.mainBinaryName
+if ([string]::IsNullOrWhiteSpace($productName) -or [string]::IsNullOrWhiteSpace($productVersion) -or [string]::IsNullOrWhiteSpace($mainBinary)) {
+    throw 'Tauri productName, version, and mainBinaryName are required for Windows verification.'
+}
+$expectedExe = "$mainBinary.exe"
+
+function Test-PeHeader([string]$Path, [string]$Label) {
+    $stream = [System.IO.File]::OpenRead($Path)
+    try {
+        $first = $stream.ReadByte()
+        $second = $stream.ReadByte()
+    }
+    finally {
+        $stream.Dispose()
+    }
+    if ($first -ne 0x4D -or $second -ne 0x5A) {
+        throw "$Label does not have a valid PE MZ header: $Path"
+    }
+}
+
+function Get-DhadUninstallEntries {
+    $paths = @(
+        'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+        'HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
+        'HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    )
+    $entries = foreach ($path in $paths) {
+        Get-ItemProperty -Path $path -ErrorAction SilentlyContinue |
+            Where-Object {
+                $_.DisplayName -eq $productName -and
+                ([string]::IsNullOrWhiteSpace([string]$_.DisplayVersion) -or $_.DisplayVersion -eq $productVersion)
+            }
+    }
+    @($entries)
+}
+
+function Add-RootCandidate([System.Collections.Generic.List[string]]$Roots, [object]$Value) {
+    if ($null -eq $Value) { return }
+    $candidate = ([string]$Value).Trim().Trim('"')
+    if ([string]::IsNullOrWhiteSpace($candidate)) { return }
+    if ($candidate -match '^(?<exe>.+?\.exe)(?:\s+.*)?$') {
+        $candidate = Split-Path -Parent $Matches.exe.Trim('"')
+    }
+    if (-not [string]::IsNullOrWhiteSpace($candidate) -and -not $Roots.Contains($candidate)) {
+        $Roots.Add($candidate)
+    }
+}
+
+function Resolve-Executable([object[]]$Entries) {
+    $roots = [System.Collections.Generic.List[string]]::new()
+    foreach ($entry in $Entries) {
+        Add-RootCandidate $roots $entry.InstallLocation
+        Add-RootCandidate $roots $entry.UninstallString
+        Add-RootCandidate $roots $entry.QuietUninstallString
+    }
+
+    $publisher = [string]$config.bundle.publisher
+    if (-not [string]::IsNullOrWhiteSpace($publisher)) {
+        foreach ($registryPath in @(
+            "HKCU:\Software\$publisher\$productName",
+            "HKLM:\Software\$publisher\$productName"
+        )) {
+            try {
+                $defaultValue = (Get-Item -LiteralPath $registryPath -ErrorAction Stop).GetValue('')
+                Add-RootCandidate $roots $defaultValue
+            }
+            catch { }
+        }
+    }
+
+    foreach ($known in @(
+        (Join-Path $env:LOCALAPPDATA $productName),
+        (Join-Path $env:ProgramFiles $productName),
+        $(if (${env:ProgramFiles(x86)}) { Join-Path ${env:ProgramFiles(x86)} $productName } else { $null })
+    )) {
+        Add-RootCandidate $roots $known
+    }
+
+    foreach ($candidateRoot in $roots) {
+        $direct = Join-Path $candidateRoot $expectedExe
+        if (Test-Path -LiteralPath $direct -PathType Leaf) {
+            return [pscustomobject]@{ App = Get-Item -LiteralPath $direct; Roots = $roots }
+        }
+        if (Test-Path -LiteralPath $candidateRoot -PathType Container) {
+            $nested = Get-ChildItem -LiteralPath $candidateRoot -Filter $expectedExe -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($nested) {
+                return [pscustomobject]@{ App = $nested; Roots = $roots }
+            }
+        }
+    }
+    [pscustomobject]@{ App = $null; Roots = $roots }
+}
+
+function Resolve-Uninstaller([object[]]$Entries, [string]$InstallRoot) {
+    foreach ($entry in $Entries) {
+        foreach ($value in @($entry.QuietUninstallString, $entry.UninstallString)) {
+            if ([string]::IsNullOrWhiteSpace([string]$value)) { continue }
+            $raw = ([string]$value).Trim()
+            if ($raw -match '^"(?<exe>[^"]+\.exe)"\s*(?<args>.*)$') {
+                if (Test-Path -LiteralPath $Matches.exe -PathType Leaf) {
+                    return [pscustomobject]@{ Exe = $Matches.exe; Args = $Matches.args }
+                }
+            }
+            elseif ($raw -match '^(?<exe>.+?\.exe)(?:\s+(?<args>.*))?$') {
+                $exe = $Matches.exe.Trim('"')
+                if (Test-Path -LiteralPath $exe -PathType Leaf) {
+                    return [pscustomobject]@{ Exe = $exe; Args = [string]$Matches.args }
+                }
+            }
+        }
+    }
+    $fallback = Join-Path $InstallRoot 'uninstall.exe'
+    if (Test-Path -LiteralPath $fallback -PathType Leaf) {
+        return [pscustomobject]@{ Exe = $fallback; Args = '' }
+    }
+    $null
+}
+
 $extension = if ($bundle -eq 'msi') { '.msi' } else { '.exe' }
 $candidates = Get-ChildItem -Path (Join-Path $root 'target') -Recurse -File -ErrorAction SilentlyContinue |
     Where-Object {
@@ -27,51 +148,116 @@ Write-Host "Verifying $bundle installer: $($installer.FullName)"
 Write-Host "Installer size: $($installer.Length) bytes"
 
 if ($bundle -eq 'nsis') {
+    Test-PeHeader $installer.FullName 'NSIS installer'
+
+    # Tauri's `both` install mode selects its own current-user or all-users location.
+    # Do not assert that NSIS /D overrides the MultiUser-selected directory; discover
+    # the authoritative destination through Add/Remove Programs metadata instead.
+    $process = Start-Process -FilePath $installer.FullName -ArgumentList '/S' -Wait -PassThru
+    if ($process.ExitCode -ne 0) {
+        throw "NSIS silent installation failed with exit code $($process.ExitCode)."
+    }
+
+    $entries = @()
+    $resolved = $null
+    for ($attempt = 0; $attempt -lt 20; $attempt++) {
+        $entries = Get-DhadUninstallEntries
+        $resolved = Resolve-Executable $entries
+        if ($resolved.App) { break }
+        Start-Sleep -Milliseconds 500
+    }
+    if (-not $resolved.App) {
+        Write-Host 'NSIS uninstall registry entries:'
+        $entries | Select-Object DisplayName, DisplayVersion, InstallLocation, UninstallString, QuietUninstallString | Format-List | Out-String | Write-Host
+        Write-Host "Candidate installation roots: $($resolved.Roots -join '; ')"
+        $diagnosticRoots = @($env:LOCALAPPDATA, $env:ProgramFiles, ${env:ProgramFiles(x86)}) | Where-Object { $_ -and (Test-Path -LiteralPath $_) }
+        $matches = foreach ($diagnosticRoot in $diagnosticRoots) {
+            Get-ChildItem -LiteralPath $diagnosticRoot -Filter $expectedExe -Recurse -File -Depth 4 -ErrorAction SilentlyContinue
+        }
+        Write-Host "Discovered matching executables: $((@($matches).FullName) -join '; ')"
+        throw "NSIS installation completed but $expectedExe could not be resolved from registry or standard install roots."
+    }
+
+    $app = $resolved.App
+    Write-Host "Installed executable: $($app.FullName)"
+    Write-Host "Installed executable size: $($app.Length) bytes"
+    if ($app.Length -lt 1MB) {
+        throw "Installed executable is unexpectedly small: $($app.FullName)"
+    }
+    Test-PeHeader $app.FullName 'Installed application'
+
+    $desktopPaths = @(
+        [Environment]::GetFolderPath('Desktop'),
+        [Environment]::GetFolderPath('CommonDesktopDirectory')
+    ) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique
+    $shortcut = foreach ($desktopPath in $desktopPaths) {
+        $candidate = Join-Path $desktopPath "$productName.lnk"
+        if (Test-Path -LiteralPath $candidate -PathType Leaf) { Get-Item -LiteralPath $candidate }
+    }
+    if (-not $shortcut) {
+        throw "NSIS installed $expectedExe but did not create the native Tauri desktop shortcut '$productName.lnk'."
+    }
+    Write-Host "Desktop shortcut: $($shortcut[0].FullName)"
+
+    $installRoot = Split-Path -Parent $app.FullName
+    $uninstaller = Resolve-Uninstaller $entries $installRoot
+    if (-not $uninstaller) {
+        throw 'NSIS installation succeeded but no uninstaller could be resolved.'
+    }
+    $uninstallArgs = @()
+    if (-not [string]::IsNullOrWhiteSpace($uninstaller.Args)) {
+        $uninstallArgs += $uninstaller.Args
+    }
+    if (($uninstallArgs -join ' ') -notmatch '(?i)(^|\s)/S($|\s)') {
+        $uninstallArgs += '/S'
+    }
+    $uninstall = Start-Process -FilePath $uninstaller.Exe -ArgumentList $uninstallArgs -Wait -PassThru
+    if ($uninstall.ExitCode -ne 0) {
+        throw "NSIS silent uninstall failed with exit code $($uninstall.ExitCode)."
+    }
+    for ($attempt = 0; $attempt -lt 20 -and (Test-Path -LiteralPath $app.FullName); $attempt++) {
+        Start-Sleep -Milliseconds 500
+    }
+    if (Test-Path -LiteralPath $app.FullName) {
+        throw "NSIS silent uninstall completed but the application executable still exists: $($app.FullName)"
+    }
+    Write-Host 'NSIS install, desktop shortcut, and uninstall lifecycle: PASS'
+}
+else {
     $stream = [System.IO.File]::OpenRead($installer.FullName)
     try {
-        $first = $stream.ReadByte()
-        $second = $stream.ReadByte()
+        $signatureBytes = New-Object byte[] 8
+        [void]$stream.Read($signatureBytes, 0, 8)
     }
     finally {
         $stream.Dispose()
     }
-    if ($first -ne 0x4D -or $second -ne 0x5A) {
-        throw 'NSIS installer does not have a valid PE MZ header.'
+    $oleSignature = [byte[]](0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1)
+    if (($signatureBytes -join ',') -ne ($oleSignature -join ',')) {
+        throw 'MSI installer does not have a valid Windows Installer compound-file header.'
     }
 
-    $installRoot = Join-Path $env:RUNNER_TEMP 'dhad-nsis-smoke'
-    Remove-Item -LiteralPath $installRoot -Recurse -Force -ErrorAction SilentlyContinue
-    $process = Start-Process -FilePath $installer.FullName -ArgumentList @('/S', "/D=$installRoot") -Wait -PassThru
-    if ($process.ExitCode -ne 0) {
-        throw "NSIS silent installation failed with exit code $($process.ExitCode)."
-    }
-    $app = Get-ChildItem -Path $installRoot -Filter 'dhad-desktop.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
-    if (-not $app) {
-        throw 'NSIS installation completed but dhad-desktop.exe was not installed.'
-    }
-    $uninstaller = Get-ChildItem -Path $installRoot -Filter 'uninstall*.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($uninstaller) {
-        $uninstall = Start-Process -FilePath $uninstaller.FullName -ArgumentList '/S' -Wait -PassThru
-        if ($uninstall.ExitCode -ne 0) {
-            throw "NSIS silent uninstall failed with exit code $($uninstall.ExitCode)."
-        }
-    }
-    Remove-Item -LiteralPath $installRoot -Recurse -Force -ErrorAction SilentlyContinue
-}
-else {
     $adminRoot = Join-Path $env:RUNNER_TEMP 'dhad-msi-admin-image'
+    $msiLog = Join-Path $env:RUNNER_TEMP 'dhad-msi-admin.log'
     Remove-Item -LiteralPath $adminRoot -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -LiteralPath $msiLog -Force -ErrorAction SilentlyContinue
     New-Item -ItemType Directory -Path $adminRoot | Out-Null
-    $arguments = @('/a', "`"$($installer.FullName)`"", '/qn', "TARGETDIR=`"$adminRoot`"")
+    $arguments = @('/a', $installer.FullName, '/qn', "TARGETDIR=$adminRoot", '/l*v', $msiLog)
     $process = Start-Process -FilePath "$env:SystemRoot\System32\msiexec.exe" -ArgumentList $arguments -Wait -PassThru
     if ($process.ExitCode -notin @(0, 3010)) {
+        if (Test-Path -LiteralPath $msiLog) { Get-Content -LiteralPath $msiLog -Tail 200 | Write-Host }
         throw "MSI administrative extraction failed with exit code $($process.ExitCode)."
     }
-    $app = Get-ChildItem -Path $adminRoot -Filter 'dhad-desktop.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    $app = Get-ChildItem -Path $adminRoot -Filter $expectedExe -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
     if (-not $app) {
-        throw 'MSI database opened successfully but the administrative image contains no dhad-desktop.exe.'
+        throw "MSI database opened successfully but the administrative image contains no $expectedExe."
     }
+    if ($app.Length -lt 1MB) {
+        throw "MSI administrative image contains an unexpectedly small application executable: $($app.FullName)"
+    }
+    Test-PeHeader $app.FullName 'MSI application payload'
     Remove-Item -LiteralPath $adminRoot -Recurse -Force -ErrorAction SilentlyContinue
+    Write-Host 'MSI administrative extraction and payload validation: PASS'
 }
 
 $signature = Get-AuthenticodeSignature -LiteralPath $installer.FullName

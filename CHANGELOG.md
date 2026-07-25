@@ -1,3 +1,12 @@
+## 1.0.17 — 2026-07-25 — Native Windows installer finalization
+
+- Removed the redundant WiX desktop-shortcut fragment because Tauri 2.11 already authors and references its own validated desktop shortcut component; the extra component was the only project-specific input reaching `light.exe` when MSI linking failed.
+- Removed duplicate NSIS shortcut hooks and rely on Tauri's native shortcut lifecycle, including silent-install shortcut creation.
+- Reworked the Windows verifier to discover the actual NSIS installation through Add/Remove Programs registry metadata instead of assuming `/D` controls the destination while `installMode` is `both`.
+- Added bounded registry/path diagnostics, executable metadata checks, desktop-shortcut verification, and verified silent uninstall cleanup.
+- Kept MSI validation as an administrative extraction and executable-presence check after native WiX generation.
+- Promoted every distributable surface to version `1.0.17`.
+
 ## 1.0.16 — 2026-07-25 — Native bundle verification and Windows MSI hardening
 
 - Repaired the workspace lockfile after a broad textual version promotion accidentally transformed `serde_json 1.0.151` into the nonexistent `1.0.161`; both Rust manifests now pin `serde_json = "=1.0.151"` and release validation enforces the lock/manifests together.

@@ -1,7 +1,7 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **454**
-- Checks passed: **205/205**
+- Files audited: **452**
+- Checks passed: **206/206**
 - Errors: **0**
 - Warnings: **0**
 
@@ -13,8 +13,6 @@
 - PASS — `required:src-tauri/icons/icon.icns`: missing or empty required release file
 - PASS — `required:src-tauri/icons/icon.ico`: missing or empty required release file
 - PASS — `required:src-tauri/dmg/background.png`: missing or empty required release file
-- PASS — `required:src-tauri/windows/nsis-hooks.nsh`: missing or empty required release file
-- PASS — `required:src-tauri/windows/desktop-shortcut.wxs`: missing or empty required release file
 - PASS — `required:src-tauri/windows/nsis-header.bmp`: missing or empty required release file
 - PASS — `required:src-tauri/windows/nsis-sidebar.bmp`: missing or empty required release file
 - PASS — `required:src-tauri/windows/wix-banner.bmp`: missing or empty required release file
@@ -59,10 +57,10 @@
 - PASS — `macos-hardened-runtime`: True
 - PASS — `dmg-background-configured`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
 - PASS — `dmg-drag-layout`: {'background': 'dmg/background.png', 'appPosition': {'x': 180, 'y': 190}, 'applicationFolderPosition': {'x': 480, 'y': 190}, 'windowSize': {'width': 660, 'height': 400}}
-- PASS — `nsis-hooks-configured`: {'compression': 'lzma', 'installMode': 'both', 'installerIcon': 'icons/icon.ico', 'uninstallerIcon': 'icons/icon.ico', 'headerImage': 'windows/nsis-header.bmp', 'sidebarImage': 'windows/nsis-sidebar.bmp', 'uninstallerHeaderImage': 'windows/nsis-header.bmp', 'installerHooks': 'windows/nsis-hooks.nsh', 'startMenuFolder': 'Dhad', 'languages': ['English']}
+- PASS — `nsis-native-shortcut-template`: {'compression': 'lzma', 'installMode': 'both', 'installerIcon': 'icons/icon.ico', 'uninstallerIcon': 'icons/icon.ico', 'headerImage': 'windows/nsis-header.bmp', 'sidebarImage': 'windows/nsis-sidebar.bmp', 'uninstallerHeaderImage': 'windows/nsis-header.bmp', 'startMenuFolder': 'Dhad', 'languages': ['English']}
 - PASS — `nsis-installer-icon`: icons/icon.ico
 - PASS — `nsis-uninstaller-icon`: icons/icon.ico
-- PASS — `wix-fragment-configured`: {'bannerPath': 'windows/wix-banner.bmp', 'dialogImagePath': 'windows/wix-dialog.bmp', 'fragmentPaths': ['windows/desktop-shortcut.wxs'], 'componentRefs': ['DhadDesktopShortcut'], 'language': 'en-US', 'upgradeCode': '279f422c-ff6b-528a-962b-dea62c4bb547'}
+- PASS — `wix-native-shortcut-template`: {'bannerPath': 'windows/wix-banner.bmp', 'dialogImagePath': 'windows/wix-dialog.bmp', 'language': 'en-US', 'upgradeCode': '279f422c-ff6b-528a-962b-dea62c4bb547'}
 - PASS — `wix-upgrade-code-pinned`: 279f422c-ff6b-528a-962b-dea62c4bb547
 - PASS — `dimensions:src-tauri/icons/128x128.png`: expected (128, 128), got (128, 128)
 - PASS — `dimensions:src-tauri/icons/128x128@2x.png`: expected (256, 256), got (256, 256)
@@ -75,8 +73,11 @@
 - PASS — `info-plist-display-name`: ضاد
 - PASS — `info-plist-does-not-override-generated-identity`: []
 - PASS — `entitlements-minimal-dictionary`: {}
-- PASS — `nsis-create-shortcut`
-- PASS — `nsis-delete-shortcut`
+- PASS — `legacy-wix-shortcut-fragment-removed`: redundant fragment must remain absent
+- PASS — `legacy-nsis-shortcut-hooks-removed`: redundant hooks must remain absent
+- PASS — `windows-verifier-registry-discovery`: NSIS verifier must discover the actual install root through uninstall metadata
+- PASS — `windows-verifier-native-shortcut`: NSIS verifier must check both user and common desktop shortcuts
+- PASS — `windows-verifier-no-forced-destination`: NSIS both-mode verification must not assume /D controls the selected install context
 - PASS — `workflow:macos-15`: missing workflow contract
 - PASS — `workflow:macos-15-intel`: missing workflow contract
 - PASS — `workflow:windows-2022`: missing workflow contract
@@ -183,8 +184,8 @@
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `release-version-validator-semver`
 - PASS — `single-workspace-cargo-lock`: member lockfile must not exist
-- PASS — `cargo-lock-desktop-member`: 1.0.16
-- PASS — `cargo-lock-core-member`: 1.0.16
+- PASS — `cargo-lock-desktop-member`: 1.0.17
+- PASS — `cargo-lock-core-member`: 1.0.17
 - PASS — `cargo-lock-tauri-pinned`: 2.11.5
 - PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
 - PASS — `cargo-lock-serde-json-pinned`: 1.0.151
@@ -211,4 +212,4 @@
 - PASS — `release-publishes-after-asset-verification`
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 454 files
+- PASS — `repository-file-count`: only 452 files
