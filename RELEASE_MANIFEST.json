@@ -1,8 +1,8 @@
 {
   "project": "Dhad",
-  "version": "1.0.15",
-  "python_version": "1.0.15",
-  "completed_phase": "Ultimate Desktop Release v1.0.15",
+  "version": "1.0.16",
+  "python_version": "1.0.16",
+  "completed_phase": "Ultimate Desktop Release v1.0.16",
   "phase_name": "Reproducible Tauri desktop release with exact frontend closure and atomic multi-platform publication",
   "tests_passed": 72,
   "quality": {
