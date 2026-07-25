@@ -1,13 +1,14 @@
 # Dhad Desktop Gold Master Validation
 
-- Files audited: **452**
-- Checks passed: **206/206**
+- Files audited: **454**
+- Checks passed: **221/221**
 - Errors: **0**
 - Warnings: **0**
 
 ## Results
 
 - PASS — `required:src-tauri/tauri.conf.json`: missing or empty required release file
+- PASS — `required:src-tauri/tauri.windows.conf.json`: missing or empty required release file
 - PASS — `required:src-tauri/icons/128x128.png`: missing or empty required release file
 - PASS — `required:src-tauri/icons/128x128@2x.png`: missing or empty required release file
 - PASS — `required:src-tauri/icons/icon.icns`: missing or empty required release file
@@ -33,6 +34,7 @@
 - PASS — `required:tools/verify_macos_bundle.py`: missing or empty required release file
 - PASS — `required:scripts/verify-macos-app.sh`: missing or empty required release file
 - PASS — `required:scripts/verify-windows-installer.ps1`: missing or empty required release file
+- PASS — `required:scripts/test-windows-installer-verifier.ps1`: missing or empty required release file
 - PASS — `required:scripts/install-macos-app.sh`: missing or empty required release file
 - PASS — `required:tools/clean_repository.py`: missing or empty required release file
 - PASS — `required:tools/build_web_dist.mjs`: missing or empty required release file
@@ -62,6 +64,11 @@
 - PASS — `nsis-uninstaller-icon`: icons/icon.ico
 - PASS — `wix-native-shortcut-template`: {'bannerPath': 'windows/wix-banner.bmp', 'dialogImagePath': 'windows/wix-dialog.bmp', 'language': 'en-US', 'upgradeCode': '279f422c-ff6b-528a-962b-dea62c4bb547'}
 - PASS — `wix-upgrade-code-pinned`: 279f422c-ff6b-528a-962b-dea62c4bb547
+- PASS — `windows-product-name-ascii-safe`: Dhad
+- PASS — `windows-short-description-ascii-safe`: Local and secure Arabic writing assistant
+- PASS — `windows-long-description-ascii-safe`: Dhad is a local-first Arabic writing assistant for proofreading, analysis, and rewriting.
+- PASS — `windows-wix-language-en-us`: {'language': 'en-US'}
+- PASS — `windows-nsis-start-menu-ascii-safe`: {'startMenuFolder': 'Dhad'}
 - PASS — `dimensions:src-tauri/icons/128x128.png`: expected (128, 128), got (128, 128)
 - PASS — `dimensions:src-tauri/icons/128x128@2x.png`: expected (256, 256), got (256, 256)
 - PASS — `dimensions:src-tauri/dmg/background.png`: expected (660, 400), got (660, 400)
@@ -78,6 +85,9 @@
 - PASS — `windows-verifier-registry-discovery`: NSIS verifier must discover the actual install root through uninstall metadata
 - PASS — `windows-verifier-native-shortcut`: NSIS verifier must check both user and common desktop shortcuts
 - PASS — `windows-verifier-no-forced-destination`: NSIS both-mode verification must not assume /D controls the selected install context
+- PASS — `windows-verifier-strict-safe-properties`: registry properties must be optional under Set-StrictMode
+- PASS — `windows-verifier-platform-config`: verifier must use the effective Windows product identity
+- PASS — `windows-verifier-native-contract-test`: missing-property regression must run on Windows CI
 - PASS — `workflow:macos-15`: missing workflow contract
 - PASS — `workflow:macos-15-intel`: missing workflow contract
 - PASS — `workflow:windows-2022`: missing workflow contract
@@ -85,6 +95,7 @@
 - PASS — `workflow:x86_64-apple-darwin`: missing workflow contract
 - PASS — `workflow:--bundles nsis`: missing workflow contract
 - PASS — `workflow:--bundles msi`: missing workflow contract
+- PASS — `workflow:--verbose --target x86_64-pc-windows-msvc --bundles msi`: missing workflow contract
 - PASS — `workflow:tauri-apps/tauri-action@v1`: missing workflow contract
 - PASS — `workflow-validation:v*.*.*`: missing workflow contract matching ["\']v\*\.\*\.\*["\']
 - PASS — `workflow-validation:libwebkit2gtk-4.1-dev`: missing workflow contract matching \blibwebkit2gtk-4\.1-dev\b
@@ -107,6 +118,8 @@
 - PASS — `workflow-validation:npm test`: missing workflow contract matching \bnpm\s+test\b
 - PASS — `workflow-validation:verify-macos-app.sh`: missing workflow contract matching (?:^|[\s./])verify-macos-app\.sh\b
 - PASS — `workflow-validation:verify-windows-installer.ps1`: missing workflow contract matching verify-windows-installer\.ps1
+- PASS — `workflow-validation:WiX failure diagnostics`: missing workflow contract matching Upload WiX diagnostics after MSI failure
+- PASS — `workflow-validation:Windows platform identity`: missing workflow contract matching tauri\.windows\.conf\.json
 - PASS — `workflow-validation:VBSCRIPT MSI prerequisite`: missing workflow contract matching VBSCRIPT smoke test: PASS
 - PASS — `workflow-validation:stable ASCII release names`: missing workflow contract matching releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]
 - PASS — `workflow-validation:APPLE_SIGNING_IDENTITY`: missing workflow contract matching \bAPPLE_SIGNING_IDENTITY\b
@@ -122,6 +135,8 @@
 - PASS — `ci:rust-toolchain-pinned`: missing CI contract: dtolnay/rust-toolchain@1.97.1
 - PASS — `ci:pythonpath-root-and-src`: missing CI contract: PYTHONPATH: ".:src"
 - PASS — `ci:node-22`: missing CI contract: node-version: "22"
+- PASS — `ci:windows-verifier-contract-job`: missing CI contract: Windows installer verifier contracts
+- PASS — `ci:windows-verifier-test-script`: missing CI contract: test-windows-installer-verifier.ps1
 - PASS — `ci:ruff-check`: missing CI contract: ruff check src tests tools benchmarks gunicorn_conf.py
 - PASS — `ci:pytest`: missing CI contract: pytest -q
 - PASS — `ci:npm-test`: missing CI contract: npm test
@@ -184,8 +199,8 @@
 - PASS — `desktop-build-tools-pinned`: ['onnx==1.22.0', 'PyYAML==6.0.3']
 - PASS — `release-version-validator-semver`
 - PASS — `single-workspace-cargo-lock`: member lockfile must not exist
-- PASS — `cargo-lock-desktop-member`: 1.0.17
-- PASS — `cargo-lock-core-member`: 1.0.17
+- PASS — `cargo-lock-desktop-member`: 1.0.18
+- PASS — `cargo-lock-core-member`: 1.0.18
 - PASS — `cargo-lock-tauri-pinned`: 2.11.5
 - PASS — `cargo-lock-tauri-build-pinned`: 2.6.3
 - PASS — `cargo-lock-serde-json-pinned`: 1.0.151
@@ -212,4 +227,4 @@
 - PASS — `release-publishes-after-asset-verification`
 - PASS — `no-obvious-embedded-private-keys`: []
 - PASS — `onnx-assets-present`: no ONNX models found
-- PASS — `repository-file-count`: only 452 files
+- PASS — `repository-file-count`: only 454 files

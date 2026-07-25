@@ -1,17 +1,17 @@
 Dhad Desktop Gold Master — Directory Inventory
 ================================================
 Source base: dhad-v1.0-Desktop-Ultimate-v17.zip
-Files inventoried: 449
-Total bytes: 180227911
+Files inventoried: 451
+Total bytes: 180242628
 
 Top-level inventory:
 - .dockerignore: 1 files, 377 bytes
 - .gitattributes: 1 files, 365 bytes
-- .github: 3 files, 18343 bytes
+- .github: 3 files, 21080 bytes
 - .gitignore: 1 files, 1071 bytes
 - .nvmrc: 1 files, 3 bytes
 - .tauriignore: 1 files, 405 bytes
-- CHANGELOG.md: 1 files, 33747 bytes
+- CHANGELOG.md: 1 files, 34107 bytes
 - CODE_OF_CONDUCT.md: 1 files, 5754 bytes
 - CONTRIBUTING.md: 1 files, 3564 bytes
 - Cargo.lock: 1 files, 116049 bytes
@@ -20,7 +20,7 @@ Top-level inventory:
 - LICENSE: 1 files, 34020 bytes
 - Makefile: 1 files, 653 bytes
 - README.md: 1 files, 10110 bytes
-- RELEASE_MANIFEST.json: 1 files, 22349 bytes
+- RELEASE_MANIFEST.json: 1 files, 22395 bytes
 - SECURITY.md: 1 files, 5731 bytes
 - SHA256SUMS.txt: 1 files, 626 bytes
 - benchmarks: 5 files, 9799 bytes
@@ -31,22 +31,22 @@ Top-level inventory:
 - gunicorn_conf.py: 1 files, 2468 bytes
 - mobile: 1 files, 1075 bytes
 - pyproject.toml: 1 files, 2311 bytes
-- reports: 84 files, 651315 bytes
+- reports: 84 files, 655738 bytes
 - requirements-dev.lock: 1 files, 992 bytes
 - rust: 18 files, 4138193 bytes
 - rust-toolchain.toml: 1 files, 123 bytes
-- scripts: 5 files, 25390 bytes
+- scripts: 6 files, 28340 bytes
 - src: 82 files, 6142541 bytes
-- src-tauri: 30 files, 2519641 bytes
-- tests: 44 files, 253745 bytes
-- tools: 24 files, 182560 bytes
+- src-tauri: 31 files, 2520056 bytes
+- tests: 44 files, 255174 bytes
+- tools: 24 files, 184917 bytes
 - vercel.json: 1 files, 431 bytes
 - web_demo: 79 files, 165717325 bytes
 
 Extension counts:
 - .py: 113
 - .md: 81
-- .json: 67
+- .json: 68
 - .js: 31
 - .mjs: 31
 - .png: 20
@@ -65,12 +65,12 @@ Extension counts:
 - .lock: 2
 - .onnx: 2
 - .plist: 2
+- .ps1: 2
 - .svg: 2
 - .bat: 1
 - .desktop: 1
 - .icns: 1
 - .ico: 1
-- .ps1: 1
 - .sha256: 1
 - .typed: 1
 - .webmanifest: 1

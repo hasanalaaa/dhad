@@ -156,7 +156,7 @@ def write_reports(root: Path, results: list[MatrixResult]) -> None:
     report_dir.mkdir(exist_ok=True)
     counts = {status: sum(item.status == status for item in results) for status in ("passed", "failed", "blocked", "timed_out")}
     payload = {
-        "release": "Dhad v1.0.17 Sovereign Edition",
+        "release": "Dhad v1.0.18 Sovereign Edition",
         "summary": counts | {"total": len(results)},
         "results": [asdict(item) for item in results],
     }

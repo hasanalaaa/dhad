@@ -47,6 +47,8 @@ def test_workflow_contains_pinned_release_contracts() -> None:
         "dtolnay/rust-toolchain@1.97.1",
         "verify-macos-app.sh",
         "verify-windows-installer.ps1",
+        "test-windows-installer-verifier.ps1",
+        "Upload WiX diagnostics after MSI failure",
         "windows-2022",
         "VBSCRIPT smoke test: PASS",
         "APPLE_SIGNING_IDENTITY",
@@ -188,6 +190,8 @@ def test_general_ci_matches_pinned_toolchains_and_import_paths() -> None:
     assert "dtolnay/rust-toolchain@1.97.1" in workflow
     assert 'PYTHONPATH: ".:src"' in workflow
     assert 'node-version: "22"' in workflow
+    assert "Windows installer verifier contracts" in workflow
+    assert "test-windows-installer-verifier.ps1" in workflow
     assert 'pythonpath = [".", "src"]' in pyproject
     assert 'addopts = ["--import-mode=prepend"]' in pyproject
 
@@ -275,14 +279,14 @@ def test_release_version_and_workspace_lock_are_single_source() -> None:
     from tools.validate_release_version import collect_versions, validate
 
     versions = collect_versions(root)
-    assert set(versions.values()) == {"1.0.17"}
-    assert validate(root, "v1.0.17") == []
+    assert set(versions.values()) == {"1.0.18"}
+    assert validate(root, "v1.0.18") == []
     assert not (root / "rust" / "dhad-core-rs" / "Cargo.lock").exists()
 
     lock = tomllib.loads((root / "Cargo.lock").read_text(encoding="utf-8"))
     packages = {item["name"]: item["version"] for item in lock["package"]}
-    assert packages["dhad-core"] == "1.0.17"
-    assert packages["dhad-desktop"] == "1.0.17"
+    assert packages["dhad-core"] == "1.0.18"
+    assert packages["dhad-desktop"] == "1.0.18"
     assert packages["tauri"] == "2.11.5"
     assert packages["tauri-build"] == "2.6.3"
     assert packages["serde_json"] == "1.0.151"
@@ -321,7 +325,7 @@ def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) 
         ),
         encoding="utf-8",
     )
-    errors = validate(tmp_path, "v1.0.17")
+    errors = validate(tmp_path, "v1.0.18")
     assert any("serde_json must be 1.0.151" in error for error in errors)
 
 
@@ -394,7 +398,7 @@ def test_validation_matrix_kills_timeout_process_trees_and_uses_locked_rust() ->
     )
 
     for contract in (
-        '"release": "Dhad v1.0.17 Sovereign Edition"',
+        '"release": "Dhad v1.0.18 Sovereign Edition"',
         'popen_options["start_new_session"] = True',
         'tempfile.TemporaryFile(mode="w+t", encoding="utf-8")',
         "process.wait(timeout=timeout)",

@@ -1,14 +1,19 @@
 {
-  "generated_at_utc": "2026-07-25T05:53:35.584940+00:00",
-  "file_count": 452,
-  "total_bytes": 180351335,
-  "checks_total": 206,
-  "checks_passed": 206,
+  "generated_at_utc": "2026-07-25T08:17:57.164638+00:00",
+  "file_count": 454,
+  "total_bytes": 180365843,
+  "checks_total": 221,
+  "checks_passed": 221,
   "errors": [],
   "warnings": [],
   "checks": [
     {
       "name": "required:src-tauri/tauri.conf.json",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:src-tauri/tauri.windows.conf.json",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -134,6 +139,11 @@
     },
     {
       "name": "required:scripts/verify-windows-installer.ps1",
+      "ok": true,
+      "detail": "missing or empty required release file"
+    },
+    {
+      "name": "required:scripts/test-windows-installer-verifier.ps1",
       "ok": true,
       "detail": "missing or empty required release file"
     },
@@ -283,6 +293,31 @@
       "detail": "279f422c-ff6b-528a-962b-dea62c4bb547"
     },
     {
+      "name": "windows-product-name-ascii-safe",
+      "ok": true,
+      "detail": "Dhad"
+    },
+    {
+      "name": "windows-short-description-ascii-safe",
+      "ok": true,
+      "detail": "Local and secure Arabic writing assistant"
+    },
+    {
+      "name": "windows-long-description-ascii-safe",
+      "ok": true,
+      "detail": "Dhad is a local-first Arabic writing assistant for proofreading, analysis, and rewriting."
+    },
+    {
+      "name": "windows-wix-language-en-us",
+      "ok": true,
+      "detail": "{'language': 'en-US'}"
+    },
+    {
+      "name": "windows-nsis-start-menu-ascii-safe",
+      "ok": true,
+      "detail": "{'startMenuFolder': 'Dhad'}"
+    },
+    {
       "name": "dimensions:src-tauri/icons/128x128.png",
       "ok": true,
       "detail": "expected (128, 128), got (128, 128)"
@@ -363,6 +398,21 @@
       "detail": "NSIS both-mode verification must not assume /D controls the selected install context"
     },
     {
+      "name": "windows-verifier-strict-safe-properties",
+      "ok": true,
+      "detail": "registry properties must be optional under Set-StrictMode"
+    },
+    {
+      "name": "windows-verifier-platform-config",
+      "ok": true,
+      "detail": "verifier must use the effective Windows product identity"
+    },
+    {
+      "name": "windows-verifier-native-contract-test",
+      "ok": true,
+      "detail": "missing-property regression must run on Windows CI"
+    },
+    {
       "name": "workflow:macos-15",
       "ok": true,
       "detail": "missing workflow contract"
@@ -394,6 +444,11 @@
     },
     {
       "name": "workflow:--bundles msi",
+      "ok": true,
+      "detail": "missing workflow contract"
+    },
+    {
+      "name": "workflow:--verbose --target x86_64-pc-windows-msvc --bundles msi",
       "ok": true,
       "detail": "missing workflow contract"
     },
@@ -508,6 +563,16 @@
       "detail": "missing workflow contract matching verify-windows-installer\\.ps1"
     },
     {
+      "name": "workflow-validation:WiX failure diagnostics",
+      "ok": true,
+      "detail": "missing workflow contract matching Upload WiX diagnostics after MSI failure"
+    },
+    {
+      "name": "workflow-validation:Windows platform identity",
+      "ok": true,
+      "detail": "missing workflow contract matching tauri\\.windows\\.conf\\.json"
+    },
+    {
       "name": "workflow-validation:VBSCRIPT MSI prerequisite",
       "ok": true,
       "detail": "missing workflow contract matching VBSCRIPT smoke test: PASS"
@@ -581,6 +646,16 @@
       "name": "ci:node-22",
       "ok": true,
       "detail": "missing CI contract: node-version: \"22\""
+    },
+    {
+      "name": "ci:windows-verifier-contract-job",
+      "ok": true,
+      "detail": "missing CI contract: Windows installer verifier contracts"
+    },
+    {
+      "name": "ci:windows-verifier-test-script",
+      "ok": true,
+      "detail": "missing CI contract: test-windows-installer-verifier.ps1"
     },
     {
       "name": "ci:ruff-check",
@@ -895,12 +970,12 @@
     {
       "name": "cargo-lock-desktop-member",
       "ok": true,
-      "detail": "1.0.17"
+      "detail": "1.0.18"
     },
     {
       "name": "cargo-lock-core-member",
       "ok": true,
-      "detail": "1.0.17"
+      "detail": "1.0.18"
     },
     {
       "name": "cargo-lock-tauri-pinned",
@@ -1035,11 +1110,12 @@
     {
       "name": "repository-file-count",
       "ok": true,
-      "detail": "only 452 files"
+      "detail": "only 454 files"
     }
   ],
   "key_assets": {
-    "src-tauri/tauri.conf.json": "f5886e2f1b9ec8007fbef0d0c0b31e4232aea264eb20a54d62254ebf15e30bb4",
+    "src-tauri/tauri.conf.json": "303002f2529133eaa1164e04359a15703b62a85e2b184f17be975708ee94d1b1",
+    "src-tauri/tauri.windows.conf.json": "de32f41f6a2cbdaa14fd5dd2a92ba42ae1170fb1c8800a691ed255863ad78f64",
     "src-tauri/icons/128x128.png": "8219d6c5c4ecec8301553d8ae647b5818b7429346408d33133417a19adef39f6",
     "src-tauri/icons/128x128@2x.png": "06ddd1dc9aa6a509f71424094175908924378ac639f18bacc532d43582d394b3",
     "src-tauri/icons/icon.icns": "2d0542e020b1785b9caf92a692cac184f0e42f3cb32b52aae7af44d59795e591",
@@ -1051,20 +1127,21 @@
     "src-tauri/windows/wix-dialog.bmp": "753d26b413e9fb9127d95d8981ee179309b88a2d416d128d280ea8620c30d08e",
     "scripts/build-desktop.sh": "56ea6d3e66e5943c7b9f124b5bf321ac49937a5d28e7db3c2dd346530f0af025",
     "scripts/build-desktop.bat": "8ed28a3c1298511d95ecf72f97c74f9f9efa557a50726909c330986348f21ac5",
-    ".github/workflows/desktop-release.yml": "a63c67c090d348d69f34c47dad2b0c839aa28adf420cd6c3fecc4c774644a268",
-    ".github/workflows/ci.yml": "60da28f835506c68109e5d8453f587ed89bbfc60d7fc2b94b584d484ef6dc95a",
+    ".github/workflows/desktop-release.yml": "8f72aa7773d500b1368e4b607b1b9d0bb8e35bf182373db52b2499b8044a8efe",
+    ".github/workflows/ci.yml": "cc3de7b0391b8197d6c88263280016c353632e82bdf61cebff689b5d84e698de",
     ".nvmrc": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
     "docs/index.html": "02bca33ee47bd4af4f8f09b97d6caca224fa8ae047dc96376dc9651578f66a3a",
     "tools/optimize_onnx_assets.py": "67801bc682f6b7f65d6fcb75e7a3730959c6673faa0e09d22d5ebf617086a30d",
-    "tools/validate_desktop_release.py": "d3ae2c0ab682938b4274c1be170884f0da77fc4e54062b02df649eaa13e3c561",
+    "tools/validate_desktop_release.py": "ada58381fb70bc274cb22e1c4edb616ff576502f86f7925fdfc27321189e8a57",
     "tools/validate_tauri_config.py": "98ccdf817d6df684ea28a3a651c1f5d9099e10f84de2d1931de35cf0abde688e",
     "tools/validate_release_version.py": "172566dfd207cf22e019850504b284685283d44859ceb132a00dde5def340feb",
-    "tools/package_release.py": "53cf0c20537566ac41925e56b8a9a1b9ecf5a4abe21491545f142170e67964ac",
+    "tools/package_release.py": "3dbf199fae7ae3e691c6b717d70ec0fa3c821ad82e38a219718e69d87cedfd55",
     "tools/desktop-build-requirements.txt": "a48fc665be6ff95df748b5cf216ae351b07111516a960651334ab9459ee1e74d",
     "tools/generate_release_inventory.py": "18dcacbacf905d5a98d071a0125f410acb28dd9be3bc938c22adeaf695dbb2d3",
     "tools/verify_macos_bundle.py": "e25051a9798448593fe0662111309458813c6ca5d5fd08101fb0caadd875b634",
     "scripts/verify-macos-app.sh": "567b69db2194d6633bef5339bfd2e682eb5c9a7fff29da1833dd7b422ab555d0",
-    "scripts/verify-windows-installer.ps1": "6d5f9683562574243c5cbc374dd76bc727e310af94b12026f748971e969de7f3",
+    "scripts/verify-windows-installer.ps1": "cc0c51cd01984191e517fdddd1fbd91a7f9accd3b0e59df320e8ac34dc218566",
+    "scripts/test-windows-installer-verifier.ps1": "3e3ac1e70c9d2537c1a159e396a2246593c4b99378664d460b843f873ed264ad",
     "scripts/install-macos-app.sh": "cbe92a74bfa79845de65e7b5da935b7c265520664e1d125bba22bafe40e47635",
     "tools/clean_repository.py": "f44148f00a3b25b1c69a1db3e09d5d3f1abaaad578592c80a36b57a76b087ccc",
     "tools/build_web_dist.mjs": "3900dc4f02688a148e9864f8c67d89bf7e2c3396f00aa5f093acf568922473e2",

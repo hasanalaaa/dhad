@@ -1,0 +1,39 @@
+{
+  "release": "Dhad Desktop Ultimate v1.0.18",
+  "date": "2026-07-25",
+  "diagnosed_native_failures": {
+    "nsis": "The v1.0.17 NSIS installer built, uploaded, and silently installed; strict-mode verification crashed on unrelated uninstall-registry objects lacking DisplayName.",
+    "msi": "Rust and WiX candle compilation succeeded; light.exe failed while producing an en-US MSI with a non-ASCII Arabic product/bundle identity and filename."
+  },
+  "changes": [
+    "Add a Windows-only Tauri configuration with ASCII productName Dhad and ASCII installer descriptions while preserving Arabic application window titles.",
+    "Use null-safe optional-property access for every uninstall-registry field under PowerShell Set-StrictMode.",
+    "Add a native windows-2022 verifier contract job and run the same contract before both Windows release builds.",
+    "Verify NSIS PE header, silent install, installed executable, desktop shortcut, resolved uninstaller, and silent uninstall cleanup.",
+    "Verify MSI compound-file header, administrative extraction, executable payload, and PE header.",
+    "Preserve generated WiX sources and inventory after MSI failures.",
+    "Keep separate NSIS/MSI jobs and atomic draft publication requiring all four native artifacts."
+  ],
+  "local_validation": {
+    "release_version_contract": "PASS: 1.0.18 / v1.0.18",
+    "tauri_config": "PASS: tauri-cli 2.11.4 / tauri 2.11.5",
+    "javascript_syntax": "PASS: 58 first-party files",
+    "javascript_release_contracts": "PASS: 6/6",
+    "frontend_staging": "PASS: 44 allowlisted files / 165592508 bytes",
+    "focused_pytest": "PASS: 50/50",
+    "desktop_release_audit": "PASS: 221/221",
+    "sovereign_release_audit": "PASS: 71/71",
+    "repository_audit": "PASS: 0 findings"
+  },
+  "native_evidence": {
+    "macos": "The tagged v1.0.17 hosted run passed native build, DMG inspection, architecture/signature checks, and launch smoke tests for Apple Silicon and Intel.",
+    "windows": "The v1.0.17 NSIS installer built and uploaded before verification crashed. The v1.0.18 Windows changes require GitHub Actions for native NSIS/MSI confirmation."
+  },
+  "environment_limits": [
+    "Native Windows, PowerShell, WiX, and NSIS unavailable on the packaging host.",
+    "Cargo/rustc unavailable on the packaging host.",
+    "Complete npm dependency installation unavailable on the packaging host; version-derived JavaScript tests and syntax checks were run.",
+    "Hosted CI remains mandatory for the complete Python, JavaScript, Rust, and native installer matrix."
+  ],
+  "publication_gate": "Do not publish until two DMGs, one NSIS EXE, and one MSI exist and all native verifiers pass."
+}

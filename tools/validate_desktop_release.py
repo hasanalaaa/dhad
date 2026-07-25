@@ -80,7 +80,7 @@ def main() -> int:
         checks.append({'name': name, 'ok': bool(cond), 'detail': detail})
         if not cond:
             errors.append(f'{name}: {detail}')
-    required = ['src-tauri/tauri.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
+    required = ['src-tauri/tauri.conf.json', 'src-tauri/tauri.windows.conf.json', 'src-tauri/icons/128x128.png', 'src-tauri/icons/128x128@2x.png', 'src-tauri/icons/icon.icns', 'src-tauri/icons/icon.ico', 'src-tauri/dmg/background.png', 'src-tauri/windows/nsis-header.bmp', 'src-tauri/windows/nsis-sidebar.bmp', 'src-tauri/windows/wix-banner.bmp', 'src-tauri/windows/wix-dialog.bmp', 'scripts/build-desktop.sh', 'scripts/build-desktop.bat', '.github/workflows/desktop-release.yml', '.github/workflows/ci.yml', '.nvmrc', 'docs/index.html', 'tools/optimize_onnx_assets.py', 'tools/validate_desktop_release.py', 'tools/validate_tauri_config.py', 'tools/validate_release_version.py', 'tools/package_release.py', 'tools/desktop-build-requirements.txt', 'tools/generate_release_inventory.py', 'tools/verify_macos_bundle.py', 'scripts/verify-macos-app.sh', 'scripts/verify-windows-installer.ps1', 'scripts/test-windows-installer-verifier.ps1', 'scripts/install-macos-app.sh', 'tools/clean_repository.py', 'tools/build_web_dist.mjs', 'src-tauri/Info.plist', 'src-tauri/Entitlements.plist', 'vercel.json', 'docs/.nojekyll']
     for rel in required:
         path = root / rel
         present = path.is_file() and (rel != '.github/workflows/desktop-release.yml' or path.stat().st_size > 0)
@@ -89,6 +89,7 @@ def main() -> int:
         print('\n'.join(errors), file=sys.stderr)
         return 1
     cfg = json.loads((root / 'src-tauri/tauri.conf.json').read_text(encoding='utf-8'))
+    windows_cfg = json.loads((root / 'src-tauri/tauri.windows.conf.json').read_text(encoding='utf-8'))
     ok('identifier', cfg.get('identifier') == 'com.dhad.desktop', str(cfg.get('identifier')))
     ok('identifier-no-app-suffix', not str(cfg.get('identifier', '')).lower().endswith('.app'), str(cfg.get('identifier')))
     ok('main-binary-name', cfg.get('mainBinaryName') == 'dhad-desktop', str(cfg.get('mainBinaryName')))
@@ -121,6 +122,16 @@ def main() -> int:
     ok('nsis-uninstaller-icon', nsis.get('uninstallerIcon') == 'icons/icon.ico', str(nsis.get('uninstallerIcon')))
     ok('wix-native-shortcut-template', not wix.get('fragmentPaths') and not wix.get('componentRefs'), str(wix))
     ok('wix-upgrade-code-pinned', bool(wix.get('upgradeCode')), str(wix.get('upgradeCode')))
+    windows_product_name = str(windows_cfg.get('productName', ''))
+    windows_bundle = windows_cfg.get('bundle', {})
+    windows_short = str(windows_bundle.get('shortDescription', ''))
+    windows_long = str(windows_bundle.get('longDescription', ''))
+    windows_override = windows_bundle.get('windows', {})
+    ok('windows-product-name-ascii-safe', windows_product_name == 'Dhad' and windows_product_name.isascii(), windows_product_name)
+    ok('windows-short-description-ascii-safe', bool(windows_short) and windows_short.isascii(), windows_short)
+    ok('windows-long-description-ascii-safe', bool(windows_long) and windows_long.isascii(), windows_long)
+    ok('windows-wix-language-en-us', windows_override.get('wix', {}).get('language') == 'en-US', str(windows_override.get('wix', {})))
+    ok('windows-nsis-start-menu-ascii-safe', windows_override.get('nsis', {}).get('startMenuFolder') == 'Dhad', str(windows_override.get('nsis', {})))
     expected = {'src-tauri/icons/128x128.png': (128, 128), 'src-tauri/icons/128x128@2x.png': (256, 256), 'src-tauri/dmg/background.png': (660, 400), 'src-tauri/windows/nsis-header.bmp': (150, 57), 'src-tauri/windows/nsis-sidebar.bmp': (164, 314), 'src-tauri/windows/wix-banner.bmp': (493, 58), 'src-tauri/windows/wix-dialog.bmp': (493, 312)}
     for rel, size in expected.items():
         ok(f'dimensions:{rel}', image_size(root / rel) == size, f'expected {size}, got {image_size(root / rel)}')
@@ -140,8 +151,12 @@ def main() -> int:
     ok('windows-verifier-registry-discovery', 'Get-DhadUninstallEntries' in verifier, 'NSIS verifier must discover the actual install root through uninstall metadata')
     ok('windows-verifier-native-shortcut', 'CommonDesktopDirectory' in verifier and "GetFolderPath('Desktop')" in verifier, 'NSIS verifier must check both user and common desktop shortcuts')
     ok('windows-verifier-no-forced-destination', '/D=' not in verifier, 'NSIS both-mode verification must not assume /D controls the selected install context')
+    ok('windows-verifier-strict-safe-properties', 'Get-OptionalPropertyValue' in verifier and "PSObject.Properties[$Name]" in verifier, 'registry properties must be optional under Set-StrictMode')
+    ok('windows-verifier-platform-config', 'tauri.windows.conf.json' in verifier, 'verifier must use the effective Windows product identity')
+    verifier_test = (root / 'scripts/test-windows-installer-verifier.ps1').read_text(encoding='utf-8')
+    ok('windows-verifier-native-contract-test', 'missing DisplayName' in verifier_test and 'strict-mode contracts: PASS' in verifier_test, 'missing-property regression must run on Windows CI')
     workflow = (root / '.github/workflows/desktop-release.yml').read_text(encoding='utf-8')
-    for token in ['macos-15', 'macos-15-intel', 'windows-2022', 'aarch64-apple-darwin', 'x86_64-apple-darwin', '--bundles nsis', '--bundles msi', 'tauri-apps/tauri-action@v1']:
+    for token in ['macos-15', 'macos-15-intel', 'windows-2022', 'aarch64-apple-darwin', 'x86_64-apple-darwin', '--bundles nsis', '--bundles msi', '--verbose --target x86_64-pc-windows-msvc --bundles msi', 'tauri-apps/tauri-action@v1']:
         ok(f'workflow:{token}', token in workflow, 'missing workflow contract')
     workflow_contracts = [
         ("v*.*.*", r'["\']v\*\.\*\.\*["\']'),
@@ -168,6 +183,8 @@ def main() -> int:
         ("npm test", r"\bnpm\s+test\b"),
         ("verify-macos-app.sh", r"(?:^|[\s./])verify-macos-app\.sh\b"),
         ("verify-windows-installer.ps1", r"verify-windows-installer\.ps1"),
+        ("WiX failure diagnostics", r"Upload WiX diagnostics after MSI failure"),
+        ("Windows platform identity", r"tauri\.windows\.conf\.json"),
         ("VBSCRIPT MSI prerequisite", r"VBSCRIPT smoke test: PASS"),
         ("stable ASCII release names", r"releaseAssetNamePattern\s*:\s*[\"\']Dhad_\[version\]"),
         ("APPLE_SIGNING_IDENTITY", r"\bAPPLE_SIGNING_IDENTITY\b"),
@@ -188,6 +205,8 @@ def main() -> int:
         'rust-toolchain-pinned': 'dtolnay/rust-toolchain@1.97.1',
         'pythonpath-root-and-src': 'PYTHONPATH: ".:src"',
         'node-22': 'node-version: "22"',
+        'windows-verifier-contract-job': 'Windows installer verifier contracts',
+        'windows-verifier-test-script': 'test-windows-installer-verifier.ps1',
         'ruff-check': 'ruff check src tests tools benchmarks gunicorn_conf.py',
         'pytest': 'pytest -q',
         'npm-test': 'npm test',

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Dhad",
+  "bundle": {
+    "shortDescription": "Local and secure Arabic writing assistant",
+    "longDescription": "Dhad is a local-first Arabic writing assistant for proofreading, analysis, and rewriting.",
+    "windows": {
+      "nsis": {
+        "startMenuFolder": "Dhad"
+      },
+      "wix": {
+        "language": "en-US"
+      }
+    }
+  }
+}

@@ -112,7 +112,7 @@ from .stylometry import (
 )
 from .suppression import Suppression, apply_suppression
 
-__version__ = "1.0.17"
+__version__ = "1.0.18"
 
 
 def __getattr__(name: str) -> Any:

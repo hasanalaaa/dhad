@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing semantic version tag to build, for example v1.0.17
+        description: Existing semantic version tag to build, for example v1.0.18
         required: true
         type: string
 
@@ -161,7 +161,7 @@ jobs:
           - label: Windows x64 MSI
             platform: windows-2022
             target: x86_64-pc-windows-msvc
-            args: --target x86_64-pc-windows-msvc --bundles msi
+            args: --verbose --target x86_64-pc-windows-msvc --bundles msi
             bundle: msi
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 100
@@ -216,6 +216,11 @@ jobs:
       - name: Install locked web dependencies
         run: npm ci --prefix web_demo --ignore-scripts
 
+      - name: Run Windows installer verifier strict-mode contracts
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/test-windows-installer-verifier.ps1
+
       - name: Verify VBSCRIPT support required by WiX MSI
         if: runner.os == 'Windows' && matrix.bundle == 'msi'
         shell: pwsh
@@ -238,6 +243,7 @@ jobs:
       - name: Validate and prepare release assets
         run: |
           python tools/validate_release_version.py --root . --tag "$RELEASE_TAG"
+          python -c "from pathlib import Path; assert Path('src-tauri/tauri.windows.conf.json').is_file()"
           node tools/build_web_dist.mjs
           python tools/validate_tauri_config.py --config src-tauri/tauri.conf.json
           python tools/optimize_onnx_assets.py --root . --write-manifest
@@ -318,6 +324,41 @@ jobs:
           workflowArtifactNamePattern: "Dhad-[version]-[platform]-[arch]-[bundle]"
           retryAttempts: 2
           args: ${{ matrix.args }}
+
+      - name: Preserve generated WiX diagnostics after MSI failure
+        if: failure() && runner.os == 'Windows' && matrix.bundle == 'msi'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          $destination = Join-Path $env:RUNNER_TEMP 'dhad-wix-diagnostics'
+          Remove-Item -LiteralPath $destination -Recurse -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path $destination | Out-Null
+          $wixRoots = Get-ChildItem -Path (Join-Path $PWD 'target') -Directory -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { $_.Name -eq 'wix' }
+          foreach ($wixRoot in $wixRoots) {
+            $copyTarget = Join-Path $destination ($wixRoot.FullName -replace '[:\/]', '_')
+            Copy-Item -LiteralPath $wixRoot.FullName -Destination $copyTarget -Recurse -Force -ErrorAction SilentlyContinue
+          }
+          Get-ChildItem -LiteralPath $destination -Recurse -File -ErrorAction SilentlyContinue |
+            Select-Object FullName, Length, LastWriteTimeUtc |
+            Format-Table -AutoSize |
+            Out-String |
+            Set-Content -LiteralPath (Join-Path $destination 'inventory.txt') -Encoding UTF8
+          Get-ChildItem -LiteralPath $destination -Filter main.wxs -Recurse -File -ErrorAction SilentlyContinue |
+            ForEach-Object {
+              "===== $($_.FullName) =====" | Add-Content -LiteralPath (Join-Path $destination 'generated-main-wxs.txt') -Encoding UTF8
+              Get-Content -LiteralPath $_.FullName | Add-Content -LiteralPath (Join-Path $destination 'generated-main-wxs.txt') -Encoding UTF8
+            }
+          Write-Host "WiX diagnostics preserved at $destination"
+
+      - name: Upload WiX diagnostics after MSI failure
+        if: failure() && runner.os == 'Windows' && matrix.bundle == 'msi'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dhad-${{ env.RELEASE_TAG }}-wix-diagnostics
+          path: ${{ runner.temp }}/dhad-wix-diagnostics
+          if-no-files-found: warn
+          retention-days: 30
 
       - name: Verify signed macOS app bundle and native launch
         if: runner.os == 'macOS'

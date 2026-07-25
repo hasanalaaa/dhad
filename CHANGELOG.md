@@ -1,11 +1,13 @@
-## 1.0.17 — 2026-07-25 — Native Windows installer finalization
+## 1.0.18 — 2026-07-25 — Windows bundle identity and verifier hardening
 
-- Removed the redundant WiX desktop-shortcut fragment because Tauri 2.11 already authors and references its own validated desktop shortcut component; the extra component was the only project-specific input reaching `light.exe` when MSI linking failed.
-- Removed duplicate NSIS shortcut hooks and rely on Tauri's native shortcut lifecycle, including silent-install shortcut creation.
-- Reworked the Windows verifier to discover the actual NSIS installation through Add/Remove Programs registry metadata instead of assuming `/D` controls the destination while `installMode` is `both`.
-- Added bounded registry/path diagnostics, executable metadata checks, desktop-shortcut verification, and verified silent uninstall cleanup.
-- Kept MSI validation as an administrative extraction and executable-presence check after native WiX generation.
-- Promoted every distributable surface to version `1.0.17`.
+- Fixed the exact NSIS verification crash from the v1.0.17 Windows runner: `Set-StrictMode` encountered unrelated uninstall-registry records without `DisplayName`; every optional registry property is now accessed through a null-safe helper and exercised by a native PowerShell contract job.
+- Added a Windows-only Tauri configuration with the ASCII product identity `Dhad` while preserving the Arabic window titles and the Arabic product identity on non-Windows platforms.
+- Kept WiX on `en-US` and removed non-ASCII data from the Windows bundle identity and installer descriptions, avoiding the `light.exe` failure pattern reproduced by Tauri with non-ASCII `productName` values.
+- Added pre-build Windows verifier contracts to both general CI and every native Windows release job.
+- Added bounded NSIS registry/path diagnostics, PE validation, desktop-shortcut verification, uninstaller discovery, and silent-uninstall cleanup.
+- Added failure-only preservation of the generated WiX source and inventory so a future linker failure cannot lose its native evidence.
+- Retained separate NSIS and MSI jobs and atomic draft publication requiring both macOS DMGs and both Windows installers.
+- Promoted every distributable surface to version `1.0.18`.
 
 ## 1.0.16 — 2026-07-25 — Native bundle verification and Windows MSI hardening
 

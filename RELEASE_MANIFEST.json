@@ -1,10 +1,10 @@
 {
   "project": "Dhad",
-  "version": "1.0.17",
-  "python_version": "1.0.17",
-  "completed_phase": "Ultimate Desktop Release v1.0.17",
+  "version": "1.0.18",
+  "python_version": "1.0.18",
+  "completed_phase": "Ultimate Desktop Release v1.0.18",
   "phase_name": "Reproducible Tauri desktop release with exact frontend closure and atomic multi-platform publication",
-  "tests_passed": 48,
+  "tests_passed": 52,
   "quality": {
     "ruff": "validated by locked CI; source-level regressions covered locally",
     "format": "Python/JavaScript syntax and shell syntax verified locally; Rust format enforced in CI",
@@ -45,7 +45,7 @@
     },
     "javascript_tests_available": "58-file syntax pass; exact 44-file packaged closure verified; complete dependency-backed suite remains mandatory in CI",
     "mini_assistant_runtime_boot": "passed",
-    "native_installer_builds": "v1.0.16 macOS Apple Silicon and Intel DMGs passed hosted native build and launch verification; v1.0.17 Windows NSIS/MSI changes require hosted Windows confirmation",
+    "native_installer_builds": "v1.0.17 macOS DMGs passed and the NSIS installer built; v1.0.18 fixes the strict-mode verifier and uses an ASCII Windows bundle identity to avoid WiX v3 codepage failures while preserving Arabic window titles.",
     "rust_tests_scope": "full workspace fmt, Clippy, tests, and WASM build are mandatory with --locked in CI and release CI",
     "frontend_staging": {
       "allowlisted_files": 44,

@@ -140,3 +140,16 @@ jobs:
       - name: Validate retained release assets
         working-directory: .
         run: python tools/validate_sovereign_release.py --root . --skip-cleanliness --strict
+
+  windows-installer-contracts:
+    name: Windows installer verifier contracts
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Parse and exercise strict-mode-safe Windows verifier
+        shell: pwsh
+        run: ./scripts/test-windows-installer-verifier.ps1
+

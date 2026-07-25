@@ -3,17 +3,39 @@ Set-StrictMode -Version Latest
 
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
-$bundle = if ($env:DHAD_WINDOWS_BUNDLE) { $env:DHAD_WINDOWS_BUNDLE.ToLowerInvariant() } else { '' }
-if ($bundle -notin @('nsis', 'msi')) {
-    throw "DHAD_WINDOWS_BUNDLE must be 'nsis' or 'msi', got '$bundle'."
+
+$baseConfigPath = Join-Path $root 'src-tauri/tauri.conf.json'
+$windowsConfigPath = Join-Path $root 'src-tauri/tauri.windows.conf.json'
+$config = Get-Content -LiteralPath $baseConfigPath -Raw | ConvertFrom-Json
+$windowsConfig = if (Test-Path -LiteralPath $windowsConfigPath -PathType Leaf) {
+    Get-Content -LiteralPath $windowsConfigPath -Raw | ConvertFrom-Json
+}
+else {
+    $null
 }
 
-$config = Get-Content -LiteralPath (Join-Path $root 'src-tauri/tauri.conf.json') -Raw | ConvertFrom-Json
-$productName = [string]$config.productName
-$productVersion = [string]$config.version
-$mainBinary = [string]$config.mainBinaryName
+function Get-OptionalPropertyValue([object]$Object, [string]$Name) {
+    if ($null -eq $Object) { return $null }
+    $property = $Object.PSObject.Properties[$Name]
+    if ($null -eq $property) { return $null }
+    $property.Value
+}
+
+$productName = [string]$(
+    if ($null -ne $windowsConfig -and -not [string]::IsNullOrWhiteSpace([string](Get-OptionalPropertyValue $windowsConfig 'productName'))) {
+        Get-OptionalPropertyValue $windowsConfig 'productName'
+    }
+    else {
+        Get-OptionalPropertyValue $config 'productName'
+    }
+)
+$productVersion = [string](Get-OptionalPropertyValue $config 'version')
+$mainBinary = [string](Get-OptionalPropertyValue $config 'mainBinaryName')
+$bundleConfig = Get-OptionalPropertyValue $config 'bundle'
+$publisher = [string](Get-OptionalPropertyValue $bundleConfig 'publisher')
+
 if ([string]::IsNullOrWhiteSpace($productName) -or [string]::IsNullOrWhiteSpace($productVersion) -or [string]::IsNullOrWhiteSpace($mainBinary)) {
-    throw 'Tauri productName, version, and mainBinaryName are required for Windows verification.'
+    throw 'Effective Windows productName, version, and mainBinaryName are required for verification.'
 }
 $expectedExe = "$mainBinary.exe"
 
@@ -31,6 +53,15 @@ function Test-PeHeader([string]$Path, [string]$Label) {
     }
 }
 
+function Test-DhadUninstallEntry([object]$Entry) {
+    $displayName = [string](Get-OptionalPropertyValue $Entry 'DisplayName')
+    if ([string]::IsNullOrWhiteSpace($displayName) -or $displayName -ne $productName) {
+        return $false
+    }
+    $displayVersion = [string](Get-OptionalPropertyValue $Entry 'DisplayVersion')
+    [string]::IsNullOrWhiteSpace($displayVersion) -or $displayVersion -eq $productVersion
+}
+
 function Get-DhadUninstallEntries {
     $paths = @(
         'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*',
@@ -39,10 +70,7 @@ function Get-DhadUninstallEntries {
     )
     $entries = foreach ($path in $paths) {
         Get-ItemProperty -Path $path -ErrorAction SilentlyContinue |
-            Where-Object {
-                $_.DisplayName -eq $productName -and
-                ([string]::IsNullOrWhiteSpace([string]$_.DisplayVersion) -or $_.DisplayVersion -eq $productVersion)
-            }
+            Where-Object { Test-DhadUninstallEntry $_ }
     }
     @($entries)
 }
@@ -62,12 +90,11 @@ function Add-RootCandidate([System.Collections.Generic.List[string]]$Roots, [obj
 function Resolve-Executable([object[]]$Entries) {
     $roots = [System.Collections.Generic.List[string]]::new()
     foreach ($entry in $Entries) {
-        Add-RootCandidate $roots $entry.InstallLocation
-        Add-RootCandidate $roots $entry.UninstallString
-        Add-RootCandidate $roots $entry.QuietUninstallString
+        Add-RootCandidate $roots (Get-OptionalPropertyValue $entry 'InstallLocation')
+        Add-RootCandidate $roots (Get-OptionalPropertyValue $entry 'UninstallString')
+        Add-RootCandidate $roots (Get-OptionalPropertyValue $entry 'QuietUninstallString')
     }
 
-    $publisher = [string]$config.bundle.publisher
     if (-not [string]::IsNullOrWhiteSpace($publisher)) {
         foreach ($registryPath in @(
             "HKCU:\Software\$publisher\$productName",
@@ -106,7 +133,8 @@ function Resolve-Executable([object[]]$Entries) {
 
 function Resolve-Uninstaller([object[]]$Entries, [string]$InstallRoot) {
     foreach ($entry in $Entries) {
-        foreach ($value in @($entry.QuietUninstallString, $entry.UninstallString)) {
+        foreach ($name in @('QuietUninstallString', 'UninstallString')) {
+            $value = Get-OptionalPropertyValue $entry $name
             if ([string]::IsNullOrWhiteSpace([string]$value)) { continue }
             $raw = ([string]$value).Trim()
             if ($raw -match '^"(?<exe>[^"]+\.exe)"\s*(?<args>.*)$') {
@@ -129,6 +157,16 @@ function Resolve-Uninstaller([object[]]$Entries, [string]$InstallRoot) {
     $null
 }
 
+if ($env:DHAD_WINDOWS_VERIFIER_LIBRARY_ONLY -eq '1') {
+    Write-Host 'Windows installer verifier library loaded: PASS'
+    return
+}
+
+$bundle = if ($env:DHAD_WINDOWS_BUNDLE) { $env:DHAD_WINDOWS_BUNDLE.ToLowerInvariant() } else { '' }
+if ($bundle -notin @('nsis', 'msi')) {
+    throw "DHAD_WINDOWS_BUNDLE must be 'nsis' or 'msi', got '$bundle'."
+}
+
 $extension = if ($bundle -eq 'msi') { '.msi' } else { '.exe' }
 $candidates = Get-ChildItem -Path (Join-Path $root 'target') -Recurse -File -ErrorAction SilentlyContinue |
     Where-Object {
@@ -144,15 +182,13 @@ $installer = $candidates[0]
 if ($installer.Length -lt 1MB) {
     throw "Generated installer is unexpectedly small: $($installer.FullName) ($($installer.Length) bytes)."
 }
+Write-Host "Effective Windows product name: $productName"
 Write-Host "Verifying $bundle installer: $($installer.FullName)"
 Write-Host "Installer size: $($installer.Length) bytes"
 
 if ($bundle -eq 'nsis') {
     Test-PeHeader $installer.FullName 'NSIS installer'
 
-    # Tauri's `both` install mode selects its own current-user or all-users location.
-    # Do not assert that NSIS /D overrides the MultiUser-selected directory; discover
-    # the authoritative destination through Add/Remove Programs metadata instead.
     $process = Start-Process -FilePath $installer.FullName -ArgumentList '/S' -Wait -PassThru
     if ($process.ExitCode -ne 0) {
         throw "NSIS silent installation failed with exit code $($process.ExitCode)."

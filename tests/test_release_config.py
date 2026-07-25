@@ -197,6 +197,7 @@ def test_windows_installers_are_split_and_use_native_tauri_shortcuts():
     verifier = (ROOT / "scripts" / "verify-windows-installer.ps1").read_text(encoding="utf-8")
     config = json.loads((ROOT / "src-tauri" / "tauri.conf.json").read_text(encoding="utf-8"))
     windows = config["bundle"]["windows"]
+    windows_config = json.loads((ROOT / "src-tauri" / "tauri.windows.conf.json").read_text(encoding="utf-8"))
 
     assert "Windows x64 NSIS" in workflow
     assert "Windows x64 MSI" in workflow
@@ -205,9 +206,19 @@ def test_windows_installers_are_split_and_use_native_tauri_shortcuts():
     assert "--bundles msi" in workflow
     assert "VBSCRIPT smoke test: PASS" in workflow
     assert "verify-windows-installer.ps1" in workflow
+    assert "Upload WiX diagnostics after MSI failure" in workflow
+    assert "--verbose --target x86_64-pc-windows-msvc --bundles msi" in workflow
+    assert windows_config["productName"] == "Dhad"
+    assert windows_config["productName"].isascii()
+    assert windows_config["bundle"]["shortDescription"].isascii()
+    assert windows_config["bundle"]["longDescription"].isascii()
+    assert windows_config["bundle"]["windows"]["wix"]["language"] == "en-US"
     assert "MSI administrative extraction failed" in verifier
     assert "NSIS silent installation failed" in verifier
     assert "Get-DhadUninstallEntries" in verifier
+    assert "Get-OptionalPropertyValue" in verifier
+    assert "PSObject.Properties[$Name]" in verifier
+    assert "tauri.windows.conf.json" in verifier
     assert "CommonDesktopDirectory" in verifier
     assert "NSIS install, desktop shortcut, and uninstall lifecycle: PASS" in verifier
     assert "installerHooks" not in windows["nsis"]
@@ -228,7 +239,7 @@ def test_macos_release_wrapper_verifies_the_app_shipped_inside_a_dmg(tmp_path):
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir()
     arguments_log = tmp_path / "python-arguments.txt"
-    dmg = tmp_path / "Dhad_1.0.17_aarch64.dmg"
+    dmg = tmp_path / "Dhad_1.0.18_aarch64.dmg"
     dmg.write_bytes(b"synthetic-dmg")
 
     scripts = {
@@ -286,3 +297,12 @@ printf '%s\\n' "$*" > {arguments_log!s}
     arguments = arguments_log.read_text(encoding="utf-8")
     assert "tools/verify_macos_bundle.py" in arguments
     assert "--expected-arch aarch64" in arguments
+
+
+def test_windows_verifier_has_native_strict_mode_regression_job():
+    workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    test_script = (ROOT / "scripts" / "test-windows-installer-verifier.ps1").read_text(encoding="utf-8")
+    assert "Windows installer verifier contracts" in workflow
+    assert "test-windows-installer-verifier.ps1" in workflow
+    assert "missing DisplayName" in test_script
+    assert "strict-mode contracts: PASS" in test_script

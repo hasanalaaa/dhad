@@ -1,40 +1,40 @@
-# Dhad Desktop Gold Master — v1.0.17 Release Report
+# Dhad Desktop Gold Master — v1.0.18 Release Report
 
 ## Scope
 
-This source package finalizes the native Windows installer path after the tagged v1.0.16 release run proved both macOS targets and exposed two Windows-only defects. The release remains draft-first and is published only after both DMGs, NSIS, and MSI are present and verified.
+This source package addresses the two exact Windows-only failures captured by the tagged v1.0.17 release while retaining the macOS path that already passed natively. Publication remains draft-first and atomic.
 
 ## Diagnosed Windows failures
 
-- **NSIS verification:** the installer exited successfully, but the old verifier assumed `/D=<temporary path>` controlled the destination while Tauri was configured with `installMode = "both"`. The verifier now discovers the authoritative installation through Add/Remove Programs registry metadata and standard installation roots.
-- **MSI linking:** application compilation and WiX `candle.exe` succeeded; `light.exe` failed only after the redundant project-specific desktop-shortcut fragment was added. Tauri already authors the desktop shortcut in its native WiX template, so the duplicate fragment and component reference were removed.
+- **NSIS verification:** the installer built, uploaded, and completed silent installation. `Set-StrictMode` then terminated the verifier while it enumerated an unrelated Add/Remove Programs registry object without a `DisplayName` property.
+- **MSI linking:** application compilation and WiX `candle.exe` succeeded on all attempts. `light.exe` failed while producing the `en-US` MSI with the Arabic `productName` embedded in the Windows bundle identity and filename—the same stage and pattern reported by Tauri for non-ASCII product names.
 
 ## Release engineering changes
 
-- Removed `src-tauri/windows/desktop-shortcut.wxs` and all WiX fragment/component references.
-- Removed `src-tauri/windows/nsis-hooks.nsh` and the duplicate NSIS hook configuration.
-- Kept the native Tauri Windows configuration for install mode, branding, Start Menu folder, desktop shortcut lifecycle, and stable WiX upgrade code.
-- Rebuilt `scripts/verify-windows-installer.ps1` to verify the actual installer lifecycle:
-  - NSIS PE header, silent installation, registry-discovered executable, native desktop shortcut, and silent uninstall cleanup.
+- Added a platform-specific `src-tauri/tauri.windows.conf.json` with `productName: Dhad`, ASCII installer descriptions, the existing `en-US` WiX language, and `Dhad` Start Menu branding. The base configuration still owns the Arabic application window titles.
+- Rebuilt `scripts/verify-windows-installer.ps1` so every optional registry field is read through `PSObject.Properties[...]` and missing fields return null under strict mode.
+- Added `scripts/test-windows-installer-verifier.ps1` and a mandatory `windows-2022` CI job exercising missing-property, wrong-entry, matching-entry, and missing-path cases.
+- Run that PowerShell contract before each Windows release build.
+- Retained native installer lifecycle checks:
+  - NSIS PE header, silent installation, registry-discovered executable, desktop shortcut, uninstaller, and silent cleanup.
   - MSI compound-file header, administrative extraction, executable payload size, and PE header.
-  - Optional Authenticode enforcement through `DHAD_REQUIRE_WINDOWS_SIGNED=1`.
-- Retained separate Windows NSIS and MSI jobs so one bundle does not hide the result of the other.
-- Retained draft-first atomic publication requiring two DMGs, one MSI, and one NSIS EXE.
+- Added failure-only upload of generated WiX source and inventory.
+- Retained separate NSIS and MSI jobs and atomic publication requiring both DMGs and both Windows installers.
 
 ## Local validation
 
-- Release/version contract: **PASS — 1.0.17 / v1.0.17**.
+- Release/version contract: **PASS — 1.0.18 / v1.0.18**.
 - JavaScript syntax: **58 first-party files passed**.
+- Version-derived JavaScript contracts: **6/6 passed**.
 - Dependency-free Tauri frontend: **44 allowlisted runtime files verified**.
-- Focused release regressions: **48/48 passed**.
-- Desktop release structural audit: **206/206 passed** across 452 files after final report generation.
+- Focused release regressions: **50/50 passed**.
+- Desktop release structural audit: **221/221 passed**.
 - Sovereign release audit: **71/71 passed**.
-- Repository audit: **449 files audited; 0 findings**.
-- Shell, JSON, TOML, YAML, plist, and XML structure checks: **passed through the release validators/auditor**.
+- Repository audit: **0 findings**.
 
 ## Native evidence and remaining gate
 
-The v1.0.16 hosted release run successfully built, mounted, inspected, and launched both Apple Silicon and Intel DMGs. The packaging host used for v1.0.17 does not provide Cargo, PowerShell, WiX, NSIS, or native Windows runners, so the revised Windows installer build and smoke tests cannot be represented as locally executed. GitHub Actions remains the final native gate.
+The v1.0.17 hosted run successfully built, inspected, and launched both macOS DMGs. It also built and uploaded NSIS before the verifier defect terminated the job. Native Windows packaging is unavailable on this archive-building host, so GitHub Actions is the mandatory final gate for the corrected NSIS verifier and the ASCII-identity MSI build.
 
 The release must not be published unless all four artifacts exist and pass their native checks:
 
@@ -42,13 +42,3 @@ The release must not be published unless all four artifacts exist and pass their
 2. macOS Intel DMG.
 3. Windows x64 NSIS EXE.
 4. Windows x64 MSI.
-
-## Commands
-
-```bash
-./scripts/build-desktop.sh
-```
-
-```bat
-scripts\build-desktop.bat
-```
