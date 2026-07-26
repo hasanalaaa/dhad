@@ -25,13 +25,21 @@ const runtimeAssets = Object.freeze([
   "collaboration/e2ee.js",
   "collaboration/secure-yjs-provider.js",
   "collaboration/sync-transport.js",
+  "design/dhad-system.css",
   "dhad-core.js",
   "dhad_core.fast.wasm",
   "dhad_core.small.wasm",
   "dhad_core.wasm",
   "documents/document-io.js",
+  "fonts/OFL.txt",
+  "fonts/dhad-kufi-arabic.woff2",
+  "fonts/dhad-kufi-latin.woff2",
+  "fonts/dhad-naskh-arabic.woff2",
+  "fonts/dhad-naskh-latin.woff2",
   "icons/icon-192.png",
   "icons/icon-512.png",
+  "icons/icon-maskable-192.png",
+  "icons/icon-maskable-512.png",
   "index.html",
   "intelligence/writing-intelligence.js",
   "js/desktop-adapter.js",
@@ -190,7 +198,7 @@ async function verifyModuleClosure() {
 function localDocumentReferences(source, extension) {
   const patterns =
     extension === ".css"
-      ? [/url\(\s*['"]?([^)'"\s]+)['"]?\s*\)/gu]
+      ? [/url\(\s*['"]?([^)'"\s]+)['"]?\s*\)/gu]  // @import url(...) matches this too
       : [/(?:src|href)\s*=\s*['"]([^'"]+)['"]/gu];
   return patterns.flatMap((pattern) => [...source.matchAll(pattern)].map((match) => match[1]));
 }

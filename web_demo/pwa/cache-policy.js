@@ -9,6 +9,7 @@ export const APP_SHELL = Object.freeze([
   "./manifest.json",
   "./app.css",
   "./app.js",
+  "./design/dhad-system.css",
   "./dhad-core.js",
   "./analysis/analysis-client.js",
   "./analysis/analysis-worker.js",
@@ -35,6 +36,8 @@ export const APP_SHELL = Object.freeze([
   "./collaboration/sync-transport.js",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
+  "./icons/icon-maskable-192.png",
+  "./icons/icon-maskable-512.png",
 ]);
 
 // Small deterministic assets remain part of the atomic install transaction.
@@ -43,6 +46,12 @@ export const CORE_IMMUTABLE_ASSETS = Object.freeze([
   "./dhad_core.fast.wasm",
   "./dhad_core.small.wasm",
   "./rules.json",
+  // Typefaces are part of the identity, so they install with the shell: the
+  // product must look like itself on its first offline launch.
+  "./fonts/dhad-kufi-arabic.woff2",
+  "./fonts/dhad-kufi-latin.woff2",
+  "./fonts/dhad-naskh-arabic.woff2",
+  "./fonts/dhad-naskh-latin.woff2",
 ]);
 
 // Neural assets exceed 150 MiB. They are cached on first use or by an explicit

@@ -47,10 +47,20 @@ test("manifest is installable and points at local maskable icons", async () => {
   assert.equal(manifest.scope, "./");
   assert.equal(manifest.display, "standalone");
   for (const size of ["192x192", "512x512"]) {
-    const icon = manifest.icons.find((candidate) => candidate.sizes === size);
-    assert.ok(icon, `missing ${size} icon`);
-    assert.match(icon.purpose, /maskable/u);
-    await access(resolve(webRoot, icon.src));
+    const icons = manifest.icons.filter((candidate) => candidate.sizes === size);
+    assert.ok(icons.length, `missing ${size} icon`);
+    // "any" and "maskable" are declared separately: a maskable icon keeps its
+    // art inside the 80% safe zone, so reusing it for "any" would ship a
+    // needlessly small mark everywhere else.
+    assert.ok(
+      icons.some((icon) => /maskable/u.test(icon.purpose)),
+      `missing maskable ${size} icon`,
+    );
+    assert.ok(
+      icons.some((icon) => /\bany\b/u.test(icon.purpose)),
+      `missing any-purpose ${size} icon`,
+    );
+    for (const icon of icons) await access(resolve(webRoot, icon.src));
   }
   const student = JSON.parse(
     await readFile(resolve(webRoot, "models/student-manifest.json"), "utf8"),

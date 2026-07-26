@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test neural/*.test.mjs collaboration/*.test.mjs storage/*.test.mjs pwa/*.test.mjs ui/*.test.mjs analysis/*.test.mjs intelligence/*.test.mjs rewriting/*.test.mjs analytics/*.test.mjs templates/*.test.mjs themes/*.test.mjs documents/*.test.mjs shared/*.test.mjs packed_bridge_test.mjs",
+    "test": "node --test design/*.test.mjs neural/*.test.mjs collaboration/*.test.mjs storage/*.test.mjs pwa/*.test.mjs ui/*.test.mjs analysis/*.test.mjs intelligence/*.test.mjs rewriting/*.test.mjs analytics/*.test.mjs templates/*.test.mjs themes/*.test.mjs documents/*.test.mjs shared/*.test.mjs packed_bridge_test.mjs",
     "vendor:ort": "node ../tools/vendor_onnxruntime_web.mjs",
     "check": "node ../tools/check_javascript.mjs"
   },

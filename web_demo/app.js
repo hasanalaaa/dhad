@@ -106,17 +106,9 @@ function observeAsync(promise, context, userMessage = null) {
   });
 }
 
-/* ── Local logo fallback ────────────────────────────────────── */
-{
-  const img = $("logoImg");
-  const fallback = () => {
-    img.hidden = true;
-    $("logoMono").hidden = false;
-  };
-  img.addEventListener("error", fallback);
-  // The 404 may have fired before this module ran.
-  if (img.complete && img.naturalWidth === 0) fallback();
-}
+/* ── Brand mark ──────────────────────────────────────────────
+   The mark is inline SVG defined in index.html, so there is no network
+   request to fail and no raster fallback to keep in sync. */
 
 /* ── PWA lifecycle ──────────────────────────────────────────── */
 let deferredInstallPrompt = null;
