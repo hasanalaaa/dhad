@@ -1,0 +1,814 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ضاد — نظام التصميم «مِداد»
+   Dhad Design System — "Midād"
+
+   The single source of truth for the Dhad visual language.
+
+   The identity is drawn from the brand mark: an emerald ribbon of ink turning
+   through itself, lit along one edge in gold, carrying a pen nib. Everything
+   here follows from that — a warm graphite ground, emerald as the material,
+   gold as the light that falls on it, and signal colours borrowed from the
+   pigments of illuminated Arabic manuscripts (lapis, verdigris, carnelian,
+   amethyst, saffron).
+
+   Rules this system holds itself to:
+     · gold is light, never a fill — it appears as edges, hairlines and marks
+     · one raking light source, from the upper start-edge of every surface
+     · curvature is continuous; radii scale with the surface, never uniform
+     · Arabic is the design language, not a translation of a Latin one
+     · no gradient text, no heavy side rules, no bouncing easing
+
+   CANONICAL FILE. `src/dhad/web/assets/app.css`, `extension/popup.css`,
+   `extension/content.css` and `docs/index.html` embed the token block below
+   verbatim; `web_demo/design/design-system.test.mjs` enforces that they match.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── typefaces ─────────────────────────────────────────────────────────────
+   Self-hosted so the identity survives offline, on every platform, and inside
+   the desktop bundle. Variable weights: one file covers 100–900.
+   Noto Kufi Arabic & Noto Naskh Arabic — SIL Open Font License 1.1 (fonts/OFL.txt)
+   ──────────────────────────────────────────────────────────────────────────*/
+@font-face {
+  font-family: "Dhad Kufi";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/dhad-kufi-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Kufi";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/dhad-kufi-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/dhad-naskh-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/dhad-naskh-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ══ TOKENS ══ dhad-token-block:start ══════════════════════════════════════ */
+:root {
+  /* ground — warm graphite, read straight off the mark's field */
+  --ink-1000: #070806;
+  --ink-950: #0b0c0a;
+  --ink-900: #111310;
+  --ink-850: #161814;
+  --ink-800: #1c1f1a;
+  --ink-750: #23261f;
+  --ink-700: #2b2f27;
+  --ink-650: #353a31;
+  --ink-600: #434941;
+  --ink-500: #5c635a;
+  --ink-400: #8f978b;
+  --ink-300: #9ba396;
+  --ink-200: #c0c7ba;
+  --ink-100: #e2e7dc;
+  --ink-050: #f4f6f0;
+
+  /* emerald — the ribbon; the material the product is made of */
+  --emerald-950: #01180f;
+  --emerald-900: #022b21;
+  --emerald-800: #024734;
+  --emerald-700: #07684b;
+  --emerald-600: #0b8560;
+  --emerald-500: #12a075;
+  --emerald-400: #35bc90;
+  --emerald-300: #6bd3af;
+  --emerald-200: #a6e7cd;
+
+  /* gold — the light on the ribbon; edges and marks only, never a field */
+  --gold-900: #4a3b14;
+  --gold-800: #6e5722;
+  --gold-700: #9e7e34;
+  --gold-600: #c39a46;
+  --gold-500: #d9b45c;
+  --gold-400: #f5d97c;
+  --gold-300: #fbe9a8;
+  --gold-200: #fdf4d2;
+
+  /* signal pigments — lapis, verdigris, carnelian, amethyst, saffron */
+  --carnelian: #f5806a;
+  --carnelian-deep: #b8351d;
+  --saffron: #edb255;
+  --saffron-deep: #9a6410;
+  --lapis: #86b2ec;
+  --lapis-deep: #1f5099;
+  --amethyst: #b99bee;
+  --amethyst-deep: #5d3aa8;
+  --verdigris: #58ccbe;
+  --verdigris-deep: #12665d;
+
+  /* ── semantic surfaces ── */
+  --canvas: var(--ink-900);
+  --canvas-sunken: var(--ink-950);
+  --surface: var(--ink-850);
+  --surface-raised: var(--ink-800);
+  --surface-overlay: var(--ink-750);
+  --surface-inset: var(--ink-950);
+  --hairline: color-mix(in srgb, var(--ink-600) 62%, transparent);
+  --hairline-strong: var(--ink-650);
+  --hairline-gold: color-mix(in srgb, var(--gold-500) 22%, transparent);
+
+  /* ── semantic text ── */
+  --text: var(--ink-100);
+  --text-strong: var(--ink-050);
+  --text-muted: var(--ink-300);
+  --text-faint: var(--ink-400);
+  --text-on-accent: #04150f;
+
+  /* ── accents ── */
+  --accent: var(--emerald-500);
+  --accent-hover: var(--emerald-400);
+  --accent-quiet: color-mix(in srgb, var(--emerald-500) 14%, transparent);
+  --accent-edge: color-mix(in srgb, var(--emerald-400) 38%, transparent);
+  --light: var(--gold-400);
+  --light-quiet: color-mix(in srgb, var(--gold-400) 12%, transparent);
+  --light-edge: color-mix(in srgb, var(--gold-400) 34%, transparent);
+  /* Brand colour used as *text* needs a different ramp end than brand colour
+     used as a surface. These two tokens are what keep contrast honest across
+     the themes; never paint text with the raw ramp. */
+  --light-ink: var(--gold-300);
+  --accent-ink: var(--emerald-200);
+
+  /* ── severity & category ── */
+  --sev-error: var(--carnelian);
+  --sev-warning: var(--saffron);
+  --sev-hint: var(--lapis);
+  --cat-dialect: var(--amethyst);
+  --cat-tashkeel: var(--verdigris);
+  --ok: var(--emerald-400);
+
+  /* ── type ── */
+  --font-display: "Dhad Kufi", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-text: "Dhad Naskh", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.78125rem;
+  --text-sm: 0.875rem;
+  --text-md: 0.96875rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 2.875rem;
+  --text-editor: 1.1875rem;
+
+  --leading-tight: 1.25;
+  --leading-snug: 1.45;
+  --leading-normal: 1.7;
+  --leading-relaxed: 1.9;
+  --leading-editor: 2.05;
+
+  --tracking-tight: -0.012em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+  --tracking-caps: 0.14em;
+
+  /* ── rhythm ── */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.25rem;
+  --s-6: 1.5rem;
+  --s-8: 2rem;
+  --s-10: 2.5rem;
+  --s-12: 3rem;
+  --s-16: 4rem;
+  --s-20: 5rem;
+  --gutter: clamp(1rem, 3.2vw, 2.5rem);
+
+  /* ── curvature: continuous, scaled to the surface ── */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-2xl: 36px;
+  --r-full: 999px;
+
+  /* ── elevation: warm, never blue ── */
+  /* the action gradient: both stops clear 4.5:1 against the label */
+  --accent-grad: linear-gradient(160deg, var(--emerald-700), var(--emerald-900));
+  --accent-grad-hover: linear-gradient(160deg, var(--emerald-600), var(--emerald-800));
+
+  --shadow-1: 0 1px 2px rgba(4, 6, 3, 0.44);
+  --shadow-2: 0 2px 4px rgba(4, 6, 3, 0.4), 0 8px 20px rgba(4, 6, 3, 0.34);
+  --shadow-3: 0 4px 10px rgba(4, 6, 3, 0.46), 0 20px 44px rgba(4, 6, 3, 0.42);
+  --shadow-4: 0 8px 20px rgba(4, 6, 3, 0.5), 0 36px 88px rgba(4, 6, 3, 0.55);
+  --glow-gold: 0 0 0 1px var(--light-edge), 0 6px 26px rgba(245, 217, 124, 0.16);
+  --glow-emerald: 0 0 0 1px var(--accent-edge), 0 6px 26px rgba(18, 160, 117, 0.2);
+
+  /* ── motion: the ribbon's flow; no bounce, ever ── */
+  --ease-ribbon: cubic-bezier(0.22, 0.68, 0.28, 1);
+  --ease-nib: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 520ms;
+
+  --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--gold-400);
+  --z-sticky: 40;
+  --z-float: 70;
+  --z-toast: 90;
+
+  color-scheme: dark;
+}
+
+/* ── parchment: the light theme is a manuscript page, not an inverted app ──*/
+:root[data-theme="light"] {
+  --canvas: #efeadb;
+  --canvas-sunken: #e4ddc9;
+  --surface: #fffdf8;
+  --surface-raised: #fffefb;
+  --surface-overlay: #fffdf7;
+  --surface-inset: #f1ede1;
+  --hairline: rgba(58, 52, 34, 0.14);
+  --hairline-strong: rgba(58, 52, 34, 0.24);
+  --hairline-gold: rgba(140, 106, 24, 0.3);
+
+  --text: #1d2a20;
+  --text-strong: #0d1710;
+  --text-muted: #566053;
+  --text-faint: #5c6456;
+  --text-on-accent: #ffffff;
+
+  --accent: var(--emerald-700);
+  --accent-hover: var(--emerald-800);
+  --accent-quiet: rgba(7, 104, 75, 0.1);
+  --accent-edge: rgba(7, 104, 75, 0.3);
+  --light: var(--gold-800);
+  --light-quiet: rgba(158, 126, 52, 0.12);
+  --light-edge: rgba(158, 126, 52, 0.34);
+  --light-ink: #5d4a17;
+  --accent-ink: var(--emerald-800);
+
+  --sev-error: var(--carnelian-deep);
+  --sev-warning: var(--saffron-deep);
+  --sev-hint: var(--lapis-deep);
+  --cat-dialect: var(--amethyst-deep);
+  --cat-tashkeel: var(--verdigris-deep);
+  --ok: var(--emerald-700);
+
+  --shadow-1: 0 1px 2px rgba(58, 52, 34, 0.12);
+  --shadow-2: 0 2px 4px rgba(58, 52, 34, 0.09), 0 8px 20px rgba(58, 52, 34, 0.08);
+  --shadow-3: 0 4px 10px rgba(58, 52, 34, 0.1), 0 20px 44px rgba(58, 52, 34, 0.1);
+  --shadow-4: 0 8px 20px rgba(58, 52, 34, 0.12), 0 36px 88px rgba(58, 52, 34, 0.14);
+  --glow-gold: 0 0 0 1px var(--light-edge), 0 6px 22px rgba(158, 126, 52, 0.16);
+  --glow-emerald: 0 0 0 1px var(--accent-edge), 0 6px 22px rgba(7, 104, 75, 0.14);
+  --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--emerald-700);
+
+  color-scheme: light;
+}
+
+/* ── high contrast: same language, maximum separation ── */
+:root[data-theme="contrast"] {
+  --canvas: #000000;
+  --canvas-sunken: #000000;
+  --surface: #0a0c09;
+  --surface-raised: #101310;
+  --surface-overlay: #101310;
+  --surface-inset: #000000;
+  --hairline: #6f776c;
+  --hairline-strong: #97a094;
+  --hairline-gold: var(--gold-400);
+
+  --text: #ffffff;
+  --text-strong: #ffffff;
+  --text-muted: #dfe4da;
+  --text-faint: #c0c7ba;
+  --text-on-accent: #000000;
+
+  --accent: #4fe0ab;
+  --accent-hover: #7cecc3;
+  --accent-quiet: rgba(79, 224, 171, 0.2);
+  --accent-edge: #4fe0ab;
+  --light: #ffe89a;
+  --light-quiet: rgba(255, 232, 154, 0.2);
+  --light-edge: #ffe89a;
+  --light-ink: #ffe89a;
+  --accent-ink: #7cecc3;
+
+  --sev-error: #ff9d88;
+  --sev-warning: #ffcd77;
+  --sev-hint: #a8caff;
+  --cat-dialect: #d3bcff;
+  --cat-tashkeel: #79e8da;
+  --ok: #4fe0ab;
+
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: 0 0 0 1px var(--hairline-strong);
+  --shadow-4: 0 0 0 1px var(--hairline-strong);
+  --glow-gold: 0 0 0 2px var(--gold-400);
+  --glow-emerald: 0 0 0 2px var(--accent);
+
+  color-scheme: dark;
+}
+/* ══ dhad-token-block:end ══════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-text);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-strong);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold-400) 30%, transparent);
+  color: var(--text-strong);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--r-xs);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* the raking light — an ambient field, drawn once behind everything */
+.dhad-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 42% at 78% -8%, color-mix(in srgb, var(--gold-400) 9%, transparent), transparent 62%),
+    radial-gradient(46% 38% at 14% 4%, color-mix(in srgb, var(--emerald-500) 8%, transparent), transparent 58%),
+    radial-gradient(120% 90% at 50% 118%, var(--canvas-sunken), transparent 70%),
+    var(--canvas);
+}
+
+/* the triad from the mark: three gold marks, used as a rhythmic divider */
+.dhad-triad {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+.dhad-triad::before,
+.dhad-triad::after,
+.dhad-triad > i {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 1px;
+  background: var(--light);
+  opacity: 0.55;
+  transform: skewX(-8deg);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PRIMITIVES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── brand lockup ── */
+.dhad-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+  text-decoration: none;
+}
+.dhad-brand__mark {
+  flex: none;
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: drop-shadow(0 2px 8px rgba(4, 6, 3, 0.45));
+}
+.dhad-brand__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-strong);
+}
+.dhad-brand__tag {
+  display: block;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── eyebrow ── */
+.dhad-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--light);
+}
+
+/* ── button ── */
+.dhad-btn {
+  --btn-bg: var(--surface-raised);
+  --btn-fg: var(--text);
+  --btn-edge: var(--hairline);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 2.375rem;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--btn-edge);
+  border-radius: var(--r-sm);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--dur-2) var(--ease-nib),
+    border-color var(--dur-2) var(--ease-nib),
+    color var(--dur-2) var(--ease-nib),
+    transform var(--dur-1) var(--ease-nib);
+}
+.dhad-btn > svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dhad-btn:hover {
+  --btn-bg: var(--surface-overlay);
+  --btn-edge: var(--hairline-strong);
+  color: var(--text-strong);
+}
+.dhad-btn:active {
+  transform: translateY(1px);
+}
+.dhad-btn[disabled] {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.dhad-btn--primary {
+  --btn-bg: var(--accent-grad);
+  --btn-fg: #f2fbf6;
+  --btn-edge: transparent;
+  box-shadow: var(--shadow-2), inset 0 1px 0 color-mix(in srgb, var(--gold-400) 26%, transparent);
+}
+.dhad-btn--primary:hover {
+  --btn-bg: var(--accent-grad-hover);
+  --btn-edge: transparent;
+}
+
+.dhad-btn--quiet {
+  --btn-bg: transparent;
+  --btn-edge: transparent;
+  color: var(--text-muted);
+}
+.dhad-btn--quiet:hover {
+  --btn-bg: var(--accent-quiet);
+  color: var(--text-strong);
+}
+
+.dhad-btn--icon {
+  width: 2.375rem;
+  padding: 0;
+}
+
+/* a pressed toggle carries the gold edge-light, like the lit side of the mark */
+.dhad-btn[aria-pressed="true"],
+.dhad-btn.is-on {
+  --btn-bg: var(--light-quiet);
+  --btn-edge: var(--light-edge);
+  color: var(--light-ink);
+}
+
+/* ── chip ── */
+.dhad-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 1.875rem;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-full);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--dur-2) var(--ease-nib),
+    border-color var(--dur-2) var(--ease-nib),
+    color var(--dur-2) var(--ease-nib);
+}
+.dhad-chip:hover {
+  border-color: var(--hairline-strong);
+  color: var(--text);
+}
+.dhad-chip[aria-pressed="true"],
+.dhad-chip.is-on {
+  background: var(--accent-quiet);
+  border-color: var(--accent-edge);
+  color: var(--accent-ink);
+}
+
+/* ── field ── */
+.dhad-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+  margin-bottom: var(--s-2);
+}
+.dhad-input,
+.dhad-select,
+.dhad-textarea {
+  width: 100%;
+  min-height: 2.375rem;
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--surface-inset);
+  color: var(--text);
+  font-size: var(--text-sm);
+  transition: border-color var(--dur-2) var(--ease-nib), background var(--dur-2) var(--ease-nib);
+}
+.dhad-textarea {
+  min-height: 6rem;
+  line-height: var(--leading-normal);
+  resize: vertical;
+}
+.dhad-input:hover,
+.dhad-select:hover,
+.dhad-textarea:hover {
+  border-color: var(--hairline-strong);
+}
+.dhad-input:focus,
+.dhad-select:focus,
+.dhad-textarea:focus {
+  outline: none;
+  border-color: var(--accent-edge);
+  box-shadow: var(--focus-ring);
+}
+.dhad-select {
+  appearance: none;
+  padding-inline-end: var(--s-8);
+  background-image: linear-gradient(45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%);
+  background-size: 6px 6px, 6px 6px;
+  background-position: left 1rem top 55%, left 0.65rem top 55%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* ── card ── */
+.dhad-card {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+}
+/* the raking light: a single hairline along the top start edge */
+.dhad-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    to left,
+    transparent,
+    color-mix(in srgb, var(--gold-400) 34%, transparent) 22%,
+    color-mix(in srgb, var(--gold-400) 8%, transparent) 62%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* ── panel head ── */
+.dhad-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* ── dialog ── */
+.dhad-dialog {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  max-width: min(96vw, 62rem);
+  max-height: 92dvh;
+  overflow: visible;
+}
+.dhad-dialog::backdrop {
+  background: rgba(6, 8, 5, 0.66);
+  backdrop-filter: blur(6px) saturate(0.9);
+}
+.dhad-dialog__panel {
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-xl);
+  background: var(--surface-overlay);
+  box-shadow: var(--shadow-4);
+  padding: var(--s-6);
+  max-height: 92dvh;
+  overflow: auto;
+}
+.dhad-dialog__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-4);
+}
+.dhad-dialog__close {
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--dur-2) var(--ease-nib), border-color var(--dur-2) var(--ease-nib);
+}
+.dhad-dialog__close:hover {
+  color: var(--text-strong);
+  border-color: var(--hairline-strong);
+}
+.dhad-dialog__close svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+/* ── status dot ── */
+.dhad-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--r-full);
+  background: var(--text-faint);
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 12%, transparent);
+  flex: none;
+}
+.dhad-dot.is-ready {
+  background: var(--ok);
+  color: var(--ok);
+}
+.dhad-dot.is-failed {
+  background: var(--sev-error);
+  color: var(--sev-error);
+}
+
+/* ── scrollbars ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-650) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--ink-650);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: var(--r-full);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-600);
+  background-clip: content-box;
+}
+
+/* ── utility ── */
+.dhad-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.dhad-skip {
+  position: absolute;
+  inset-inline-start: var(--s-4);
+  top: -4rem;
+  z-index: var(--z-toast);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+  background: var(--emerald-700);
+  color: #f2fbf6;
+  font-weight: 600;
+  transition: top var(--dur-2) var(--ease-ribbon);
+}
+.dhad-skip:focus {
+  top: var(--s-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
