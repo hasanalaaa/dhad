@@ -365,3 +365,22 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* The popup is a browser-drawn surface: when the platform forces its own
+   colours, borders that were a translucent tint of the ground disappear and
+   every control loses its shape. Give them an opaque edge and let the
+   platform recolour it. */
+@media (prefers-contrast: more), (forced-colors: active) {
+  .head,
+  .field {
+    border-bottom-color: #97a094;
+  }
+  .switch,
+  .btn,
+  .status {
+    border: 2px solid #97a094;
+  }
+  .check {
+    stroke: currentColor;
+  }
+}

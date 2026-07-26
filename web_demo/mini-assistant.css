@@ -510,6 +510,53 @@ input:focus-visible {
   box-shadow: var(--focus-ring);
 }
 
+/* ══ platform preferences ══════════════════════════════════════════════════
+   The design system answers both of these for every surface, but the panel
+   needs its own answer on top of it. It is a floating window over a
+   transparent root, so its only edge is the one it draws itself: when the
+   operating system repaints in its own colours that border has to survive,
+   and when it thins to a tint the panel stops having a shape at all. And
+   because the panel appears unbidden — summoned by a shortcut, over whatever
+   the reader was doing — its entrance and its busy pulse are exactly the
+   motion a reduced-motion preference is asking us to drop, not merely
+   shorten. */
+
+@media (prefers-reduced-motion: reduce) {
+  .issue-card,
+  .candidate-card {
+    animation: none;
+  }
+  .mini-shell.is-busy .performance-status::before {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-contrast: more), (forced-colors: active) {
+  .mini-shell,
+  #quickText,
+  .icon-button,
+  .soft-button,
+  .primary-button,
+  .accent-button,
+  .composer-actions select,
+  .issue-card,
+  .candidate-card,
+  .privacy-pill,
+  .shortcut-hint {
+    border-style: solid;
+    border-width: 2px;
+  }
+  .mini-shell {
+    border-color: var(--hairline-strong);
+    background: var(--surface);
+  }
+  /* the raking light is decoration; at this contrast it reads as an artefact */
+  .mini-shell::before {
+    display: none;
+  }
+}
+
 /* ══ responsive ════════════════════════════════════════════════════════════ */
 
 @media (max-width: 640px), (max-height: 520px) {

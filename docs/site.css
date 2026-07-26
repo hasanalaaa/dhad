@@ -329,6 +329,47 @@
 
   color-scheme: dark;
 }
+
+/* ── the platform's own request ────────────────────────────────────────────
+   `[data-theme="contrast"]` above is a choice the reader makes inside the
+   app. `prefers-contrast: more` and `forced-colors: active` are that same
+   request made by the operating system, and a surface nobody has deliberately
+   put into another theme has to honour it.
+
+   Only the tokens that carry separation move. Hairlines stop being a tint of
+   the ground and become their own colour; depth stops being communicated by
+   shadow alone and gains a ring; every glow becomes an outline. The palette
+   is untouched — this is the same identity under a harder light, not a
+   different one. */
+@media (prefers-contrast: more), (forced-colors: active) {
+  :root {
+    --hairline: #6f776c;
+    --hairline-strong: #97a094;
+    --text-muted: #dfe4da;
+    --text-faint: #c0c7ba;
+
+    --shadow-1: 0 0 0 1px var(--hairline);
+    --shadow-2: 0 0 0 1px var(--hairline);
+    --shadow-3: 0 0 0 1px var(--hairline-strong);
+    --shadow-4: 0 0 0 1px var(--hairline-strong);
+    --glow-gold: 0 0 0 2px var(--gold-400);
+    --glow-emerald: 0 0 0 2px var(--accent);
+  }
+
+  :root[data-theme="light"] {
+    --hairline: #5f6857;
+    --hairline-strong: #3d4636;
+    --text-muted: #313d2e;
+    --text-faint: #313d2e;
+
+    --shadow-1: 0 0 0 1px var(--hairline);
+    --shadow-2: 0 0 0 1px var(--hairline);
+    --shadow-3: 0 0 0 1px var(--hairline-strong);
+    --shadow-4: 0 0 0 1px var(--hairline-strong);
+    --glow-gold: 0 0 0 2px var(--light-ink);
+    --glow-emerald: 0 0 0 2px var(--accent);
+  }
+}
 /* ══ dhad-token-block:end ══════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -1228,7 +1269,7 @@ h1 {
   font-size: var(--text-sm);
 }
 
-.diagram {
+.privacy-diagram {
   margin: 0;
   padding: var(--s-6);
   border: 1px solid var(--hairline);
@@ -1237,7 +1278,7 @@ h1 {
     radial-gradient(60% 50% at 50% 45%, color-mix(in srgb, var(--emerald-500) 10%, transparent), transparent 62%),
     var(--canvas-sunken);
 }
-.diagram svg {
+.privacy-diagram svg {
   display: block;
   width: 100%;
   height: auto;

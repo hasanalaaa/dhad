@@ -380,3 +380,29 @@
     transition: none;
   }
 }
+
+/* The in-page layer lives on somebody else's document. Under forced colours
+   that document is repainted around it, so the card has to keep an edge of
+   its own or it dissolves into whatever is behind it — and the squiggle,
+   which is the whole signal, has to stop being colour alone. */
+@media (prefers-contrast: more), (forced-colors: active) {
+  .dhad-card,
+  .dhad-card__button,
+  .dhad-card__tool,
+  .dhad-card__template,
+  .dhad-badge {
+    border: 2px solid var(--dhad-line-strong);
+  }
+  .dhad-card__header,
+  .dhad-card__issue {
+    border-bottom: 1px solid var(--dhad-line-strong);
+  }
+  /* the category variants below carry their own background-image at
+     [data-category] specificity, so the reset has to match it */
+  .dhad-squiggle,
+  .dhad-squiggle[data-category] {
+    text-decoration: underline wavy currentColor 1px;
+    text-underline-offset: 3px;
+    background-image: none;
+  }
+}
