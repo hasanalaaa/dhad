@@ -7,7 +7,11 @@ const SHELL = [
   "/static/app.js",
   "/manifest.webmanifest",
   "/static/icons/icon-192.png",
-  "/static/icons/icon-512.png"
+  "/static/icons/icon-512.png",
+  "/static/fonts/dhad-kufi-arabic.woff2",
+  "/static/fonts/dhad-kufi-latin.woff2",
+  "/static/fonts/dhad-naskh-arabic.woff2",
+  "/static/fonts/dhad-naskh-latin.woff2"
 ];
 const API_PREFIXES = ["/api/", "/check", "/parse", "/style", "/dialect", "/intelligence", "/diacritize", "/v2/"];
 
