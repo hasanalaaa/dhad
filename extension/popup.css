@@ -1,27 +1,367 @@
-:root { color-scheme: dark; --bg:#08110e; --surface:#11221c; --border:#294038; --text:#edf7f2; --muted:#91a99f; --accent:#36d5a4; --danger:#ff7468; }
-* { box-sizing: border-box; }
-body { width: 340px; margin: 0; color: var(--text); background: var(--bg); font-family: "Segoe UI", Tahoma, Arial, sans-serif; }
-header { display:flex; align-items:center; gap:10px; padding:14px; border-bottom:1px solid var(--border); }
-header img { border-radius:12px; }
-header div { flex:1; }
-h1 { margin:0; font-size:18px; }
-header p { margin:2px 0 0; color:var(--muted); font-size:11px; }
-main { display:grid; gap:12px; padding:14px; }
-.field { display:grid; gap:5px; color:var(--muted); font-size:12px; }
-input[type="url"], select { width:100%; min-height:38px; border:1px solid var(--border); border-radius:9px; padding:7px 9px; color:var(--text); background:var(--surface); outline:none; }
-input:focus, select:focus { border-color:var(--accent); }
-fieldset { display:grid; gap:8px; margin:0; padding:10px; border:1px solid var(--border); border-radius:10px; color:var(--muted); font-size:12px; }
-legend { color:var(--text); }
-.status { padding:8px 10px; border-radius:8px; color:var(--muted); background:var(--surface); font-size:11px; }
-.status[data-state="ok"] { color:var(--accent); }
-.status[data-state="error"] { color:var(--danger); }
-.actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-button { min-height:38px; border-radius:9px; padding:7px 10px; cursor:pointer; font-weight:700; }
-.primary { border:0; color:#03251b; background:var(--accent); }
-.secondary { border:1px solid var(--border); color:var(--text); background:transparent; }
-.privacy { margin:0; color:var(--muted); font-size:10.5px; line-height:1.6; }
-.switch input { display:none; }
-.switch span { display:block; width:42px; height:24px; border-radius:99px; background:#344940; position:relative; cursor:pointer; }
-.switch span::after { content:""; position:absolute; width:18px; height:18px; top:3px; right:3px; border-radius:50%; background:#cbd8d2; transition:.18s; }
-.switch input:checked + span { background:var(--accent); }
-.switch input:checked + span::after { transform:translateX(-18px); background:#03251b; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   ضاد — لوحة إعدادات الإضافة
+   Extension popup. The extension ships as its own package and cannot reach
+   `web_demo/design/dhad-system.css`, so every colour below is written as a
+   literal drawn from that file's token block.
+   `web_demo/design/design-system.test.mjs` fails if any hex used here is not
+   present in the canonical tokens, which is what keeps the two in step.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Dhad Kufi";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/dhad-kufi-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Kufi";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/dhad-kufi-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/dhad-naskh-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/dhad-naskh-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ══ POPUP SURFACE ══ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  padding: 0 0 14px;
+  background:
+    radial-gradient(70% 40% at 82% -6%, rgba(245, 217, 124, 0.09), transparent 62%),
+    radial-gradient(50% 34% at 10% 2%, rgba(18, 160, 117, 0.08), transparent 58%),
+    #111310;
+  color: #e2e7dc;
+  font-family: "Dhad Naskh", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.sprite > defs > g[id^="i-"] {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ══ head ══ */
+
+.head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(67, 73, 65, 0.72);
+}
+.head::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px 0;
+  height: 1px;
+  background: linear-gradient(to left, transparent, rgba(245, 217, 124, 0.28) 22%, transparent);
+}
+.head__mark {
+  width: 38px;
+  height: 38px;
+  flex: none;
+}
+.head__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.head h1 {
+  margin: 0;
+  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+  color: #f4f6f0;
+}
+.head p {
+  margin: 0;
+  font-size: 11px;
+  color: #9ba396;
+}
+
+/* ══ switch ══ */
+
+.switch {
+  flex: none;
+  cursor: pointer;
+}
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch span {
+  display: block;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(67, 73, 65, 0.72);
+  background: #1c1f1a;
+  transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.switch span::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 3px;
+  border-radius: 999px;
+  background: #8f978b;
+  transition: transform 200ms cubic-bezier(0.22, 0.68, 0.28, 1), background 200ms;
+}
+.switch input:checked + span {
+  background: linear-gradient(160deg, #07684b, #022b21);
+  border-color: rgba(245, 217, 124, 0.34);
+}
+.switch input:checked + span::after {
+  transform: translateX(-18px);
+  background: #fbe9a8;
+}
+.switch input:focus-visible + span {
+  outline: none;
+  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+}
+
+/* ══ groups ══ */
+
+main {
+  padding: 0 14px;
+}
+.group {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(67, 73, 65, 0.45);
+}
+.group:last-of-type {
+  border-bottom: none;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f5d97c;
+  margin-bottom: 10px;
+}
+.eyebrow svg {
+  width: 13px;
+  height: 13px;
+}
+
+.field {
+  display: block;
+  margin-bottom: 10px;
+}
+.field:last-child {
+  margin-bottom: 0;
+}
+.field > span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ba396;
+  margin-bottom: 5px;
+}
+
+input[type="url"],
+select {
+  width: 100%;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid rgba(67, 73, 65, 0.72);
+  border-radius: 10px;
+  background: #0b0c0a;
+  color: #e2e7dc;
+  font: inherit;
+  font-size: 12.5px;
+  transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+select {
+  cursor: pointer;
+}
+input:hover,
+select:hover {
+  border-color: #353a31;
+}
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  border-color: rgba(18, 160, 117, 0.38);
+  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+.check input {
+  width: 15px;
+  height: 15px;
+  accent-color: #12a075;
+  flex: none;
+}
+
+/* ══ status ══ */
+
+.status {
+  position: relative;
+  padding: 8px 10px 8px 10px;
+  padding-inline-start: 22px;
+  border: 1px solid rgba(67, 73, 65, 0.72);
+  border-radius: 10px;
+  background: #1c1f1a;
+  font-size: 11.5px;
+  color: #9ba396;
+}
+.status::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 9px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: #8f978b;
+}
+.status[data-state="ok"] {
+  border-color: rgba(18, 160, 117, 0.38);
+  color: #a6e7cd;
+}
+.status[data-state="ok"]::before {
+  background: #35bc90;
+}
+.status[data-state="error"] {
+  border-color: rgba(245, 128, 106, 0.42);
+  color: #f5806a;
+}
+.status[data-state="error"]::before {
+  background: #f5806a;
+}
+
+/* ══ actions ══ */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 14px;
+}
+.btn {
+  flex: 1 1 0;
+  min-height: 36px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+}
+.secondary {
+  background: transparent;
+  border-color: rgba(67, 73, 65, 0.72);
+  color: #9ba396;
+}
+.secondary:hover {
+  border-color: #353a31;
+  color: #f4f6f0;
+}
+.primary {
+  background: linear-gradient(160deg, #07684b, #022b21);
+  color: #f2fbf6;
+  box-shadow: inset 0 1px 0 rgba(245, 217, 124, 0.26);
+}
+.primary:hover {
+  background: linear-gradient(160deg, #0b8560, #024734);
+}
+
+/* ══ footnote ══ */
+
+.privacy {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 14px 0 0;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #8f978b;
+}
+.privacy svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin-top: 2px;
+  stroke: #35bc90;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
