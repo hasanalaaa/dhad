@@ -67,7 +67,7 @@
     "license": "full verbatim GNU AGPL-3.0 text",
     "code_of_conduct": "Contributor Covenant 2.1, bilingual",
     "security_policy": "supported versions, private reporting, declared limitations",
-    "visual_identity": "docs/logo.svg (obsidian/graphite/copper), CLI banner"
+    "visual_identity": "docs/brand/ (Midad identity: emerald ribbon, gold edge-light, warm graphite), CLI banner"
   },
   "production": {
     "docker": "multi-stage Python 3.12 slim",
