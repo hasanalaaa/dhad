@@ -34,6 +34,7 @@ SURFACES = (
     "extension/manifest.json",
     "RELEASE_MANIFEST.json",
     "Cargo.lock",
+    "README.md",
 )
 
 
@@ -123,6 +124,14 @@ def _cargo_lock(root: Path, version: str) -> tuple[Path, str]:
     return path, text
 
 
+def _readme_badge(root: Path, version: str) -> tuple[Path, str]:
+    # The badge is the first version a reader sees, and nothing else in the repo
+    # was keeping it honest: it sat at 1.0.18 through the whole 1.0.19 release.
+    path = root / "README.md"
+    pattern = re.compile(r"(?m)^(\[!\[Version\]\(https://img\.shields\.io/badge/release-v)[^-]+(-[0-9A-Fa-f]{6}\)\]\(CHANGELOG\.md\))$")
+    return path, _substitute(path, pattern, rf"\g<1>{version}\g<2>", expected=1)
+
+
 def rewrite(root: Path, version: str) -> dict[str, bool]:
     edits = [
         _python_init(root, version),
@@ -135,6 +144,7 @@ def rewrite(root: Path, version: str) -> dict[str, bool]:
         _extension_manifest(root, version),
         _release_manifest(root, version),
         _cargo_lock(root, version),
+        _readme_badge(root, version),
     ]
     changed: dict[str, bool] = {}
     for path, content in edits:

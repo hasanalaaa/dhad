@@ -332,6 +332,8 @@ def test_release_contract_rejects_corrupted_registry_lock_entry(tmp_path: Path) 
         "extension/manifest.json",
         "RELEASE_MANIFEST.json",
         "Cargo.lock",
+        # the release badge is a version surface too, so the contract reads it
+        "README.md",
     ):
         source = root / relative
         target = tmp_path / relative

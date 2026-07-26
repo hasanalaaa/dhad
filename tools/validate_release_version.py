@@ -59,6 +59,16 @@ def cache_policy_version(path: Path) -> str:
     return match.group(1)
 
 
+def readme_badge_version(path: Path) -> str:
+    pattern = re.compile(
+        r"(?m)^\[!\[Version\]\(https://img\.shields\.io/badge/release-v([^-]+)-[0-9A-Fa-f]{6}\)\]\(CHANGELOG\.md\)$"
+    )
+    match = pattern.search(path.read_text(encoding="utf-8"))
+    if not match:
+        raise ValueError(f"missing release version badge: {path}")
+    return match.group(1)
+
+
 def collect_versions(root: Path) -> dict[str, str]:
     package_lock = load_json(root / "web_demo" / "package-lock.json")
     lock_root = package_lock.get("packages", {}).get("", {})
@@ -86,6 +96,9 @@ def collect_versions(root: Path) -> dict[str, str]:
         "extension": str(extension["version"]),
         "release-manifest": str(release_manifest["version"]),
         "release-manifest-python": str(release_manifest["python_version"]),
+        # The README badge is the first version a reader sees; it is a
+        # distributable surface even though nothing ships it.
+        "readme-badge": readme_badge_version(root / "README.md"),
         **{f"cargo-lock:{name}": version for name, version in cargo_lock_versions(root / "Cargo.lock").items()},
     }
 

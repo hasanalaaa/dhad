@@ -6,7 +6,7 @@
 ### Arabic writing intelligence that belongs on your device.
 ### ذكاء كتابي عربي، محلي أولاً، مصمم للخصوصية والسرعة.
 
-[![Version](https://img.shields.io/badge/release-v1.0.18%20Sovereign-8A7CFF)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/release-v1.0.19-07684B)](CHANGELOG.md)
 [![Rust](https://img.shields.io/badge/core-Rust-000000?logo=rust&logoColor=white)](rust/dhad-core-rs)
 [![Tauri](https://img.shields.io/badge/desktop-Tauri%202-24C8DB?logo=tauri&logoColor=white)](src-tauri)
 [![WebAssembly](https://img.shields.io/badge/runtime-WASM-654FF0?logo=webassembly&logoColor=white)](web_demo)
