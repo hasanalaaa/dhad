@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>ضاد — مصدر بطاقة المشاركة</title>
+<!--
+  The source of docs/brand/og-card.png.
+
+  The card is rendered, never drawn. Open this file at exactly 1200×630 with a
+  device pixel ratio of 1 and screenshot it:
+
+      docs/brand/og-card.png  ←  tools/render/og-card.html
+
+  Everything it shows is referenced, not copied — the mark comes from
+  docs/brand/dhad-mark.svg and the type from the same self-hosted woff2 files
+  the product ships — so the card cannot drift away from the identity it is
+  supposed to be advertising. Re-render it after any change to either.
+
+  The previous card was the mark alone on an empty field. At the width a feed
+  actually renders an OG image (~500px) that reduced to a dark rectangle with
+  an unreadable smudge in it, which is why the name, the promise and the
+  platforms are on the card now.
+-->
+<style>
+@font-face {
+  font-family: "Dhad Kufi";
+  font-weight: 100 900;
+  src: url("../../docs/fonts/dhad-kufi-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Dhad Kufi";
+  font-weight: 100 900;
+  src: url("../../docs/fonts/dhad-kufi-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+2000-206F;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-weight: 100 900;
+  src: url("../../docs/fonts/dhad-naskh-arabic.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
+  font-family: "Dhad Naskh";
+  font-weight: 100 900;
+  src: url("../../docs/fonts/dhad-naskh-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+2000-206F;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1200px; height: 630px; overflow: hidden; }
+
+.card {
+  position: relative;
+  width: 1200px;
+  height: 630px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 64px;
+  padding: 0 92px;
+  /* the same ground, and the same one raking light, as every product surface */
+  background:
+    radial-gradient(80% 120% at 88% -10%, rgba(245, 217, 124, 0.1), transparent 58%),
+    radial-gradient(70% 100% at 12% 110%, rgba(11, 133, 96, 0.13), transparent 62%),
+    #111310;
+  font-family: "Dhad Naskh", serif;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(to left, transparent, #f5d97c 26%, #9e7e34 62%, transparent);
+}
+
+.mark {
+  display: block;
+  width: 252px;
+  height: 252px;
+  filter: drop-shadow(0 18px 44px rgba(0, 0, 0, 0.55));
+}
+
+.wordmark {
+  font-family: "Dhad Kufi", sans-serif;
+  font-weight: 800;
+  font-size: 116px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #f6f8f2;
+}
+.rule {
+  width: 132px;
+  height: 2px;
+  margin: 26px 0 24px;
+  background: linear-gradient(to left, #f5d97c, rgba(245, 217, 124, 0));
+}
+.lede {
+  max-width: 21ch;
+  font-size: 38px;
+  line-height: 1.42;
+  color: #dfe4da;
+}
+.lede b {
+  font-weight: 600;
+  color: #f5d97c;
+}
+.platforms {
+  margin-top: 30px;
+  font-family: "Dhad Kufi", sans-serif;
+  font-size: 23px;
+  letter-spacing: 0.06em;
+  color: #8f978b;
+}
+.platforms span { color: #4fe0ab; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="mark" src="../../docs/brand/dhad-mark.svg" alt="">
+    <div>
+      <p class="wordmark">ضاد</p>
+      <div class="rule"></div>
+      <p class="lede">الذكاء الكتابي العربي — <b>على جهازك</b>، دون إرسال نصّك إلى أحد.</p>
+      <p class="platforms">macOS <span>·</span> Windows <span>·</span> الويب</p>
+    </div>
+  </div>
+</body>
+</html>
