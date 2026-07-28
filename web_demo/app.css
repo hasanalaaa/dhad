@@ -54,11 +54,19 @@ body { overflow-x: hidden; }
   inset-block-start: 0;
   z-index: 40;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-3) var(--space-6);
   padding: var(--space-3) var(--gutter);
   background: var(--bg);
   border-block-end: 1px solid var(--border);
+}
+/* Below 560px the row cannot hold the brand and the status side by side, so
+   the brand takes the full line and the controls drop beneath it. Wrapping is
+   the fix; shrinking the wordmark until it collides is not. */
+@media (max-width: 559px) {
+  .dhad-brand { flex: 1 0 100%; }
+  .masthead__aside { margin-inline-start: 0; flex-wrap: wrap; }
 }
 
 .dhad-brand {
