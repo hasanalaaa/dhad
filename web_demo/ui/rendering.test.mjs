@@ -67,7 +67,10 @@ test("the editor integrates composited overlay, worker checks, persistence, and 
   assert.match(css, /\.editor-overlay/u);
   assert.match(css, /will-change:\s*transform/u);
   assert.match(css, /translate3d/u);
-  assert.match(css, /\.issues\s*\{[\s\S]*?min-height:\s*0/u);
+  // The virtualised list must be allowed to shrink below its content, or the
+  // scroll container never scrolls. Written logically: `min-height` is a
+  // physical property and the design system bans them outright.
+  assert.match(css, /\.issues\s*\{[\s\S]*?min-block-size:\s*0/u);
 });
 
 test("the Arabic editor exposes keyboard and assistive-technology state", async () => {

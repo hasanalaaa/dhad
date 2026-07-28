@@ -48,10 +48,12 @@ export const CORE_IMMUTABLE_ASSETS = Object.freeze([
   "./rules.json",
   // Typefaces are part of the identity, so they install with the shell: the
   // product must look like itself on its first offline launch.
-  "./fonts/dhad-kufi-arabic.woff2",
-  "./fonts/dhad-kufi-latin.woff2",
+  "./fonts/dhad-display.woff2",
+  "./fonts/dhad-text-arabic.woff2",
+  "./fonts/dhad-text-arabic-600.woff2",
+  "./fonts/dhad-text-latin.woff2",
   "./fonts/dhad-naskh-arabic.woff2",
-  "./fonts/dhad-naskh-latin.woff2",
+  "./fonts/dhad-mono.woff2",
 ]);
 
 // Neural assets exceed 150 MiB. They are cached on first use or by an explicit

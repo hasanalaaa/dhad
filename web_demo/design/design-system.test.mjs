@@ -68,11 +68,21 @@ test("no surface still references the retired visual identity", async () => {
   // Hex values from the pre-redesign obsidian/copper palette. If any of these
   // come back, some part of the old design survived the migration.
   const retired = [
+    // the original obsidian/copper palette
     "#0c0f14", "#07090c", "#12161d", "#171c25", "#1e2430", "#262d3a", "#1c222d",
     "#d9b25a", "#eccb7b", "#b87848", "#ece7db", "#9aa3b0", "#626c7a",
     "#ff6b6b", "#f2b53f", "#6fb7ff", "#55c98a", "#c99cff", "#5fd0c0",
     "#080b10", "#10151d", "#151b24", "#f7f1e7", "#aeb6c2", "#b87333", "#d4af37",
     "#0a1512", "#07100d", "#0b0e14",
+    // Midād's *interface* colours, replaced by Al-Ḥāshiya. The brand mark's own
+    // gradient stops are deliberately NOT in this list: the mark survived the
+    // redesign intact, and its emerald ribbon and gold light are the one place
+    // those hues are still correct. What changed is where the interface spends
+    // them — gold is now an edge and never a fill.
+    "#111310", "#0b0c0a", "#161814", "#1c1f1a", "#23261f", "#353a31",
+    "#f4f6f0", "#e2e7dc", "#9ba396", "#97a094", "#8f978b",
+    "#35bc90", "#12a075", "#0b8560", "#a6e7cd", "#fbe9a8",
+    "#f5806a", "#edb255", "#86b2ec", "#b99bee", "#58ccbe",
   ];
   const surfaces = [
     "web_demo/design/dhad-system.css",
@@ -104,7 +114,10 @@ test("the canonical system defines the full brand ramp and all four themes", asy
   for (const token of [
     "--emerald-600", "--gold-400", "--ink-900", "--carnelian", "--saffron",
     "--lapis", "--amethyst", "--verdigris", "--font-display", "--font-text",
-    "--ease-ribbon", "--focus-ring",
+    "--font-doc", "--font-mono", "--ease-ribbon", "--focus-ring",
+    // the three layers must all be present, or a "token" is just a variable
+    "--paper-100", "--graphite-800", "--bg", "--accent", "--btn-primary-bg",
+    "--gloss-width", "--mark-spelling",
   ]) {
     assert.match(canonical, new RegExp(`${token}\\s*:`, "u"), `missing token ${token}`);
   }
@@ -113,6 +126,36 @@ test("the canonical system defines the full brand ramp and all four themes", asy
   }
   // The identity must survive offline, so the typefaces are self-hosted.
   assert.match(canonical, /@font-face/u);
-  assert.match(canonical, /dhad-kufi-arabic\.woff2/u);
-  assert.match(canonical, /dhad-naskh-arabic\.woff2/u);
+  for (const face of [
+    "dhad-display.woff2",       // Alexandria — the Arabic display voice
+    "dhad-text-arabic.woff2",   // IBM Plex Sans Arabic 400
+    "dhad-text-arabic-600.woff2", // ...and a real 600, never synthesised
+    "dhad-naskh-arabic.woff2",  // Noto Naskh — the document itself
+    "dhad-mono.woff2",          // IBM Plex Mono — Latin ids and numerals
+  ]) {
+    assert.match(canonical, new RegExp(face.replaceAll(".", "\\."), "u"), `missing face ${face}`);
+  }
+  // Arabic is a connected script: a synthesised bold smears the joins, and
+  // tracking breaks them outright. Both bans live in the canonical file.
+  assert.match(canonical, /font-synthesis:\s*none/u, "font-synthesis: none is missing");
+  assert.match(canonical, /letter-spacing:\s*0/u, "the Arabic letter-spacing reset is missing");
+});
+
+test("no surface uses a physical direction property", async () => {
+  // Every physical direction is an RTL bug waiting for a language switch.
+  const physical =
+    /(?:^|[\s{;])(?:margin|padding|border|inset)-(?:left|right)\s*:|(?:^|[\s{;])(?:left|right)\s*:|text-align\s*:\s*(?:left|right)\b/u;
+  for (const surface of [
+    "web_demo/design/dhad-system.css",
+    "web_demo/app.css",
+  ]) {
+    const source = await read(surface);
+    for (const [index, line] of source.split("\n").entries()) {
+      const code = line.split("/*")[0];
+      assert.ok(
+        !physical.test(code),
+        `${surface}:${index + 1} uses a physical direction: ${line.trim()}`,
+      );
+    }
+  }
 });

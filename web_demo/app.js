@@ -858,8 +858,11 @@ function updateStats(text, visible, elapsed, parsed = null) {
   stat.issues.textContent = String(visible.length);
   const wordCount = text.match(/[\p{L}\p{N}]+/gu)?.length ?? 0;
   stat.words.textContent = String(wordCount);
-  stat.latency.textContent =
-    wordCount === 0 ? "0 د" : wordCount < 180 ? "< 1 د" : `${Math.ceil(wordCount / 180)} د`;
+  // "<" is a bidi-neutral character: inside an LTR-isolated numeral sitting in
+  // an RTL page it lands on the wrong side of the value and reads as "د 1 <".
+  // Math.ceil already rounds a part-minute up to 1, so the branch was never
+  // carrying information the number did not.
+  stat.latency.textContent = wordCount === 0 ? "—" : `${Math.ceil(wordCount / 180)} د`;
   const sentenceCount = parsed?.sentences?.length;
   stat.latency.title =
     `زمن آخر فحص: ${elapsed.toFixed(2)} م.ث` +

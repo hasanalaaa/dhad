@@ -7,21 +7,38 @@
    present in the canonical tokens, which is what keeps the two in step.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* dhad-font-block:start */
 @font-face {
-  font-family: "Dhad Kufi";
+  font-family: "Dhad Display";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("fonts/dhad-kufi-arabic.woff2") format("woff2");
+  src: url("fonts/dhad-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Dhad Text";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/dhad-text-arabic.woff2") format("woff2");
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
     U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
 }
 @font-face {
-  font-family: "Dhad Kufi";
+  font-family: "Dhad Text";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 600;
   font-display: swap;
-  src: url("fonts/dhad-kufi-latin.woff2") format("woff2");
+  src: url("fonts/dhad-text-arabic-600.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Text";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url("fonts/dhad-text-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
     U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -35,14 +52,14 @@
     U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
 }
 @font-face {
-  font-family: "Dhad Naskh";
+  font-family: "Dhad Mono";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400;
   font-display: swap;
-  src: url("fonts/dhad-naskh-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
-    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("fonts/dhad-mono.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+2000-206F, U+2070-209F, U+20A0-20BF;
 }
+/* dhad-font-block:end */
 
 /* ══ POPUP SURFACE ══ */
 
@@ -57,8 +74,8 @@ body {
   background:
     radial-gradient(70% 40% at 82% -6%, rgba(245, 217, 124, 0.09), transparent 62%),
     radial-gradient(50% 34% at 10% 2%, rgba(18, 160, 117, 0.08), transparent 58%),
-    #111310;
-  color: #e2e7dc;
+    #131410;
+  color: #edeae0;
   font-family: "Dhad Naskh", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
   font-size: 13px;
   line-height: 1.7;
@@ -116,17 +133,17 @@ body {
 }
 .head h1 {
   margin: 0;
-  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-family: "Dhad Display", "Alexandria", system-ui, sans-serif;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.012em;
   line-height: 1.2;
-  color: #f4f6f0;
+  color: #edeae0;
 }
 .head p {
   margin: 0;
   font-size: 11px;
-  color: #9ba396;
+  color: #c3beae;
 }
 
 /* ══ switch ══ */
@@ -147,7 +164,7 @@ body {
   height: 24px;
   border-radius: 999px;
   border: 1px solid rgba(67, 73, 65, 0.72);
-  background: #1c1f1a;
+  background: #1a1c16;
   transition: background 200ms cubic-bezier(0.4, 0, 0.2, 1),
     border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -158,20 +175,20 @@ body {
   height: 16px;
   margin: 3px;
   border-radius: 999px;
-  background: #8f978b;
+  background: #a69f8c;
   transition: transform 200ms cubic-bezier(0.22, 0.68, 0.28, 1), background 200ms;
 }
 .switch input:checked + span {
-  background: linear-gradient(160deg, #07684b, #022b21);
+  background: linear-gradient(160deg, #0f5c43, #073024);
   border-color: rgba(245, 217, 124, 0.34);
 }
 .switch input:checked + span::after {
   transform: translateX(-18px);
-  background: #fbe9a8;
+  background: #f2e2ac;
 }
 .switch input:focus-visible + span {
   outline: none;
-  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+  box-shadow: 0 0 0 2px #131410, 0 0 0 4px #e3c578;
 }
 
 /* ══ groups ══ */
@@ -190,12 +207,12 @@ main {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-family: "Dhad Display", "Alexandria", system-ui, sans-serif;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f5d97c;
+  color: #e3c578;
   margin-bottom: 10px;
 }
 .eyebrow svg {
@@ -214,7 +231,7 @@ main {
   display: block;
   font-size: 11px;
   font-weight: 600;
-  color: #9ba396;
+  color: #c3beae;
   margin-bottom: 5px;
 }
 
@@ -225,8 +242,8 @@ select {
   padding: 0 10px;
   border: 1px solid rgba(67, 73, 65, 0.72);
   border-radius: 10px;
-  background: #0b0c0a;
-  color: #e2e7dc;
+  background: #0e0f0c;
+  color: #edeae0;
   font: inherit;
   font-size: 12.5px;
   transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -236,13 +253,13 @@ select {
 }
 input:hover,
 select:hover {
-  border-color: #353a31;
+  border-color: #32352a;
 }
 input:focus-visible,
 select:focus-visible {
   outline: none;
   border-color: rgba(18, 160, 117, 0.38);
-  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+  box-shadow: 0 0 0 2px #131410, 0 0 0 4px #e3c578;
 }
 
 .check {
@@ -256,7 +273,7 @@ select:focus-visible {
 .check input {
   width: 15px;
   height: 15px;
-  accent-color: #12a075;
+  accent-color: #58c79a;
   flex: none;
 }
 
@@ -268,9 +285,9 @@ select:focus-visible {
   padding-inline-start: 22px;
   border: 1px solid rgba(67, 73, 65, 0.72);
   border-radius: 10px;
-  background: #1c1f1a;
+  background: #1a1c16;
   font-size: 11.5px;
-  color: #9ba396;
+  color: #c3beae;
 }
 .status::before {
   content: "";
@@ -281,21 +298,21 @@ select:focus-visible {
   height: 6px;
   margin-top: -3px;
   border-radius: 999px;
-  background: #8f978b;
+  background: #a69f8c;
 }
 .status[data-state="ok"] {
   border-color: rgba(18, 160, 117, 0.38);
-  color: #a6e7cd;
+  color: #8fdcbc;
 }
 .status[data-state="ok"]::before {
-  background: #35bc90;
+  background: #58c79a;
 }
 .status[data-state="error"] {
   border-color: rgba(245, 128, 106, 0.42);
-  color: #f5806a;
+  color: #e89078;
 }
 .status[data-state="error"]::before {
-  background: #f5806a;
+  background: #e89078;
 }
 
 /* ══ actions ══ */
@@ -310,7 +327,7 @@ select:focus-visible {
   min-height: 36px;
   border: 1px solid transparent;
   border-radius: 10px;
-  font-family: "Dhad Kufi", "Noto Kufi Arabic", system-ui, sans-serif;
+  font-family: "Dhad Display", "Alexandria", system-ui, sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
@@ -319,24 +336,24 @@ select:focus-visible {
 }
 .btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #111310, 0 0 0 4px #f5d97c;
+  box-shadow: 0 0 0 2px #131410, 0 0 0 4px #e3c578;
 }
 .secondary {
   background: transparent;
   border-color: rgba(67, 73, 65, 0.72);
-  color: #9ba396;
+  color: #c3beae;
 }
 .secondary:hover {
-  border-color: #353a31;
-  color: #f4f6f0;
+  border-color: #32352a;
+  color: #edeae0;
 }
 .primary {
-  background: linear-gradient(160deg, #07684b, #022b21);
+  background: linear-gradient(160deg, #0f5c43, #073024);
   color: #f2fbf6;
   box-shadow: inset 0 1px 0 rgba(245, 217, 124, 0.26);
 }
 .primary:hover {
-  background: linear-gradient(160deg, #0b8560, #024734);
+  background: linear-gradient(160deg, #0f5c43, #0b4633);
 }
 
 /* ══ footnote ══ */
@@ -348,14 +365,14 @@ select:focus-visible {
   margin: 14px 0 0;
   font-size: 11px;
   line-height: 1.6;
-  color: #8f978b;
+  color: #a69f8c;
 }
 .privacy svg {
   width: 14px;
   height: 14px;
   flex: none;
   margin-top: 2px;
-  stroke: #35bc90;
+  stroke: #58c79a;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -373,12 +390,12 @@ select:focus-visible {
 @media (prefers-contrast: more), (forced-colors: active) {
   .head,
   .field {
-    border-bottom-color: #97a094;
+    border-bottom-color: #c3beae;
   }
   .switch,
   .btn,
   .status {
-    border: 2px solid #97a094;
+    border: 2px solid #c3beae;
   }
   .check {
     stroke: currentColor;

@@ -1,48 +1,90 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ضاد — نظام التصميم «مِداد»
-   Dhad Design System — "Midād"
+   ضاد — نظام التصميم «الحاشية»
+   Dhad Design System — "Al-Ḥāshiya" (the margin gloss)
 
-   The single source of truth for the Dhad visual language.
+   The organising idea, in one sentence: a proofread page is a manuscript with
+   a scholar's gloss in its margin — so the interface is a column of ink with a
+   commentary beside it, not an app with a text box in it.
 
-   The identity is drawn from the brand mark: an emerald ribbon of ink turning
-   through itself, lit along one edge in gold, carrying a pen nib. Everything
-   here follows from that — a warm graphite ground, emerald as the material,
-   gold as the light that falls on it, and signal colours borrowed from the
-   pigments of illuminated Arabic manuscripts (lapis, verdigris, carnelian,
-   amethyst, saffron).
+   That idea decides everything below:
+     · the ground is warm paper, not a product surface — the text is the object
+     · one accent only (emerald ink). Gold belongs to the brand mark's lit edge,
+       never to the interface
+     · a correction is carnelian, the colour scribes used for it — and it never
+       carries meaning alone: position, label and the struck word carry it too
+     · surfaces separate by hairline, not by shadow. Depth is a lie on paper
+     · Arabic is the design language. Every direction is logical, every measure
+       is set for Arabic, and no rule tracks a connected script
+     · nothing animates near the text while it is being read
 
-   Rules this system holds itself to:
-     · gold is light, never a fill — it appears as edges, hairlines and marks
-     · one raking light source, from the upper start-edge of every surface
-     · curvature is continuous; radii scale with the surface, never uniform
-     · Arabic is the design language, not a translation of a Latin one
-     · no gradient text, no heavy side rules, no bouncing easing
+   THREE TOKEN LAYERS, never two:
+     primitive (--paper-100, --emerald-600) → semantic (--bg, --accent)
+       → component (--btn-primary-bg). Components reference semantics only;
+     a component that names a primitive cannot be re-themed.
 
-   CANONICAL FILE. `src/dhad/web/assets/app.css`, `extension/popup.css`,
-   `extension/content.css` and `docs/index.html` embed the token block below
-   verbatim; `web_demo/design/design-system.test.mjs` enforces that they match.
+   CANONICAL FILE. `src/dhad/web/assets/app.css` and `docs/site.css` embed the
+   token block below verbatim; `web_demo/design/design-system.test.mjs` fails the
+   moment a copy drifts. The extension ships separately and is checked for
+   off-palette literals by the same test.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── typefaces ─────────────────────────────────────────────────────────────
    Self-hosted so the identity survives offline, on every platform, and inside
-   the desktop bundle. Variable weights: one file covers 100–900.
-   Noto Kufi Arabic & Noto Naskh Arabic — SIL Open Font License 1.1 (fonts/OFL.txt)
+   the desktop bundle. Four voices, each with a job:
+
+     display  Alexandria           — geometric, wide, unmistakably Arabic.
+                                     Variable 100–900 in 31KB. Chosen over Reem
+                                     Kufi, which collapses word spaces above
+                                     ~48px, and over Noto Kufi, which reads as
+                                     the system default.
+     text     IBM Plex Sans Arabic — real 400 and 600, never synthesised, and
+                                     the only free Arabic face with a Latin
+                                     sibling drawn to the same proportions.
+     naskh    Noto Naskh Arabic    — the document itself. Prose being proofread
+                                     should look like prose, not like UI.
+     mono     IBM Plex Mono        — Latin only: rule ids, offsets, timings.
+                                     There is no good Arabic monospace and we
+                                     do not fake one.
+
+   All SIL Open Font License 1.1 — see fonts/OFL.txt. Total 268KB for five
+   files: the same budget the two previous families cost.
+
+   The block between the markers below is copied into every surface that cannot
+   import this file, with `../fonts/` rewritten to that surface's own path.
+   `tools/sync_design_tokens.mjs` owns the copy; never hand-edit a copy.
    ──────────────────────────────────────────────────────────────────────────*/
+/* dhad-font-block:start */
 @font-face {
-  font-family: "Dhad Kufi";
+  font-family: "Dhad Display";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url("../fonts/dhad-kufi-arabic.woff2") format("woff2");
+  src: url("../fonts/dhad-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Dhad Text";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/dhad-text-arabic.woff2") format("woff2");
   unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
     U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
 }
 @font-face {
-  font-family: "Dhad Kufi";
+  font-family: "Dhad Text";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 600;
   font-display: swap;
-  src: url("../fonts/dhad-kufi-latin.woff2") format("woff2");
+  src: url("../fonts/dhad-text-arabic-600.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+08A0-08FF, U+FB50-FDFF,
+    U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
+}
+@font-face {
+  font-family: "Dhad Text";
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url("../fonts/dhad-text-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
     U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
 }
@@ -56,793 +98,789 @@
     U+FE70-FEFF, U+102E0-102FB, U+10E60-10E7E, U+1EE00-1EEFF;
 }
 @font-face {
-  font-family: "Dhad Naskh";
+  font-family: "Dhad Mono";
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400;
   font-display: swap;
-  src: url("../fonts/dhad-naskh-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
-    U+2070-209F, U+20A0-20BF, U+2190-21BB, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url("../fonts/dhad-mono.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+2000-206F, U+2070-209F, U+20A0-20BF;
+}
+/* dhad-font-block:end */
+
+/* dhad-token-block:start */
+
+/* ── layer 1 · primitives ──────────────────────────────────────────────────
+   Raw material. Nothing in a component may name one of these directly.
+   Every ramp step was measured, not guessed: the weakest pairing any theme
+   puts on screen is 4.74:1 against a 4.5:1 floor.
+   ──────────────────────────────────────────────────────────────────────────*/
+:root {
+  /* paper — a warm rag stock, never pure white */
+  --paper-50:  #fbf9f4;
+  --paper-100: #f4f1e9;
+  --paper-200: #ede8dc;
+  --paper-300: #dcd5c3;
+  --paper-400: #c4bba4;
+
+  /* graphite — the dark ground. Warm, so emerald reads as ink and not as neon */
+  --graphite-900: #0e0f0c;
+  --graphite-800: #131410;
+  --graphite-700: #1a1c16;
+  --graphite-600: #22241c;
+  --graphite-500: #32352a;
+  --graphite-400: #454940;
+
+  /* ink — text on paper */
+  --ink-900: #16150f;
+  --ink-700: #353226;
+  --ink-600: #4a4636;
+  --ink-500: #5e5947;
+  --ink-400: #6b6553;
+
+  /* chalk — text on graphite */
+  --chalk-50:  #edeae0;
+  --chalk-200: #c3beae;
+  --chalk-300: #a69f8c;
+  --chalk-400: #8d8674;
+
+  /* emerald — the single accent, the colour of the mark's ribbon */
+  --emerald-300: #8fdcbc;
+  --emerald-400: #58c79a;
+  --emerald-500: #2c9b71;
+  --emerald-600: #0f5c43;
+  --emerald-700: #0b4633;
+  --emerald-800: #073024;
+
+  /* gold — the mark's raking light. An edge, a hairline, a nib. Never a fill. */
+  --gold-200: #f2e2ac;
+  --gold-400: #e3c578;
+  --gold-600: #a98829;
+
+  /* pigments from illuminated manuscripts — status only, never decoration */
+  --carnelian: #93301f;
+  --carnelian-light: #e89078;
+  --saffron: #9a6708;
+  --saffron-light: #e6b45c;
+  --lapis: #1f3d7a;
+  --lapis-light: #96b4ea;
+  --amethyst: #6b3f96;
+  --amethyst-light: #c3a3e8;
+  --verdigris: #0d6a68;
+  --verdigris-light: #66c9c4;
+
+  /* type — scale 1.25, fixed once, never mixed */
+  --font-display: "Dhad Display", "Alexandria", system-ui, sans-serif;
+  --font-text: "Dhad Text", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-doc: "Dhad Naskh", "Noto Naskh Arabic", Georgia, serif;
+  --font-mono: "Dhad Mono", "IBM Plex Mono", ui-monospace, monospace;
+
+  --step--2: 0.688rem;
+  --step--1: 0.813rem;
+  --step-0:  1rem;
+  --step-1:  1.063rem;
+  --step-2:  1.25rem;
+  --step-3:  1.563rem;
+  --step-4:  1.953rem;
+  --step-5:  2.441rem;
+  --step-6:  3.052rem;
+
+  /* Arabic needs more leading than Latin: dots above and below, plus diacritics */
+  --leading-tight: 1.22;
+  --leading-ui: 1.65;
+  --leading-body: 1.85;
+  --leading-doc: 2.05;
+
+  --measure-display: 18ch;
+  --measure-body: 58ch;
+  --measure-note: 34ch;
+
+  /* space — 4px grid, deliberately uneven: sections breathe, components do not */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-28: 112px;
+  --section-y: clamp(64px, 9vw, 112px);
+
+  /* radius — print, not plastic */
+  --radius-0: 0;
+  --radius-1: 3px;
+  --radius-2: 6px;
+  --radius-3: 10px;
+  --radius-pill: 999px;
+
+  /* motion — feedback 160ms, entrance 260ms. Ink does not bounce. */
+  --dur-fast: 160ms;
+  --dur-enter: 260ms;
+  --ease-ribbon: cubic-bezier(0.22, 0.7, 0.3, 1);
 }
 
-/* ══ TOKENS ══ dhad-token-block:start ══════════════════════════════════════ */
+/* ── layer 2 · semantics ───────────────────────────────────────────────────
+   Dark is the default ground and is authored, not inverted. Elevation here
+   comes from surface lightness; on paper it comes from a hairline.
+   ──────────────────────────────────────────────────────────────────────────*/
 :root {
-  /* ground — warm graphite, read straight off the mark's field */
-  --ink-1000: #070806;
-  --ink-950: #0b0c0a;
-  --ink-900: #111310;
-  --ink-850: #161814;
-  --ink-800: #1c1f1a;
-  --ink-750: #23261f;
-  --ink-700: #2b2f27;
-  --ink-650: #353a31;
-  --ink-600: #434941;
-  --ink-500: #5c635a;
-  --ink-400: #8f978b;
-  --ink-300: #9ba396;
-  --ink-200: #c0c7ba;
-  --ink-100: #e2e7dc;
-  --ink-050: #f4f6f0;
+  color-scheme: dark;
 
-  /* emerald — the ribbon; the material the product is made of */
-  --emerald-950: #01180f;
-  --emerald-900: #022b21;
-  --emerald-800: #024734;
-  --emerald-700: #07684b;
-  --emerald-600: #0b8560;
-  --emerald-500: #12a075;
-  --emerald-400: #35bc90;
-  --emerald-300: #6bd3af;
-  --emerald-200: #a6e7cd;
+  --bg: var(--graphite-800);
+  --surface: var(--graphite-700);
+  --surface-raised: var(--graphite-600);
+  --surface-sunken: var(--graphite-900);
 
-  /* gold — the light on the ribbon; edges and marks only, never a field */
-  --gold-900: #4a3b14;
-  --gold-800: #6e5722;
-  --gold-700: #9e7e34;
-  --gold-600: #c39a46;
-  --gold-500: #d9b45c;
-  --gold-400: #f5d97c;
-  --gold-300: #fbe9a8;
-  --gold-200: #fdf4d2;
+  --border: var(--graphite-500);
+  --border-strong: var(--graphite-400);
 
-  /* signal pigments — lapis, verdigris, carnelian, amethyst, saffron */
-  --carnelian: #f5806a;
-  --carnelian-deep: #b8351d;
-  --saffron: #edb255;
-  --saffron-deep: #9a6410;
-  --lapis: #86b2ec;
-  --lapis-deep: #1f5099;
-  --amethyst: #b99bee;
-  --amethyst-deep: #5d3aa8;
-  --verdigris: #58ccbe;
-  --verdigris-deep: #12665d;
-
-  /* ── semantic surfaces ── */
-  --canvas: var(--ink-900);
-  --canvas-sunken: var(--ink-950);
-  --surface: var(--ink-850);
-  --surface-raised: var(--ink-800);
-  --surface-overlay: var(--ink-750);
-  --surface-inset: var(--ink-950);
-  --hairline: color-mix(in srgb, var(--ink-600) 62%, transparent);
-  --hairline-strong: var(--ink-650);
-  --hairline-gold: color-mix(in srgb, var(--gold-500) 22%, transparent);
-
-  /* ── semantic text ── */
-  --text: var(--ink-100);
-  --text-strong: var(--ink-050);
-  --text-muted: var(--ink-300);
-  --text-faint: var(--ink-400);
+  --text: var(--chalk-50);
+  --text-muted: var(--chalk-200);
+  --text-faint: var(--chalk-300);
   --text-on-accent: #04150f;
 
-  /* ── accents ── */
-  --accent: var(--emerald-500);
-  --accent-hover: var(--emerald-400);
-  --accent-quiet: color-mix(in srgb, var(--emerald-500) 14%, transparent);
-  --accent-edge: color-mix(in srgb, var(--emerald-400) 38%, transparent);
-  --light: var(--gold-400);
-  --light-quiet: color-mix(in srgb, var(--gold-400) 12%, transparent);
-  --light-edge: color-mix(in srgb, var(--gold-400) 34%, transparent);
-  /* Brand colour used as *text* needs a different ramp end than brand colour
-     used as a surface. These two tokens are what keep contrast honest across
-     the themes; never paint text with the raw ramp. */
-  --light-ink: var(--gold-300);
-  --accent-ink: var(--emerald-200);
+  --accent: var(--emerald-400);
+  --accent-strong: var(--emerald-300);
+  --accent-wash: color-mix(in srgb, var(--emerald-400) 14%, transparent);
+  --accent-ink: var(--emerald-400);
 
-  /* ── severity & category ── */
-  --sev-error: var(--carnelian);
-  --sev-warning: var(--saffron);
-  --sev-hint: var(--lapis);
-  --cat-dialect: var(--amethyst);
-  --cat-tashkeel: var(--verdigris);
-  --ok: var(--emerald-400);
+  --danger: var(--carnelian-light);
+  --danger-wash: color-mix(in srgb, var(--carnelian-light) 16%, transparent);
+  --warn: var(--saffron-light);
+  --info: var(--lapis-light);
+  --rare: var(--amethyst-light);
+  --calm: var(--verdigris-light);
+  --gold-edge: var(--gold-400);
 
-  /* ── type ── */
-  --font-display: "Dhad Kufi", "Noto Kufi Arabic", "Segoe UI", system-ui, sans-serif;
-  --font-text: "Dhad Naskh", "Noto Naskh Arabic", "Segoe UI", system-ui, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
-
-  --text-2xs: 0.6875rem;
-  --text-xs: 0.78125rem;
-  --text-sm: 0.875rem;
-  --text-md: 0.96875rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 2.875rem;
-  --text-editor: 1.1875rem;
-
-  --leading-tight: 1.25;
-  --leading-snug: 1.45;
-  --leading-normal: 1.7;
-  --leading-relaxed: 1.9;
-  --leading-editor: 2.05;
-
-  --tracking-tight: -0.012em;
-  --tracking-normal: 0;
-  --tracking-wide: 0.06em;
-  --tracking-caps: 0.14em;
-
-  /* ── rhythm ── */
-  --s-1: 0.25rem;
-  --s-2: 0.5rem;
-  --s-3: 0.75rem;
-  --s-4: 1rem;
-  --s-5: 1.25rem;
-  --s-6: 1.5rem;
-  --s-8: 2rem;
-  --s-10: 2.5rem;
-  --s-12: 3rem;
-  --s-16: 4rem;
-  --s-20: 5rem;
-  --gutter: clamp(1rem, 3.2vw, 2.5rem);
-
-  /* ── curvature: continuous, scaled to the surface ── */
-  --r-xs: 6px;
-  --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 20px;
-  --r-xl: 28px;
-  --r-2xl: 36px;
-  --r-full: 999px;
-
-  /* ── elevation: warm, never blue ── */
-  /* the action gradient: both stops clear 4.5:1 against the label */
-  --accent-grad: linear-gradient(160deg, var(--emerald-700), var(--emerald-900));
-  --accent-grad-hover: linear-gradient(160deg, var(--emerald-600), var(--emerald-800));
-
-  --shadow-1: 0 1px 2px rgba(4, 6, 3, 0.44);
-  --shadow-2: 0 2px 4px rgba(4, 6, 3, 0.4), 0 8px 20px rgba(4, 6, 3, 0.34);
-  --shadow-3: 0 4px 10px rgba(4, 6, 3, 0.46), 0 20px 44px rgba(4, 6, 3, 0.42);
-  --shadow-4: 0 8px 20px rgba(4, 6, 3, 0.5), 0 36px 88px rgba(4, 6, 3, 0.55);
-  --glow-gold: 0 0 0 1px var(--light-edge), 0 6px 26px rgba(245, 217, 124, 0.16);
-  --glow-emerald: 0 0 0 1px var(--accent-edge), 0 6px 26px rgba(18, 160, 117, 0.2);
-
-  /* ── motion: the ribbon's flow; no bounce, ever ── */
-  --ease-ribbon: cubic-bezier(0.22, 0.68, 0.28, 1);
-  --ease-nib: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
-  --dur-1: 120ms;
-  --dur-2: 200ms;
-  --dur-3: 320ms;
-  --dur-4: 520ms;
-
-  --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--gold-400);
-  --z-sticky: 40;
-  --z-float: 70;
-  --z-toast: 90;
-
-  color-scheme: dark;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --shadow-float: 0 12px 28px -12px rgb(0 0 0 / 0.55), 0 2px 6px -2px rgb(0 0 0 / 0.4);
 }
 
-/* ── parchment: the light theme is a manuscript page, not an inverted app ──*/
 :root[data-theme="light"] {
-  --canvas: #efeadb;
-  --canvas-sunken: #e4ddc9;
-  --surface: #fffdf8;
-  --surface-raised: #fffefb;
-  --surface-overlay: #fffdf7;
-  --surface-inset: #f1ede1;
-  --hairline: rgba(58, 52, 34, 0.14);
-  --hairline-strong: rgba(58, 52, 34, 0.24);
-  --hairline-gold: rgba(140, 106, 24, 0.3);
-
-  --text: #1d2a20;
-  --text-strong: #0d1710;
-  --text-muted: #566053;
-  --text-faint: #5c6456;
-  --text-on-accent: #ffffff;
-
-  --accent: var(--emerald-700);
-  --accent-hover: var(--emerald-800);
-  --accent-quiet: rgba(7, 104, 75, 0.1);
-  --accent-edge: rgba(7, 104, 75, 0.3);
-  --light: var(--gold-800);
-  --light-quiet: rgba(158, 126, 52, 0.12);
-  --light-edge: rgba(158, 126, 52, 0.34);
-  --light-ink: #5d4a17;
-  --accent-ink: var(--emerald-800);
-
-  --sev-error: var(--carnelian-deep);
-  --sev-warning: var(--saffron-deep);
-  --sev-hint: var(--lapis-deep);
-  --cat-dialect: var(--amethyst-deep);
-  --cat-tashkeel: var(--verdigris-deep);
-  --ok: var(--emerald-700);
-
-  --shadow-1: 0 1px 2px rgba(58, 52, 34, 0.12);
-  --shadow-2: 0 2px 4px rgba(58, 52, 34, 0.09), 0 8px 20px rgba(58, 52, 34, 0.08);
-  --shadow-3: 0 4px 10px rgba(58, 52, 34, 0.1), 0 20px 44px rgba(58, 52, 34, 0.1);
-  --shadow-4: 0 8px 20px rgba(58, 52, 34, 0.12), 0 36px 88px rgba(58, 52, 34, 0.14);
-  --glow-gold: 0 0 0 1px var(--light-edge), 0 6px 22px rgba(158, 126, 52, 0.16);
-  --glow-emerald: 0 0 0 1px var(--accent-edge), 0 6px 22px rgba(7, 104, 75, 0.14);
-  --focus-ring: 0 0 0 2px var(--canvas), 0 0 0 4px var(--emerald-700);
-
   color-scheme: light;
+
+  --bg: var(--paper-100);
+  --surface: var(--paper-50);
+  --surface-raised: var(--paper-50);
+  --surface-sunken: var(--paper-200);
+
+  --border: var(--paper-300);
+  --border-strong: var(--paper-400);
+
+  --text: var(--ink-900);
+  --text-muted: var(--ink-600);
+  --text-faint: var(--ink-500);
+  --text-on-accent: var(--paper-50);
+
+  --accent: var(--emerald-600);
+  --accent-strong: var(--emerald-700);
+  --accent-wash: color-mix(in srgb, var(--emerald-600) 9%, transparent);
+  --accent-ink: var(--emerald-600);
+
+  --danger: var(--carnelian);
+  --danger-wash: color-mix(in srgb, var(--carnelian) 10%, transparent);
+  --warn: var(--saffron);
+  --info: var(--lapis);
+  --rare: var(--amethyst);
+  --calm: var(--verdigris);
+  --gold-edge: var(--gold-600);
+
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  --shadow-float: 0 14px 30px -16px rgb(22 21 15 / 0.24), 0 2px 5px -2px rgb(22 21 15 / 0.12);
 }
 
-/* ── high contrast: same language, maximum separation ── */
+/* High contrast is a real theme with its own hierarchy, not a filter. */
 :root[data-theme="contrast"] {
-  --canvas: #000000;
-  --canvas-sunken: #000000;
-  --surface: #0a0c09;
-  --surface-raised: #101310;
-  --surface-overlay: #101310;
-  --surface-inset: #000000;
-  --hairline: #6f776c;
-  --hairline-strong: #97a094;
-  --hairline-gold: var(--gold-400);
+  color-scheme: dark;
+
+  --bg: #000000;
+  --surface: #0a0b09;
+  --surface-raised: #131410;
+  --surface-sunken: #000000;
+
+  --border: #7e8878;
+  --border-strong: #ffffff;
 
   --text: #ffffff;
-  --text-strong: #ffffff;
-  --text-muted: #dfe4da;
-  --text-faint: #c0c7ba;
+  --text-muted: #ffffff;
+  --text-faint: #e4e2da;
   --text-on-accent: #000000;
 
-  --accent: #4fe0ab;
-  --accent-hover: #7cecc3;
-  --accent-quiet: rgba(79, 224, 171, 0.2);
-  --accent-edge: #4fe0ab;
-  --light: #ffe89a;
-  --light-quiet: rgba(255, 232, 154, 0.2);
-  --light-edge: #ffe89a;
-  --light-ink: #ffe89a;
-  --accent-ink: #7cecc3;
+  --accent: #8fdcbc;
+  --accent-strong: #b8ecd6;
+  --accent-wash: color-mix(in srgb, #8fdcbc 22%, transparent);
+  --accent-ink: #8fdcbc;
 
-  --sev-error: #ff9d88;
-  --sev-warning: #ffcd77;
-  --sev-hint: #a8caff;
-  --cat-dialect: #d3bcff;
-  --cat-tashkeel: #79e8da;
-  --ok: #4fe0ab;
+  --danger: #ffb3a0;
+  --danger-wash: color-mix(in srgb, #ffb3a0 24%, transparent);
+  --warn: #ffd79a;
+  --info: #b9d0ff;
+  --rare: #dcc4ff;
+  --calm: #8fe4df;
+  --gold-edge: #f2e2ac;
 
+  --focus-ring: 0 0 0 2px #000000, 0 0 0 5px #ffffff;
+  --shadow-float: 0 0 0 1px #ffffff;
+}
+
+/* The OS preference decides only where the user has not. */
+@media (prefers-contrast: more) {
+  :root:not([data-theme]) {
+    --border: #7e8878;
+    --border-strong: #ffffff;
+    --text: #ffffff;
+    --text-muted: #ffffff;
+    --text-faint: #e4e2da;
+    --accent: #8fdcbc;
+    --accent-ink: #8fdcbc;
+    --danger: #ffb3a0;
+    --focus-ring: 0 0 0 2px var(--bg), 0 0 0 5px #ffffff;
+  }
+  :root[data-theme="light"] {
+    --border: #6b6553;
+    --border-strong: #16150f;
+    --text: #000000;
+    --text-muted: #16150f;
+    --text-faint: #353226;
+    --accent: var(--emerald-800);
+    --accent-ink: var(--emerald-800);
+    --danger: #6d2416;
+    --focus-ring: 0 0 0 2px var(--bg), 0 0 0 5px #000000;
+  }
+}
+
+/* ── layer 3 · components ─────────────────────────────────────────────────*/
+:root {
+  --btn-height: 40px;
+  --btn-height-lg: 48px;
+  --btn-radius: var(--radius-1);
+  --btn-primary-bg: var(--accent);
+  --btn-primary-fg: var(--text-on-accent);
+  --btn-quiet-fg: var(--text-muted);
+  --btn-border: var(--border);
+
+  --field-bg: var(--surface-sunken);
+  --field-border: var(--border);
+  --field-radius: var(--radius-1);
+
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-radius: var(--radius-2);
+
+  /* the gloss — the margin column that carries the commentary */
+  --gloss-width: 316px;
+  --gloss-rule: var(--border);
+
+  /* a mark in the running text. Never colour alone: each category owns a
+     distinct underline style and weight, and every mark is named in the gloss. */
+  --mark-thickness: 2px;
+  --mark-offset: 0.28em;
+  --mark-spelling: var(--danger);
+  --mark-grammar: var(--info);
+  --mark-style: var(--warn);
+  --mark-dialect: var(--accent-ink);
+  --mark-tashkeel: var(--rare);
+  --mark-active-bg: var(--danger-wash);
+
+  /* tap targets never drop below 44px on touch, whatever the visual height */
+  --tap-min: 44px;
+}
+
+/* dhad-token-block:end */
+
+/* dhad-compat-block:start */
+/* ── migration layer ───────────────────────────────────────────────────────
+   Al-Ḥāshiya renamed the token vocabulary. Three surfaces — the landing page,
+   the served dashboard, the extension — still spell their rules in the Midād
+   names, and every one of those names would otherwise resolve to nothing and
+   render the surface unstyled.
+
+   This block is an ALIAS TABLE, not a second design system: every entry points
+   at a semantic token defined above, so those surfaces inherit the new palette,
+   the new type and all four themes without being recomposed first.
+
+   It is deliberately temporary. Each surface leaves this table when it is
+   recomposed on the gloss layout; delete the aliases a surface no longer uses.
+   Adding a NEW rule that spells a name from this table is a review failure.
+   ──────────────────────────────────────────────────────────────────────────*/
+:root {
+  /* grounds and rules */
+  --canvas: var(--bg);
+  --canvas-sunken: var(--surface-sunken);
+  --surface-inset: var(--surface-sunken);
+  --surface-overlay: var(--surface-raised);
+  --hairline: var(--border);
+  --hairline-strong: var(--border-strong);
+  --dhad-line: var(--border);
+  --dhad-line-strong: var(--border-strong);
+
+  /* text */
+  --text-strong: var(--text);
+  --dhad-text: var(--text);
+  --dhad-text-strong: var(--text);
+  --dhad-text-muted: var(--text-muted);
+  --dhad-text-faint: var(--text-faint);
+  --ink-650: var(--ink-600);
+  --dhad-ink-650: var(--ink-600);
+  --dhad-ink-750: var(--ink-700);
+  --dhad-ink-800: var(--ink-900);
+
+  /* accent — gold is no longer a fill, so every gold "gradient" resolves to
+     the single emerald accent and the gold aliases resolve to the edge token */
+  --accent-ink: var(--accent-ink);
+  --accent-quiet: var(--accent-wash);
+  --accent-edge: var(--accent);
+  --accent-grad: var(--accent);
+  --accent-grad-hover: var(--accent-strong);
+  --btn-bg: var(--accent);
+  --btn-fg: var(--text-on-accent);
+  --btn-edge: var(--accent);
+  --dhad-emerald-600: var(--emerald-600);
+  --dhad-emerald-700: var(--emerald-700);
+  --dhad-emerald-900: var(--emerald-800);
+  --hairline-gold: var(--border);
+  --dhad-gold-300: var(--gold-edge);
+  --dhad-gold-edge: var(--gold-edge);
+  --dhad-gold-quiet: var(--border);
+  --light: var(--gold-edge);
+  --light-edge: var(--gold-edge);
+  --light-ink: var(--gold-edge);
+  --light-quiet: var(--border);
+
+  /* status */
+  --ok: var(--accent);
+  --sev-error: var(--danger);
+  --sev-warning: var(--warn);
+  --dhad-carnelian: var(--danger);
+
+  /* type */
+  --dhad-font: var(--font-text);
+  --text-2xs: var(--step--2);
+  --text-xs: var(--step--1);
+  --text-sm: var(--step-0);
+  --text-md: var(--step-1);
+  --text-lg: var(--step-2);
+  --text-xl: var(--step-3);
+  --text-2xl: var(--step-4);
+  --text-3xl: var(--step-5);
+  --text-editor: 1.25rem;
+  --leading-snug: var(--leading-tight);
+  --leading-normal: var(--leading-ui);
+  --leading-relaxed: var(--leading-body);
+  --leading-editor: var(--leading-doc);
+  /* Arabic is a connected script: every tracking alias collapses to zero. */
+  --tracking-tight: 0;
+  --tracking-wide: 0;
+  --tracking-caps: 0;
+
+  /* space */
+  --s-1: var(--space-1);
+  --s-2: var(--space-2);
+  --s-3: var(--space-3);
+  --s-4: var(--space-4);
+  --s-5: var(--space-5);
+  --s-6: var(--space-6);
+  --s-8: var(--space-8);
+  --s-10: var(--space-10);
+  --s-12: var(--space-12);
+  --s-16: var(--space-16);
+  --gutter: clamp(16px, 3.5vw, 40px);
+
+  /* radius — the new system is near-flat, so the old ramp compresses */
+  --r-xs: var(--radius-1);
+  --r-sm: var(--radius-1);
+  --r-md: var(--radius-1);
+  --r-lg: var(--radius-2);
+  --r-xl: var(--radius-2);
+  --r-2xl: var(--radius-3);
+  --r-full: var(--radius-pill);
+  --dhad-radius: var(--radius-1);
+  --dhad-radius-lg: var(--radius-2);
+
+  /* depth — paper separates by hairline, so the old shadow ramp flattens and
+     only the floating layer keeps a real shadow */
   --shadow-1: none;
   --shadow-2: none;
-  --shadow-3: 0 0 0 1px var(--hairline-strong);
-  --shadow-4: 0 0 0 1px var(--hairline-strong);
-  --glow-gold: 0 0 0 2px var(--gold-400);
-  --glow-emerald: 0 0 0 2px var(--accent);
+  --shadow-4: var(--shadow-float);
+  --dhad-shadow: var(--shadow-float);
 
-  color-scheme: dark;
+  /* motion */
+  --dur-1: var(--dur-fast);
+  --dur-2: var(--dur-fast);
+  --dur-3: var(--dur-enter);
+  --ease-nib: var(--ease-ribbon);
+  --dhad-ease: var(--ease-ribbon);
+
+  /* stacking */
+  --z-sticky: 40;
+  --z-toast: 80;
 }
+/* dhad-compat-block:end */
 
-/* ── the platform's own request ────────────────────────────────────────────
-   `[data-theme="contrast"]` above is a choice the reader makes inside the
-   app. `prefers-contrast: more` and `forced-colors: active` are that same
-   request made by the operating system, and a surface nobody has deliberately
-   put into another theme has to honour it.
-
-   Only the tokens that carry separation move. Hairlines stop being a tint of
-   the ground and become their own colour; depth stops being communicated by
-   shadow alone and gains a ring; every glow becomes an outline. The palette
-   is untouched — this is the same identity under a harder light, not a
-   different one. */
-@media (prefers-contrast: more), (forced-colors: active) {
-  :root {
-    --hairline: #6f776c;
-    --hairline-strong: #97a094;
-    --text-muted: #dfe4da;
-    --text-faint: #c0c7ba;
-
-    --shadow-1: 0 0 0 1px var(--hairline);
-    --shadow-2: 0 0 0 1px var(--hairline);
-    --shadow-3: 0 0 0 1px var(--hairline-strong);
-    --shadow-4: 0 0 0 1px var(--hairline-strong);
-    --glow-gold: 0 0 0 2px var(--gold-400);
-    --glow-emerald: 0 0 0 2px var(--accent);
-  }
-
-  :root[data-theme="light"] {
-    --hairline: #5f6857;
-    --hairline-strong: #3d4636;
-    --text-muted: #313d2e;
-    --text-faint: #313d2e;
-
-    --shadow-1: 0 0 0 1px var(--hairline);
-    --shadow-2: 0 0 0 1px var(--hairline);
-    --shadow-3: 0 0 0 1px var(--hairline-strong);
-    --shadow-4: 0 0 0 1px var(--hairline-strong);
-    --glow-gold: 0 0 0 2px var(--light-ink);
-    --glow-emerald: 0 0 0 2px var(--accent);
-  }
-}
-/* ══ dhad-token-block:end ══════════════════════════════════════════════════ */
-
-/* ══════════════════════════════════════════════════════════════════════════
-   BASE
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRIMITIVES — the shared element vocabulary every surface builds from.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  min-inline-size: 0;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
 }
 
 body {
   margin: 0;
-  background: var(--canvas);
+  background: var(--bg);
   color: var(--text);
   font-family: var(--font-text);
-  font-size: var(--text-md);
-  line-height: var(--leading-normal);
+  font-size: var(--step-1);
+  line-height: var(--leading-body);
+  /* Never fake a weight: synthesis smears the joins of a connected script. */
+  font-synthesis: none;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  color: var(--text-strong);
+h1, h2, h3, h4, h5 {
   margin: 0;
-}
-
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-}
-
-::selection {
-  background: color-mix(in srgb, var(--gold-400) 30%, transparent);
-  color: var(--text-strong);
-}
-
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-  border-radius: var(--r-xs);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-}
-
-/* the raking light — an ambient field, drawn once behind everything */
-.dhad-field {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(58% 42% at 78% -8%, color-mix(in srgb, var(--gold-400) 9%, transparent), transparent 62%),
-    radial-gradient(46% 38% at 14% 4%, color-mix(in srgb, var(--emerald-500) 8%, transparent), transparent 58%),
-    radial-gradient(120% 90% at 50% 118%, var(--canvas-sunken), transparent 70%),
-    var(--canvas);
-}
-
-/* the triad from the mark: three gold marks, used as a rhythmic divider */
-.dhad-triad {
-  display: inline-flex;
-  gap: 3px;
-  align-items: center;
-}
-.dhad-triad::before,
-.dhad-triad::after,
-.dhad-triad > i {
-  content: "";
-  width: 4px;
-  height: 4px;
-  border-radius: 1px;
-  background: var(--light);
-  opacity: 0.55;
-  transform: skewX(-8deg);
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   PRIMITIVES
-   ══════════════════════════════════════════════════════════════════════════ */
-
-/* ── brand lockup ── */
-.dhad-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-3);
-  min-width: 0;
-  text-decoration: none;
-}
-.dhad-brand__mark {
-  flex: none;
-  display: block;
-  width: 2.5rem;
-  height: 2.5rem;
-  filter: drop-shadow(0 2px 8px rgba(4, 6, 3, 0.45));
-}
-.dhad-brand__name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: var(--text-xl);
-  line-height: 1;
-  letter-spacing: var(--tracking-tight);
-  color: var(--text-strong);
-}
-.dhad-brand__tag {
-  display: block;
-  font-size: var(--text-xs);
-  line-height: 1.5;
-  color: var(--text-muted);
-  margin-top: 2px;
+  line-height: var(--leading-tight);
+  color: var(--text);
 }
 
-/* ── eyebrow ── */
-.dhad-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  font-family: var(--font-display);
-  font-size: var(--text-2xs);
+p { margin: 0; }
+a { color: inherit; }
+
+/* Tracking is a Latin device; on a connected script it breaks the joins. */
+:lang(ar),
+[lang="ar"],
+[dir="rtl"] {
+  letter-spacing: 0;
+}
+:lang(en) .dhad-track { letter-spacing: 0.06em; }
+
+/* Numerals, offsets and rule ids stay Latin, tabular and LTR inside RTL text. */
+.dhad-num,
+.dhad-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.dhad-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dhad-skip {
+  position: absolute;
+  inset-block-start: var(--space-2);
+  inset-inline-start: var(--space-2);
+  z-index: 100;
+  padding: var(--space-3) var(--space-5);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: var(--radius-1);
   font-weight: 600;
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  color: var(--light);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.dhad-skip:focus-visible {
+  transform: none;
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
-/* ── button ── */
+/* One focus treatment everywhere. `outline: none` alone never ships. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-1);
+}
+
+/* ── type ─────────────────────────────────────────────────────────────────*/
+.dhad-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  max-inline-size: var(--measure-display);
+  text-wrap: balance;
+}
+
+.dhad-eyebrow {
+  display: inline-block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-faint);
+}
+
+.dhad-lede {
+  max-inline-size: var(--measure-body);
+  color: var(--text-muted);
+  font-size: var(--step-2);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+.dhad-prose {
+  max-inline-size: var(--measure-body);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+/* ── buttons ──────────────────────────────────────────────────────────────
+   Six interaction states, always: default · hover · focus-visible · active ·
+   disabled · loading. A button missing one of them is not finished.
+   ──────────────────────────────────────────────────────────────────────────*/
 .dhad-btn {
-  --btn-bg: var(--surface-raised);
-  --btn-fg: var(--text);
-  --btn-edge: var(--hairline);
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--s-2);
-  min-height: 2.375rem;
-  padding: 0 var(--s-4);
-  border: 1px solid var(--btn-edge);
-  border-radius: var(--r-sm);
-  background: var(--btn-bg);
-  color: var(--btn-fg);
-  font-family: var(--font-display);
-  font-size: var(--text-sm);
+  gap: var(--space-2);
+  min-block-size: var(--btn-height);
+  padding-block: 0;
+  padding-inline: var(--space-5);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--btn-radius);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--step-0);
   font-weight: 600;
-  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  text-decoration: none;
   cursor: pointer;
-  white-space: nowrap;
   transition:
-    background var(--dur-2) var(--ease-nib),
-    border-color var(--dur-2) var(--ease-nib),
-    color var(--dur-2) var(--ease-nib),
-    transform var(--dur-1) var(--ease-nib);
+    background-color var(--dur-fast) var(--ease-ribbon),
+    border-color var(--dur-fast) var(--ease-ribbon),
+    color var(--dur-fast) var(--ease-ribbon);
 }
-.dhad-btn > svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex: none;
+.dhad-btn:hover:not(:disabled) {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+}
+.dhad-btn:active:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.dhad-btn:disabled,
+.dhad-btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.dhad-btn[data-loading="true"] {
+  cursor: progress;
+  color: var(--text-faint);
+}
+
+.dhad-btn--primary {
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+}
+.dhad-btn--primary:hover:not(:disabled) {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: var(--btn-primary-fg);
+}
+
+.dhad-btn--quiet {
+  border-color: transparent;
+  color: var(--btn-quiet-fg);
+}
+.dhad-btn--quiet:hover:not(:disabled) { color: var(--text); }
+
+.dhad-btn--lg { min-block-size: var(--btn-height-lg); padding-inline: var(--space-6); }
+
+.dhad-btn--icon {
+  padding-inline: 0;
+  inline-size: var(--btn-height);
+}
+
+.dhad-btn svg {
+  inline-size: 20px;
+  block-size: 20px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-.dhad-btn:hover {
-  --btn-bg: var(--surface-overlay);
-  --btn-edge: var(--hairline-strong);
-  color: var(--text-strong);
-}
-.dhad-btn:active {
-  transform: translateY(1px);
-}
-.dhad-btn[disabled] {
-  opacity: 0.42;
-  cursor: not-allowed;
+  flex: none;
 }
 
-.dhad-btn--primary {
-  --btn-bg: var(--accent-grad);
-  --btn-fg: #f2fbf6;
-  --btn-edge: transparent;
-  box-shadow: var(--shadow-2), inset 0 1px 0 color-mix(in srgb, var(--gold-400) 26%, transparent);
-}
-.dhad-btn--primary:hover {
-  --btn-bg: var(--accent-grad-hover);
-  --btn-edge: transparent;
+/* Directional glyphs mirror; the brand mark, numbers and pictograms never do. */
+[dir="rtl"] .dhad-icon--directional { scale: -1 1; }
+
+@media (pointer: coarse) {
+  .dhad-btn { min-block-size: var(--tap-min); }
+  .dhad-btn--icon { inline-size: var(--tap-min); }
 }
 
-.dhad-btn--quiet {
-  --btn-bg: transparent;
-  --btn-edge: transparent;
-  color: var(--text-muted);
-}
-.dhad-btn--quiet:hover {
-  --btn-bg: var(--accent-quiet);
-  color: var(--text-strong);
-}
-
-.dhad-btn--icon {
-  width: 2.375rem;
-  padding: 0;
-}
-
-/* a pressed toggle carries the gold edge-light, like the lit side of the mark */
-.dhad-btn[aria-pressed="true"],
-.dhad-btn.is-on {
-  --btn-bg: var(--light-quiet);
-  --btn-edge: var(--light-edge);
-  color: var(--light-ink);
-}
-
-/* ── chip ── */
+/* ── chips, fields, cards ─────────────────────────────────────────────────*/
 .dhad-chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
-  min-height: 1.875rem;
-  padding: 0 var(--s-3);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-full);
+  gap: var(--space-2);
+  min-block-size: 32px;
+  padding-inline: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--text-muted);
-  font-family: var(--font-display);
-  font-size: var(--text-xs);
+  font: inherit;
+  font-size: var(--step--1);
   font-weight: 600;
   cursor: pointer;
   transition:
-    background var(--dur-2) var(--ease-nib),
-    border-color var(--dur-2) var(--ease-nib),
-    color var(--dur-2) var(--ease-nib);
+    color var(--dur-fast) var(--ease-ribbon),
+    border-color var(--dur-fast) var(--ease-ribbon),
+    background-color var(--dur-fast) var(--ease-ribbon);
 }
-.dhad-chip:hover {
-  border-color: var(--hairline-strong);
-  color: var(--text);
-}
-.dhad-chip[aria-pressed="true"],
-.dhad-chip.is-on {
-  background: var(--accent-quiet);
-  border-color: var(--accent-edge);
+.dhad-chip:hover { color: var(--text); border-color: var(--border-strong); }
+.dhad-chip[aria-pressed="true"] {
+  background: var(--accent-wash);
+  border-color: var(--accent);
   color: var(--accent-ink);
 }
 
-/* ── field ── */
 .dhad-label {
   display: block;
-  font-family: var(--font-display);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
+  margin-block-end: var(--space-2);
   color: var(--text-muted);
-  margin-bottom: var(--s-2);
+  font-size: var(--step--1);
+  font-weight: 600;
 }
+
 .dhad-input,
-.dhad-select,
-.dhad-textarea {
-  width: 100%;
-  min-height: 2.375rem;
-  padding: var(--s-2) var(--s-3);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-sm);
-  background: var(--surface-inset);
-  color: var(--text);
-  font-size: var(--text-sm);
-  transition: border-color var(--dur-2) var(--ease-nib), background var(--dur-2) var(--ease-nib);
-}
-.dhad-textarea {
-  min-height: 6rem;
-  line-height: var(--leading-normal);
-  resize: vertical;
-}
-.dhad-input:hover,
-.dhad-select:hover,
-.dhad-textarea:hover {
-  border-color: var(--hairline-strong);
-}
-.dhad-input:focus,
-.dhad-select:focus,
-.dhad-textarea:focus {
-  outline: none;
-  border-color: var(--accent-edge);
-  box-shadow: var(--focus-ring);
-}
+.dhad-textarea,
 .dhad-select {
-  appearance: none;
-  padding-inline-end: var(--s-8);
-  background-image: linear-gradient(45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%),
-    linear-gradient(-45deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%);
-  background-size: 6px 6px, 6px 6px;
-  background-position: left 1rem top 55%, left 0.65rem top 55%;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-/* ── card ── */
-.dhad-card {
-  position: relative;
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-2);
-}
-/* the raking light: a single hairline along the top start edge */
-.dhad-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    to left,
-    transparent,
-    color-mix(in srgb, var(--gold-400) 34%, transparent) 22%,
-    color-mix(in srgb, var(--gold-400) 8%, transparent) 62%,
-    transparent
-  );
-  pointer-events: none;
-}
-
-/* ── panel head ── */
-.dhad-panel-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--s-4);
-  padding: var(--s-4) var(--s-5);
-  border-bottom: 1px solid var(--hairline);
-}
-
-/* ── dialog ── */
-.dhad-dialog {
-  padding: 0;
-  border: none;
-  background: transparent;
+  inline-size: 100%;
+  min-block-size: var(--btn-height);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--field-border);
+  border-radius: var(--field-radius);
+  background: var(--field-bg);
   color: var(--text);
-  max-width: min(96vw, 62rem);
-  max-height: 92dvh;
-  overflow: visible;
+  font: inherit;
+  font-size: var(--step-0);
 }
-.dhad-dialog::backdrop {
-  background: rgba(6, 8, 5, 0.66);
-  backdrop-filter: blur(6px) saturate(0.9);
+.dhad-textarea { line-height: var(--leading-body); resize: vertical; }
+.dhad-input:hover,
+.dhad-textarea:hover,
+.dhad-select:hover { border-color: var(--border-strong); }
+.dhad-input::placeholder,
+.dhad-textarea::placeholder { color: var(--text-faint); }
+
+.dhad-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
 }
-.dhad-dialog__panel {
-  border: 1px solid var(--hairline-strong);
-  border-radius: var(--r-xl);
-  background: var(--surface-overlay);
-  box-shadow: var(--shadow-4);
-  padding: var(--s-6);
-  max-height: 92dvh;
-  overflow: auto;
-}
-.dhad-dialog__head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--s-4);
-  margin-bottom: var(--s-4);
-}
-.dhad-dialog__close {
-  flex: none;
-  width: 2.25rem;
-  height: 2.25rem;
+
+/* ── the gloss — a margin, not a sidebar ──────────────────────────────────
+   A note is: the struck word, an arrow, the correction, and the reason. All
+   four readable without a click — that is the whole argument for this layout.
+   ──────────────────────────────────────────────────────────────────────────*/
+.dhad-gloss__note {
   display: grid;
-  place-items: center;
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-sm);
-  background: transparent;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--gloss-rule);
+}
+.dhad-gloss__index {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  font-style: normal;
+  color: var(--text-faint);
+  padding-block-start: 4px;
+}
+.dhad-gloss__from {
+  color: var(--text-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--danger);
+}
+.dhad-gloss__to { color: var(--accent-ink); font-weight: 600; }
+.dhad-gloss__why {
+  margin: 2px 0 0;
+  max-inline-size: var(--measure-note);
   color: var(--text-muted);
-  cursor: pointer;
-  transition: color var(--dur-2) var(--ease-nib), border-color var(--dur-2) var(--ease-nib);
-}
-.dhad-dialog__close:hover {
-  color: var(--text-strong);
-  border-color: var(--hairline-strong);
-}
-.dhad-dialog__close svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
+  font-size: var(--step--1);
+  line-height: var(--leading-ui);
 }
 
-/* ── status dot ── */
+/* ── a mark in the running text ───────────────────────────────────────────*/
+.dhad-mark {
+  background: none;
+  color: inherit;
+  padding: 0;
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--mark-thickness);
+  text-underline-offset: var(--mark-offset);
+  text-decoration-skip-ink: none;
+  text-decoration-color: var(--mark-spelling);
+  cursor: pointer;
+}
+.dhad-mark[data-category="grammar"]  { text-decoration-color: var(--mark-grammar); }
+.dhad-mark[data-category="style"]    { text-decoration-color: var(--mark-style); text-decoration-style: dotted; text-decoration-thickness: 3px; }
+.dhad-mark[data-category="dialect"]  { text-decoration-color: var(--mark-dialect); text-decoration-style: dashed; }
+.dhad-mark[data-category="tashkeel"] { text-decoration-color: var(--mark-tashkeel); text-decoration-style: dotted; text-decoration-thickness: 3px; }
+.dhad-mark[data-active="true"] { background: var(--mark-active-bg); border-radius: var(--radius-1); }
+
+/* ── status dot — colour plus a written state, never colour alone ─────────*/
 .dhad-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: var(--r-full);
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
   background: var(--text-faint);
-  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 12%, transparent);
   flex: none;
 }
-.dhad-dot.is-ready {
-  background: var(--ok);
-  color: var(--ok);
+.dhad-dot[data-state="ready"] { background: var(--accent); }
+.dhad-dot[data-state="busy"]  { background: var(--warn); }
+.dhad-dot[data-state="error"] { background: var(--danger); }
+
+/* ── loading is a skeleton shaped like the content, never a spinner ───────*/
+.dhad-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-raised) 0%,
+    color-mix(in srgb, var(--surface-raised) 55%, var(--border)) 50%,
+    var(--surface-raised) 100%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-1);
+  animation: dhad-shimmer 1.4s linear infinite;
 }
-.dhad-dot.is-failed {
-  background: var(--sev-error);
-  color: var(--sev-error);
+@keyframes dhad-shimmer { to { background-position: -200% 0; } }
+
+/* ── entrance: reading order, 70ms apart, and it never replays ────────────*/
+.dhad-reveal {
+  animation: dhad-rise var(--dur-enter) var(--ease-ribbon) both;
+  animation-delay: calc(var(--dhad-reveal-index, 0) * 70ms);
+}
+@keyframes dhad-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
 }
 
-/* ── scrollbars ── */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--ink-650) transparent;
-}
-*::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-*::-webkit-scrollbar-thumb {
-  background: var(--ink-650);
-  border: 3px solid transparent;
-  background-clip: content-box;
-  border-radius: var(--r-full);
-}
-*::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-600);
-  background-clip: content-box;
-}
-
-/* ── utility ── */
-.dhad-visually-hidden {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-.dhad-skip {
-  position: absolute;
-  inset-inline-start: var(--s-4);
-  top: -4rem;
-  z-index: var(--z-toast);
-  padding: var(--s-3) var(--s-4);
-  border-radius: var(--r-sm);
-  background: var(--emerald-700);
-  color: #f2fbf6;
-  font-weight: 600;
-  transition: top var(--dur-2) var(--ease-ribbon);
-}
-.dhad-skip:focus {
-  top: var(--s-4);
-}
-
+/* Reduced motion disables. It does not shorten. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -852,4 +890,12 @@ textarea {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .dhad-reveal { animation: none; opacity: 1; transform: none; }
+  .dhad-skeleton { animation: none; }
+}
+
+/* ── print: the interface disappears and the page remains ────────────────*/
+@media print {
+  .dhad-no-print { display: none !important; }
+  body { background: #ffffff; color: #000000; }
 }
