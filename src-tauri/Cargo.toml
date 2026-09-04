@@ -28,7 +28,7 @@ serde_json = "=1.0.151"
 # feature, tauri-runtime-wry compiles the transparency call out on macOS entirely,
 # so the mini-assistant overlay would ship opaque in release builds.
 tauri = { version = "=2.11.5", features = ["macos-private-api", "tray-icon"] }
-tauri-plugin-dialog = "=2.7.2"
+tauri-plugin-dialog = "=2.7.3"
 
 [target.'cfg(any(target_os = "macos", target_os = "windows"))'.dependencies]
 tauri-plugin-global-shortcut = "=2.3.2"
