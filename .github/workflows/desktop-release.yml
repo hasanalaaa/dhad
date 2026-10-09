@@ -423,7 +423,7 @@ jobs:
 
       - name: Upload WiX diagnostics after MSI failure
         if: failure() && runner.os == 'Windows' && matrix.bundle == 'msi'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: Dhad-${{ env.RELEASE_TAG }}-wix-diagnostics
           path: ${{ runner.temp }}/dhad-wix-diagnostics
